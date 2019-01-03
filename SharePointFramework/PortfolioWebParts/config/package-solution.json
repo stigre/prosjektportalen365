@@ -1,0 +1,13 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "portfolio-web-parts-client-side-solution",
+    "id": "00483367-68e2-4977-9cc3-6cf0de623daa",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true
+  },
+  "paths": {
+    "zippedPackage": "solution/portfolio-web-parts.sppkg"
+  }
+}
