@@ -33,6 +33,14 @@
           "manifest": "./src/webparts/portfolioOverview/PortfolioOverviewWebPart.manifest.json"
         }
       ]
+    },
+    "project-list-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/projectList/ProjectListWebPart.js",
+          "manifest": "./src/webparts/projectList/ProjectListWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -40,6 +48,7 @@
     "DeliveriesOverviewWebPartStrings": "lib/webparts/deliveriesOverview/loc/{locale}.js",
     "BenefitsOverviewWebPartStrings": "lib/webparts/benefitsOverview/loc/{locale}.js",
     "ProjectInsightsWebPartStrings": "lib/webparts/projectInsights/loc/{locale}.js",
-    "PortfolioOverviewWebPartStrings": "lib/webparts/portfolioOverview/loc/{locale}.js"
+    "PortfolioOverviewWebPartStrings": "lib/webparts/portfolioOverview/loc/{locale}.js",
+    "ProjectListWebPartStrings": "lib/webparts/projectList/loc/{locale}.js"
   }
 }
