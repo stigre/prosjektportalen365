@@ -9,10 +9,19 @@
           "manifest": "./src/webparts/deliveriesOverview/DeliveriesOverviewWebPart.manifest.json"
         }
       ]
+    },
+    "benefits-overview-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/benefitsOverview/BenefitsOverviewWebPart.js",
+          "manifest": "./src/webparts/benefitsOverview/BenefitsOverviewWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "DeliveriesOverviewWebPartStrings": "lib/webparts/deliveriesOverview/loc/{locale}.js"
+    "DeliveriesOverviewWebPartStrings": "lib/webparts/deliveriesOverview/loc/{locale}.js",
+    "BenefitsOverviewWebPartStrings": "lib/webparts/benefitsOverview/loc/{locale}.js"
   }
 }
