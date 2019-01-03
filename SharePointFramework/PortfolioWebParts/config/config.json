@@ -17,11 +17,20 @@
           "manifest": "./src/webparts/benefitsOverview/BenefitsOverviewWebPart.manifest.json"
         }
       ]
+    },
+    "project-insights-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/projectInsights/ProjectInsightsWebPart.js",
+          "manifest": "./src/webparts/projectInsights/ProjectInsightsWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
     "DeliveriesOverviewWebPartStrings": "lib/webparts/deliveriesOverview/loc/{locale}.js",
-    "BenefitsOverviewWebPartStrings": "lib/webparts/benefitsOverview/loc/{locale}.js"
+    "BenefitsOverviewWebPartStrings": "lib/webparts/benefitsOverview/loc/{locale}.js",
+    "ProjectInsightsWebPartStrings": "lib/webparts/projectInsights/loc/{locale}.js"
   }
 }
