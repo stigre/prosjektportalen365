@@ -1,0 +1,22 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "subactions": [
+                {
+                    "verb": "addContentType",
+                    "name": "Infoelement"
+                },
+                {
+                    "verb": "removeContentType",
+                    "name": "Element"
+                }
+            ],
+            "templateType": 100,
+            "listName": "Informasjon",
+            "verb": "createSPList"
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}

@@ -1,0 +1,20 @@
+﻿{
+    "bindata":  {
+
+                },
+    "actions":  [
+                    {
+                        "subactions":  [
+                                           {
+                                               "verb":  "addContentType",
+                                               "name":  "Prosjekthendelse"
+                                           }
+                                       ],
+                        "templateType":  106,
+                        "listName":  "Møtekalender",
+                        "verb":  "createSPList"
+                    }
+                ],
+    "$schema":  "schema.json",
+    "version":  1
+}

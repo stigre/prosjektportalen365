@@ -1,0 +1,20 @@
+﻿{
+    "bindata":  {
+
+                },
+    "actions":  [
+                    {
+                        "subactions":  [
+                                           {
+                                               "verb":  "addContentType",
+                                               "name":  "Gevinstoppfølging"
+                                           }
+                                       ],
+                        "templateType":  100,
+                        "listName":  "Gevinstsoppfølging",
+                        "verb":  "createSPList"
+                    }
+                ],
+    "$schema":  "schema.json",
+    "version":  1
+}

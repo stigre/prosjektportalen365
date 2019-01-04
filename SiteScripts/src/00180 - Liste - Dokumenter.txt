@@ -1,0 +1,20 @@
+﻿{
+    "bindata":  {
+
+                },
+    "actions":  [
+                    {
+                        "subactions":  [
+                                           {
+                                               "verb":  "addContentType",
+                                               "name":  "Prosjektdokument"
+                                           }
+                                       ],
+                        "templateType":  101,
+                        "listName":  "Dokumenter",
+                        "verb":  "createSPList"
+                    }
+                ],
+    "$schema":  "schema.json",
+    "version":  1
+}

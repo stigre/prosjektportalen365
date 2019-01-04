@@ -1,0 +1,20 @@
+﻿{
+    "bindata":  {
+
+                },
+    "actions":  [
+                    {
+                        "subactions":  [
+                                           {
+                                               "verb":  "addContentType",
+                                               "name":  "Endring"
+                                           }
+                                       ],
+                        "templateType":  100,
+                        "listName":  "Endringsanalyse",
+                        "verb":  "createSPList"
+                    }
+                ],
+    "$schema":  "schema.json",
+    "version":  1
+}

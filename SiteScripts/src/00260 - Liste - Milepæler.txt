@@ -1,0 +1,20 @@
+﻿{
+    "bindata":  {
+
+                },
+    "actions":  [
+                    {
+                        "subactions":  [
+                                           {
+                                               "verb":  "addContentType",
+                                               "name":  "Milepæl"
+                                           }
+                                       ],
+                        "templateType":  100,
+                        "listName":  "Milepæler",
+                        "verb":  "createSPList"
+                    }
+                ],
+    "$schema":  "schema.json",
+    "version":  1
+}

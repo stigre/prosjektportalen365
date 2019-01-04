@@ -1,0 +1,13 @@
+{
+  "name": "sitescripts",
+  "version": "0.0.1",
+  "description": "Site scripts for Prosjektportalen Office 365",
+  "main": "index.js",
+  "scripts": {
+    "deploy-sitedesign": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./Deploy-SiteDesign.ps1 -Name \"Prosjektportalen\"",
+    "test-invoke-sitedesign": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./Test-Invoke-SiteDesign.ps1 -StartIndex 82",
+    "generate-sitescripts": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./Generate-SiteScripts.ps1"
+  },
+  "author": "",
+  "license": "ISC"
+}

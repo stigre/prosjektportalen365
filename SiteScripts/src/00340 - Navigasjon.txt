@@ -1,0 +1,33 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "verb": "removeNavLink",
+            "displayName": "Samtaler",
+            "isWebRelative": true
+        },
+        {
+            "verb": "removeNavLink",
+            "displayName": "Notatblokk",
+            "isWebRelative": true
+        },
+        {
+            "verb": "removeNavLink",
+            "displayName": "Sider",
+            "isWebRelative": true
+        },
+        {
+            "verb": "removeNavLink",
+            "displayName": "Områdeinnhold",
+            "isWebRelative": true
+        },
+        {
+            "verb": "addNavLink",
+            "url": "/Lists/Oppgaver/AllItems.aspx",
+            "displayName": "Oppgaver",
+            "isWebRelative": true
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}
