@@ -7,7 +7,11 @@
                         "subactions":  [
                                            {
                                                "verb":  "addContentType",
-                                               "name":  "Infoelement"
+                                               "name":  "Risiko"
+                                           },
+                                           {
+                                               "verb":  "addContentType",
+                                               "name":  "Mulighet"
                                            },
                                            {
                                                "name":  "Alle elementer",
@@ -28,7 +32,7 @@
                                            }
                                        ],
                         "templateType":  100,
-                        "listName":  "Informasjon",
+                        "listName":  "Usikkerhet",
                         "verb":  "createSPList"
                     }
                 ],

@@ -7,7 +7,7 @@
                         "subactions":  [
                                            {
                                                "verb":  "addContentType",
-                                               "name":  "Infoelement"
+                                               "name":  "Ressursallokering"
                                            },
                                            {
                                                "name":  "Alle elementer",
@@ -28,7 +28,7 @@
                                            }
                                        ],
                         "templateType":  100,
-                        "listName":  "Informasjon",
+                        "listName":  "Ressursallokering",
                         "verb":  "createSPList"
                     }
                 ],

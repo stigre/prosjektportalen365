@@ -17,7 +17,7 @@ Try {
     $ProjectWebUrl = $env_settings.ProjectWebUrl
     $Credentials = $env_settings.Credentials
 } Catch {
-
+    exit 0
 }
 
 Write-Host "[INFO] Connecting to $RootSiteUrl"
@@ -28,6 +28,7 @@ $ProjectWebConnection = Connect-PnPOnline -Url $ProjectWebUrl -Credentials $Cred
 
 $ContentTypes = Get-PnPContentType -Connection $SiteConnection | Where-Object { $_.Group -eq "Prosjektportalen innholdstyper" } | Sort-Object -Property Id
 $Lists = Get-PnPList -Connection $ProjectWebConnection | Where-Object { ($_.BaseTemplate -eq 100 -or $_.BaseTemplate -eq 101 -or $_.BaseTemplate -eq 106 -or $_.BaseTemplate -eq 171) -and $_.RootFolder.ServerRelativeUrl -notlike "*SiteAssets" }
+$NavigationNodes = Get-PnPNavigationNode -Location QuickLaunch -Connection $ProjectWebConnection 
 
 $index = 10
 foreach($ct in $ContentTypes) {
@@ -50,4 +51,13 @@ foreach($lst in $Lists) {
         .\Build-SiteScript.ps1 -ListName $lst.Title -Index $index -SiteConnection $SiteConnection -ProjectWebConnection $ProjectWebConnection
         $index += 10
     }
+}
+
+$CreateSiteScript = "y"
+if($ConfirmLists.IsPresent) {
+    $CreateSiteScript = Read-Host "Create site script for navigation nodes? (y/n)"
+}
+if($CreateSiteScript.ToLower() -eq "y") {
+    .\Build-SiteScript.ps1 -NavigationNodes $NavigationNodes -Index $index -SiteConnection $SiteConnection -ProjectWebConnection $ProjectWebConnection
+    $index += 10
 }

@@ -11,6 +11,8 @@ Param(
     [string]$ContentTypeName,   
     [Parameter(Mandatory = $false)]
     [string]$ListName,   
+    [Parameter(Mandatory = $false)]
+    $NavigationNodes,
     [Parameter(Mandatory = $true)]
     [int]$Index,   
     [Parameter(Mandatory = $false)]
@@ -74,6 +76,8 @@ if (-not [string]::IsNullOrEmpty($ListName)) {
     Remove-Item $OutFile -Force -ErrorAction SilentlyContinue
     $List = Get-PnPList -Identity $ListName -Connection $ProjectWebConnection
     $List.Context.Load($List.ContentTypes)
+    $List.Context.Load($List.DefaultView)
+    $List.Context.Load($List.DefaultView.ViewFields)
     $List.Context.ExecuteQuery()
     $CreateSPListAction = @{}
     $CreateSPListAction.verb = "createSPList"
@@ -92,10 +96,38 @@ if (-not [string]::IsNullOrEmpty($ListName)) {
         }
         $CreateSPListAction.subactions += $subActionAddContentType
     }
+    $subActionAddSPView = @{
+        verb = "addSPView";
+        name = $List.DefaultView.Title;
+        viewFields = @("Title", "Modified", "Editor");
+        query = "";
+        rowLimit = 100;
+        isPaged = $true;
+        makeDefault = $true
+    } 
+    $subActionRemoveSPView = @{
+        verb = "removeSPView";
+        name= "All Items";
+    }
+    $CreateSPListAction.subactions += $subActionAddSPView
+    $CreateSPListAction.subactions += $subActionRemoveSPView
     $SiteScript.actions += $CreateSPListAction
     Write-Host "[INFO] Created Site Script with verb [createSPList] with TemplateType $TemplateType"
 }
 
+if($null -ne $NavigationNodes) {
+    Write-Host "[INFO] NavigationNodes was specified, creating Site Script with verb [addNavLink]"
+    $OutFile = "{0} - Navigasjon.txt" -f $Index.ToString("00000")
+    foreach($node in $NavigationNodes) {
+        $AddNavLinkAction = @{}
+        $AddNavLinkAction.verb = "addNavLink"
+        $AddNavLinkAction.url = $node.Url
+        $AddNavLinkAction.displayName = $node.Title
+        $AddNavLinkAction.isWebRelative = $true
+        $SiteScript.actions += $AddNavLinkAction
+    }
+    Write-Host "[INFO] Created Site Script with verb [addNavLink]"
+}
 
 Write-Host "[INFO] Saving site script to file $OutFile"
 

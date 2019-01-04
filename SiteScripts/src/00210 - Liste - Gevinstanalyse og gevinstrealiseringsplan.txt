@@ -8,6 +8,23 @@
                                            {
                                                "verb":  "addContentType",
                                                "name":  "Gevinst"
+                                           },
+                                           {
+                                               "name":  "Alle elementer",
+                                               "isPaged":  true,
+                                               "query":  "",
+                                               "makeDefault":  true,
+                                               "verb":  "addSPView",
+                                               "rowLimit":  100,
+                                               "viewFields":  [
+                                                                  "Title",
+                                                                  "Modified",
+                                                                  "Editor"
+                                                              ]
+                                           },
+                                           {
+                                               "verb":  "removeSPView",
+                                               "name":  "All Items"
                                            }
                                        ],
                         "templateType":  100,

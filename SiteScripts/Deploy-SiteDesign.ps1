@@ -19,7 +19,7 @@ Try {
     $Credentials = $env_settings.Credentials
 }
 Catch {
-
+    exit 0
 }
 
 

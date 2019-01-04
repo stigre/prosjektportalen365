@@ -28,7 +28,7 @@ Try {
     $Password = ConvertTo-SecureString $env_settings.Password -AsPlainText -Force
 }
 Catch {
-
+    exit 0
 }
 
 Write-Host "[INFO] Connecting to $RootSiteUrl"
@@ -47,7 +47,6 @@ while (-not $CreatedSiteUrl) {
         Disconnect-PnPOnline -Connection $SiteConnection
     }
     Catch {
-        Write-Host "[ERROR] $($_.Exception.Message)"
         $idx++
     }
 }

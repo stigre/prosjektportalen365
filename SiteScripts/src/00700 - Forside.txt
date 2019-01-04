@@ -1,0 +1,18 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "verb": "createPage",
+            "fileName": "Hjem.aspx",
+            "pageData": {
+                "Title": "",
+                "BannerImageUrl": null,
+                "CanvasContent1": null,
+                "LayoutWebpartsContent": "{}"
+            },
+            "setAsHomePage": true
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}
