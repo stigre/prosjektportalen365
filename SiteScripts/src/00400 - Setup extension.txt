@@ -1,0 +1,14 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "verb": "associateExtension",
+            "title": "ProjectSetupApplicationCustomizer",
+            "location": "ClientSideExtension.ApplicationCustomizer",
+            "clientSideComponentId": "ce34553d-ab47-4107-8dd1-e980d953996d",
+            "scope": "Web"
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}
