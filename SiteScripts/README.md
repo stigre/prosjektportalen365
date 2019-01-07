@@ -1,6 +1,7 @@
 # Site Scripts #
 
 ## List of scripts ##
+<<<<<<< HEAD
 ActionsCount | Title                                             | Filename                                                   | Order
 ------------ | ------------------------------------------------- | ---------------------------------------------------------- | -----
 109          | Felter                                            | 000010 - Felter                                            | 10
@@ -40,6 +41,45 @@ ActionsCount | Title                                             | Filename     
 1            | Koble til hub                                     | 002200 - Koble til hub                                     | 2200
 1            | Forside                                           | 002300 - Forside                                           | 2300
 1            | Regionale innstillinger                           | 002400 - Regionale innstillinger                           | 2400
+=======
+* 00010 - Innholdstype - Prosjektloggelement
+* 00020 - Innholdstype - Infoelement
+* 00030 - Innholdstype - Gevinstoppfølging
+* 00040 - Innholdstype - Kommunikasjonselement
+* 00050 - Innholdstype - Sjekkpunkt
+* 00060 - Innholdstype - Prosjektleveranse
+* 00070 - Innholdstype - Interessent
+* 00080 - Innholdstype - Prosjektelement
+* 00090 - Innholdstype - Gevinst
+* 00100 - Innholdstype - Endring
+* 00110 - Innholdstype - Mulighet
+* 00120 - Innholdstype - Risiko
+* 00130 - Innholdstype - Ressursallokering
+* 00140 - Innholdstype - Milepæl
+* 00150 - Innholdstype - Prosjektdokument
+* 00160 - Innholdstype - Prosjekthendelse
+* 00170 - Innholdstype - Prosjektoppgave
+* 00180 - Liste - Dokumenter
+* 00190 - Liste - Endringsanalyse
+* 00200 - Liste - Fasesjekkliste
+* 00210 - Liste - Gevinstanalyse og gevinstrealiseringsplan
+* 00220 - Liste - Gevinstsoppfølging
+* 00230 - Liste - Informasjon
+* 00240 - Liste - Interessentregister
+* 00250 - Liste - Kommunikasjonsplan
+* 00260 - Liste - Milepæler
+* 00270 - Liste - Møtekalender
+* 00280 - Liste - Oppgaver
+* 00290 - Liste - Prosjektleveranser
+* 00300 - Liste - Prosjektlogg
+* 00320 - Liste - Ressursallokering
+* 00330 - Liste - Usikkerhet
+* 00340 - Navigasjon
+* 00400 - Setup extension
+* 00500 - Koble til hub
+* 00600 - Regionale innstillinger
+* 00700 - Forside
+>>>>>>> 340f73c576749e9975a26e5674be1e7be31a42bb
 
 ## Development ##
 There's a number of scripts used in developing the site scripts.

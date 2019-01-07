@@ -2,35 +2,12 @@
     "bindata":  {
 
                 },
-<<<<<<< HEAD:SiteScripts/src/000230 - Liste - Informasjon.txt
-                {
-                    "name": "All Items",
-                    "isPaged": true,
-                    "query": "",
-                    "makeDefault": true,
-                    "verb": "addSPView",
-                    "rowLimit": 100,
-                    "viewFields": [
-                        "LinkTitle",
-                        "GtProjectInfoDescription"
-                    ]
-                }
-            ],
-            "templateType": 100,
-            "listName": "Informasjon",
-            "verb": "createSPList"
-        }
-    ],
-    "$schema": "schema.json",
-    "version": 1
-}
-=======
     "actions":  [
                     {
                         "subactions":  [
                                            {
                                                "verb":  "addContentType",
-                                               "name":  "Infoelement"
+                                               "name":  "Ressursallokering"
                                            },
                                            {
                                                "name":  "Alle elementer",
@@ -51,11 +28,10 @@
                                            }
                                        ],
                         "templateType":  100,
-                        "listName":  "Informasjon",
+                        "listName":  "Ressursallokering",
                         "verb":  "createSPList"
                     }
                 ],
     "$schema":  "schema.json",
     "version":  1
 }
->>>>>>> 340f73c576749e9975a26e5674be1e7be31a42bb:SiteScripts/src/00230 - Liste - Informasjon.txt
