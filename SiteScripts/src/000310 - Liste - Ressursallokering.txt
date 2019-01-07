@@ -1,0 +1,34 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "subactions": [
+                {
+                    "verb": "addContentType",
+                    "name": "Ressursallokering"
+                },
+                {
+                    "name": "All Items",
+                    "isPaged": true,
+                    "query": "",
+                    "makeDefault": true,
+                    "verb": "addSPView",
+                    "rowLimit": 100,
+                    "viewFields": [
+                        "ID",
+                        "GtResourceUser",
+                        "GtResourceRole",
+                        "GtStartDate",
+                        "GtEndDate",
+                        "GtResourceLoad"
+                    ]
+                }
+            ],
+            "templateType": 100,
+            "listName": "Ressursallokering",
+            "verb": "createSPList"
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}

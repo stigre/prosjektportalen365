@@ -1,0 +1,70 @@
+﻿{
+    "bindata":  {
+
+                },
+    "actions":  [
+                    {
+                        "verb":  "createContentType",
+                        "description":  "Opprett et nytt listeelement.",
+                        "parentId":  "0x01",
+                        "subactions":  [
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProductDescription"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProductStartTime"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProductEndTime"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProductPhase"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProductQualityExpectations"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProductAcceptanceCriteria"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProductQualityTolerance"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProductQualityResponsible"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProductAcceptanceMethod"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProductAcceptanceResponsible"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProductAcceptanceDate"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProductStatus"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProductStatusComment"
+                                           }
+                                       ],
+                        "name":  "Prosjektleveranse",
+                        "hidden":  false
+                    }
+                ],
+    "$schema":  "schema.json",
+    "version":  1
+}

@@ -1,0 +1,50 @@
+﻿{
+    "bindata":  {
+
+                },
+    "actions":  [
+                    {
+                        "verb":  "createContentType",
+                        "description":  "Opprett et nytt listeelement.",
+                        "parentId":  "0x01",
+                        "subactions":  [
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProjectLogType"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProjectLogReporter"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProjectLogDescription"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProjectLogResponsible"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProjectLogConsequence"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProjectLogRecommendation"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProjectLogExperience"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProjectLogActors"
+                                           }
+                                       ],
+                        "name":  "Prosjektloggelement",
+                        "hidden":  false
+                    }
+                ],
+    "$schema":  "schema.json",
+    "version":  1
+}

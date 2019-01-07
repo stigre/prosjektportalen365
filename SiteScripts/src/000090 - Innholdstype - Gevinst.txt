@@ -1,0 +1,54 @@
+﻿{
+    "bindata":  {
+
+                },
+    "actions":  [
+                    {
+                        "verb":  "createContentType",
+                        "description":  "Opprett et nytt listeelement.",
+                        "parentId":  "0x01",
+                        "subactions":  [
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtGainsType"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtPrereqProfitAchievement"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtGainsTurnover"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtGainsResponsible"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtMeasureIndicator"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtStartValue"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtDesiredValue"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtMeasurementUnit"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtRealizationTime"
+                                           }
+                                       ],
+                        "name":  "Gevinst",
+                        "hidden":  false
+                    }
+                ],
+    "$schema":  "schema.json",
+    "version":  1
+}

@@ -1,0 +1,42 @@
+﻿{
+    "bindata":  {
+
+                },
+    "actions":  [
+                    {
+                        "verb":  "createContentType",
+                        "description":  "Opprett et nytt listeelement.",
+                        "parentId":  "0x01",
+                        "subactions":  [
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtActionDescription"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProjectPhase"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtActionStatus"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtActionChannel"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtActionDate"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtActionResponsible"
+                                           }
+                                       ],
+                        "name":  "Kommunikasjonselement",
+                        "hidden":  false
+                    }
+                ],
+    "$schema":  "schema.json",
+    "version":  1
+}

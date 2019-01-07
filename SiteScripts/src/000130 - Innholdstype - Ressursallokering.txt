@@ -1,0 +1,40 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "verb": "createContentType",
+            "description": "Opprett et nytt listeelement.",
+            "parentId": "0x01",
+            "subactions": [
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtResourceUser"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtResourceRole"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtStartDate"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtEndDate"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtResourceLoad"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtResourceAbsenceComment"
+                }
+            ],
+            "name": "Ressursallokering",
+            "hidden": false
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}

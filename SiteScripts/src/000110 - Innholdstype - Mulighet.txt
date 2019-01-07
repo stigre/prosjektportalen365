@@ -1,0 +1,14 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "verb": "createContentType",
+            "description": "Opprett et nytt listeelement.",
+            "parentId": "0x0100c90c950a9cdc4340a4265d9ec5db66a3",
+            "name": "Mulighet",
+            "hidden": false
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}

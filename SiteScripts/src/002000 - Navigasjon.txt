@@ -1,0 +1,87 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "verb": "removeNavLink",
+            "displayName": "Pages",
+            "isWebRelative": true
+        },
+        {
+            "verb": "removeNavLink",
+            "displayName": "Conversations",
+            "isWebRelative": true
+        },
+        {
+            "verb": "removeNavLink",
+            "displayName": "Documents",
+            "isWebRelative": true
+        },
+        {
+            "verb": "removeNavLink",
+            "displayName": "Notebook",
+            "isWebRelative": true
+        },
+        {
+            "isWebRelative": true,
+            "url": "Lists/Prosjektlogg/AllItems.aspx",
+            "displayName": "Prosjektlogg",
+            "verb": "addNavLink"
+        },
+        {
+            "isWebRelative": true,
+            "url": "Lists/Interessentregister/AllItems.aspx",
+            "displayName": "Interessentregister",
+            "verb": "addNavLink"
+        },
+        {
+            "isWebRelative": true,
+            "url": "Lists/Kommunikasjonsplan/AllItems.aspx",
+            "displayName": "Kommunikasjonsplan",
+            "verb": "addNavLink"
+        },
+        {
+            "isWebRelative": true,
+            "url": "Lists/Usikkerhet/AllItems.aspx",
+            "displayName": "Usikkerhet",
+            "verb": "addNavLink"
+        },
+        {
+            "isWebRelative": true,
+            "url": "Lists/Oppgaver/AllItems.aspx",
+            "displayName": "Oppgaver",
+            "verb": "addNavLink"
+        },
+        {
+            "isWebRelative": true,
+            "url": "Lists/Mtekalender/calendar.aspx",
+            "displayName": "Møtekalender",
+            "verb": "addNavLink"
+        },
+        {
+            "isWebRelative": true,
+            "url": "Prosjektdokumenter/Forms/AllItems.aspx",
+            "displayName": "Prosjektdokumenter",
+            "verb": "addNavLink"
+        },
+        {
+            "isWebRelative": true,
+            "url": "Lists/Fasesjekkliste/AllItems.aspx",
+            "displayName": "Fasesjekkliste",
+            "verb": "addNavLink"
+        },
+        {
+            "isWebRelative": true,
+            "url": "Lists/Prosjektleveranser/AllItems.aspx",
+            "displayName": "Prosjektleveranser",
+            "verb": "addNavLink"
+        },
+        {
+            "isWebRelative": true,
+            "url": "Lists/Ressursallokering/AllItems.aspx",
+            "displayName": "Ressursallokering",
+            "verb": "addNavLink"
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}

@@ -1,0 +1,33 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "subactions": [
+                {
+                    "verb": "addContentType",
+                    "name": "Prosjektdokument"
+                },
+                {
+                    "name": "All Items",
+                    "isPaged": true,
+                    "query": "",
+                    "makeDefault": true,
+                    "verb": "addSPView",
+                    "rowLimit": 100,
+                    "viewFields": [
+                        "DocIcon",
+                        "LinkFilename",
+                        "GtProjectPhase",
+                        "Modified",
+                        "Editor"
+                    ]
+                }
+            ],
+            "templateType": 101,
+            "listName": "Prosjektdokumenter",
+            "verb": "createSPList"
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}

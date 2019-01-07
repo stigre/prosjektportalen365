@@ -1,0 +1,22 @@
+﻿{
+    "bindata":  {
+
+                },
+    "actions":  [
+                    {
+                        "verb":  "createContentType",
+                        "description":  "Opprett et nytt listeelement.",
+                        "parentId":  "0x01",
+                        "subactions":  [
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtProjectInfoDescription"
+                                           }
+                                       ],
+                        "name":  "Infoelement",
+                        "hidden":  false
+                    }
+                ],
+    "$schema":  "schema.json",
+    "version":  1
+}

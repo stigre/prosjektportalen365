@@ -1,0 +1,20 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "verb": "createContentType",
+            "description": "Spor et arbeidselement som du eller gruppen må fullføre.",
+            "parentId": "0x0108",
+            "subactions": [
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtProjectPhase"
+                }
+            ],
+            "name": "Prosjektoppgave",
+            "hidden": false
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}

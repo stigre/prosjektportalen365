@@ -1,0 +1,32 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "subactions": [
+                {
+                    "verb": "addContentType",
+                    "name": "Kommunikasjonselement"
+                },
+                {
+                    "name": "All Items",
+                    "isPaged": true,
+                    "query": "",
+                    "makeDefault": true,
+                    "verb": "addSPView",
+                    "rowLimit": 100,
+                    "viewFields": [
+                        "LinkTitle",
+                        "GtProjectPhase",
+                        "GtActionDate",
+                        "GtActionResponsible"
+                    ]
+                }
+            ],
+            "templateType": 100,
+            "listName": "Kommunikasjonsplan",
+            "verb": "createSPList"
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}

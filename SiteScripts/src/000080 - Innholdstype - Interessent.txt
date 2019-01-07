@@ -1,0 +1,46 @@
+﻿{
+    "bindata":  {
+
+                },
+    "actions":  [
+                    {
+                        "verb":  "createContentType",
+                        "description":  "Opprett et nytt listeelement.",
+                        "parentId":  "0x01",
+                        "subactions":  [
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtStakeholderGroup"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtStakeholderContext"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtStakeholderStrategy"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtStakeholderInterest"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtStakeholderInfluence"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtStakeholderInfluencePossibilty"
+                                           },
+                                           {
+                                               "verb":  "addSiteColumn",
+                                               "internalName":  "GtStakeholderActions"
+                                           }
+                                       ],
+                        "name":  "Interessent",
+                        "hidden":  false
+                    }
+                ],
+    "$schema":  "schema.json",
+    "version":  1
+}

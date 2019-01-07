@@ -1,0 +1,68 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "verb": "createContentType",
+            "description": "Opprett et nytt listeelement.",
+            "id": "0x0100c90c950a9cdc4340a4265d9ec5db66a3",
+            "subactions": [
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtProjectPhase"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtRiskProximity"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtRiskAction"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtRiskStrategy"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtActionResponsible"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtRiskProbability"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtRiskConsequence"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtRiskFactor"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtRiskProbabilityPostAction"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtRiskConsequencePostAction"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtRiskFactorPostAction"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtRiskStatus"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtShowInPortfolio"
+                }
+            ],
+            "name": "Usikkerhet",
+            "hidden": false
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}

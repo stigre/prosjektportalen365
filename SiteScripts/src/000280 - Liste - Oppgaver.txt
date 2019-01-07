@@ -1,0 +1,30 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "subactions": [
+                {
+                    "verb": "addContentType",
+                    "name": "Prosjektoppgave"
+                },
+                {
+                    "name": "All Items",
+                    "isPaged": true,
+                    "query": "",
+                    "makeDefault": true,
+                    "verb": "addSPView",
+                    "rowLimit": 100,
+                    "viewFields": [
+                        "LinkTitle",
+                        "Editor"
+                    ]
+                }
+            ],
+            "templateType": 107,
+            "listName": "Oppgaver",
+            "verb": "createSPList"
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}

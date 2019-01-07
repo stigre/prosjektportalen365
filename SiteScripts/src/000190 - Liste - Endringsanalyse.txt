@@ -1,0 +1,31 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "subactions": [
+                {
+                    "verb": "addContentType",
+                    "name": "Endring"
+                },
+                {
+                    "name": "All Items",
+                    "isPaged": true,
+                    "query": "",
+                    "makeDefault": true,
+                    "verb": "addSPView",
+                    "rowLimit": 100,
+                    "viewFields": [
+                        "LinkTitle",
+                        "GtProcess",
+                        "GtChallengeDescription"
+                    ]
+                }
+            ],
+            "templateType": 100,
+            "listName": "Endringsanalyse",
+            "verb": "createSPList"
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}

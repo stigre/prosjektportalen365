@@ -1,0 +1,36 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "subactions": [
+                {
+                    "verb": "addContentType",
+                    "name": "Interessent"
+                },
+                {
+                    "name": "All Items",
+                    "isPaged": true,
+                    "query": "",
+                    "makeDefault": true,
+                    "verb": "addSPView",
+                    "rowLimit": 100,
+                    "viewFields": [
+                        "LinkTitle",
+                        "GtStakeholderGroup",
+                        "GtStakeholderContext",
+                        "GtStakeholderStrategy",
+                        "GtStakeholderInterest",
+                        "GtStakeholderInfluence",
+                        "GtStakeholderInfluencePossibilty",
+                        "GtStakeholderActions"
+                    ]
+                }
+            ],
+            "templateType": 100,
+            "listName": "Interessentregister",
+            "verb": "createSPList"
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}

@@ -1,0 +1,40 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "verb": "createContentType",
+            "description": "Opprett et nytt dokument.",
+            "parentId": "0x0101",
+            "subactions": [
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtProjectPhase"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtProjectFinanceName"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtProjectNumber"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtArchiveReference"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtProjectServiceArea"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtProjectType"
+                }
+            ],
+            "name": "Prosjektdokument",
+            "hidden": false
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}

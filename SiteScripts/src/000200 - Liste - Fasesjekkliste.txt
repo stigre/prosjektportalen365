@@ -1,0 +1,32 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "subactions": [
+                {
+                    "verb": "addContentType",
+                    "name": "Sjekkpunkt"
+                },
+                {
+                    "name": "All Items",
+                    "isPaged": true,
+                    "query": "",
+                    "makeDefault": true,
+                    "verb": "addSPView",
+                    "rowLimit": 100,
+                    "viewFields": [
+                        "LinkTitle",
+                        "GtProjectPhase",
+                        "GtChecklistStatus",
+                        "GtComment"
+                    ]
+                }
+            ],
+            "templateType": 100,
+            "listName": "Fasesjekkliste",
+            "verb": "createSPList"
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}

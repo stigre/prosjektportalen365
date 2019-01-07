@@ -1,0 +1,35 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "subactions": [
+                {
+                    "verb": "addContentType",
+                    "name": "Prosjektloggelement"
+                },
+                {
+                    "name": "All Items",
+                    "isPaged": true,
+                    "query": "",
+                    "makeDefault": true,
+                    "verb": "addSPView",
+                    "rowLimit": 100,
+                    "viewFields": [
+                        "LinkTitle",
+                        "GtProjectLogType",
+                        "GtProjectLogReporter",
+                        "GtProjectLogResponsible",
+                        "GtProjectLogConsequence",
+                        "GtProjectLogRecommendation",
+                        "GtProjectLogExperience"
+                    ]
+                }
+            ],
+            "templateType": 100,
+            "listName": "Prosjektlogg",
+            "verb": "createSPList"
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}

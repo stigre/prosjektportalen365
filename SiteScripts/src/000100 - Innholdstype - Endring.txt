@@ -1,0 +1,24 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "verb": "createContentType",
+            "description": "Opprett et nytt listeelement.",
+            "parentId": "0x01",
+            "subactions": [
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtProcess"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtChallengeDescription"
+                }
+            ],
+            "name": "Endring",
+            "hidden": false
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}

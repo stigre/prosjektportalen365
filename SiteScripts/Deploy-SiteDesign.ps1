@@ -8,7 +8,7 @@ Param(
     [Parameter(Mandatory = $false)]
     $Description = "Prosjektportalen 3.0",
     [Parameter(Mandatory = $false)]
-    $Folder = "./src",
+    $Folder,
     [Parameter(Mandatory = $false)]
     [int]$First = 300
 )
@@ -19,7 +19,7 @@ Try {
     $Credentials = $env_settings.Credentials
 }
 Catch {
-
+    exit 0
 }
 
 
@@ -31,14 +31,24 @@ Get-PnPSiteScript -Connection $SiteConnection | Remove-PnPSiteScript -Connection
 
 $SiteScripts = Get-ChildItem "$($Folder)/*.txt" | Select-Object -First $First
 $SiteScriptIds = @()
+$TotalActionsCount = 0
 
 foreach ($s in $SiteScripts) {
+    $ActionsCount = 0
     $Content = (Get-Content -Path $s.FullName -Raw | Out-String)
-    $SiteScriptTitle = $s.BaseName.Substring(8)
-    Write-Host "[INFO] Generating site script [$SiteScriptTitle] from file [$($s.Name)]"
+    $ContentJson = ConvertFrom-Json $Content
+    foreach ($action in $ContentJson.actions) {
+        $ActionsCount++
+        $ActionsCount += $action.subactions.length
+    }    
+    $SiteScriptTitle = $s.BaseName.Substring(9)
+    Write-Host "[INFO] Adding site script [$SiteScriptTitle] with [$ActionsCount] actions from file [$($s.Name)]"
     $SiteScript = Add-PnPSiteScript -Title $SiteScriptTitle -Content $Content -Connection $SiteConnection
     $SiteScriptIds += $SiteScript.Id.Guid
+    $TotalActionsCount += $ActionsCount
 }
+
+Write-Host "TotalActionsCount: $TotalActionsCount"
 
 $SiteDesign = (Get-PnPSiteDesign -Identity $Name)
 

@@ -1,0 +1,36 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "verb": "createContentType",
+            "description": "Opprett et nytt listeelement.",
+            "parentId": "0x01",
+            "subactions": [
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtProjectPhase"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtMilestonePlannedDate"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtMilestoneActualDate"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtMilestoneStatus"
+                },
+                {
+                    "verb": "addSiteColumn",
+                    "internalName": "GtMilestoneComment"
+                }
+            ],
+            "name": "Milepæl",
+            "hidden": false
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}

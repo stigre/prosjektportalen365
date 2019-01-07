@@ -1,0 +1,37 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "subactions": [
+                {
+                    "verb": "addContentType",
+                    "name": "Gevinst"
+                },
+                {
+                    "name": "All Items",
+                    "isPaged": true,
+                    "query": "",
+                    "makeDefault": true,
+                    "verb": "addSPView",
+                    "rowLimit": 100,
+                    "viewFields": [
+                        "LinkTitle",
+                        "GtGainsType",
+                        "GtGainsTurnover",
+                        "GtGainsResponsible",
+                        "GtMeasureIndicator",
+                        "GtStartValue",
+                        "GtDesiredValue",
+                        "GtMeasurementUnit",
+                        "GtRealizationTime"
+                    ]
+                }
+            ],
+            "templateType": 100,
+            "listName": "Gevinstanalyse og gevinstrealiseringsplan",
+            "verb": "createSPList"
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}

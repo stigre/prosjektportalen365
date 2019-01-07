@@ -1,0 +1,31 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "subactions": [
+                {
+                    "verb": "addContentType",
+                    "name": "Gevinstoppfølging"
+                },
+                {
+                    "name": "All Items",
+                    "isPaged": true,
+                    "query": "",
+                    "makeDefault": true,
+                    "verb": "addSPView",
+                    "rowLimit": 100,
+                    "viewFields": [
+                        "GtMeasurementDate",
+                        "GtMeasurementValue",
+                        "GtMeasurementComment"
+                    ]
+                }
+            ],
+            "templateType": 100,
+            "listName": "Gevinstsoppfølging",
+            "verb": "createSPList"
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}
