@@ -1,8 +1,12 @@
 ﻿{
-    "bindata":  {
-
+    "bindata": {},
+    "actions": [
+        {
+            "subactions": [
+                {
+                    "verb": "addContentType",
+                    "name": "Infoelement"
                 },
-<<<<<<< HEAD:SiteScripts/src/000230 - Liste - Informasjon.txt
                 {
                     "name": "All Items",
                     "isPaged": true,
@@ -24,38 +28,3 @@
     "$schema": "schema.json",
     "version": 1
 }
-=======
-    "actions":  [
-                    {
-                        "subactions":  [
-                                           {
-                                               "verb":  "addContentType",
-                                               "name":  "Infoelement"
-                                           },
-                                           {
-                                               "name":  "Alle elementer",
-                                               "isPaged":  true,
-                                               "query":  "",
-                                               "makeDefault":  true,
-                                               "verb":  "addSPView",
-                                               "rowLimit":  100,
-                                               "viewFields":  [
-                                                                  "Title",
-                                                                  "Modified",
-                                                                  "Editor"
-                                                              ]
-                                           },
-                                           {
-                                               "verb":  "removeSPView",
-                                               "name":  "All Items"
-                                           }
-                                       ],
-                        "templateType":  100,
-                        "listName":  "Informasjon",
-                        "verb":  "createSPList"
-                    }
-                ],
-    "$schema":  "schema.json",
-    "version":  1
-}
->>>>>>> 340f73c576749e9975a26e5674be1e7be31a42bb:SiteScripts/src/00230 - Liste - Informasjon.txt
