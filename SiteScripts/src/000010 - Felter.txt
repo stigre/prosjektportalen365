@@ -233,7 +233,7 @@
                     },
                     {
                         "verb":  "createSiteColumnXml",
-                        "schemaXml":  "<Field ID=\"{0e82c395-9ed9-43f9-871a-208215b18558}\" Name=\"Sorteringsrekkefølge\" DisplayName=\"Sorteringsrekkefølge\" Type=\"Number\" Group=\"Prosjektportalenkolonner\" Description=\"\" StaticName=\"GtSortOrder\"></Field>"
+                        "schemaXml":  "<Field ID=\"{0e82c395-9ed9-43f9-871a-208215b18558}\" Name=\"GtSortOrder\" DisplayName=\"Sorteringsrekkefølge\" Type=\"Number\" Group=\"Prosjektportalenkolonner\" Description=\"\" StaticName=\"GtSortOrder\"></Field>"
                     },
                     {
                         "verb":  "createSiteColumnXml",
