@@ -35,13 +35,13 @@ $TotalActionsCount = 0
 
 foreach ($s in $SiteScriptSrc) {
     $ActionsCount = 0
+    $Title = $s.BaseName.Substring(9)
     $Content = (Get-Content -Path $s.FullName -Raw | Out-String)
     $ContentJson = ConvertFrom-Json $Content
     foreach ($action in $ContentJson.actions) {
         $ActionsCount++
         $ActionsCount += $action.subactions.length
     }    
-    $Title = $s.BaseName.Substring(9)
     $SiteScript = $SiteScripts | Where-Object { $_.Title -eq $Title }
     if($null -ne $SiteScript) {
         Write-Host "[INFO] Updating existing site script [$Title] with [$ActionsCount] actions from file [$($s.Name)]"
@@ -54,9 +54,7 @@ foreach ($s in $SiteScriptSrc) {
     $TotalActionsCount += $ActionsCount
 }
 
-Write-Host "TotalActionsCount: $TotalActionsCount"
-
-$SiteDesign = (Get-PnPSiteDesign -Identity $Name)
+$SiteDesign = Get-PnPSiteDesign -Identity $Name
 
 if ($null -ne $SiteDesign) {
     Write-Host "[INFO] Updating existing site design [$Name] with [$TotalActionsCount] actions"
