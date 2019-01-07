@@ -8,6 +8,11 @@
                     "name": "Gevinst"
                 },
                 {
+                    "verb": "addSPLookupFieldXml",
+                    "schemaXml": "<Field Type=\"LookupMulti\" Mult=\"TRUE\" DisplayName=\"Endring\" Description=\"Foreslått endring fra endringsanalysen\" EnforceUniqueValues=\"FALSE\" ShowField=\"Title\" UnlimitedLengthInDocumentLibrary=\"FALSE\" RelationshipDeleteBehavior=\"None\" ID=\"{1d5752af-4d26-4aed-b20a-6229ac14ed5d}\" StaticName=\"GtChangeLookup\" Name=\"GtChangeLookup\" />",
+                    "targetListName": "Endringsanalyse"
+                },
+                {
                     "name": "All Items",
                     "isPaged": true,
                     "query": "",
@@ -16,6 +21,7 @@
                     "rowLimit": 100,
                     "viewFields": [
                         "LinkTitle",
+                        "GtChangeLookup",
                         "GtGainsType",
                         "GtGainsTurnover",
                         "GtGainsResponsible",

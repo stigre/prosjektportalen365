@@ -27,13 +27,13 @@ Write-Host "[INFO] Connecting to $RootSiteUrl"
 $SiteConnection = Connect-PnPOnline -Url $RootSiteUrl -Credentials $Credentials -ReturnConnection
 
 
-Get-PnPSiteScript -Connection $SiteConnection | Remove-PnPSiteScript -Connection $SiteConnection -Force
-
-$SiteScripts = Get-ChildItem "$($Folder)/*.txt" | Select-Object -First $First
+# $SiteScripts = Get-PnPSiteScript -Connection $SiteConnection | Remove-PnPSiteScript -Connection $SiteConnection -Force
+$SiteScripts = Get-PnPSiteScript -Connection $SiteConnection
+$SiteScriptSrc = Get-ChildItem "$($Folder)/*.txt" | Select-Object -First $First
 $SiteScriptIds = @()
 $TotalActionsCount = 0
 
-foreach ($s in $SiteScripts) {
+foreach ($s in $SiteScriptSrc) {
     $ActionsCount = 0
     $Content = (Get-Content -Path $s.FullName -Raw | Out-String)
     $ContentJson = ConvertFrom-Json $Content
@@ -41,9 +41,15 @@ foreach ($s in $SiteScripts) {
         $ActionsCount++
         $ActionsCount += $action.subactions.length
     }    
-    $SiteScriptTitle = $s.BaseName.Substring(9)
-    Write-Host "[INFO] Adding site script [$SiteScriptTitle] with [$ActionsCount] actions from file [$($s.Name)]"
-    $SiteScript = Add-PnPSiteScript -Title $SiteScriptTitle -Content $Content -Connection $SiteConnection
+    $Title = $s.BaseName.Substring(9)
+    $SiteScript = $SiteScripts | Where-Object { $_.Title -eq $Title }
+    if($null -ne $SiteScript) {
+        Write-Host "[INFO] Updating existing site script [$Title] with [$ActionsCount] actions from file [$($s.Name)]"
+        Set-PnPSiteScript -Identity $SiteScript -Content $Content -Connection $SiteConnection  >$null 2>&1
+    } else {
+        Write-Host "[INFO] Adding site script [$Title] with [$ActionsCount] actions from file [$($s.Name)]"
+        $SiteScript = Add-PnPSiteScript -Title $Title -Content $Content -Connection $SiteConnection
+    }
     $SiteScriptIds += $SiteScript.Id.Guid
     $TotalActionsCount += $ActionsCount
 }
@@ -53,12 +59,12 @@ Write-Host "TotalActionsCount: $TotalActionsCount"
 $SiteDesign = (Get-PnPSiteDesign -Identity $Name)
 
 if ($null -ne $SiteDesign) {
-    Write-Host "[INFO] Updating existing site design $Name"
+    Write-Host "[INFO] Updating existing site design [$Name] with [$TotalActionsCount] actions"
     $Version = $SiteDesign.Version
     $Version++
     $SiteDesign = Set-PnPSiteDesign -Identity $SiteDesign -SiteScriptIds $SiteScriptIds -Description $Description -Version $Version -Connection $SiteConnection
 }
 else {
-    Write-Host "[INFO] Creating new site design $Name"
+    Write-Host "[INFO] Creating new site design [$Name] with [$TotalActionsCount] actions"
     $SiteDesign = Add-PnPSiteDesign -Title $Name -SiteScriptIds $SiteScriptIds -Description $Description -WebTemplate TeamSite -Connection $SiteConnection
 }
