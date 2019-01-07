@@ -9,26 +9,6 @@
                 {
                     "verb": "addSiteColumn",
                     "internalName": "GtProjectPhase"
-                },
-                {
-                    "verb": "addSiteColumn",
-                    "internalName": "GtProjectFinanceName"
-                },
-                {
-                    "verb": "addSiteColumn",
-                    "internalName": "GtProjectNumber"
-                },
-                {
-                    "verb": "addSiteColumn",
-                    "internalName": "GtArchiveReference"
-                },
-                {
-                    "verb": "addSiteColumn",
-                    "internalName": "GtProjectServiceArea"
-                },
-                {
-                    "verb": "addSiteColumn",
-                    "internalName": "GtProjectType"
                 }
             ],
             "name": "Prosjektdokument",
