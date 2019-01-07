@@ -1,0 +1,38 @@
+﻿{
+    "bindata": {},
+    "actions": [
+        {
+            "verb": "createPage",
+            "fileName": "Hjem.aspx",
+            "pageData": {
+                "Title": " ",
+                "BannerImageUrl": "",
+                "CanvasContent1": "",
+                "LayoutWebpartsContent": ""
+            },
+            "setAsHomePage": true
+        },
+        {
+            "verb": "createPage",
+            "fileName": "BenefitsOverview.aspx",
+            "pageData": {
+                "Title": " ",
+                "BannerImageUrl": "",
+                "CanvasContent1": "",
+                "LayoutWebpartsContent": ""
+            }
+        },
+        {
+            "verb": "createPage",
+            "fileName": "ProjectStatus.aspx",
+            "pageData": {
+                "Title": " ",
+                "BannerImageUrl": "",
+                "CanvasContent1": "",
+                "LayoutWebpartsContent": ""
+            }
+        }
+    ],
+    "$schema": "schema.json",
+    "version": 1
+}

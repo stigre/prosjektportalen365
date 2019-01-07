@@ -8,6 +8,10 @@
                     "name": "Prosjektleveranse"
                 },
                 {
+                    "verb": "removeContentType",
+                    "name": "Item"
+                },
+                {
                     "name": "All Items",
                     "isPaged": true,
                     "query": "",

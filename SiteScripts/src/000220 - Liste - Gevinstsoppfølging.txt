@@ -8,6 +8,16 @@
                     "name": "Gevinstoppfølging"
                 },
                 {
+                    "verb": "addSPLookupFieldXml",
+                    "schemaXml": "<Field Type=\"Lookup\" DisplayName=\"Gevinst\" ShowField=\"Title\" ID=\"{8d70fa93-b547-46f1-84e7-4982f8c9c675}\" StaticName=\"GtGainLookup\" Name=\"GtGainLookup\" />",
+                    "targetListName": "Gevinstanalyse og gevinstrealiseringsplan"
+                },
+                {
+                    "verb": "addSPLookupFieldXml",
+                    "schemaXml": "<Field Type=\"Lookup\" DisplayName=\"Gevinst ID\" ShowField=\"ID\" FieldRef=\"8d70fa93-b547-46f1-84e7-4982f8c9c675\" ReadOnly=\"TRUE\" UnlimitedLengthInDocumentLibrary=\"FALSE\" ID=\"{c239539c-8672-46cc-be77-fb53322f71ae}\" ShowInDisplayForm=\"FALSE\" StaticName=\"GtGainLookup_ID\" Name=\"GtGainLookup_ID\" />",
+                    "targetListName": "Gevinstanalyse og gevinstrealiseringsplan"
+                },
+                {
                     "name": "All Items",
                     "isPaged": true,
                     "query": "",
@@ -15,6 +25,7 @@
                     "verb": "addSPView",
                     "rowLimit": 100,
                     "viewFields": [
+                        "GtGainLookup",
                         "GtMeasurementDate",
                         "GtMeasurementValue",
                         "GtMeasurementComment"
