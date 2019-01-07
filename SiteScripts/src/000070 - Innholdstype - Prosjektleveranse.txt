@@ -22,7 +22,7 @@
                                            },
                                            {
                                                "verb":  "addSiteColumn",
-                                               "internalName":  "GtProductPhase"
+                                               "internalName":  "GtProjectPhase"
                                            },
                                            {
                                                "verb":  "addSiteColumn",

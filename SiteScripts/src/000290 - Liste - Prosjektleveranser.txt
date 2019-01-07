@@ -21,7 +21,7 @@
                         "GtProductEndTime",
                         "GtProductStatus",
                         "GtProductStatusComment",
-                        "GtProductPhase"
+                        "GtProjectPhase"
                     ]
                 }
             ],

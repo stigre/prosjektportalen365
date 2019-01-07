@@ -3,7 +3,7 @@
 ## List of scripts ##
 ActionsCount | Title                                             | Filename                                                   | Order
 ------------ | ------------------------------------------------- | ---------------------------------------------------------- | -----
-109          | Felter                                            | 000010 - Felter                                            | 10
+73           | Felter                                            | 000010 - Felter                                            | 10
 9            | Innholdstype - Prosjektloggelement                | 000020 - Innholdstype - Prosjektloggelement                | 20
 2            | Innholdstype - Infoelement                        | 000030 - Innholdstype - Infoelement                        | 30
 4            | Innholdstype - Gevinstoppfølging                  | 000040 - Innholdstype - Gevinstoppfølging                  | 40
@@ -13,14 +13,15 @@ ActionsCount | Title                                             | Filename     
 8            | Innholdstype - Interessent                        | 000080 - Innholdstype - Interessent                        | 80
 10           | Innholdstype - Gevinst                            | 000090 - Innholdstype - Gevinst                            | 90
 3            | Innholdstype - Endring                            | 000100 - Innholdstype - Endring                            | 100
+14           | Innholdstype - Usikkerhet                         | 000101 - Innholdstype - Usikkerhet                         | 101
 1            | Innholdstype - Mulighet                           | 000110 - Innholdstype - Mulighet                           | 110
 1            | Innholdstype - Risiko                             | 000120 - Innholdstype - Risiko                             | 120
 7            | Innholdstype - Ressursallokering                  | 000130 - Innholdstype - Ressursallokering                  | 130
 6            | Innholdstype - Milepæl                            | 000140 - Innholdstype - Milepæl                            | 140
-7            | Innholdstype - Prosjektdokument                   | 000150 - Innholdstype - Prosjektdokument                   | 150
+2            | Innholdstype - Prosjektdokument                   | 000150 - Innholdstype - Prosjektdokument                   | 150
 1            | Innholdstype - Prosjekthendelse                   | 000160 - Innholdstype - Prosjekthendelse                   | 160
 2            | Innholdstype - Prosjektoppgave                    | 000170 - Innholdstype - Prosjektoppgave                    | 170
-3            | Liste - Dokumenter                                | 000180 - Liste - Dokumenter                                | 180
+3            | Liste - Prosjektdokumenter                        | 000180 - Liste - Prosjektdokumenter                        | 180
 3            | Liste - Endringsanalyse                           | 000190 - Liste - Endringsanalyse                           | 190
 3            | Liste - Fasesjekkliste                            | 000200 - Liste - Fasesjekkliste                            | 200
 3            | Liste - Gevinstanalyse og gevinstrealiseringsplan | 000210 - Liste - Gevinstanalyse og gevinstrealiseringsplan | 210
