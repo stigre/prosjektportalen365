@@ -4,16 +4,9 @@
   "description": "Site scripts for Prosjektportalen Office 365",
   "main": "index.js",
   "scripts": {
-<<<<<<< HEAD
-    "deploy-sitedesign": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./Deploy-SiteDesign.ps1 -Name \"Prosjektportalen\" -Folder ./src",
-    "test-sitedesign": "npm run deploy-sitedesign && @powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./Test-SiteDesign.ps1 -StartIndex 107",
-    "generate-sitescripts": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./Generate-SiteScripts.ps1 -SkipNavigationNodes -Folder ./temp",
-    "get-sitescripts": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./Get-SiteScripts.ps1 -Folder ./src"
-=======
     "deploy-sitedesign": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./Deploy-SiteDesign.ps1 -Name \"Prosjektportalen\"",
     "test-sitedesign": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./Test-SiteDesign.ps1 -StartIndex 91",
     "generate-sitescripts": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./Generate-SiteScripts.ps1"
->>>>>>> 340f73c576749e9975a26e5674be1e7be31a42bb
   },
   "author": "",
   "license": "ISC"

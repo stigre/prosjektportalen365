@@ -22,12 +22,8 @@ Try {
     $RootSiteUrl = $env_settings.RootSiteUrl
     $ProjectWebUrl = $env_settings.ProjectWebUrl
     $Credentials = $env_settings.Credentials
-<<<<<<< HEAD
 }
 Catch {
-=======
-} Catch {
->>>>>>> 340f73c576749e9975a26e5674be1e7be31a42bb
     exit 0
 }
 
@@ -41,11 +37,8 @@ $SiteFields = Get-PnPField -Connection $SiteConnection | Where-Object { $_.Group
 $ContentTypes = Get-PnPContentType -Connection $SiteConnection | Where-Object { $_.Group -eq "Prosjektportalen innholdstyper" } | Sort-Object -Property Id
 $Lists = Get-PnPList -Connection $ProjectWebConnection | Where-Object { ($_.BaseTemplate -eq 100 -or $_.BaseTemplate -eq 101 -or $_.BaseTemplate -eq 106 -or $_.BaseTemplate -eq 171) -and $_.RootFolder.ServerRelativeUrl -notlike "*SiteAssets" }
 $NavigationNodes = Get-PnPNavigationNode -Location QuickLaunch -Connection $ProjectWebConnection 
-<<<<<<< HEAD
 
 $ActionsCount = 0
-=======
->>>>>>> 340f73c576749e9975a26e5674be1e7be31a42bb
 
 $index = 10
 
@@ -80,7 +73,6 @@ foreach ($lst in $Lists) {
     }
 }
 
-<<<<<<< HEAD
 if (-not $SkipNavigationNodes.IsPresent) {
     $CreateSiteScript = "y"
     if ($ConfirmLists.IsPresent) {
@@ -93,13 +85,3 @@ if (-not $SkipNavigationNodes.IsPresent) {
 }
 
 Write-Host "ActionsCount: $ActionsCount"
-=======
-$CreateSiteScript = "y"
-if($ConfirmLists.IsPresent) {
-    $CreateSiteScript = Read-Host "Create site script for navigation nodes? (y/n)"
-}
-if($CreateSiteScript.ToLower() -eq "y") {
-    .\Build-SiteScript.ps1 -NavigationNodes $NavigationNodes -Index $index -SiteConnection $SiteConnection -ProjectWebConnection $ProjectWebConnection
-    $index += 10
-}
->>>>>>> 340f73c576749e9975a26e5674be1e7be31a42bb
