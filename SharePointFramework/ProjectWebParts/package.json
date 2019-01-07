@@ -1,0 +1,52 @@
+{
+  "name": "project-web-parts",
+  "version": "0.0.3",
+  "private": true,
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "serve": "gulp serve --locale=nb-no",
+    "package": "gulp clean && gulp default --ship && gulp package-solution --ship",
+    "deploy": "gulp uploadAppPkg && gulp deploySppkg",
+    "package-deploy": " npm run package &&  npm run deploy",
+    "package-deploy-patch": " npm version patch &&  npm run deploy",
+    "package-deploy-minor": " npm version minor &&  npm run deploy",
+    "package-deploy-major": " npm version major &&  npm run deploy",
+    "postversion": "gulp version-sync && npm run package",
+    "patch-version": "npm version patch",
+    "minor-version": "npm version minor",
+    "major-version": "npm version major"
+  },
+  "dependencies": {
+    "@microsoft/sp-core-library": "1.7.1",
+    "@microsoft/sp-lodash-subset": "1.7.1",
+    "@microsoft/sp-office-ui-fabric-core": "1.7.1",
+    "@microsoft/sp-webpart-base": "1.7.1",
+    "@types/es6-promise": "0.0.33",
+    "@types/react": "16.4.2",
+    "@types/react-dom": "16.0.5",
+    "@types/webpack-env": "1.13.1",
+    "react": "16.3.2",
+    "react-dom": "16.3.2"
+  },
+  "resolutions": {
+    "@types/react": "16.4.2"
+  },
+  "devDependencies": {
+    "@microsoft/sp-build-web": "1.7.1",
+    "@microsoft/sp-module-interfaces": "1.7.1",
+    "@microsoft/sp-tslint-rules": "1.7.1",
+    "@microsoft/sp-webpart-workbench": "1.7.1",
+    "@types/chai": "3.4.34",
+    "@types/mocha": "2.2.38",
+    "ajv": "~5.2.2",
+    "bluebird": "^3.5.3",
+    "gulp": "~3.9.1",
+    "node-fetch": "^2.3.0",
+    "spfx-pkgdeploy": "^0.2.1",
+    "tslint": "5.9.1",
+    "tslint-microsoft-contrib": "^6.0.0",
+    "typescript": "2.4.2"
+  }
+}
