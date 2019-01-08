@@ -1,6 +1,6 @@
 import { override } from '@microsoft/decorators';
-import { BaseApplicationCustomizer, PlaceholderName } from '@microsoft/sp-application-base';
-import { CheckHubAssosication, SetupPages, PlannerConfiguration, IBaseTaskParams, SetupViews } from './tasks';
+import { BaseApplicationCustomizer } from '@microsoft/sp-application-base';
+import { CheckHubAssosication, SetupPages, PlannerConfiguration, IBaseTaskParams, SetupViews, SetupProjectInformation } from './tasks';
 import { sp } from "@pnp/sp";
 import { Logger, LogLevel, ConsoleListener } from "@pnp/logging";
 import { IProjectSetupApplicationCustomizerProperties } from './IProjectSetupApplicationCustomizerProperties';
@@ -16,9 +16,9 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
     }
   }
 
-   /**
-   * Run tasks
-   */
+  /**
+  * Run tasks
+  */
   public async runTasks(): Promise<void> {
     Logger.log({ message: '(ProjectSetupApplicationCustomizer) runTasks', level: LogLevel.Info });
     const params: IBaseTaskParams = { context: this.context, properties: this.properties };
@@ -26,6 +26,7 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
     await SetupPages.execute(params);
     await SetupViews.execute(params);
     await PlannerConfiguration.execute(params);
+    await SetupProjectInformation.execute(params);
     await this.removeCustomizer(this.componentId, true);
   }
 
