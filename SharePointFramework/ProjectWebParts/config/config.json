@@ -25,12 +25,21 @@
           "manifest": "./src/webparts/projectPhases/ProjectPhasesWebPart.manifest.json"
         }
       ]
+    },
+    "project-information-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/projectInformation/ProjectInformationWebPart.js",
+          "manifest": "./src/webparts/projectInformation/ProjectInformationWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
     "ProjectStatusWebPartStrings": "lib/webparts/projectStatus/loc/{locale}.js",
     "BenefitsOverviewWebPartStrings": "lib/webparts/benefitsOverview/loc/{locale}.js",
-    "ProjectPhasesWebPartStrings": "lib/webparts/projectPhases/loc/{locale}.js"
+    "ProjectPhasesWebPartStrings": "lib/webparts/projectPhases/loc/{locale}.js",
+    "ProjectInformationWebPartStrings": "lib/webparts/projectInformation/loc/{locale}.js"
   }
 }

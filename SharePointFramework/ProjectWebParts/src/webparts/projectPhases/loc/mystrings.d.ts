@@ -21,6 +21,10 @@ declare interface IProjectPhasesWebPartStrings {
   DocumentsListName: string;
   RiskRegisterListName: string;
   TasksListName: string;
+  Yes: string;
+  No: string;
+  CheckPointsMarkedAsText: string;
+  GoToPhaseChecklist: string;
 }
 
 declare module 'ProjectPhasesWebPartStrings' {

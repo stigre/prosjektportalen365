@@ -11,7 +11,7 @@ const ConfirmPhaseDialog = (props: IConfirmPhaseDialogProps) => {
     return (
         <Dialog
             hidden={false}
-            onDismiss={e => props.callbackFunction(false)}
+            onDismiss={e => props.onConfirm(false)}
             dialogContentProps={{
                 type: DialogType.normal,
                 title: strings.ConfirmPhaseDialogTitle,
@@ -26,8 +26,8 @@ const ConfirmPhaseDialog = (props: IConfirmPhaseDialogProps) => {
                 )
                 : (
                     <DialogFooter>
-                        <PrimaryButton onClick={e => props.callbackFunction(true)} text='Yes' />
-                        <DefaultButton onClick={e => props.callbackFunction(false)} text='No' />
+                        <PrimaryButton onClick={e => props.onConfirm(true)} text={strings.Yes} />
+                        <DefaultButton onClick={e => props.onConfirm(false)} text={strings.No} />
                     </DialogFooter>
                 )}
         </Dialog>

@@ -21,6 +21,10 @@ define([], function () {
     WebPartNotConfiguredMessage: "The webpart is not configured properly. You need to set webpart properties accordingly.",
     DocumentsListName: "Project documents",
     RiskRegisterListName: "Risk Register",
-    TasksListName: "Tasks"
+    TasksListName: "Tasks",
+    Yes: "Yes",
+    No: "No",
+    CheckPointsMarkedAsText: "check points marked as",
+    GoToPhaseChecklist: "Go to phase checklist"
   }
 });

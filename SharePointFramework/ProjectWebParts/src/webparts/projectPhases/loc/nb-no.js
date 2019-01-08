@@ -21,6 +21,10 @@ define([], function () {
     WebPartNotConfiguredMessage: "Webdelen er ikke konfigurert riktig. Du må angi webpartegenskaper riktig.",
     DocumentsListName: "Prosjektdokumenter",
     RiskRegisterListName: "Usikkerhet",
-    TasksListName: "Oppgaver"
+    TasksListName: "Oppgaver",
+    Yes: "Ja",
+    No: "Nei",
+    CheckPointsMarkedAsText: "sjekkpunkter markert som",
+    GoToPhaseChecklist: "Gå til fasesjekklisten"
   }
 });

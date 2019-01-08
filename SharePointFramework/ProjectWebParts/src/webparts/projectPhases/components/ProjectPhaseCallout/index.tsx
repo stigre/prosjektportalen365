@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Callout } from 'office-ui-fabric-react/lib/Callout';
 import { IProjectPhaseCalloutProps } from './IProjectPhaseCalloutProps';
 import styles from './ProjectPhaseCallout.module.scss';
+import * as strings from 'ProjectPhasesWebPartStrings';
 
 // ProjectPhaseCallout
 export default class ProjectPhaseCallout extends React.Component<IProjectPhaseCalloutProps, {}> {
@@ -46,9 +47,9 @@ export default class ProjectPhaseCallout extends React.Component<IProjectPhaseCa
                             <hr />
                             <div>
                                 {Object.keys(checkPointStatus).map(status => {
-                                    return <div className={styles.addText}><span>{checkPointStatus[status]} check points marked as {status}</span></div>;
+                                    return <div className={styles.addText}><span>{checkPointStatus[status]} {strings.CheckPointsMarkedAsText} {status}</span></div>;
                                 })}
-                                <div className={styles.addText}><a href={this.getFilteredPhaseChecklistViewUrl()}>Go to phase checklist</a></div>
+                                <div className={styles.addText}><a href={this.getFilteredPhaseChecklistViewUrl()}>{strings.GoToPhaseChecklist}</a></div>
                             </div>
 
                         </div>

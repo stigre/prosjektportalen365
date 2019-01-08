@@ -96,7 +96,7 @@ export default class ProjectPhases extends React.Component<IProjectPhasesProps, 
         {this.state.confirmPhase && (
           <ConfirmPhaseDialog
             phase={this.state.confirmPhase}
-            callbackFunction={this._confirmPhaseDialogCallback}
+            onConfirm={this._confirmPhaseDialogCallback}
             isBlocking={true}
             isChangingPhase={this.state.isChangingPhase} />
         )}
@@ -197,7 +197,11 @@ export default class ProjectPhases extends React.Component<IProjectPhasesProps, 
         this.setState({ showPhaseChangeMessage: false });
       }, messageDurationMs);
     } catch (err) {
-      this.setState({ isChangingPhase: false });
+      this.setState({
+        confirmPhase: null,
+        showPhaseChangeMessage: true,
+        isChangingPhase: false,
+      });
     }
   }
 
