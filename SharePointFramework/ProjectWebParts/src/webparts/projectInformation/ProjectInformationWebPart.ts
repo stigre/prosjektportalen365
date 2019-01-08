@@ -1,27 +1,23 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
-import {
-  BaseClientSideWebPart,
-  IPropertyPaneConfiguration,
-  PropertyPaneTextField
-} from '@microsoft/sp-webpart-base';
-
-import * as strings from 'ProjectInformationWebPartStrings';
+import { BaseClientSideWebPart, IPropertyPaneConfiguration } from '@microsoft/sp-webpart-base';
 import ProjectInformation from './components/ProjectInformation';
 import { IProjectInformationProps } from './components/IProjectInformationProps';
 
 export interface IProjectInformationWebPartProps {
-  description: string;
+  title: string;
 }
 
 export default class ProjectInformationWebPart extends BaseClientSideWebPart<IProjectInformationWebPartProps> {
 
   public render(): void {
-    const element: React.ReactElement<IProjectInformationProps > = React.createElement(
+    const element: React.ReactElement<IProjectInformationProps> = React.createElement(
       ProjectInformation,
       {
-        description: this.properties.description
+        title: this.properties.title,
+        displayMode: this.displayMode,
+        updateTitle: title => this.properties.title = title,
       }
     );
 
@@ -41,16 +37,12 @@ export default class ProjectInformationWebPart extends BaseClientSideWebPart<IPr
       pages: [
         {
           header: {
-            description: strings.PropertyPaneDescription
+            description: ''
           },
           groups: [
             {
-              groupName: strings.BasicGroupName,
-              groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
-                })
-              ]
+              groupName: '',
+              groupFields: []
             }
           ]
         }

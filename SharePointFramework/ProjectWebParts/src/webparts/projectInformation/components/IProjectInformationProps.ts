@@ -1,3 +1,7 @@
+import { DisplayMode } from '@microsoft/sp-core-library';
+
 export interface IProjectInformationProps {
-  description: string;
+  title: string;
+  displayMode: DisplayMode;
+  updateTitle: (title: string) => void;
 }

@@ -13,15 +13,13 @@
         "default": "Other"
       },
       "title": {
-        "default": "BenefitsOverview"
+        "default": "Gevinstoversikt"
       },
       "description": {
         "default": " "
       },
       "officeFabricIconFontName": "Page",
-      "properties": {
-        "description": "BenefitsOverview"
-      }
+      "properties": {}
     }
   ]
 }

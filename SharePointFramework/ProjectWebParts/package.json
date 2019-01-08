@@ -1,6 +1,6 @@
 {
   "name": "project-web-parts",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": true,
   "engines": {
     "node": ">=0.10.0"
@@ -30,6 +30,7 @@
     "@pnp/sp": "^1.2.7",
     "@pnp/sp-clientsvc": "^1.2.7",
     "@pnp/sp-taxonomy": "^1.2.7",
+    "@pnp/spfx-controls-react": "^1.11.0",
     "@types/es6-promise": "0.0.33",
     "@types/react": "16.4.2",
     "@types/react-dom": "16.0.5",

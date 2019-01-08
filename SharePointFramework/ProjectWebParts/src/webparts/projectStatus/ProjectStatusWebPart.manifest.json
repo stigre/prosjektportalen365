@@ -13,15 +13,13 @@
         "default": "Other"
       },
       "title": {
-        "default": "ProjectStatus"
+        "default": "Prosjektstatus"
       },
       "description": {
         "default": " "
       },
       "officeFabricIconFontName": "Page",
-      "properties": {
-        "description": "ProjectStatus"
-      }
+      "properties": {}
     }
   ]
 }

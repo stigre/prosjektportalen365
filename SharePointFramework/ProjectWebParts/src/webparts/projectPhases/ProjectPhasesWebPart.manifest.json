@@ -6,14 +6,20 @@
   "version": "*",
   "manifestVersion": 2,
   "requiresCustomScript": false,
-  "preconfiguredEntries": [{
-    "groupId": "5c03119e-3074-46fd-976b-c60198311f70", 
-    "group": { "default": "Other" },
-    "title": { "default": "ProjectPhases" },
-    "description": { "default": "ProjectPhases description" },
-    "officeFabricIconFontName": "Page",
-    "properties": {
-      "description": "ProjectPhases"
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Other"
+      },
+      "title": {
+        "default": "Fasevelger"
+      },
+      "description": {
+        "default": " "
+      },
+      "officeFabricIconFontName": "Page",
+      "properties": {}
     }
-  }]
+  ]
 }
