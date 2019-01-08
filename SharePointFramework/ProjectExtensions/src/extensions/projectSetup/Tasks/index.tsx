@@ -1,7 +1,13 @@
 import CheckHubAssosication from './CheckHubAssosication';
-import SetQuickLaunch from './SetQuickLaunch';
+import SetupPages from './SetupPages';
+import SetupViews from './SetupViews';
+import PlannerConfiguration from './PlannerConfiguration';
+import { IBaseTaskParams } from './BaseTask';
 
 export {
     CheckHubAssosication,
-    SetQuickLaunch,
+    SetupPages,
+    SetupViews,
+    PlannerConfiguration,
+    IBaseTaskParams,
 };

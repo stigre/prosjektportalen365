@@ -1,20 +1,42 @@
 import { override } from '@microsoft/decorators';
 import { BaseApplicationCustomizer } from '@microsoft/sp-application-base';
-import { CheckHubAssosication, SetQuickLaunch } from './Tasks';
+import { CheckHubAssosication, SetupPages, PlannerConfiguration, IBaseTaskParams, SetupViews } from './Tasks';
 import { sp } from "@pnp/sp";
-
-export interface IProjectSetupApplicationCustomizerProperties { }
-
+import { Logger, LogLevel, ConsoleListener } from "@pnp/logging";
+import { } from './Tasks/PlannerConfiguration';
+import { IProjectSetupApplicationCustomizerProperties } from './IProjectSetupApplicationCustomizerProperties';
 
 export default class ProjectSetupApplicationCustomizer extends BaseApplicationCustomizer<IProjectSetupApplicationCustomizerProperties> {
   @override
   public async onInit(): Promise<void> {
-    sp.setup({ spfxContext: this.context });
-    await this.runTasks();
+    if (this.context.pageContext.legacyPageContext.isSiteAdmin) {
+      Logger.subscribe(new ConsoleListener());
+      Logger.activeLogLevel = LogLevel.Info;
+      sp.setup({ spfxContext: this.context });
+      await this.runTasks();
+    }
   }
 
   public async runTasks() {
-    await CheckHubAssosication.execute({ context: this.context, properties: this.properties });
-    await SetQuickLaunch.execute({ context: this.context, properties: this.properties });
+    Logger.log({ message: '(ProjectSetupApplicationCustomizer) runTasks', level: LogLevel.Info });
+    const params: IBaseTaskParams = { context: this.context, properties: this.properties };
+    await CheckHubAssosication.execute(params);
+    await SetupPages.execute(params);
+    await SetupViews.execute(params);
+    await PlannerConfiguration.execute(params);
+    await this.removeCustomizer(this.componentId);
+    window.location.href = window.location.href;
+  }
+
+  private async removeCustomizer(componentId: string) {
+    Logger.log({ message: '(ProjectSetupApplicationCustomizer) removeCustomizer', level: LogLevel.Info });
+    let customActions = await sp.web.userCustomActions.get();
+    for (let i = 0; i < customActions.length; i++) {
+      var instance = customActions[i];
+      if (instance.ClientSideComponentId === componentId) {
+        await sp.web.userCustomActions.getById(instance.Id).delete();
+        break;
+      }
+    }
   }
 }

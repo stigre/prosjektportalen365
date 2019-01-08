@@ -1,13 +1,13 @@
 import { ApplicationCustomizerContext } from '@microsoft/sp-application-base';
-import { IProjectSetupApplicationCustomizerProperties } from '../ProjectSetupApplicationCustomizer';
+import { IProjectSetupApplicationCustomizerProperties } from '../IProjectSetupApplicationCustomizerProperties';
 
-export interface IBaseTaskConfig {
+export interface IBaseTaskParams {
     context: ApplicationCustomizerContext;
     properties: IProjectSetupApplicationCustomizerProperties;
 }
 
 export class BaseTask {
-    public async execute(config: IBaseTaskConfig): Promise<void> {
+    public async execute(config: IBaseTaskParams): Promise<void> {
         return;
     }
 }
