@@ -1,9 +1,8 @@
 import { override } from '@microsoft/decorators';
-import { BaseApplicationCustomizer } from '@microsoft/sp-application-base';
-import { CheckHubAssosication, SetupPages, PlannerConfiguration, IBaseTaskParams, SetupViews } from './Tasks';
+import { BaseApplicationCustomizer, PlaceholderName } from '@microsoft/sp-application-base';
+import { CheckHubAssosication, SetupPages, PlannerConfiguration, IBaseTaskParams, SetupViews } from './tasks';
 import { sp } from "@pnp/sp";
 import { Logger, LogLevel, ConsoleListener } from "@pnp/logging";
-import { } from './Tasks/PlannerConfiguration';
 import { IProjectSetupApplicationCustomizerProperties } from './IProjectSetupApplicationCustomizerProperties';
 
 export default class ProjectSetupApplicationCustomizer extends BaseApplicationCustomizer<IProjectSetupApplicationCustomizerProperties> {
@@ -17,18 +16,18 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
     }
   }
 
-  public async runTasks() {
+  public async runTasks(): Promise<void> {
     Logger.log({ message: '(ProjectSetupApplicationCustomizer) runTasks', level: LogLevel.Info });
     const params: IBaseTaskParams = { context: this.context, properties: this.properties };
     await CheckHubAssosication.execute(params);
     await SetupPages.execute(params);
     await SetupViews.execute(params);
     await PlannerConfiguration.execute(params);
-    await this.removeCustomizer(this.componentId);
-    window.location.href = window.location.href;
+    // await this.removeCustomizer(this.componentId);
+    // window.location.href = window.location.href;
   }
 
-  private async removeCustomizer(componentId: string) {
+  private async removeCustomizer(componentId: string): Promise<void> {
     Logger.log({ message: '(ProjectSetupApplicationCustomizer) removeCustomizer', level: LogLevel.Info });
     let customActions = await sp.web.userCustomActions.get();
     for (let i = 0; i < customActions.length; i++) {
