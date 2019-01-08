@@ -56,13 +56,14 @@ export class SetupPages extends BaseTask {
                 }
             }
             Logger.log({ message: '(ProjectSetupApplicationCustomizer) SetupPages/createPages: Saving client side page', data: { name }, level: LogLevel.Info });
-            return await clientSidePage.save();
+            await clientSidePage.save();
+            await clientSidePage.disableComments();
         }));
         await Promise.all(pageNames.map(async (name, index) => {
             const { PageLayoutType } = config.Pages[name];
             Logger.log({ message: '(ProjectSetupApplicationCustomizer) SetupPages/createPages: Setting PageLayoutType for client side page', data: { name, PageLayoutType }, level: LogLevel.Info });
             const item = await clientSidePages[index].getItem();
-            return await item.update({ PageLayoutType });
+            await item.update({ PageLayoutType });
         }));
     }
 }

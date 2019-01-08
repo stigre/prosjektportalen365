@@ -26,6 +26,26 @@ export function GetSetupPagesConfiguration(listsMap: { [key: string]: string }):
                 {
                     Columns: [
                         {
+                            Factor: 12,
+                            Controls: [new ClientSideWebpart('Custom', null, {
+                                description: "",
+                                phaseSubTextProperty: "",
+                                phaseField: "GtProjectPhase",
+                                automaticReload: true,
+                                confirmPhaseChange: true,
+                                reloadTimeout: 2,
+                                updateViewsDocuments: false,
+                                updateViewsTasks: false,
+                                updateViewsRisks: false,
+                                gutter: 10,
+                                fontSize: 12
+                            }, '4449d3dc-fa58-4982-b87c-5a893114e7b7')]
+                        },
+                    ],
+                },
+                {
+                    Columns: [
+                        {
                             Factor: 8,
                             Controls: [new ClientSideWebpart('Documents', null, { isDocumentLibrary: true, selectedListId: listsMap['Prosjektdokumenter'], webpartHeightKey: 4 }, 'f92bf067-bc19-489e-a556-7fe95f508720')]
                         },
