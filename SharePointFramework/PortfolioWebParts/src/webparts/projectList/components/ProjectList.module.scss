@@ -1,28 +1,33 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
-.projectList {
-    background-color: white;
-    .projectsContainer {
-        background-color: white;
+.projectListWebPartContainer {
+    .projectListSearchBox {
+        @include ms-font-m;
     }
-    .ppCardContainer {
-        padding: 5px;
-        display: flex;
-        flex-wrap: wrap;
-        flex-direction: row;
-        .projectCard {
-            object-fit: cover;
+    .projectList {
+        background-color: white;
+        .projectsContainer {
+            background-color: white;
+        }
+        .ppCardContainer {
             padding: 5px;
-            margin: 5px;
-            > div > div > i {
-              margin: 0 5px;
-            }
-            > a {
-              color: rgb(51, 51, 51);
-              text-transform: uppercase;
-              letter-spacing: 2px;
-              text-align: center;
-              border-top: 1px solid #dedede;
-              border-bottom: 1px solid #dedede;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            .projectCard {
+                object-fit: cover;
+                padding: 5px;
+                margin: 5px;
+                >div>div>i {
+                    margin: 0 5px;
+                }
+                >a {
+                    color: rgb(51, 51, 51);
+                    text-transform: uppercase;
+                    letter-spacing: 2px;
+                    text-align: center;
+                    border-top: 1px solid #dedede;
+                    border-bottom: 1px solid #dedede;
+                }
             }
         }
     }

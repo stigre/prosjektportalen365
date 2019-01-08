@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styles from '../ProjectList.module.scss';
+import * as strings from 'ProjectListWebPartStrings';
 import IProjectCardProps from './IProjectCardProps';
 import {
   DocumentCard,
@@ -12,8 +13,7 @@ import {
   IDocumentCardPreviewImage
 } from "office-ui-fabric-react/lib/DocumentCard";
 import { ImageFit } from 'office-ui-fabric-react/lib/Image';
-import { UtilityMethod } from '@pnp/sp';
-import { getParent } from '@uifabric/utilities/lib';
+import { IUserDetails } from '../ProjectListModel';
 
 
 const ProjectCard = (props: IProjectCardProps): JSX.Element => {
@@ -34,7 +34,9 @@ const ProjectCard = (props: IProjectCardProps): JSX.Element => {
     >
       <DocumentCardPreview previewImages={[previewImage]} />
       <DocumentCardTitle title={props.project.Title} shouldTruncate={false} />
-      <DocumentCardLocation location={props.project.Phase} />
+      <DocumentCardLocation location={props.project.Phase || strings.NotSet} />
+      <DocumentCardActivity activity={strings.ProjectOwner} people={[getOwner(props.project, props.rootUrl)]} />
+      <DocumentCardActivity activity={strings.ProjectManager} people={[getManager(props.project, props.rootUrl)]} />
       <DocumentCardActions
         actions={
           [{
@@ -54,15 +56,33 @@ const ProjectCard = (props: IProjectCardProps): JSX.Element => {
 
 function stringToColor(str: string): string {
   let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-      hash = str.charCodeAt(i) + ((hash << 5) - hash);
-  }
+  for (let i = 0; i < str.length; i++) hash = str.charCodeAt(i) + ((hash << 5) - hash);
   let color = "#";
   for (let i = 0; i < 3; i++) {
-      let value = (hash >> (i * 8)) & 0xFF;
-      color += ("00" + value.toString(16)).substr(-2);
+    let value = (hash >> (i * 8)) & 0xFF;
+    color += ("00" + value.toString(16)).substr(-2);
   }
   return color;
+}
+
+function getOwner(obj, rootUrl: string): IUserDetails {
+  let email = "";
+  let name = strings.NotSet;
+  if (obj.Owner) [email, name] = obj.Owner.split("|");
+  const profileImageSrc = userPhoto(rootUrl, email);
+  return { name, email, profileImageSrc };
+}
+
+function getManager(obj, rootUrl: string): IUserDetails {
+  let email = "";
+  let name = strings.NotSet;
+  if (obj.Manager) [email, name] = obj.Owner.split("|");
+  const profileImageSrc = userPhoto(rootUrl, email);
+  return { name, email, profileImageSrc };
+}
+
+function userPhoto(rootUrl: string, email: string, size = "L"): string {
+  return `${rootUrl}/_layouts/15/userphoto.aspx?size=${size}&accountname=${email}`;
 }
 
 export default ProjectCard;

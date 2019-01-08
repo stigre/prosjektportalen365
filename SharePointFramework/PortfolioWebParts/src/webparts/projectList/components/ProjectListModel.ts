@@ -17,6 +17,7 @@ export default class ProjectListModel {
   public Views: number;
   public RawObject: any;
 
+  constructor() {
 
-
+  }
 }
