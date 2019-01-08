@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "deploy-sitedesign": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./Deploy-SiteDesign.ps1 -Name \"Prosjektportalen\" -Folder ./src",
-    "test-sitedesign": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./Test-SiteDesign.ps1 -StartIndex 22",
+    "test-sitedesign": "npm run deploy-sitedesign && @powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./Test-SiteDesign.ps1 -StartIndex 23",
     "generate-sitescripts-temp": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./Generate-SiteScripts.ps1 -SkipNavigationNodes -Folder ./temp",
     "generate-sitescripts-src": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./Generate-SiteScripts.ps1 -SkipNavigationNodes -Folder ./src",
     "get-sitescripts": "@powershell -NoProfile -ExecutionPolicy Unrestricted -Command ./Get-SiteScripts.ps1 -Folder ./src"

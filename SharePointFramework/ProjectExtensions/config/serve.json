@@ -2,29 +2,33 @@
   "$schema": "https://developer.microsoft.com/json-schemas/core-build/serve.schema.json",
   "port": 4321,
   "https": true,
-  "serveConfigurations": {
-    "default": {
-      "pageUrl": "https://olemp.sharepoint.com/sites/Prosjektportalen-O365-00192",
-      "customActions": {
-        "ce34553d-ab47-4107-8dd1-e980d953996d": {
-          "location": "ClientSideExtension.ApplicationCustomizer",
-          "properties": {}
-        }
-      }
-    },
-    "projectSetup": {
-      "pageUrl": "https://olemp.sharepoint.com/sites/Prosjektportalen-O365-00192",
-      "customActions": {
-        "ce34553d-ab47-4107-8dd1-e980d953996d": {
-          "location": "ClientSideExtension.ApplicationCustomizer",
-          "properties": {}
-        }
-      }
-    }
-  },
   "initialPage": "https://localhost:5432/workbench",
   "api": {
     "port": 5432,
     "entryPath": "node_modules/@microsoft/sp-webpart-workbench/lib/api/"
+  },
+  "serveConfigurations": {
+    "default": {
+      "pageUrl": "https://contoso.sharepoint.com/sites/mySite/SitePages/myPage.aspx",
+      "customActions": {
+        "a4c15af6-629f-4b6d-b073-c4829204a674": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "testMessage": "Test message"
+          }
+        }
+      }
+    },
+    "projectSetup": {
+      "pageUrl": "https://contoso.sharepoint.com/sites/mySite/SitePages/myPage.aspx",
+      "customActions": {
+        "a4c15af6-629f-4b6d-b073-c4829204a674": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "testMessage": "Test message"
+          }
+        }
+      }
+    }
   }
 }

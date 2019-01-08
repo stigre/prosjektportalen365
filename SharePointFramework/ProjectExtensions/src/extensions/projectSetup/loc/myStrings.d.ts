@@ -1,6 +1,4 @@
-declare interface IProjectSetupApplicationCustomizerStrings {
-  Title: string;
-}
+declare interface IProjectSetupApplicationCustomizerStrings { }
 
 declare module 'ProjectSetupApplicationCustomizerStrings' {
   const strings: IProjectSetupApplicationCustomizerStrings;

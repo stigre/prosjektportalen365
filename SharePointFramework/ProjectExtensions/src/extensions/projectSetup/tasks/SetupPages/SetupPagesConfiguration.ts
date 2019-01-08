@@ -53,7 +53,7 @@ export function GetSetupPagesConfiguration(listsMap: { [key: string]: string }):
                             Factor: 4,
                             Controls: [
                                 new ClientSideWebpart('Custom', null, { title: 'Prosjektinformasjon' }, 'b8bec0be-2354-443d-a3ca-24b36e8ea7dc'),
-                                new ClientSideWebpart('List', null, { isDocumentLibrary: false, selectedListId: listsMap['Usikkerhet'], webpartHeightKey: 4 }, 'f92bf067-bc19-489e-a556-7fe95f508720'),
+                                new ClientSideWebpart('List', null, { isDocumentLibrary: false, selectedListId: listsMap['Usikkerhet'], webpartHeightKey: 4 }, 'f92bf067-bc19-489e-a556-7fe95f508720')
                             ]
                         }
                     ]

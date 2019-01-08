@@ -1,5 +1,3 @@
-define([], function() {
-  return {
-    "Title": "ProjectSetupApplicationCustomizer"
-  }
+define([], function () {
+  return {}
 });

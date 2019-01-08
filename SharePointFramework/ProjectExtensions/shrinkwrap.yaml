@@ -957,9 +957,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-cKB4yTX0wGaRCSkdHDX2fkGQbMAA8UOshC2U7DQky1CE5o+5q2iQQ8VkbPbE/88uaTtsusvBPMcCX7dgmjxBhQ==
-  /@types/prop-types/15.5.8:
-    resolution:
-      integrity: sha512-3AQoUxQcQtLHsK25wtTWIoIpgYjH3vSDroZOUr7PpCHw/jLY1RB9z9E8dBT/OSmwStVgkRNvdh+ZHNiomRieaw==
   /@types/q/0.0.32:
     dev: true
     resolution:
@@ -979,7 +976,7 @@ packages:
   /@types/react-dom/16.0.5:
     dependencies:
       '@types/node': 10.12.18
-      '@types/react': 16.7.18
+      '@types/react': 16.4.2
     resolution:
       integrity: sha512-ony2hEYlGXCLWNAWWgbsHR7qVvDbeMRFc5b43+7dhj3n+zXzxz81HV9Yjpc3JD8vLCiwYoSLqFCI6bD0+0zG2Q==
   /@types/react/16.4.2:
@@ -987,12 +984,6 @@ packages:
       csstype: 2.6.0
     resolution:
       integrity: sha512-oVcVteCDNiVc/fkDjowRfAZQDEOR76j3CJ3FvwXNvfV6zJguhghy1lMgpAzYox+9AZsWch+JPV6Imml3wvIUeg==
-  /@types/react/16.7.18:
-    dependencies:
-      '@types/prop-types': 15.5.8
-      csstype: 2.6.0
-    resolution:
-      integrity: sha512-Tx4uu3ppK53/iHk6VpamMP3f3ahfDLEVt3ZQc8TFm30a1H3v9lMsCntBREswZIW/SKrvJjkb3Hq8UwO6GREBng==
   /@types/request-promise/4.1.42:
     dependencies:
       '@types/bluebird': 3.5.25
@@ -1694,7 +1685,7 @@ packages:
       caniuse-lite: 1.0.30000927
       normalize-range: 0.1.2
       num2fraction: 1.2.2
-      postcss: 7.0.7
+      postcss: 7.0.8
       postcss-value-parser: 3.3.1
     dev: true
     engines:
@@ -8450,7 +8441,7 @@ packages:
       css-modules-loader-core: 1.1.0
       generic-names: 1.0.3
       lodash.camelcase: 4.3.0
-      postcss: 7.0.7
+      postcss: 7.0.8
       string-hash: 1.1.3
     dev: true
     resolution:
@@ -8576,16 +8567,16 @@ packages:
       node: '>=6.0.0'
     resolution:
       integrity: sha512-HBNpviAUFCKvEh7NZhw1e8MBPivRszIiUnhrJ+sBFVSYSqubrzwX3KG51mYgcRHX8j/cAgZJedONZcm5jTBdgQ==
-  /postcss/7.0.7:
+  /postcss/7.0.8:
     dependencies:
       chalk: 2.4.2
       source-map: 0.6.1
-      supports-color: 5.5.0
+      supports-color: 6.0.0
     dev: true
     engines:
       node: '>=6.0.0'
     resolution:
-      integrity: sha512-HThWSJEPkupqew2fnuQMEI2YcTj/8gMV3n80cMdJsKxfIh5tHf7nM5JigNX6LxVMqo6zkgQNAI88hyFvBk41Pg==
+      integrity: sha512-WudsIzuTKRw9IInRTPBgVXJ7DKR26HT09Rxp0g3w0Fqh3TUtYICcUmvC0xURj04o3vdcDtnjCAUCECg/p341iQ==
   /prelude-ls/1.1.2:
     dev: true
     engines:
@@ -10277,6 +10268,14 @@ packages:
       node: '>=4'
     resolution:
       integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==
+  /supports-color/6.0.0:
+    dependencies:
+      has-flag: 3.0.0
+    dev: true
+    engines:
+      node: '>=6'
+    resolution:
+      integrity: sha512-on9Kwidc1IUQo+bQdhi8+Tijpo0e1SS6RoGo2guUwn5vdaxw8RXOF9Vb2ws+ihWOmh4JnCJOvaziZWP1VABaLg==
   /svgo/0.7.2:
     dependencies:
       coa: 1.0.4
