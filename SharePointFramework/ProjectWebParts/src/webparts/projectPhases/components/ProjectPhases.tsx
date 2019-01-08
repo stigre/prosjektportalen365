@@ -215,7 +215,11 @@ export default class ProjectPhases extends React.Component<IProjectPhasesProps, 
       updateViewsTasks,
     } = this.props;
 
-    const listsToUpdate = [updateViewsDocuments && 'Project Documents', updateViewsRisks && 'Risk Register', updateViewsTasks && 'Tasks'].filter(l => l);
+    const listsToUpdate = [
+      updateViewsDocuments && strings.DocumentsListName,
+      updateViewsRisks && strings.RiskRegisterListName,
+      updateViewsTasks && strings.TasksListName,
+    ].filter(l => l);
     const lists = web.lists;
     const viewsPromises = listsToUpdate.map(t => lists.getByTitle(t).views.get());
     const viewsResult = await Promise.all(viewsPromises);

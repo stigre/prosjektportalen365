@@ -18,6 +18,9 @@ define([], function () {
     ConfirmPhaseDialogSubText: "Endring av fasen til {0} vil endre dette for alle, vil du fortsette?",
     PhaseChangedMessage: "Prosjektet er nå i fase {0}.",
     PageReloadMessage: "Oppdater siden for å få oppdaterte listevisninger.",
-    WebPartNotConfiguredMessage: "Webdelen er ikke konfigurert riktig. Du må angi webpartegenskaper riktig."
+    WebPartNotConfiguredMessage: "Webdelen er ikke konfigurert riktig. Du må angi webpartegenskaper riktig.",
+    DocumentsListName: "Prosjektdokumenter",
+    RiskRegisterListName: "Usikkerhet",
+    TasksListName: "Oppgaver"
   }
 });

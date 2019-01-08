@@ -18,6 +18,9 @@ declare interface IProjectPhasesWebPartStrings {
   PhaseChangedMessage: string;
   PageReloadMessage: string;
   WebPartNotConfiguredMessage: string;
+  DocumentsListName: string;
+  RiskRegisterListName: string;
+  TasksListName: string;
 }
 
 declare module 'ProjectPhasesWebPartStrings' {
