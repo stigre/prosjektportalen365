@@ -14,7 +14,7 @@
         },
         {
             "verb": "createPage",
-            "fileName": "BenefitsOverview.aspx",
+            "fileName": "Gevinstoversikt.aspx",
             "pageData": {
                 "Title": "Gevinstoversikt",
                 "BannerImageUrl": "",
@@ -24,7 +24,7 @@
         },
         {
             "verb": "createPage",
-            "fileName": "ProjectStatus.aspx",
+            "fileName": "Prosjektstatus.aspx",
             "pageData": {
                 "Title": "Prosjektstatus",
                 "BannerImageUrl": "",

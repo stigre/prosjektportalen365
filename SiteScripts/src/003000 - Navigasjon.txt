@@ -23,6 +23,12 @@
         },
         {
             "isWebRelative": true,
+            "url": "SitePages/Prosjektstatus.aspx",
+            "displayName": "Prosjektstatus",
+            "verb": "addNavLink"
+        },
+        {
+            "isWebRelative": true,
             "url": "Lists/Prosjektlogg/AllItems.aspx",
             "displayName": "Prosjektlogg",
             "verb": "addNavLink"
@@ -79,6 +85,12 @@
             "isWebRelative": true,
             "url": "Lists/Ressursallokering/AllItems.aspx",
             "displayName": "Ressursallokering",
+            "verb": "addNavLink"
+        },
+        {
+            "isWebRelative": true,
+            "url": "SitePages/Gevinstoversikt.aspx",
+            "displayName": "Gevinstoversikt",
             "verb": "addNavLink"
         }
     ],
