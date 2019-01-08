@@ -1,3 +1,3 @@
 export interface IProjectListProps {
-  description: string;
+  rootUrl: string;
 }

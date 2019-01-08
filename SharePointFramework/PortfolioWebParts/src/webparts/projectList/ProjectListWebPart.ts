@@ -10,9 +10,12 @@ import {
 import * as strings from 'ProjectListWebPartStrings';
 import ProjectList from './components/ProjectList';
 import { IProjectListProps } from './components/IProjectListProps';
+import { sp } from '@pnp/sp';
+
+
 
 export interface IProjectListWebPartProps {
-  description: string;
+  rootUrl: string;
 }
 
 export default class ProjectListWebPart extends BaseClientSideWebPart<IProjectListWebPartProps> {
@@ -21,11 +24,19 @@ export default class ProjectListWebPart extends BaseClientSideWebPart<IProjectLi
     const element: React.ReactElement<IProjectListProps > = React.createElement(
       ProjectList,
       {
-        description: this.properties.description
+        rootUrl: this.context.pageContext.web.absoluteUrl
       }
     );
 
     ReactDom.render(element, this.domElement);
+  }
+
+  protected onInit(): Promise<void> {
+    return super.onInit().then(_ => {
+      sp.setup({
+        spfxContext: this.context
+      });
+    });
   }
 
   protected onDispose(): void {
