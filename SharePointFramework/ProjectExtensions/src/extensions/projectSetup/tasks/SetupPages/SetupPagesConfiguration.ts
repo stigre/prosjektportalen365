@@ -1,20 +1,33 @@
-import { ClientSideWebpart } from '@pnp/sp';
+import { ClientSideWebpart, CanvasColumnFactorType } from '@pnp/sp';
+
+export interface IClientSidePageColumn {
+    Factor: CanvasColumnFactorType;
+    Controls: ClientSideWebpart[];
+}
+
+export interface IClientSidePageSection {
+    Columns: IClientSidePageColumn[];
+}
+
+export interface IClientSidePage {
+    PageLayoutType: string;
+    Sections: IClientSidePageSection[];
+}
 
 export interface ISetupPagesConfiguration {
-    Pages: { [key: string]: any };
-    WelcomePage: string;
+    Pages: { [key: string]: IClientSidePage };
 }
 
 export function GetSetupPagesConfiguration(listsMap: { [key: string]: string }): ISetupPagesConfiguration {
-    const Pages = {
+    const Pages: { [key: string]: IClientSidePage } = {
         "Hjem": {
             PageLayoutType: 'Home',
             Sections: [
                 {
                     Columns: [
                         {
-                            factor: 8,
-                            controls: [new ClientSideWebpart('Documents', null, { isDocumentLibrary: true, selectedListId: listsMap['Prosjektdokumenter'], webpartHeightKey: 4 }, 'f92bf067-bc19-489e-a556-7fe95f508720')]
+                            Factor: 8,
+                            Controls: [new ClientSideWebpart('Documents', null, { isDocumentLibrary: true, selectedListId: listsMap['Prosjektdokumenter'], webpartHeightKey: 4 }, 'f92bf067-bc19-489e-a556-7fe95f508720')]
                         },
                         {
                             Factor: 4,
@@ -51,6 +64,5 @@ export function GetSetupPagesConfiguration(listsMap: { [key: string]: string }):
             ],
         }
     };
-    const WelcomePage = 'SitePages/Hjem.aspx';
-    return { Pages, WelcomePage };
+    return { Pages };
 }

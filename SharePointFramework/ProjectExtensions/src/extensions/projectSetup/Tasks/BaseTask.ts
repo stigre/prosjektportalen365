@@ -7,7 +7,13 @@ export interface IBaseTaskParams {
 }
 
 export class BaseTask {
-    public async execute(config: IBaseTaskParams): Promise<void> {
-        return;
+    public params: IBaseTaskParams;
+
+    constructor() {
+        this.params = null;
+    }
+
+    public async execute(params: IBaseTaskParams): Promise<void> {
+        this.params = params;
     }
 }

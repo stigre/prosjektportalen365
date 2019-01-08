@@ -16,6 +16,9 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
     }
   }
 
+   /**
+   * Run tasks
+   */
   public async runTasks(): Promise<void> {
     Logger.log({ message: '(ProjectSetupApplicationCustomizer) runTasks', level: LogLevel.Info });
     const params: IBaseTaskParams = { context: this.context, properties: this.properties };
@@ -23,11 +26,16 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
     await SetupPages.execute(params);
     await SetupViews.execute(params);
     await PlannerConfiguration.execute(params);
-    // await this.removeCustomizer(this.componentId);
-    // window.location.href = window.location.href;
+    await this.removeCustomizer(this.componentId, true);
   }
 
-  private async removeCustomizer(componentId: string): Promise<void> {
+  /**
+   * Remove customizer
+   * 
+   * @param {string} componentId Component ID
+   * @param {boolean} reload Reload page after customizer removal
+   */
+  private async removeCustomizer(componentId: string, reload: boolean): Promise<void> {
     Logger.log({ message: '(ProjectSetupApplicationCustomizer) removeCustomizer', level: LogLevel.Info });
     let customActions = await sp.web.userCustomActions.get();
     for (let i = 0; i < customActions.length; i++) {
@@ -36,6 +44,9 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
         await sp.web.userCustomActions.getById(instance.Id).delete();
         break;
       }
+    }
+    if (reload) {
+      window.location.href = this.context.pageContext.web.absoluteUrl;
     }
   }
 }
