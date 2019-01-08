@@ -1,6 +1,5 @@
 import { override } from '@microsoft/decorators';
 import { BaseTask, IBaseTaskParams } from '../BaseTask';
-import { sp } from '@pnp/sp';
 import { Logger, LogLevel } from '@pnp/logging';
 
 export class PlannerConfiguration extends BaseTask {
