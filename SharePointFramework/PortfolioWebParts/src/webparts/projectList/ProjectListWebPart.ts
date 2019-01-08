@@ -21,7 +21,7 @@ export interface IProjectListWebPartProps {
 export default class ProjectListWebPart extends BaseClientSideWebPart<IProjectListWebPartProps> {
 
   public render(): void {
-    const element: React.ReactElement<IProjectListProps > = React.createElement(
+    const element: React.ReactElement<IProjectListProps> = React.createElement(
       ProjectList,
       {
         rootUrl: this.context.pageContext.web.absoluteUrl

@@ -2,6 +2,12 @@ declare interface IProjectListWebPartStrings {
   PropertyPaneDescription: string;
   BasicGroupName: string;
   DescriptionFieldLabel: string;
+  NotSet: string;
+  LoadingProjectsLabel: string;
+  ProjectOwner: string;
+  ProjectManager: string;
+  SearchBoxPlaceholderText: string;
+  NoSearchResults: string;
 }
 
 declare module 'ProjectListWebPartStrings' {
