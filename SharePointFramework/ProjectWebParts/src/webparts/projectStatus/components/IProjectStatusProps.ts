@@ -1,3 +1,1 @@
-export interface IProjectStatusProps {
-  description: string;
-}
+export interface IProjectStatusProps {}
