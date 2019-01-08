@@ -1,0 +1,26 @@
+declare interface IProjectPhasesWebPartStrings {
+  SettingsGroupName: string;
+  ViewsGroupName: string;
+  LookAndFeelGroupName: string;
+  PersistedPhasePropertyBagKey: string;
+  PhaseFieldFieldLabel: string;
+  AutomaticReloadFieldLabel: string;
+  ReloadTimeoutFieldLabel: string;
+  FontSizeFieldLabel: string;
+  GutterFieldLabel: string;
+  UpdateViewsDocumentsFieldLabel: string;
+  UpdateViewsTasksFieldLabel: string;
+  UpdateViewsRisksFieldLabel: string;
+  ConfirmPhaseChangeFieldLabel: string;
+  PhaseSubTextPropertyFieldLabel: string;
+  ConfirmPhaseDialogTitle: string;
+  ConfirmPhaseDialogSubText: string;
+  PhaseChangedMessage: string;
+  PageReloadMessage: string;
+  WebPartNotConfiguredMessage: string;
+}
+
+declare module 'ProjectPhasesWebPartStrings' {
+  const strings: IProjectPhasesWebPartStrings;
+  export = strings;
+}

@@ -23,12 +23,22 @@
     "@microsoft/sp-lodash-subset": "1.7.1",
     "@microsoft/sp-office-ui-fabric-core": "1.7.1",
     "@microsoft/sp-webpart-base": "1.7.1",
+    "@pnp/common": "^1.2.7",
+    "@pnp/logging": "^1.2.7",
+    "@pnp/odata": "^1.2.7",
+    "@pnp/polyfill-ie11": "^1.0.0",
+    "@pnp/sp": "^1.2.7",
+    "@pnp/sp-clientsvc": "^1.2.7",
+    "@pnp/sp-taxonomy": "^1.2.7",
     "@types/es6-promise": "0.0.33",
     "@types/react": "16.4.2",
     "@types/react-dom": "16.0.5",
     "@types/webpack-env": "1.13.1",
+    "office-ui-fabric-react": "5.134.0",
     "react": "16.3.2",
-    "react-dom": "16.3.2"
+    "react-dom": "16.3.2",
+    "spfx-jsom": "^0.6.0",
+    "string-format": "^2.0.0"
   },
   "resolutions": {
     "@types/react": "16.4.2"

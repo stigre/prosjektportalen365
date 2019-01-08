@@ -1,13 +1,13 @@
 {
-    "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
-    "solution": {
-        "name": "project-web-parts-client-side-solution",
-        "id": "b69cb2f2-762d-425d-8e0b-d59c08918831",
-        "version": "0.0.3.0",
-        "includeClientSideAssets": true,
-        "skipFeatureDeployment": true
-    },
-    "paths": {
-        "zippedPackage": "solution/project-web-parts.sppkg"
-    }
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "project-web-parts-client-side-solution",
+    "id": "b69cb2f2-762d-425d-8e0b-d59c08918831",
+    "version": "0.0.3.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true
+  },
+  "paths": {
+    "zippedPackage": "solution/project-web-parts.sppkg"
+  }
 }

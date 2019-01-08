@@ -1,7 +1,7 @@
 {
   "@microsoft/generator-sharepoint": {
     "packageManager": "pnpm",
-    "isCreatingSolution": true,
+    "isCreatingSolution": false,
     "environment": "spo",
     "version": "1.7.1",
     "libraryName": "project-web-parts",

@@ -1,8 +1,4 @@
-declare interface IProjectStatusWebPartStrings {
-  PropertyPaneDescription: string;
-  BasicGroupName: string;
-  DescriptionFieldLabel: string;
-}
+declare interface IProjectStatusWebPartStrings {}
 
 declare module 'ProjectStatusWebPartStrings' {
   const strings: IProjectStatusWebPartStrings;

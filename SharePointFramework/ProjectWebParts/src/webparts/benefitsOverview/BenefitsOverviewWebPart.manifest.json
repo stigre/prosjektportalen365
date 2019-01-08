@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
-  "id": "681ad0dc-ddb5-4dba-a5d6-a42f6d1c90a6",
-  "alias": "ProjectStatusWebPart",
+  "id": "c7ff77cd-07e3-435e-971a-8845fa28ba8e",
+  "alias": "BenefitsOverviewWebPart",
   "componentType": "WebPart",
   "version": "*",
   "manifestVersion": 2,
@@ -13,14 +13,14 @@
         "default": "Other"
       },
       "title": {
-        "default": "ProjectStatus"
+        "default": "BenefitsOverview"
       },
       "description": {
         "default": " "
       },
       "officeFabricIconFontName": "Page",
       "properties": {
-        "description": "ProjectStatus"
+        "description": "BenefitsOverview"
       }
     }
   ]

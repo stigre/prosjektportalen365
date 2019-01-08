@@ -9,10 +9,28 @@
           "manifest": "./src/webparts/projectStatus/ProjectStatusWebPart.manifest.json"
         }
       ]
+    },
+    "benefits-overview-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/benefitsOverview/BenefitsOverviewWebPart.js",
+          "manifest": "./src/webparts/benefitsOverview/BenefitsOverviewWebPart.manifest.json"
+        }
+      ]
+    },
+    "project-phases-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/projectPhases/ProjectPhasesWebPart.js",
+          "manifest": "./src/webparts/projectPhases/ProjectPhasesWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "ProjectStatusWebPartStrings": "lib/webparts/projectStatus/loc/{locale}.js"
+    "ProjectStatusWebPartStrings": "lib/webparts/projectStatus/loc/{locale}.js",
+    "BenefitsOverviewWebPartStrings": "lib/webparts/benefitsOverview/loc/{locale}.js",
+    "ProjectPhasesWebPartStrings": "lib/webparts/projectPhases/loc/{locale}.js"
   }
 }

@@ -1,0 +1,55 @@
+@import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
+
+.projectPhases {
+  .container {
+    .phaseItem {
+      display: inline-block;
+      height: 100px;
+      vertical-align: top;
+      background-color: #2777b8;
+      transition: background-color 1s ease 0.2s;
+      color: $ms-color-white;
+      box-sizing: border-box;
+      position: relative;
+
+      .itemText {
+        padding: 25px 20px 20px 70px;
+      }
+
+      &.phaseItemActive, &:hover {
+        background-color: #8E8277;
+        transition: background-color 1s ease 0.2s;
+        &:after {                
+          border-left-color: #8E8277;
+          transition: border-left-color 1s ease 0.2s;
+        }
+      }
+
+      &:before, &:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 0; 
+        height: 0;
+        border-top: 50px solid transparent;
+        border-bottom: 50px solid transparent;  
+        border-left-width: 50px;
+        border-left-style: solid;
+      }
+      
+
+      &:before {
+        left: 0;      
+        border-left-color: $ms-color-white;
+        transition: border-left-color 1s ease 0.2s;
+      }
+      &:after {
+        right: -50px;     
+        border-left-color: #2777b8;
+        transition: border-left-color 1s ease 0.2s;
+        z-index: 20;
+      }
+    }
+  }
+}
+
