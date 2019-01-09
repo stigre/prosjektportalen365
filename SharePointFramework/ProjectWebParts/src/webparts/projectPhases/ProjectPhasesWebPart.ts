@@ -28,7 +28,7 @@ export default class ProjectPhasesWebPart extends BaseClientSideWebPart<IProject
       this.web.fields.select('InternalName', 'Title').filter(`TypeAsString eq 'TaxonomyFieldType'`).get(),
     ]);
     this.currentUserManageWeb = currentUserManageWeb;
-    this.optionsPhaseField = taxonomyFields.map(field => ({ key: field.InternalName, text: field.Title }));
+    this.optionsPhaseField = taxonomyFields.map(field => ({ key: field.Title, text: field.Title }));
   }
 
   public render(): void {
@@ -40,6 +40,7 @@ export default class ProjectPhasesWebPart extends BaseClientSideWebPart<IProject
         webAbsoluteUrl: this.context.pageContext.web.absoluteUrl,
         web: this.web,
         domElement: this.domElement,
+        context: this.context,
       }
     );
 

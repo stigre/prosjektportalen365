@@ -6,9 +6,9 @@ export class CheckHubAssosication extends BaseTask {
     @override
     public async execute(params: IBaseTaskParams) {
         super.execute(params);
-        // if (params.context.pageContext.legacyPageContext.hubSiteId) {
-            
-        // }
+        if (!params.context.pageContext.legacyPageContext.hubSiteId) {
+            throw "The group is not associated with a hubsite.";
+        }
     }
 }
 

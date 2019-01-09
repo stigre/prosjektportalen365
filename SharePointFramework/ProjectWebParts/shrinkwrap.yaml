@@ -18,6 +18,8 @@ dependencies:
   office-ui-fabric-react: 5.134.0
   react: 16.3.2
   react-dom: 16.3.2
+  sp-entityportal-service: 0.1.1
+  sp-hubsite-service: 0.0.2
   spfx-jsom: 0.6.0
   string-format: 2.0.0
 devDependencies:
@@ -731,6 +733,18 @@ packages:
       '@pnp/logging': 1.2.7
     resolution:
       integrity: sha512-7hgSZcC0mZd+6YaFWxT6l3QPu3HS2DknIECx/64YHEqF+0qXX6Tcg9Rtn7lsVt6kG3VXSnGnN0A5pCG6VaT5ag==
+  /@pnp/odata/1.2.7/2f60dda3223b9f76cd6b54bcd199880e:
+    dependencies:
+      '@pnp/common': 1.2.7
+      '@pnp/logging': 1.2.7
+      tslib: 1.9.3
+    dev: false
+    id: registry.npmjs.org/@pnp/odata/1.2.7
+    peerDependencies:
+      '@pnp/common': 1.2.7
+      '@pnp/logging': 1.2.7
+    resolution:
+      integrity: sha512-7hgSZcC0mZd+6YaFWxT6l3QPu3HS2DknIECx/64YHEqF+0qXX6Tcg9Rtn7lsVt6kG3VXSnGnN0A5pCG6VaT5ag==
   /@pnp/polyfill-ie11/1.0.0:
     dependencies:
       '@types/core-js': 2.5.0
@@ -783,6 +797,20 @@ packages:
     dependencies:
       tslib: 1.9.3
     dev: false
+    peerDependencies:
+      '@pnp/common': 1.2.7
+      '@pnp/logging': 1.2.7
+      '@pnp/odata': 1.2.7
+    resolution:
+      integrity: sha512-shhqPNYBRV7jEO1TLtRzGk/Czd43WFJTqH19Gll2dt9MmTUzLj7Pyc9ioEsSXp6GdjtQ0Qz9e2hVX9UZboLxJQ==
+  /@pnp/sp/1.2.7/5e4bfbec60dd1a26b5584e8bd12afffd:
+    dependencies:
+      '@pnp/common': 1.2.7
+      '@pnp/logging': 1.2.7
+      '@pnp/odata': /@pnp/odata/1.2.7/2f60dda3223b9f76cd6b54bcd199880e
+      tslib: 1.9.3
+    dev: false
+    id: registry.npmjs.org/@pnp/sp/1.2.7
     peerDependencies:
       '@pnp/common': 1.2.7
       '@pnp/logging': 1.2.7
@@ -10063,6 +10091,19 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
+  /sp-entityportal-service/0.1.1:
+    dependencies:
+      '@pnp/common': 1.2.7
+      '@pnp/logging': 1.2.7
+      '@pnp/odata': /@pnp/odata/1.2.7/2f60dda3223b9f76cd6b54bcd199880e
+      '@pnp/sp': /@pnp/sp/1.2.7/5e4bfbec60dd1a26b5584e8bd12afffd
+    dev: false
+    resolution:
+      integrity: sha512-i8aOEyoTfa80oXvS0HNk7aX14pGq07m1QZCJQg8jXuSmSf6plsDAy5z/65rkeZx9zvhkiVK0NG8by2qHlzhd9g==
+  /sp-hubsite-service/0.0.2:
+    dev: false
+    resolution:
+      integrity: sha512-W7jPjzWhFTYaK2Dhfy36SB4u/6A7bujolg5XDudiyt6PE/xji8TROrayNsuZbk1PT8L8/nQBZqlMz/mB2qD1PQ==
   /sp-pnp-js/3.0.10:
     dependencies:
       '@microsoft/microsoft-graph-types': 1.1.0
@@ -11873,6 +11914,8 @@ specifiers:
   office-ui-fabric-react: 5.134.0
   react: 16.3.2
   react-dom: 16.3.2
+  sp-entityportal-service: ^0.1.1
+  sp-hubsite-service: ^0.0.2
   spfx-jsom: ^0.6.0
   spfx-pkgdeploy: ^0.2.1
   string-format: ^2.0.0

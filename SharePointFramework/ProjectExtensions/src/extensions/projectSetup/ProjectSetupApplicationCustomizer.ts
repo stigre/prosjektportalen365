@@ -1,9 +1,12 @@
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import { override } from '@microsoft/decorators';
 import { BaseApplicationCustomizer, PlaceholderName } from '@microsoft/sp-application-base';
-import { CheckHubAssosication, SetupPages, PlannerConfiguration, IBaseTaskParams, SetupViews } from './tasks';
+import { CheckHubAssosication, SetupPages, PlannerConfiguration, IBaseTaskParams, SetupViews, SetupProjectInformation } from './tasks';
 import { sp } from "@pnp/sp";
 import { Logger, LogLevel, ConsoleListener } from "@pnp/logging";
 import { IProjectSetupApplicationCustomizerProperties } from './IProjectSetupApplicationCustomizerProperties';
+import ProgressModal from './components/ProgressModal';
 
 export default class ProjectSetupApplicationCustomizer extends BaseApplicationCustomizer<IProjectSetupApplicationCustomizerProperties> {
   @override
@@ -12,21 +15,31 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
       Logger.subscribe(new ConsoleListener());
       Logger.activeLogLevel = LogLevel.Info;
       sp.setup({ spfxContext: this.context });
+      const topPlaceholder = this.context.placeholderProvider.tryCreateContent(PlaceholderName.Top);
+      const progressModal = React.createElement(ProgressModal, {
+        progressIndicatorProps: { label: 'Klargjør prosjektområdet', description: 'Vennligst vent..' },
+      });
+      ReactDOM.render(progressModal, topPlaceholder.domElement);
       await this.runTasks();
     }
   }
 
-   /**
-   * Run tasks
-   */
+  /**
+  * Run tasks
+  */
   public async runTasks(): Promise<void> {
     Logger.log({ message: '(ProjectSetupApplicationCustomizer) runTasks', level: LogLevel.Info });
     const params: IBaseTaskParams = { context: this.context, properties: this.properties };
-    await CheckHubAssosication.execute(params);
-    await SetupPages.execute(params);
-    await SetupViews.execute(params);
-    await PlannerConfiguration.execute(params);
-    await this.removeCustomizer(this.componentId, true);
+    try {
+      await CheckHubAssosication.execute(params);
+      await SetupPages.execute(params);
+      await SetupViews.execute(params);
+      await PlannerConfiguration.execute(params);
+      await SetupProjectInformation.execute(params);
+      await this.removeCustomizer(this.componentId, true);
+    } catch (error) {
+      Logger.log({ message: '(ProjectSetupApplicationCustomizer) runTasks: Failed', level: LogLevel.Error });
+    }
   }
 
   /**

@@ -1,6 +1,6 @@
 {
   "name": "project-web-parts",
-  "version": "0.0.5",
+  "version": "0.0.8",
   "private": true,
   "engines": {
     "node": ">=0.10.0"
@@ -38,6 +38,8 @@
     "office-ui-fabric-react": "5.134.0",
     "react": "16.3.2",
     "react-dom": "16.3.2",
+    "sp-entityportal-service": "^0.1.1",
+    "sp-hubsite-service": "^0.0.2",
     "spfx-jsom": "^0.6.0",
     "string-format": "^2.0.0"
   },

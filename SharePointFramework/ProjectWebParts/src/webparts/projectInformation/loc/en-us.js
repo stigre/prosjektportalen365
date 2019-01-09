@@ -1,3 +1,6 @@
 define([], function () {
-  return {}
+  return {
+    "MissingPropertiesMessage": "MissingPropertiesMessage",
+    "NoPropertiesMessage": "NoPropertiesMessage"
+  }
 });

@@ -4,20 +4,28 @@ import { Version } from '@microsoft/sp-core-library';
 import { BaseClientSideWebPart, IPropertyPaneConfiguration } from '@microsoft/sp-webpart-base';
 import ProjectInformation from './components/ProjectInformation';
 import { IProjectInformationProps } from './components/IProjectInformationProps';
+import { sp } from '@pnp/sp';
 
 export interface IProjectInformationWebPartProps {
   title: string;
+  entityListName: string;
+  entityCtId: string;
+  entityFieldsGroup: string;
 }
 
 export default class ProjectInformationWebPart extends BaseClientSideWebPart<IProjectInformationWebPartProps> {
+  public async onInit() {
+    sp.setup({ spfxContext: this.context });
+  }
 
   public render(): void {
     const element: React.ReactElement<IProjectInformationProps> = React.createElement(
       ProjectInformation,
       {
-        title: this.properties.title,
+        ...this.properties,
         displayMode: this.displayMode,
-        updateTitle: title => this.properties.title = title,
+        updateTitle: (title: string) => this.properties.title = title,
+        context: this.context,
       }
     );
 
@@ -29,7 +37,7 @@ export default class ProjectInformationWebPart extends BaseClientSideWebPart<IPr
   }
 
   protected get dataVersion(): Version {
-    return Version.parse('1.0');
+    return Version.parse(this.manifest.version);
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {

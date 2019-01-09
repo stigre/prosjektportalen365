@@ -27,10 +27,10 @@ export function GetSetupPagesConfiguration(listsMap: { [key: string]: string }):
                     Columns: [
                         {
                             Factor: 12,
-                            Controls: [new ClientSideWebpart('Custom', null, {
+                            Controls: [new ClientSideWebpart('Fasevelger', null, {
                                 description: "",
                                 phaseSubTextProperty: "",
-                                phaseField: "GtProjectPhase",
+                                phaseField: "Fase",
                                 automaticReload: true,
                                 confirmPhaseChange: true,
                                 reloadTimeout: 2,
@@ -47,13 +47,18 @@ export function GetSetupPagesConfiguration(listsMap: { [key: string]: string }):
                     Columns: [
                         {
                             Factor: 8,
-                            Controls: [new ClientSideWebpart('Documents', null, { isDocumentLibrary: true, selectedListId: listsMap['Prosjektdokumenter'], webpartHeightKey: 4 }, 'f92bf067-bc19-489e-a556-7fe95f508720')]
+                            Controls: [new ClientSideWebpart('Prosjektdokumenter', null, { isDocumentLibrary: true, selectedListId: listsMap['Prosjektdokumenter'], webpartHeightKey: 4 }, 'f92bf067-bc19-489e-a556-7fe95f508720')]
                         },
                         {
                             Factor: 4,
                             Controls: [
-                                new ClientSideWebpart('Custom', null, { title: 'Prosjektinformasjon' }, 'b8bec0be-2354-443d-a3ca-24b36e8ea7dc'),
-                                new ClientSideWebpart('List', null, { isDocumentLibrary: false, selectedListId: listsMap['Usikkerhet'], webpartHeightKey: 4 }, 'f92bf067-bc19-489e-a556-7fe95f508720'),
+                                new ClientSideWebpart('Prosjektinformasjon', null, {
+                                    title: 'Prosjektinformasjon',
+                                    entityListName: 'Prosjekter',
+                                    entityCtId: '0x0100805E9E4FEAAB4F0EABAB2600D30DB70C',
+                                    entityFieldsGroup: 'Prosjektportalenkolonner',
+                                }, 'b8bec0be-2354-443d-a3ca-24b36e8ea7dc'),
+                                new ClientSideWebpart('Usikkerhet', null, { isDocumentLibrary: false, selectedListId: listsMap['Usikkerhet'], webpartHeightKey: 4 }, 'f92bf067-bc19-489e-a556-7fe95f508720')
                             ]
                         }
                     ]
@@ -67,7 +72,7 @@ export function GetSetupPagesConfiguration(listsMap: { [key: string]: string }):
                     Columns: [
                         {
                             Factor: 12,
-                            Controls: [new ClientSideWebpart('Custom', null, {}, 'c7ff77cd-07e3-435e-971a-8845fa28ba8e')]
+                            Controls: [new ClientSideWebpart('Gevinstoversikt', null, {}, 'c7ff77cd-07e3-435e-971a-8845fa28ba8e')]
                         },
                     ]
                 }
@@ -80,7 +85,7 @@ export function GetSetupPagesConfiguration(listsMap: { [key: string]: string }):
                     Columns: [
                         {
                             Factor: 12,
-                            Controls: [new ClientSideWebpart('Custom', null, {}, '681ad0dc-ddb5-4dba-a5d6-a42f6d1c90a6')]
+                            Controls: [new ClientSideWebpart('Prosjektstatus', null, {}, '681ad0dc-ddb5-4dba-a5d6-a42f6d1c90a6')]
                         },
                     ]
                 }

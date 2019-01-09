@@ -15,7 +15,7 @@ const ConfirmPhaseDialog = (props: IConfirmPhaseDialogProps) => {
             dialogContentProps={{
                 type: DialogType.normal,
                 title: strings.ConfirmPhaseDialogTitle,
-                subText: format(strings.ConfirmPhaseDialogSubText, props.phase),
+                subText: format(strings.ConfirmPhaseDialogSubText, props.phase.name),
             }}
             modalProps={{ isBlocking: props.isBlocking }}>
             {props.isChangingPhase
