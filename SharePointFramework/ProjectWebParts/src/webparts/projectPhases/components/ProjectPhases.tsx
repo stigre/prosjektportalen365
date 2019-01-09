@@ -94,11 +94,13 @@ export default class ProjectPhases extends React.Component<IProjectPhasesProps, 
             </div>
           ))}
         </div>
-        <div hidden={!this.state.showPhaseChangeMessage} style={{ marginTop: 20 }}>
-          <MessageBar messageBarType={MessageBarType.info}>
-            <p>{format(strings.PhaseChangedMessage, this.state.currentPhase.name)}</p>
-          </MessageBar>
-        </div>
+        {(this.state.currentPhase && this.state.showPhaseChangeMessage) &&
+          <div style={{ marginTop: 20 }}>
+            <MessageBar messageBarType={MessageBarType.info}>
+              <p>{format(strings.PhaseChangedMessage, this.state.currentPhase.name)}</p>
+            </MessageBar>
+          </div>
+        }
         {this.state.confirmPhase && (
           <ConfirmPhaseDialog
             phase={this.state.confirmPhase}

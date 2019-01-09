@@ -8,6 +8,9 @@ import { sp } from '@pnp/sp';
 
 export interface IProjectInformationWebPartProps {
   title: string;
+  entityListName: string;
+  entityCtId: string;
+  entityFieldsGroup: string;
 }
 
 export default class ProjectInformationWebPart extends BaseClientSideWebPart<IProjectInformationWebPartProps> {
@@ -19,9 +22,9 @@ export default class ProjectInformationWebPart extends BaseClientSideWebPart<IPr
     const element: React.ReactElement<IProjectInformationProps> = React.createElement(
       ProjectInformation,
       {
-        title: this.properties.title,
+        ...this.properties,
         displayMode: this.displayMode,
-        updateTitle: title => this.properties.title = title,
+        updateTitle: (title: string) => this.properties.title = title,
         context: this.context,
       }
     );

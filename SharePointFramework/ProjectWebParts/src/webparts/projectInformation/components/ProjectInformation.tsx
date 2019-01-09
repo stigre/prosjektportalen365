@@ -14,20 +14,18 @@ import SpEntityPortalService from 'sp-entityportal-service';
 import * as strings from 'ProjectInformationWebPartStrings';
 
 export default class ProjectInformation extends React.Component<IProjectInformationProps, IProjectInformationState> {
-  public static defaultProps: Partial<IProjectInformationProps> = {
-    entityListName: 'Prosjekter',
-    entityCtId: '0x0100805E9E4FEAAB4F0EABAB2600D30DB70C',
-    entityFieldsGroup: 'Prosjektportalenkolonner',
-  };
-
   constructor(props: IProjectInformationProps) {
     super(props);
     this.state = { properties: [], isLoading: true };
   }
 
   public async componentDidMount() {
-    const { properties, editFormUrl, itemId } = await this.fetchData();
-    this.setState({ properties, editFormUrl, itemId, isLoading: false });
+    try {
+      const { properties, editFormUrl, itemId } = await this.fetchData();
+      this.setState({ properties, editFormUrl, itemId, isLoading: false });
+    } catch (err) {
+      this.setState({ isLoading: false });
+    }
   }
 
   public render(): React.ReactElement<IProjectInformationProps> {
@@ -44,7 +42,10 @@ export default class ProjectInformation extends React.Component<IProjectInformat
                 title={this.props.title}
                 updateProperty={this.props.updateTitle} />
               {this.renderProperties()}
-              <DefaultButton text={strings.EditPropertiesText} href={this.state.editFormUrl} />
+              <DefaultButton
+                text={strings.EditPropertiesText}
+                href={this.state.editFormUrl}
+                iconProps={{ iconName: 'Edit' }} />
             </div>
           </div>
         </div>
@@ -79,7 +80,7 @@ export default class ProjectInformation extends React.Component<IProjectInformat
       const fields = await hubSiteRootWeb.contentTypes.getById(this.props.entityCtId).fields.filter(`Group eq '${this.props.entityFieldsGroup}'`).get();
       const spEntityPortalService = new SpEntityPortalService(hubSite.SiteUrl, this.props.entityListName, 'GtGroupId');
       const itemId = await spEntityPortalService.GetEntityItemId(pageContext.legacyPageContext.groupId);
-      const editFormUrl = await spEntityPortalService.GetEntityEditFormUrl(pageContext.legacyPageContext.groupId);
+      const editFormUrl = await spEntityPortalService.GetEntityEditFormUrl(pageContext.legacyPageContext.groupId, this.props.context.pageContext.web.absoluteUrl);
       const item = await projectsList.items.getById(itemId).fieldValuesAsText.get();
       let itemFieldNames = Object.keys(item);
       let properties = itemFieldNames
@@ -91,7 +92,7 @@ export default class ProjectInformation extends React.Component<IProjectInformat
         .map(({ field, value }) => new ProjectPropertyModel(field, value));
       return { properties, editFormUrl, itemId };
     } catch (error) {
-
+      throw error;
     }
   }
 }

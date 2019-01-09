@@ -9,6 +9,7 @@ foreach ($m in $Manifests) {
                 Id            = $ManifestJson.id;
                 Alias         = $ManifestJson.alias;
                 ComponentType = $ManifestJson.componentType;
+                Version       = $ManifestJson.version;
                 Properties    = $ManifestJson.preconfiguredEntries.properties;
             }
         }

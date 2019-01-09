@@ -52,7 +52,12 @@ export function GetSetupPagesConfiguration(listsMap: { [key: string]: string }):
                         {
                             Factor: 4,
                             Controls: [
-                                new ClientSideWebpart('Prosjektinformasjon', null, { title: 'Prosjektinformasjon' }, 'b8bec0be-2354-443d-a3ca-24b36e8ea7dc'),
+                                new ClientSideWebpart('Prosjektinformasjon', null, {
+                                    title: 'Prosjektinformasjon',
+                                    entityListName: 'Prosjekter',
+                                    entityCtId: '0x0100805E9E4FEAAB4F0EABAB2600D30DB70C',
+                                    entityFieldsGroup: 'Prosjektportalenkolonner',
+                                }, 'b8bec0be-2354-443d-a3ca-24b36e8ea7dc'),
                                 new ClientSideWebpart('Usikkerhet', null, { isDocumentLibrary: false, selectedListId: listsMap['Usikkerhet'], webpartHeightKey: 4 }, 'f92bf067-bc19-489e-a556-7fe95f508720')
                             ]
                         }
