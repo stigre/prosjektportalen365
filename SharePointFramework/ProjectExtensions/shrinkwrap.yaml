@@ -16,7 +16,8 @@ dependencies:
   '@types/webpack-env': 1.13.1
   react: 16.3.2
   react-dom: 16.3.2
-  sp-hubsite-service: 0.0.1
+  sp-entityportal-service: 0.1.0
+  sp-hubsite-service: 0.0.4
 devDependencies:
   '@microsoft/sp-build-web': 1.7.1
   '@microsoft/sp-module-interfaces': 1.7.1
@@ -716,10 +717,36 @@ packages:
       '@pnp/logging': 1.2.7
     resolution:
       integrity: sha512-7hgSZcC0mZd+6YaFWxT6l3QPu3HS2DknIECx/64YHEqF+0qXX6Tcg9Rtn7lsVt6kG3VXSnGnN0A5pCG6VaT5ag==
+  /@pnp/odata/1.2.7/2f60dda3223b9f76cd6b54bcd199880e:
+    dependencies:
+      '@pnp/common': 1.2.7
+      '@pnp/logging': 1.2.7
+      tslib: 1.9.3
+    dev: false
+    id: registry.npmjs.org/@pnp/odata/1.2.7
+    peerDependencies:
+      '@pnp/common': 1.2.7
+      '@pnp/logging': 1.2.7
+    resolution:
+      integrity: sha512-7hgSZcC0mZd+6YaFWxT6l3QPu3HS2DknIECx/64YHEqF+0qXX6Tcg9Rtn7lsVt6kG3VXSnGnN0A5pCG6VaT5ag==
   /@pnp/sp/1.2.7:
     dependencies:
       tslib: 1.9.3
     dev: false
+    peerDependencies:
+      '@pnp/common': 1.2.7
+      '@pnp/logging': 1.2.7
+      '@pnp/odata': 1.2.7
+    resolution:
+      integrity: sha512-shhqPNYBRV7jEO1TLtRzGk/Czd43WFJTqH19Gll2dt9MmTUzLj7Pyc9ioEsSXp6GdjtQ0Qz9e2hVX9UZboLxJQ==
+  /@pnp/sp/1.2.7/5e4bfbec60dd1a26b5584e8bd12afffd:
+    dependencies:
+      '@pnp/common': 1.2.7
+      '@pnp/logging': 1.2.7
+      '@pnp/odata': /@pnp/odata/1.2.7/2f60dda3223b9f76cd6b54bcd199880e
+      tslib: 1.9.3
+    dev: false
+    id: registry.npmjs.org/@pnp/sp/1.2.7
     peerDependencies:
       '@pnp/common': 1.2.7
       '@pnp/logging': 1.2.7
@@ -9863,10 +9890,19 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
-  /sp-hubsite-service/0.0.1:
+  /sp-entityportal-service/0.1.0:
+    dependencies:
+      '@pnp/common': 1.2.7
+      '@pnp/logging': 1.2.7
+      '@pnp/odata': /@pnp/odata/1.2.7/2f60dda3223b9f76cd6b54bcd199880e
+      '@pnp/sp': /@pnp/sp/1.2.7/5e4bfbec60dd1a26b5584e8bd12afffd
     dev: false
     resolution:
-      integrity: sha512-Y4pkoI4W+X78DcWF/aG4Xqru3pwLHFnD3jz+Fj4TwQC9i/VRepzFugN5B3kcu91bc7I0Z/HmRZ/8O90FazS17Q==
+      integrity: sha512-O7/oz/F0kuXDd7pKrzQUFgaDqCKFMcFn0C/cxnd71Foixs3wKUJdImo/nbYm4GAlsN36w9Lwkyi/8Bysl6QaaA==
+  /sp-hubsite-service/0.0.4:
+    dev: false
+    resolution:
+      integrity: sha512-dPXaGrSXWTgTi910xWDPKVXGvsmvSnT0g606BdNK8sIk8N/rJ8dnjwqul7nlUDOy6Ss6dp2KXeiRkSTcrt7v9w==
   /sp-pnp-js/3.0.10:
     dependencies:
       '@microsoft/microsoft-graph-types': 1.1.0
@@ -11668,7 +11704,8 @@ specifiers:
   node-fetch: ^2.3.0
   react: 16.3.2
   react-dom: 16.3.2
-  sp-hubsite-service: ^0.0.1
+  sp-entityportal-service: ^0.1.0
+  sp-hubsite-service: ^0.0.4
   spfx-pkgdeploy: ^0.2.1
   tslint: 5.9.1
   tslint-microsoft-contrib: ^6.0.0

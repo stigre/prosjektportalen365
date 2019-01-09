@@ -22,12 +22,16 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
   public async runTasks(): Promise<void> {
     Logger.log({ message: '(ProjectSetupApplicationCustomizer) runTasks', level: LogLevel.Info });
     const params: IBaseTaskParams = { context: this.context, properties: this.properties };
-    await CheckHubAssosication.execute(params);
-    await SetupPages.execute(params);
-    await SetupViews.execute(params);
-    await PlannerConfiguration.execute(params);
-    await SetupProjectInformation.execute(params);
-    await this.removeCustomizer(this.componentId, true);
+    try {
+      await CheckHubAssosication.execute(params);
+      await SetupPages.execute(params);
+      await SetupViews.execute(params);
+      await PlannerConfiguration.execute(params);
+      await SetupProjectInformation.execute(params);
+      await this.removeCustomizer(this.componentId, true);
+    } catch (error) {
+
+    }
   }
 
   /**
