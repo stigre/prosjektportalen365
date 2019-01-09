@@ -1,4 +1,7 @@
-declare interface IProjectInformationWebPartStrings { }
+declare interface IProjectInformationWebPartStrings { 
+  MissingPropertiesMessage: string;
+  NoPropertiesMessage: string;
+}
 
 declare module 'ProjectInformationWebPartStrings' {
   const strings: IProjectInformationWebPartStrings;
