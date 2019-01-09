@@ -1,7 +1,7 @@
 <pnp:ContentTypes xmlns:pnp="http://schemas.dev.office.com/PnP/2018/05/ProvisioningSchema">
     <pnp:ContentType ID="0x0100805E9E4FEAAB4F0EABAB2600D30DB70C" Name="Prosjekt" Description="" Group="Prosjektportalen innholdstyper">
         <pnp:FieldRefs>
-            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="false" />
             <pnp:FieldRef ID="983d5ab3-0a6c-4f6a-a7b5-d34d52d73676" Name="GtProjectFinanceName" />
             <pnp:FieldRef ID="64d45745-0dd0-4c21-979b-67fb13748bb1" Name="GtProjectNumber" />
             <pnp:FieldRef ID="a59fe220-36c3-464a-8cfc-40d6d04debd2" Name="GtArchiveReference" />
@@ -29,6 +29,7 @@
             <pnp:FieldRef ID="5af54348-bc38-4a18-a11f-0f84a96da4ea" Name="GtCostsTotal" />
             <pnp:FieldRef ID="9076c206-ca80-4e17-b6f4-6fa3b90c421a" Name="GtProjectForecast" />
             <pnp:FieldRef ID="f4623214-ab74-4160-82a7-37d46901bc1b" Name="GtBudgetLastReportDate" />
+            <pnp:FieldRef ID="fba7ced6-9970-4b14-ab9c-7c809310d86d" Name="GtGroupId" />
         </pnp:FieldRefs>
     </pnp:ContentType>
 </pnp:ContentTypes> 
