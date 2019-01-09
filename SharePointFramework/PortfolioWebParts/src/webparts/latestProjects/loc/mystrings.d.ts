@@ -2,6 +2,7 @@ declare interface ILatestProjectsWebPartStrings {
   PropertyPaneDescription: string;
   BasicGroupName: string;
   DescriptionFieldLabel: string;
+  LoadingProjects: string;
 }
 
 declare module 'LatestProjectsWebPartStrings' {

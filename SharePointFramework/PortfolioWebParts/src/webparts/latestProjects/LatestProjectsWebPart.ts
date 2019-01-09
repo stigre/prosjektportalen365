@@ -4,15 +4,19 @@ import { Version } from '@microsoft/sp-core-library';
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField,
+  WebPartContext
 } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'LatestProjectsWebPartStrings';
 import LatestProjects from './components/LatestProjects';
 import { ILatestProjectsProps } from './components/ILatestProjectsProps';
+import { sp } from '@pnp/sp';
 
 export interface ILatestProjectsWebPartProps {
-  description: string;
+  absoluteUrl: string;
+  serverRelativeUrl: string;
+  context: WebPartContext;
 }
 
 export default class LatestProjectsWebPart extends BaseClientSideWebPart<ILatestProjectsWebPartProps> {
@@ -21,11 +25,21 @@ export default class LatestProjectsWebPart extends BaseClientSideWebPart<ILatest
     const element: React.ReactElement<ILatestProjectsProps > = React.createElement(
       LatestProjects,
       {
-        description: this.properties.description
+        context: this.context,
+        absoluteUrl: this.context.pageContext.web.absoluteUrl,
+        serverRelativeUrl: this.context.pageContext.web.serverRelativeUrl
       }
     );
 
     ReactDom.render(element, this.domElement);
+  }
+
+  protected onInit(): Promise<void> {
+    return super.onInit().then(_ => {
+      sp.setup({
+        spfxContext: this.context
+      });
+    });
   }
 
   protected onDispose(): void {
