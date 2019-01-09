@@ -2,7 +2,6 @@
 
 .statusElement {
     margin-top: 20px;
-    height: 150px;
     @include ms-Grid;
 
     .row {            
@@ -53,10 +52,6 @@
             @include ms-sm1;
         }
     }
-    .statusElementIcon {
-        font-size: 30px;
-    }
-
     .statusElementBody {
         .statusElementLabel {
             font-size: 16px;

@@ -5,6 +5,7 @@ export interface IProjectStatusState {
     showNewStatusReportModal?: boolean;
     reportFields: INewStatusReportModalField[];
     entityFields: any[];
+    entityItem: any;
     reports: ProjectStatusReport[];
     selectedReport: ProjectStatusReport;
 }

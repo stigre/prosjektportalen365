@@ -30,9 +30,6 @@ export default class ProjectPhases extends React.Component<IProjectPhasesProps, 
     this.state = { isLoading: true };
   }
 
-  /**
-   * Component will mount
-   */
   public async componentDidMount() {
     if (this.props.phaseField) {
       const { pageContext } = this.props.context;

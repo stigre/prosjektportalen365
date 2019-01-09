@@ -23,12 +23,18 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
 
   constructor(props: IProjectStatusProps) {
     super(props);
-    this.state = { reportFields: [], entityFields: [], reports: [], selectedReport: null };
+    this.state = { reportFields: [], entityFields: [], entityItem: {}, reports: [], selectedReport: null };
   }
 
   public async componentDidMount() {
-    const { reportFields, entityFields, reports } = await this.fetchData();
-    this.setState({ reportFields, entityFields, reports, selectedReport: reports[0] });
+    const { reportFields, entityFields, entityItem, reports } = await this.fetchData();
+    this.setState({
+      reportFields,
+      entityFields,
+      entityItem,
+      reports,
+      selectedReport: reports[0],
+    });
   }
 
   public render(): React.ReactElement<IProjectStatusProps> {
@@ -36,26 +42,31 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
     let webPartTitleText = this.props.title;
     let sections = [];
     if (this.state.selectedReport) {
-      const baseProps = { context: this.props.context, report: this.state.selectedReport, entityFields: this.state.entityFields };
+      const baseProps = {
+        context: this.props.context,
+        report: this.state.selectedReport,
+        entityFields: this.state.entityFields,
+        entityItem: this.state.entityItem,
+      };
       const data = this.state.selectedReport.item;
       sections.push(
         <SummarySection
           projectInformation={this.props.projectInformation} {...baseProps} />,
         <StatusPropertySection
-          headerProps={{ label: 'Fremdrift', value: data.GtStatusTime, comment: data.GtStatusTimeComment, iconName: 'AwayStatus' }}
+          headerProps={{ label: 'Fremdrift', value: data.GtStatusTime, comment: data.GtStatusTimeComment, iconName: 'AwayStatus', iconSize: 50 }}
           {...baseProps} />,
         <StatusPropertySection
-          headerProps={{ label: 'Økonomi', value: data.GtStatusBudget, comment: data.GtStatusBudgetComment, iconName: 'AwayStatus' }}
+          headerProps={{ label: 'Økonomi', value: data.GtStatusBudget, comment: data.GtStatusBudgetComment, iconName: 'Money', iconSize: 50 }}
           fieldNames={['GtProjectFinanceName', 'GtBudgetTotal', 'GtCostsTotal', 'GtProjectForecast']}
           {...baseProps} />,
         <StatusPropertySection
-          headerProps={{ label: 'Kvalitet', value: data.GtStatusQuality, comment: data.GtStatusQualityComment, iconName: 'AwayStatus' }}
+          headerProps={{ label: 'Kvalitet', value: data.GtStatusQuality, comment: data.GtStatusQualityComment, iconName: 'Equalizer', iconSize: 50 }}
           {...baseProps} />,
         <StatusPropertySection
-          headerProps={{ label: 'Risiko', value: data.GtStatusRisk, comment: data.GtStatusRiskComment, iconName: 'AwayStatus' }}
+          headerProps={{ label: 'Risiko', value: data.GtStatusRisk, comment: data.GtStatusRiskComment, iconName: 'Warning', iconSize: 50 }}
           {...baseProps} />,
         <StatusPropertySection
-          headerProps={{ label: 'Gevinstoppnåelse', value: data.GtStatusGainAchievement, comment: data.GtStatusGainAchievementComment, iconName: 'AwayStatus' }}
+          headerProps={{ label: 'Gevinstoppnåelse', value: data.GtStatusGainAchievement, comment: data.GtStatusGainAchievementComment, iconName: 'Wines', iconSize: 50 }}
           {...baseProps} />,
       );
       webPartTitleText = `${this.props.title} (${this.state.selectedReport.toString()})`;
@@ -135,9 +146,13 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
     const { pageContext } = this.props.context;
     const { hubSiteId, groupId } = pageContext.legacyPageContext;
     this.hubSite = await HubSiteService.GetHubSiteById(pageContext.web.absoluteUrl, hubSiteId);
-    Logger.log({ message: '(ProjectStatus) fetchData: Fetched hub site', data: { hubSite: this.hubSite }, level: LogLevel.Info });
     this.reportList = this.hubSite.web.lists.getByTitle(this.props.reportListName);
-    let entityFields = await this.hubSite.web.contentTypes.getById(this.props.projectInformation.entityCtId).fields.filter(`Group eq '${this.props.projectInformation.entityFieldsGroup}'`).get();
+    Logger.log({ message: '(ProjectStatus) fetchData: Fetched hub site', data: { hubSite: this.hubSite }, level: LogLevel.Info });
+    const spEntityPortalService = new SpEntityPortalService(this.hubSite.url, this.props.projectInformation.entityListName, 'GtGroupId', this.props.projectInformation.entityCtId, this.props.projectInformation.entityFieldsGroup);
+    const [entityItem, entityFields] = await Promise.all([
+      spEntityPortalService.GetEntityItemFieldValues(groupId),
+      spEntityPortalService.GetEntityFields(),
+    ]);
     let reportFields = await this.hubSite.web.contentTypes.getById(this.props.reportCtId).fields.select('Title', 'InternalName', 'TypeAsString', 'Choices').filter(`(TypeAsString eq 'Note' or TypeAsString eq 'Text' or TypeAsString eq 'Choice') and InternalName ne 'Title' and InternalName ne 'GtGroupId'`).get();
     reportFields = reportFields.map(fld => ({
       title: fld.Title,
@@ -147,6 +162,6 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
     }));
     let reports = await this.reportList.items.filter(`GtGroupId eq '${groupId}'`).get();
     reports = reports.map((r: any) => new ProjectStatusReport(r));
-    return { entityFields, reportFields, reports };
+    return { entityFields, entityItem, reportFields, reports };
   }
 }

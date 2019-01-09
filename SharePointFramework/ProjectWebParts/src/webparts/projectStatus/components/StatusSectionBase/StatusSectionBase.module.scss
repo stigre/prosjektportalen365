@@ -1,23 +1,23 @@
 .statusSectionBase {
     width: auto;
+}
 
-    .statusSectionField {
-        max-width: 250px;
-        text-align: center;
+.statusSectionField {
+    max-width: 250px;
+    text-align: center;
 
-        .statusSectionFieldInner {
-            margin: 0px 0px 10px;
-            max-width: 95%;
+    .statusSectionFieldInner {
+        margin: 0px 0px 10px;
+        max-width: 95%;
 
-            .statusSectionFieldLabel {
-                font-size: 14px;
-                font-weight: 600;
-            }
+        .statusSectionFieldLabel {
+            font-size: 14px;
+            font-weight: 600;
+        }
 
-            .statusSectionFieldValue {
-                font-size: 17px;
-                font-weight: 300;
-            }
+        .statusSectionFieldValue {
+            font-size: 17px;
+            font-weight: 300;
         }
     }
 }

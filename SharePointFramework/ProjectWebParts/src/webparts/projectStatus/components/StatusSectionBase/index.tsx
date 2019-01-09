@@ -18,16 +18,21 @@ export default class StatusSectionBase<P extends IStatusSectionBaseProps, S exte
 
     public renderFields() {
         if (this.props.fieldNames) {
-            const data = this.props.report.item;
-            const entityFields = this.props.entityFields;
-            return (
-                <div className={styles.statusSectionField}>
-                    <div className={styles.statusSectionFieldInner}>
-                        <div className={styles.statusSectionFieldLabel}>Prosjektnavn i økonomisystemet</div>
-                        <div className={styles.statusSectionFieldValue}>Eureka</div>
-                    </div>
-                </div>
-            );
+            const { entityFields, entityItem } = this.props;
+            return this.props.fieldNames.map(fieldName => {
+                const [fld] = entityFields.filter(ef => ef.InternalName === fieldName);
+                if (fld) {
+                    return (
+                        <div className={styles.statusSectionField}>
+                            <div className={styles.statusSectionFieldInner}>
+                                <div className={styles.statusSectionFieldLabel}>{fld.Title}</div>
+                                <div className={styles.statusSectionFieldValue}>{entityItem[fieldName]}</div>
+                            </div>
+                        </div>
+                    );
+                }
+                return null;
+            });
         }
         return null;
     }

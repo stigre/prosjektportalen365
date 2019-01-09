@@ -37,7 +37,7 @@ export function GetSetupPagesConfiguration(listsMap: { [key: string]: string }):
                                 updateViewsDocuments: false,
                                 updateViewsTasks: false,
                                 updateViewsRisks: false,
-                                gutter: 10,
+                                gutter: 15,
                                 fontSize: 12
                             }, '4449d3dc-fa58-4982-b87c-5a893114e7b7')]
                         },
@@ -86,9 +86,14 @@ export function GetSetupPagesConfiguration(listsMap: { [key: string]: string }):
                         {
                             Factor: 12,
                             Controls: [new ClientSideWebpart('Prosjektstatus', null, {
-                                "title": "Prosjektstatus",
-                                "reportListName": "Prosjektstatus",
-                                "reportCtId": "0x010022252E35737A413FB56A1BA53862F6D5",
+                                title: "Prosjektstatus",
+                                reportListName: "Prosjektstatus",
+                                reportCtId: "0x010022252E35737A413FB56A1BA53862F6D5",
+                                projectInformation: {
+                                    entityListName: 'Prosjekter',
+                                    entityCtId: '0x0100805E9E4FEAAB4F0EABAB2600D30DB70C',
+                                    entityFieldsGroup: 'Prosjektportalenkolonner',
+                                },
                             }, '681ad0dc-ddb5-4dba-a5d6-a42f6d1c90a6')]
                         },
                     ]

@@ -48,7 +48,7 @@ export default class ProjectInformation extends React.Component<IProjectInformat
                 : (
                   <div>
                     {this.renderProperties()}
-                    <div hidden={this.props.hideEditPropertiesButton}>
+                    <div className={styles.editPropertiesButton} hidden={this.props.hideEditPropertiesButton}>
                       <DefaultButton
                         text={strings.EditPropertiesText}
                         href={this.state.editFormUrl}
@@ -83,23 +83,26 @@ export default class ProjectInformation extends React.Component<IProjectInformat
 
   private async fetchData() {
     try {
-      const { pageContext } = this.props.context;
-      const hubSite = await HubSiteService.GetHubSiteById(pageContext.web.absoluteUrl, pageContext.legacyPageContext.hubSiteId);
-      const projectsList = hubSite.web.lists.getByTitle(this.props.entityListName);
-      const fields = await hubSite.web.contentTypes.getById(this.props.entityCtId).fields.filter(`Group eq '${this.props.entityFieldsGroup}'`).get();
-      const spEntityPortalService = new SpEntityPortalService(hubSite.url, this.props.entityListName, 'GtGroupId');
-      const itemId = await spEntityPortalService.GetEntityItemId(pageContext.legacyPageContext.groupId);
-      const editFormUrl = await spEntityPortalService.GetEntityEditFormUrl(pageContext.legacyPageContext.groupId, this.props.context.pageContext.web.absoluteUrl);
-      const item = await projectsList.items.getById(itemId).fieldValuesAsText.get();
-      let itemFieldNames = Object.keys(item);
-      let properties = itemFieldNames
-        .map(fname => ({
-          field: fields.filter(fld => fld.InternalName === fname)[0],
-          value: item[fname],
+      const { context, entityCtId, entityListName, entityFieldsGroup } = this.props;
+      const { pageContext } = context;
+      const { hubSiteId, groupId } = pageContext.legacyPageContext;
+      const hubSite = await HubSiteService.GetHubSiteById(pageContext.web.absoluteUrl, hubSiteId);
+      const spEntityPortalService = new SpEntityPortalService(hubSite.url, entityListName, 'GtGroupId', entityCtId, entityFieldsGroup);
+      const [entityItem, entityFields, editFormUrl] = await Promise.all([
+        spEntityPortalService.GetEntityItemFieldValues(groupId),
+        spEntityPortalService.GetEntityFields(),
+        spEntityPortalService.GetEntityEditFormUrl(groupId, pageContext.web.absoluteUrl),
+      ]);
+      let properties = Object.keys(entityItem)
+        .map(n => ({
+          field: entityFields.filter(fld => fld.InternalName === n)[0],
+          value: entityItem[n],
         }))
         .filter(prop => prop.field)
         .map(({ field, value }) => new ProjectPropertyModel(field, value));
-      return { properties, editFormUrl, itemId };
+      const data = { properties, editFormUrl, itemId: entityItem.Id };
+
+      return data;
     } catch (error) {
       throw error;
     }
