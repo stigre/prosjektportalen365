@@ -3,7 +3,6 @@ import styles from './ProjectInformation.module.scss';
 import { IProjectInformationProps } from './IProjectInformationProps';
 import { IProjectInformationState } from './IProjectInformationState';
 import { WebPartTitle } from "@pnp/spfx-controls-react/lib/WebPartTitle";
-import { Web } from '@pnp/sp';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
@@ -75,10 +74,9 @@ export default class ProjectInformation extends React.Component<IProjectInformat
     try {
       const { pageContext } = this.props.context;
       const hubSite = await HubSiteService.GetHubSiteById(pageContext.web.absoluteUrl, pageContext.legacyPageContext.hubSiteId);
-      const hubSiteRootWeb = new Web(hubSite.SiteUrl);
-      const projectsList = hubSiteRootWeb.lists.getByTitle(this.props.entityListName);
-      const fields = await hubSiteRootWeb.contentTypes.getById(this.props.entityCtId).fields.filter(`Group eq '${this.props.entityFieldsGroup}'`).get();
-      const spEntityPortalService = new SpEntityPortalService(hubSite.SiteUrl, this.props.entityListName, 'GtGroupId');
+      const projectsList = hubSite.web.lists.getByTitle(this.props.entityListName);
+      const fields = await hubSite.web.contentTypes.getById(this.props.entityCtId).fields.filter(`Group eq '${this.props.entityFieldsGroup}'`).get();
+      const spEntityPortalService = new SpEntityPortalService(hubSite.url, this.props.entityListName, 'GtGroupId');
       const itemId = await spEntityPortalService.GetEntityItemId(pageContext.legacyPageContext.groupId);
       const editFormUrl = await spEntityPortalService.GetEntityEditFormUrl(pageContext.legacyPageContext.groupId, this.props.context.pageContext.web.absoluteUrl);
       const item = await projectsList.items.getById(itemId).fieldValuesAsText.get();

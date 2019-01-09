@@ -6,6 +6,16 @@ export interface IBaseTaskParams {
     properties: IProjectSetupApplicationCustomizerProperties;
 }
 
+export class BaseTaskError {
+    constructor(
+        public task: string,
+        public message: string,
+    ) {
+        this.task = task;
+        this.message = message;
+    }
+}
+
 export class BaseTask {
     public params: IBaseTaskParams;
 

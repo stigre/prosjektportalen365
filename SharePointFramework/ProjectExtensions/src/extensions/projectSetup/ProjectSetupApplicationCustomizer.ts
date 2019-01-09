@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { override } from '@microsoft/decorators';
 import { BaseApplicationCustomizer, PlaceholderName } from '@microsoft/sp-application-base';
-import { CheckHubAssosication, SetupPages, PlannerConfiguration, IBaseTaskParams, SetupViews, SetupProjectInformation } from './tasks';
+import { CheckHubAssosication, SetupPages, PlannerConfiguration, IBaseTaskParams, BaseTaskError, SetupViews, SetupProjectInformation } from './tasks';
 import { sp } from "@pnp/sp";
 import { Logger, LogLevel, ConsoleListener } from "@pnp/logging";
 import { IProjectSetupApplicationCustomizerProperties } from './IProjectSetupApplicationCustomizerProperties';
@@ -38,7 +38,7 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
       await SetupProjectInformation.execute(params);
       await this.removeCustomizer(this.componentId, true);
     } catch (error) {
-      Logger.log({ message: '(ProjectSetupApplicationCustomizer) runTasks: Failed', level: LogLevel.Error });
+      Logger.log({ message: `(ProjectSetupApplicationCustomizer) runTasks: ${error.task} failed with message ${error.message}`, level: LogLevel.Error });
     }
   }
 
