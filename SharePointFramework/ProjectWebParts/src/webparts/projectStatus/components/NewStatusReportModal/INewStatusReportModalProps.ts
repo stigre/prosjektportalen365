@@ -11,5 +11,5 @@ export interface INewStatusReportModalField {
 
 export interface INewStatusReportModalProps extends IModalProps {
     fields: INewStatusReportModalField[];
-    onSave: (model: { [key: string]: string }) => void;
+    onSave: (model: { [key: string]: string }) => Promise<void>;
 }

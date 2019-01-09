@@ -11,8 +11,23 @@
     @include ms-Grid-row;
   }
 
-  .column {
+  .column12 {
     @include ms-Grid-col;
     @include ms-sm12;
+  }
+
+  .column8 {
+    @include ms-Grid-col;
+    @include ms-sm8;
+  }
+
+  .column6 {
+    @include ms-Grid-col;
+    @include ms-sm6;
+  }
+
+  .column4 {
+    @include ms-Grid-col;
+    @include ms-sm4;
   }
 }

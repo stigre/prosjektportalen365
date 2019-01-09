@@ -1,5 +1,6 @@
 define([], function() {
   return {
-    "SaveText": "Lagre"
+    "SaveText": "Lagre",
+    "PickReportText": "Velg rapport"
   }
 });
