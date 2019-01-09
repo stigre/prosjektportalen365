@@ -6,6 +6,6 @@ export default class ProjectStatusReport {
     }
 
     public toString() {
-        return `${this.item.GtMonthChoice} ${this.item.created.substring(0, 4)}`;
+        return `${this.item.GtMonthChoice} ${this.item.Created.substring(0, 4)}`;
     }
 }

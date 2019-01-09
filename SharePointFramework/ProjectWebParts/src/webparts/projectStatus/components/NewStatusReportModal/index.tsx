@@ -19,50 +19,8 @@ export default class NewStatusReportModal extends React.Component<INewStatusRepo
         return (
             <Modal isOpen={true} onDismiss={this.props.onDismiss}>
                 <div className={styles.newStatusReportModal}>
-                    <div className={styles.newStatusReportModalHeader}>Ny statusrapport</div>
-                    {this.props.fields.map(fld => {
-                        switch (fld.fieldType) {
-                            case 'text': {
-                                return (
-                                    <div className={styles.newStatusReportModalField}>
-                                        <TextField label={fld.title} onChanged={value => this.onFieldUpdated(fld, value)} />
-                                    </div>
-                                );
-                            }
-                            case 'note': {
-                                const [relatedChoiceField] = this.props.fields.filter(_fld => _fld.fieldName.indexOf('GtStatus') !== -1 && _fld.fieldName === fld.fieldName.replace('Comment', ''));
-                                const relatedChoiceFieldValue = relatedChoiceField ? this.state.model[relatedChoiceField.fieldName] : null;
-                                return (
-                                    <div className={styles.newStatusReportModalField} hidden={relatedChoiceField && (!relatedChoiceFieldValue || relatedChoiceFieldValue === '')}>
-                                        <TextField
-                                            label={fld.title}
-                                            multiline={true}
-                                            onChanged={value => this.onFieldUpdated(fld, value)} />
-                                    </div>
-                                );
-                            }
-                            case 'choice': {
-                                const options = [
-                                    {
-                                        key: '',
-                                        text: '',
-                                    },
-                                    ...fld.choices.map(text => ({ key: text, text })),
-                                ];
-                                return (
-                                    <div className={styles.newStatusReportModalField}>
-                                        <Dropdown
-                                            label={fld.title}
-                                            options={options}
-                                            onChanged={opt => this.onFieldUpdated(fld, opt.key.toString())} />
-                                    </div>
-                                );
-                            }
-                            default: {
-                                return null;
-                            }
-                        }
-                    })}
+                    <div className={styles.newStatusReportModalHeader}>{strings.NewStatusReportModalHeaderText}</div>
+                    {this.renderFields()}
                     <div className={styles.newStatusReportModalFooter}>
                         <PrimaryButton
                             text={strings.SaveText}
@@ -73,6 +31,52 @@ export default class NewStatusReportModal extends React.Component<INewStatusRepo
                 </div>
             </Modal>
         );
+    }
+
+    private renderFields() {
+        return this.props.fields.map(fld => {
+            switch (fld.fieldType) {
+                case 'text': {
+                    return (
+                        <div className={styles.newStatusReportModalField}>
+                            <TextField label={fld.title} onChanged={value => this.onFieldUpdated(fld, value)} />
+                        </div>
+                    );
+                }
+                case 'note': {
+                    const [relatedChoiceField] = this.props.fields.filter(_fld => _fld.fieldName.indexOf('GtStatus') !== -1 && _fld.fieldName === fld.fieldName.replace('Comment', ''));
+                    const relatedChoiceFieldValue = relatedChoiceField ? this.state.model[relatedChoiceField.fieldName] : null;
+                    return (
+                        <div className={styles.newStatusReportModalField} hidden={relatedChoiceField && (!relatedChoiceFieldValue || relatedChoiceFieldValue === '')}>
+                            <TextField
+                                label={fld.title}
+                                multiline={true}
+                                onChanged={value => this.onFieldUpdated(fld, value)} />
+                        </div>
+                    );
+                }
+                case 'choice': {
+                    const options = [
+                        {
+                            key: '',
+                            text: '',
+                        },
+                        ...fld.choices.map(text => ({ key: text, text })),
+                    ];
+                    return (
+                        <div className={styles.newStatusReportModalField}>
+                            <Dropdown
+                                label={fld.title}
+                                options={options}
+                                onChanged={opt => this.onFieldUpdated(fld, opt.key.toString())} />
+                        </div>
+                    );
+                }
+                default: {
+                    return null;
+                }
+            }
+        });
     }
 
     @autobind
