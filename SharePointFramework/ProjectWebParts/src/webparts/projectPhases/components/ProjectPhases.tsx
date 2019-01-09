@@ -37,7 +37,7 @@ export default class ProjectPhases extends React.Component<IProjectPhasesProps, 
     if (this.props.phaseField) {
       const { pageContext } = this.props.context;
       const hubSite = await HubSiteService.GetHubSiteById(pageContext.web.absoluteUrl, pageContext.legacyPageContext.hubSiteId);
-      this.spEntityPortalService = new SpEntityPortalService(hubSite.SiteUrl, this.props.entityListName, 'GtGroupId');
+      this.spEntityPortalService = new SpEntityPortalService(hubSite.url, this.props.entityListName, 'GtGroupId');
       const checkPointStatuses = await this.fetchCheckPointStatuses();
       const { phases, currentPhase, phaseTextField } = await this.fetchData(checkPointStatuses);
       this.setState({

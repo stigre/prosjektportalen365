@@ -3,7 +3,7 @@
   "id": "681ad0dc-ddb5-4dba-a5d6-a42f6d1c90a6",
   "alias": "ProjectStatusWebPart",
   "componentType": "WebPart",
-  "version": "*",
+  "version": "0.0.1",
   "manifestVersion": 2,
   "requiresCustomScript": false,
   "preconfiguredEntries": [
@@ -19,7 +19,11 @@
         "default": " "
       },
       "officeFabricIconFontName": "Page",
-      "properties": {}
+      "properties": {
+        "title": "Prosjektstatus",
+        "reportListName": "Prosjektstatus",
+        "reportCtId": "0x010022252E35737A413FB56A1BA53862F6D5"
+      }
     }
   ]
 }

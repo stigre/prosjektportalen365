@@ -1,4 +1,6 @@
-declare interface IProjectStatusWebPartStrings {}
+declare interface IProjectStatusWebPartStrings {
+  SaveText: string;
+}
 
 declare module 'ProjectStatusWebPartStrings' {
   const strings: IProjectStatusWebPartStrings;
