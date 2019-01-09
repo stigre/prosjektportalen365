@@ -2,7 +2,7 @@ import { override } from '@microsoft/decorators';
 import { BaseTask, IBaseTaskParams } from '../BaseTask';
 import { Web } from '@pnp/sp';
 import { Logger, LogLevel } from '@pnp/logging';
-import HubSiteService from '../../../../../../services/HubSiteService';
+import HubSiteService from 'sp-hubsite-service';
 
 export class SetupProjectInformation extends BaseTask {
     @override
