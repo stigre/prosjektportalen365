@@ -4,18 +4,23 @@ import { Version } from '@microsoft/sp-core-library';
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField,
+  WebPartContext,
+  BaseWebPartContext
 } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'ProjectListWebPartStrings';
 import ProjectList from './components/ProjectList';
 import { IProjectListProps } from './components/IProjectListProps';
 import { sp } from '@pnp/sp';
+import { SPHttpClient, SPHttpClientResponse, SPHttpClientConfiguration } from '@microsoft/sp-http';
 
 
 
 export interface IProjectListWebPartProps {
-  rootUrl: string;
+  absoluteUrl: string;
+  serverRelativeUrl: string;
+  context: WebPartContext;
 }
 
 export default class ProjectListWebPart extends BaseClientSideWebPart<IProjectListWebPartProps> {
@@ -24,7 +29,9 @@ export default class ProjectListWebPart extends BaseClientSideWebPart<IProjectLi
     const element: React.ReactElement<IProjectListProps> = React.createElement(
       ProjectList,
       {
-        rootUrl: this.context.pageContext.web.absoluteUrl
+        context: this.context,
+        serverRelativeUrl: this.context.pageContext.web.serverRelativeUrl,
+        absoluteUrl: this.context.pageContext.web.absoluteUrl
       }
     );
 
