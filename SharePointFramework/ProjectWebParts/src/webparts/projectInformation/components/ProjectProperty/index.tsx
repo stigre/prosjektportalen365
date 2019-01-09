@@ -38,7 +38,7 @@ export default class ProjectProperty extends React.Component<IProjectPropertyPro
                 title={this.props.model.description}
                 style={this.props.style}>
                 <div className={labelClassName.join(" ")}>{this.props.model.displayName}</div>
-                <div className={valueClassName.join(" ")} dangerouslySetInnerHTML={{ __html: this.props.model.value }}></div>
+                <div className={valueClassName.join(" ")}>{this.props.model.value}</div>
             </div>
         );
     }

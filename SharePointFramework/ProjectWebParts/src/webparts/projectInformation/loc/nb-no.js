@@ -1,6 +1,7 @@
 define([], function () {
     return {
       "MissingPropertiesMessage": "MissingPropertiesMessage",
-      "NoPropertiesMessage": "NoPropertiesMessage"
+      "NoPropertiesMessage": "NoPropertiesMessage",
+      "EditPropertiesText": "Rediger egenskaper"
     }
   });
