@@ -5,8 +5,8 @@ export interface IProjectInformationProps {
   title: string;
   displayMode: DisplayMode;
   updateTitle: (title: string) => void;
-  listName?: string;
-  contentTypeId?: string;
-  fieldsGroup?: string;
+  entityListName?: string;
+  entityCtId?: string;
+  entityFieldsGroup?: string;
   context?: WebPartContext;
 }

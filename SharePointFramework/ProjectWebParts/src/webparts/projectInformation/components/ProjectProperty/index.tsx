@@ -7,7 +7,6 @@ import IProjectPropertyProps, { ProjectPropertyDefaultProps } from "./IProjectPr
 export default class ProjectProperty extends React.Component<IProjectPropertyProps, {}> {
     public static displayName = "ProjectProperty";
     public static defaultProps = ProjectPropertyDefaultProps;
-    private shouldTruncate = false;
 
     /**
      * Constructor
