@@ -6,7 +6,7 @@ import * as strings from 'BenefitsOverviewWebPartStrings';
 import BenefitsOverview from './components/BenefitsOverview';
 import { IBenefitsOverviewProps } from './components/IBenefitsOverviewProps';
 
-export interface IBenefitsOverviewWebPartProps { 
+export interface IBenefitsOverviewWebPartProps {
   title: string;
 }
 
@@ -16,8 +16,6 @@ export default class BenefitsOverviewWebPart extends BaseClientSideWebPart<IBene
     const element: React.ReactElement<IBenefitsOverviewProps> = React.createElement(
       BenefitsOverview, {
         ...this.properties,
-        displayMode: this.displayMode,
-        updateTitle: (title: string) => this.properties.title = title,
         context: this.context,
       }
     );

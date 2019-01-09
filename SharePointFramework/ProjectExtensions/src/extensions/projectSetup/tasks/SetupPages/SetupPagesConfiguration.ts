@@ -72,7 +72,7 @@ export function GetSetupPagesConfiguration(listsMap: { [key: string]: string }):
                     Columns: [
                         {
                             Factor: 12,
-                            Controls: [new ClientSideWebpart('Gevinstoversikt', null, {}, 'c7ff77cd-07e3-435e-971a-8845fa28ba8e')]
+                            Controls: [new ClientSideWebpart('Gevinstoversikt', null, { title: 'Gevinstoversikt' }, 'c7ff77cd-07e3-435e-971a-8845fa28ba8e')]
                         },
                     ]
                 }

@@ -3,7 +3,5 @@ import { WebPartContext } from '@microsoft/sp-webpart-base';
 import { IBenefitsOverviewWebPartProps } from "../BenefitsOverviewWebPart";
 
 export interface IBenefitsOverviewProps extends IBenefitsOverviewWebPartProps {
-    displayMode: DisplayMode;
-    updateTitle: (title: string) => void;
-    context?: WebPartContext;
+    context: WebPartContext;
 }

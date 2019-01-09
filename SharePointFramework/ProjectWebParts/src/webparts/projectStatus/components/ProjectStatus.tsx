@@ -7,6 +7,7 @@ import { IProjectStatusState } from './IProjectStatusState';
 import { WebPartTitle } from "@pnp/spfx-controls-react/lib/WebPartTitle";
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
+import { Spinner } from 'office-ui-fabric-react/lib/Spinner';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import NewStatusReportModal from './NewStatusReportModal';
 import SummarySection from './SummarySection';
@@ -23,7 +24,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
 
   constructor(props: IProjectStatusProps) {
     super(props);
-    this.state = { reportFields: [], entityFields: [], entityItem: {}, reports: [], selectedReport: null };
+    this.state = { isLoading: true };
   }
 
   public async componentDidMount() {
@@ -34,10 +35,14 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
       entityItem,
       reports,
       selectedReport: reports[0],
+      isLoading: false,
     });
   }
 
   public render(): React.ReactElement<IProjectStatusProps> {
+    if (this.state.isLoading) {
+      return <Spinner label={strings.LoadingText} />;
+    }
     let reportOptions = this.getReportOptions();
     let webPartTitleText = this.props.title;
     let sections = [];
@@ -91,7 +96,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
             <div className={styles.column4}>
               <Dropdown
                 onChanged={this.onReportChanged}
-                defaultSelectedKey={this.state.selectedReport ? this.state.selectedReport.toString() : null}
+                defaultSelectedKey='0'
                 options={reportOptions}
                 disabled={reportOptions.length === 0} />
             </div>
@@ -116,8 +121,8 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
   }
 
   private getReportOptions(): IDropdownOption[] {
-    let reportOptions: IDropdownOption[] = this.state.reports.map(report => ({
-      key: report.toString(),
+    let reportOptions: IDropdownOption[] = this.state.reports.map((report, idx) => ({
+      key: `${idx}`,
       text: report.toString(),
       data: report,
     }));

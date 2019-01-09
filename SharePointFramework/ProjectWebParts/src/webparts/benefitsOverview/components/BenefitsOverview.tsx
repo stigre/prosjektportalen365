@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styles from './BenefitsOverview.module.scss';
+import { DisplayMode } from '@microsoft/sp-core-library';
 import { WebPartTitle } from "@pnp/spfx-controls-react/lib/WebPartTitle";
 import { IBenefitsOverviewProps } from './IBenefitsOverviewProps';
 
@@ -11,9 +12,9 @@ export default class BenefitsOverview extends React.Component<IBenefitsOverviewP
           <div className={styles.row}>
             <div className={styles.column}>
               <WebPartTitle
-                displayMode={this.props.displayMode}
+                displayMode={DisplayMode.Read}
                 title={this.props.title}
-                updateProperty={this.props.updateTitle} />
+                updateProperty={_title => {}} />
             </div>
           </div>
         </div>
