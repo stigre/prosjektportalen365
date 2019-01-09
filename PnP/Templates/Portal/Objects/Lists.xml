@@ -1,0 +1,7 @@
+<pnp:Lists xmlns:pnp="http://schemas.dev.office.com/PnP/2018/05/ProvisioningSchema">
+    <pnp:ListInstance Title="Prosjekter" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/Prosjekter" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" ContentTypesEnabled="true" RemoveExistingContentTypes="true" EnableFolderCreation="false" DefaultDisplayFormUrl="{site}/Lists/Prosjekter/DispForm.aspx" DefaultEditFormUrl="{site}/Lists/Prosjekter/EditForm.aspx" DefaultNewFormUrl="{site}/Lists/Prosjekter/NewForm.aspx" ImageUrl="/_layouts/15/images/itgen.png?rev=45" IrmExpire="false" IrmReject="false" IsApplicationList="false" ValidationFormula="" ValidationMessage="">
+        <pnp:ContentTypeBindings>
+            <pnp:ContentTypeBinding ContentTypeID="0x0100805E9E4FEAAB4F0EABAB2600D30DB70C" Default="true" />
+        </pnp:ContentTypeBindings>
+    </pnp:ListInstance>
+</pnp:Lists>

@@ -3,6 +3,9 @@
     <pnp:Preferences></pnp:Preferences>
     <pnp:Templates ID="CONTAINER-TEMPLATE-PP-PORTAL">
         <pnp:ProvisioningTemplate ID="TEMPLATE-PP-PORTAL" Version="1" BaseSiteTemplate="GROUP#0" Scope="RootSite">
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/SiteFields.xml" />
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/ContentTypes.xml" />
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists.xml" />
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/RegionalSettings.xml" />
         </pnp:ProvisioningTemplate>
     </pnp:Templates>
