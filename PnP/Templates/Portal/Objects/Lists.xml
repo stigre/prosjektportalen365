@@ -4,4 +4,9 @@
             <pnp:ContentTypeBinding ContentTypeID="0x0100805E9E4FEAAB4F0EABAB2600D30DB70C" Default="true" />
         </pnp:ContentTypeBindings>
     </pnp:ListInstance>
+    <pnp:ListInstance Title="Prosjektstatus" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/Prosjektstatus" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0" ContentTypesEnabled="true" RemoveExistingContentTypes="true" EnableFolderCreation="false" DefaultDisplayFormUrl="{site}/Lists/Prosjektstatus/DispForm.aspx" DefaultEditFormUrl="{site}/Lists/Prosjektstatus/EditForm.aspx" DefaultNewFormUrl="{site}/Lists/Prosjektstatus/NewForm.aspx" ImageUrl="/_layouts/15/images/itgen.png?rev=45" IrmExpire="false" IrmReject="false" IsApplicationList="false" ValidationFormula="" ValidationMessage="">
+        <pnp:ContentTypeBindings>
+            <pnp:ContentTypeBinding ContentTypeID="0x010022252E35737A413FB56A1BA53862F6D5" Default="true" />
+        </pnp:ContentTypeBindings>
+    </pnp:ListInstance>
 </pnp:Lists>

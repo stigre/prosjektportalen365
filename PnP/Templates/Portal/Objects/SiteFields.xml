@@ -1,7 +1,6 @@
 <pnp:SiteFields xmlns:pnp="http://schemas.dev.office.com/PnP/2018/05/ProvisioningSchema">
     <Field Type="Currency" DisplayName="Prognose for prosjektet" Description="" Min="0" Decimals="0" LCID="1044" Group="Prosjektportalenkolonner" ID="{9076c206-ca80-4e17-b6f4-6fa3b90c421a}" StaticName="GtProjectForecast" Name="GtProjectForecast" />
     <Field ID="{b1958607-cd56-4ecb-9ad7-65fb7d3c22c7}" Name="GtStatusGainAchievement" DisplayName="Status gevinstoppnåelse" Type="Choice" Group="Prosjektportalenkolonner" Description="" Format="RadioButtons" StaticName="GtStatusGainAchievement" AllowDeletion="TRUE">
-        <Default>Ikke påbegynt</Default>
         <CHOICES>
             <CHOICE>Ikke påbegynt</CHOICE>
             <CHOICE>Foran plan</CHOICE>
@@ -291,4 +290,20 @@
     <Field ID="{e39c32db-a7da-4c93-9369-8aa5a7bde92d}" Name="GtStartDate" DisplayName="Startdato" Type="DateTime" Group="Prosjektportalenkolonner" Description="" Format="DateOnly" StaticName="GtStartDate" />
     <Field ID="{733a47e1-4465-41c0-89e3-037f9a65c403}" Name="GtStatusQualityComment" DisplayName="Kommentar, kvalitet" Type="Note" Group="Prosjektportalenkolonner" Description="Kommentar til status kvalitet angitt over. Hva er kvaliteten på leveransene til prosjektet og om det må gjøres endringer i spesifikasjoner for å nå prosjektets fremdrifts- eller økonomimål" NumLines="3" UnlimitedLengthInDocumentLibrary="TRUE" AppendOnly="FALSE" StaticName="GtStatusQualityComment" />
     <Field ID="{fba7ced6-9970-4b14-ab9c-7c809310d86d}" Name="GtGroupId" DisplayName="Gruppe ID" Type="Text" Group="Prosjektportalenkolonner" Description="" StaticName="GtGroupId" ShowInNewForm="FALSE" ShowInEditForm="FALSE" ShowInDisplayForm="FALSE" />
+    <Field ID="{86673e07-181e-4521-843c-b687d86a6f85}" Name="GtMonthChoice" DisplayName="Måned" Type="Choice" Group="Prosjektportalenkolonner" Description="" Format="RadioButtons" StaticName="GtMonthChoice" AllowDeletion="TRUE">
+        <CHOICES>
+            <CHOICE>Januar</CHOICE>
+            <CHOICE>Februar</CHOICE>
+            <CHOICE>Mars</CHOICE>
+            <CHOICE>April</CHOICE>
+            <CHOICE>Mai</CHOICE>
+            <CHOICE>Juni</CHOICE>
+            <CHOICE>Juli</CHOICE>
+            <CHOICE>August</CHOICE>
+            <CHOICE>September</CHOICE>
+            <CHOICE>Oktober</CHOICE>
+            <CHOICE>November</CHOICE>
+            <CHOICE>Desember</CHOICE>
+        </CHOICES>
+    </Field>
 </pnp:SiteFields>
