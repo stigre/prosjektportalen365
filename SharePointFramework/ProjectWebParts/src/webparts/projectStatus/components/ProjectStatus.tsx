@@ -80,7 +80,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
             <div className={styles.column4}>
               <Dropdown
                 onChanged={this.onReportChanged}
-                defaultSelectedKey={this.state.selectedReport ? this.state.selectedReport.item.Id : null}
+                defaultSelectedKey={this.state.selectedReport ? this.state.selectedReport.toString() : null}
                 options={reportOptions}
                 disabled={reportOptions.length === 0} />
             </div>
@@ -106,7 +106,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
 
   private getReportOptions(): IDropdownOption[] {
     let reportOptions: IDropdownOption[] = this.state.reports.map(report => ({
-      key: report.item.Id,
+      key: report.toString(),
       text: report.toString(),
       data: report,
     }));

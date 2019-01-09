@@ -11,7 +11,12 @@
         .column12 {
             @include ms-Grid-col;
             @include ms-sm12;
-        }           
+        }            
+
+        .column11 {
+            @include ms-Grid-col;
+            @include ms-sm11;
+        }         
 
         .column10 {
             @include ms-Grid-col;
@@ -33,9 +38,19 @@
             @include ms-sm4;
         }
 
+        .column3 {
+            @include ms-Grid-col;
+            @include ms-sm3;
+        }
+
         .column2 {
             @include ms-Grid-col;
             @include ms-sm2;
+        }
+
+        .column1 {
+            @include ms-Grid-col;
+            @include ms-sm1;
         }
     }
     .statusElementIcon {

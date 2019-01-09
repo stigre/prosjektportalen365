@@ -17,8 +17,11 @@ export default class StatusPropertySection extends StatusSectionBase<IStatusProp
             <div className={styles.statusPropertySection}>
                 <div className={styles.container}>
                     <div className={styles.row}>
-                        <div className={styles.column12}>
+                        <div className={`${styles.statusPropertySectionHeader} ${styles.column12}`}>
                             <StatusElement {...this.props.headerProps} iconColumnWidth='column1' bodyColumnWidth='column11' />
+                        </div>
+                        <div className={`${styles.statusPropertySectionFields} ${styles.column12}`}>
+                            {super.renderFields()}
                         </div>
                     </div>
                 </div>

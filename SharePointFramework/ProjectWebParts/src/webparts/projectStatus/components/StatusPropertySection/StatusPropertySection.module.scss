@@ -5,7 +5,21 @@
         @include ms-Grid;
 
         .row {            
-            @include ms-Grid-row;             
+            @include ms-Grid-row;      
+            
+            .statusPropertySectionHeader {
+                width: auto;
+            }
+
+            .statusPropertySectionFields {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -ms-flex-wrap: nowrap;
+                flex-wrap: nowrap;
+                -ms-flex-pack: distribute;
+                justify-content: space-around;
+            }
 
             .column12 {
                 @include ms-Grid-col;
