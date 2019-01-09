@@ -1,5 +1,5 @@
 import { override } from '@microsoft/decorators';
-import { BaseTask, IBaseTaskParams } from '../BaseTask';
+import { BaseTask, IBaseTaskParams, BaseTaskError } from '../BaseTask';
 import { sp, ClientSidePage } from '@pnp/sp';
 import { Logger, LogLevel } from '@pnp/logging';
 import { GetSetupPagesConfiguration, ISetupPagesConfiguration } from './SetupPagesConfiguration';
@@ -12,15 +12,19 @@ export class SetupPages extends BaseTask {
     @override
     public async execute(params: IBaseTaskParams) {
         super.execute(params);
-        Logger.log({ message: '(ProjectSetupApplicationCustomizer) SetupPages/execute', level: LogLevel.Info });
-        let lists = await sp.web.lists.select('Title', 'Id').get();
-        let listsMap = lists.reduce((map, list) => {
-            map[list.Title] = list.Id;
-            return map;
-        }, {});
-        Logger.log({ message: '(ProjectSetupApplicationCustomizer) SetupPages/execute: Retrieved lists', data: {}, level: LogLevel.Info });
-        const config = GetSetupPagesConfiguration(listsMap);
-        await this.createPages(config);
+        try {
+            Logger.log({ message: '(ProjectSetupApplicationCustomizer) SetupPages/execute', level: LogLevel.Info });
+            let lists = await sp.web.lists.select('Title', 'Id').get();
+            let listsMap = lists.reduce((map, list) => {
+                map[list.Title] = list.Id;
+                return map;
+            }, {});
+            Logger.log({ message: '(ProjectSetupApplicationCustomizer) SetupPages/execute: Retrieved lists', data: {}, level: LogLevel.Info });
+            const config = GetSetupPagesConfiguration(listsMap);
+            await this.createPages(config);
+        } catch (err) {
+            throw new BaseTaskError('SetupPages', 'Unknown error');
+        }
     }
 
     /**
