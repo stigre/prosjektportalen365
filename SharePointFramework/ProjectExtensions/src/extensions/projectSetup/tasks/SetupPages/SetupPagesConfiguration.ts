@@ -33,7 +33,7 @@ export function GetSetupPagesConfiguration(listsMap: { [key: string]: string }):
                                 phaseField: "Fase",
                                 automaticReload: true,
                                 confirmPhaseChange: true,
-                                reloadTimeout: 2,
+                                reloadTimeout: 0,
                                 updateViewsDocuments: false,
                                 updateViewsTasks: false,
                                 updateViewsRisks: false,
@@ -85,7 +85,11 @@ export function GetSetupPagesConfiguration(listsMap: { [key: string]: string }):
                     Columns: [
                         {
                             Factor: 12,
-                            Controls: [new ClientSideWebpart('Prosjektstatus', null, {}, '681ad0dc-ddb5-4dba-a5d6-a42f6d1c90a6')]
+                            Controls: [new ClientSideWebpart('Prosjektstatus', null, {
+                                "title": "Prosjektstatus",
+                                "reportListName": "Prosjektstatus",
+                                "reportCtId": "0x010022252E35737A413FB56A1BA53862F6D5",
+                            }, '681ad0dc-ddb5-4dba-a5d6-a42f6d1c90a6')]
                         },
                     ]
                 }
