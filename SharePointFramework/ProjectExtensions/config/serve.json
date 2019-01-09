@@ -9,7 +9,7 @@
   },
   "serveConfigurations": {
     "default": {
-      "pageUrl": "https://olemp.sharepoint.com/sites/Prosjektportalen-O365-00232",
+      "pageUrl": "https://olemp.sharepoint.com/sites/Prosjektportalen-O365-00262",
       "customActions": {
         "ce34553d-ab47-4107-8dd1-e980d953996d": {
           "location": "ClientSideExtension.ApplicationCustomizer",
@@ -18,7 +18,7 @@
       }
     },
     "projectSetup": {
-      "pageUrl": "https://olemp.sharepoint.com/sites/Prosjektportalen-O365-00232",
+      "pageUrl": "https://olemp.sharepoint.com/sites/Prosjektportalen-O365-00262",
       "customActions": {
         "ce34553d-ab47-4107-8dd1-e980d953996d": {
           "location": "ClientSideExtension.ApplicationCustomizer",

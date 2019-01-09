@@ -16,6 +16,7 @@ dependencies:
   '@types/webpack-env': 1.13.1
   react: 16.3.2
   react-dom: 16.3.2
+  sp-hubsite-service: 0.0.1
 devDependencies:
   '@microsoft/sp-build-web': 1.7.1
   '@microsoft/sp-module-interfaces': 1.7.1
@@ -9862,6 +9863,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
+  /sp-hubsite-service/0.0.1:
+    dev: false
+    resolution:
+      integrity: sha512-Y4pkoI4W+X78DcWF/aG4Xqru3pwLHFnD3jz+Fj4TwQC9i/VRepzFugN5B3kcu91bc7I0Z/HmRZ/8O90FazS17Q==
   /sp-pnp-js/3.0.10:
     dependencies:
       '@microsoft/microsoft-graph-types': 1.1.0
@@ -11663,6 +11668,7 @@ specifiers:
   node-fetch: ^2.3.0
   react: 16.3.2
   react-dom: 16.3.2
+  sp-hubsite-service: ^0.0.1
   spfx-pkgdeploy: ^0.2.1
   tslint: 5.9.1
   tslint-microsoft-contrib: ^6.0.0
