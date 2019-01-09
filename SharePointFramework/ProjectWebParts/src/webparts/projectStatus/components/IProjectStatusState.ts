@@ -3,6 +3,8 @@ import ProjectStatusReport from "../models/ProjectStatusReport";
 
 export interface IProjectStatusState {
     showNewStatusReportModal?: boolean;
-    fields: INewStatusReportModalField[];
+    reportFields: INewStatusReportModalField[];
+    entityFields: any[];
     reports: ProjectStatusReport[];
+    selectedReport: ProjectStatusReport;
 }

@@ -4,4 +4,6 @@ import ProjectStatusReport from "../../models/ProjectStatusReport";
 export interface IStatusSectionBaseProps {
     report: ProjectStatusReport;
     context: WebPartContext;
+    fieldNames?: string[];
+    entityFields?: string[];
 }

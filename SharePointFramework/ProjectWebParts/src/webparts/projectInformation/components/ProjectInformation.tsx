@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styles from './ProjectInformation.module.scss';
+import { DisplayMode } from '@microsoft/sp-core-library';
 import { IProjectInformationProps } from './IProjectInformationProps';
 import { IProjectInformationState } from './IProjectInformationState';
 import { WebPartTitle } from "@pnp/spfx-controls-react/lib/WebPartTitle";
@@ -13,6 +14,11 @@ import SpEntityPortalService from 'sp-entityportal-service';
 import * as strings from 'ProjectInformationWebPartStrings';
 
 export default class ProjectInformation extends React.Component<IProjectInformationProps, IProjectInformationState> {
+  public static defaultProps: Partial<IProjectInformationProps> = {
+    displayMode: DisplayMode.Read,
+    updateTitle: () => { },
+  };
+
   constructor(props: IProjectInformationProps) {
     super(props);
     this.state = { properties: [], isLoading: true };

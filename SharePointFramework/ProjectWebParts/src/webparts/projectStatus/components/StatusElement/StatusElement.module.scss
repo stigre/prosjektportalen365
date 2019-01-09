@@ -1,6 +1,8 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
 .statusElement {
+    margin-top: 20px;
+    height: 150px;
     @include ms-Grid;
 
     .row {            
@@ -36,13 +38,23 @@
             @include ms-sm2;
         }
     }
-
-    .statusElementLabel {
-        font-size: 16px;
-        font-weight: 400;
-    }
-
     .statusElementIcon {
         font-size: 30px;
+    }
+
+    .statusElementBody {
+        .statusElementLabel {
+            font-size: 16px;
+            font-weight: 400;
+        }
+    
+        .statusElementValue {
+            font-size: 18px;
+            font-weight: 600;
+        }
+    
+        .statusElementComment {
+            font-size: 12px;
+        }    
     }
 }

@@ -4,6 +4,4 @@ import { IProjectStatusWebPartProps } from '../ProjectStatusWebPart';
 
 export interface IProjectStatusProps extends IProjectStatusWebPartProps {
     context: WebPartContext;
-    displayMode: DisplayMode;
-    updateTitle: (title: string) => void;
 }
