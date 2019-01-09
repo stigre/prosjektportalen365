@@ -1,23 +1,25 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
-import {
-  BaseClientSideWebPart,
-  IPropertyPaneConfiguration,
-  PropertyPaneTextField
-} from '@microsoft/sp-webpart-base';
-
+import { BaseClientSideWebPart, IPropertyPaneConfiguration } from '@microsoft/sp-webpart-base';
 import * as strings from 'BenefitsOverviewWebPartStrings';
 import BenefitsOverview from './components/BenefitsOverview';
 import { IBenefitsOverviewProps } from './components/IBenefitsOverviewProps';
 
-export interface IBenefitsOverviewWebPartProps { }
+export interface IBenefitsOverviewWebPartProps { 
+  title: string;
+}
 
 export default class BenefitsOverviewWebPart extends BaseClientSideWebPart<IBenefitsOverviewWebPartProps> {
 
   public render(): void {
     const element: React.ReactElement<IBenefitsOverviewProps> = React.createElement(
-      BenefitsOverview, {}
+      BenefitsOverview, {
+        ...this.properties,
+        displayMode: this.displayMode,
+        updateTitle: (title: string) => this.properties.title = title,
+        context: this.context,
+      }
     );
 
     ReactDom.render(element, this.domElement);

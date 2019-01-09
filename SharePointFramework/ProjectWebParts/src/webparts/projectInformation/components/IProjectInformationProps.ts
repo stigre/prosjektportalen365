@@ -5,5 +5,6 @@ import { IProjectInformationWebPartProps } from '../ProjectInformationWebPart';
 export interface IProjectInformationProps extends IProjectInformationWebPartProps {
   displayMode: DisplayMode;
   updateTitle: (title: string) => void;
-  context?: WebPartContext;
+  context: WebPartContext;
+  hideEditPropertiesButton?: boolean;
 }

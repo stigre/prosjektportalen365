@@ -1,0 +1,48 @@
+@import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
+
+.statusElement {
+    @include ms-Grid;
+
+    .row {            
+        @include ms-Grid-row;             
+
+        .column12 {
+            @include ms-Grid-col;
+            @include ms-sm12;
+        }           
+
+        .column10 {
+            @include ms-Grid-col;
+            @include ms-sm10;
+        }
+
+        .column8 {
+            @include ms-Grid-col;
+            @include ms-sm8;
+        }
+
+        .column6 {
+            @include ms-Grid-col;
+            @include ms-sm6;
+        }
+
+        .column4 {
+            @include ms-Grid-col;
+            @include ms-sm4;
+        }
+
+        .column2 {
+            @include ms-Grid-col;
+            @include ms-sm2;
+        }
+    }
+
+    .statusElementLabel {
+        font-size: 16px;
+        font-weight: 400;
+    }
+
+    .statusElementIcon {
+        font-size: 30px;
+    }
+}

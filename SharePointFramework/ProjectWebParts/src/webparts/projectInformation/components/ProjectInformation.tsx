@@ -28,9 +28,6 @@ export default class ProjectInformation extends React.Component<IProjectInformat
   }
 
   public render(): React.ReactElement<IProjectInformationProps> {
-    if (this.state.isLoading) {
-      return <Spinner />;
-    }
     return (
       <div className={styles.projectInformation}>
         <div className={styles.container}>
@@ -40,11 +37,19 @@ export default class ProjectInformation extends React.Component<IProjectInformat
                 displayMode={this.props.displayMode}
                 title={this.props.title}
                 updateProperty={this.props.updateTitle} />
-              {this.renderProperties()}
-              <DefaultButton
-                text={strings.EditPropertiesText}
-                href={this.state.editFormUrl}
-                iconProps={{ iconName: 'Edit' }} />
+              {this.state.isLoading
+                ? <Spinner />
+                : (
+                  <div>
+                    {this.renderProperties()}
+                    <div hidden={this.props.hideEditPropertiesButton}>
+                      <DefaultButton
+                        text={strings.EditPropertiesText}
+                        href={this.state.editFormUrl}
+                        iconProps={{ iconName: 'Edit' }} />
+                    </div>
+                  </div>
+                )}
             </div>
           </div>
         </div>

@@ -7,9 +7,11 @@ import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import NewStatusReportModal from './NewStatusReportModal';
+import SummarySection from './SummarySection';
 import HubSiteService, { IHubSite } from 'sp-hubsite-service';
 import ProjectStatusReport from '../models/ProjectStatusReport';
 import * as strings from 'ProjectStatusWebPartStrings';
+
 
 export default class ProjectStatus extends React.Component<IProjectStatusProps, IProjectStatusState> {
   private hubSite: IHubSite;
@@ -39,6 +41,9 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
 
   public render(): React.ReactElement<IProjectStatusProps> {
     const reportOptions = this.getReportOptions();
+    const sections = [
+      <SummarySection context={this.props.context} report={null} />
+    ];
 
     return (
       <div className={styles.projectStatus}>
@@ -57,10 +62,10 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
                 iconProps={{ iconName: 'NewFolder' }} />
             </div>
             <div className={styles.column4}>
-              <Dropdown
-                label={strings.PickReportText}
-                options={reportOptions}
-                disabled={reportOptions.length === 0} />
+              <Dropdown options={reportOptions} disabled={reportOptions.length === 0} />
+            </div>
+            <div className={`${styles.sections} ${styles.column12}`}>
+              {sections}
             </div>
           </div>
         </div>
