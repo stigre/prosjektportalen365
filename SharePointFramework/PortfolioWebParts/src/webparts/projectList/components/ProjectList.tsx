@@ -8,9 +8,12 @@ import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
 import ProjectCard from './ProjectCard/ProjectCard';
-import { autobind } from '@uifabric/utilities/lib';
+import { autobind, values } from '@uifabric/utilities/lib';
+import { sp, SearchQuery, QueryPropertyValueType, SearchQueryBuilder, ISearchQueryBuilder } from '@pnp/sp';
+import { SPHttpClient, SPHttpClientResponse, SPHttpClientConfiguration } from '@microsoft/sp-http';
 
 export default class ProjectList extends React.Component<IProjectListProps, IProjectListState> {
+
 
   constructor(props) {
     super(props);
@@ -21,8 +24,8 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
     };
   }
 
-  public componentDidMount() {
-    let projectData: IProjectListData = this.fetchData();
+  public async componentDidMount() {
+    let projectData: IProjectListData = await this.fetchData();
     this.setState({ data: projectData, isLoading: false, searchTerm: undefined });
   }
 
@@ -55,7 +58,7 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
               project={project}
               onClickHref={project.Url}
               showProjectInfo={e => this.setState({ showProjectInfo: project })}
-              rootUrl={this.props.rootUrl}
+              absoluteUrl={this.props.absoluteUrl}
             />
           ))}
       </div>
@@ -83,52 +86,48 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
     this.setState({ searchTerm: searchTerm.toLowerCase() });
   }
 
-  private fetchData() {
+  private async fetchData() {
     const testProjects: ProjectListModel[] = [];
-    let logo = `${this.props.rootUrl}/SiteAssets/pp/img/ICO-Global-Project-11.png`;
+    let id = await this.getHubId();
+    let queryText = `DepartmentId:{${id}} contentclass:STS_Site`;
 
-    let project1: ProjectListModel = {
-      Logo: logo,
-      Manager: 'stian@pzlpart.onmicrosoft.com|Stian Grepperud',
-      Owner: 'stian@pzlpart.onmicrosoft.com|Stian Grepperud',
-      Phase: 'Konsept',
-      ServiceArea: 'N/A',
-      Title: `Stian's prosjekt`,
-      Type: 'Type',
-      Url: '/sites/prosjekt-1',
-      Views: 5,
-      RawObject: undefined
+    const _searchQuerySettings: SearchQuery = {
+      TrimDuplicates: false,
+      RowLimit: 500,
+      SelectProperties: ['Title', 'Path', 'DepartmentId', 'SiteId', 'SiteLogo'],
+      Properties: [{
+        Name: "EnableDynamicGroups",
+        Value: {
+          BoolVal: true,
+          QueryPropertyValueTypeIndex: QueryPropertyValueType.BooleanType
+        }
+      }
+      ]
     };
 
-    let project2: ProjectListModel = {
-      Logo: logo,
-      Manager: 'stian@pzlpart.onmicrosoft.com|Stian Grepperud',
-      Owner: 'stian@pzlpart.onmicrosoft.com|Stian Grepperud',
-      Phase: 'Gjennomføre',
-      ServiceArea: 'N/A',
-      Title: 'Et testprosjekt',
-      Type: 'Type',
-      Url: '/sites/prosjekt-2',
-      Views: 36,
-      RawObject: undefined
-    };
+    const query: ISearchQueryBuilder = SearchQueryBuilder(queryText, _searchQuerySettings);
+    let result = await sp.search(query);
+    let associatedSites = result.PrimarySearchResults.filter(site => id !== site.SiteId);
 
-    let project3: ProjectListModel = {
-      Logo: logo,
-      Manager: 'stian@pzlpart.onmicrosoft.com|Stian Grepperud',
-      Owner: 'stian@pzlpart.onmicrosoft.com|Stian Grepperud',
-      Phase: 'Planlegge',
-      ServiceArea: 'N/A',
-      Title: 'Koseprosjekt',
-      Type: 'Type',
-      Url: '/sites/prosjekt-3',
-      Views: 589,
-      RawObject: undefined
-    };
+    associatedSites.forEach(site => {
+      let logo = site.SiteLogo;
+      if (site.SiteLogo.indexOf('GetGroupImage') > 0) logo = undefined;
 
-    testProjects.push(project1);
-    testProjects.push(project2);
-    testProjects.push(project3);
+      let project: ProjectListModel = {
+        Logo: logo,
+        Manager: 'stian@pzlpart.onmicrosoft.com|Stian Grepperud',
+        Owner: 'stian@pzlpart.onmicrosoft.com|Stian Grepperud',
+        Phase: 'Planlegge',
+        ServiceArea: 'N/A',
+        Title: site.Title,
+        Type: 'N/A',
+        Url: site.Path,
+        Views: 5,
+        RawObject: undefined
+      };
+
+      testProjects.push(project);
+    });
 
     const testData: IProjectListData = {
       projects: testProjects
@@ -137,6 +136,26 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
     return testData;
   }
 
+  private getHubId() {
+    let rootUrl = this.props.absoluteUrl.replace(this.props.serverRelativeUrl, '');
+    let url = `${rootUrl}/_api/HubSites?$filter=SiteUrl eq '${this.props.absoluteUrl}'`;
+    let id: string = '';
+
+    return this.props.context.spHttpClient.get(url, SPHttpClient.configurations.v1, {
+      headers: {
+        'Accept': 'application/json;odata=nometadata',
+        'odata-version': '',
+      }
+    }).then((response: SPHttpClientResponse) => {
+      return response.json();
+    }).then((responseJSON) => {
+      let responseItems = responseJSON.value;
+      if (responseItems.length > 0) {
+        id = responseItems[0].ID;
+      }
+      return id;
+    });
+  }
 
 }
 

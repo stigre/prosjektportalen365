@@ -4,8 +4,7 @@ interface IProjectCardProps {
   project: ProjectListModel;
   onClickHref: string;
   showProjectInfo: (evt: any) => void;
-  rootUrl: string;
-  // fields: { [key: string]: string };
+  absoluteUrl: string;
 }
 
 export default IProjectCardProps;
