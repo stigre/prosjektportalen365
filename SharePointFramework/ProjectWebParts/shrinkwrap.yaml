@@ -18,7 +18,7 @@ dependencies:
   office-ui-fabric-react: 5.134.0
   react: 16.3.2
   react-dom: 16.3.2
-  sp-entityportal-service: 0.0.1
+  sp-entityportal-service: 0.0.2
   sp-hubsite-service: 0.0.2
   spfx-jsom: 0.6.0
   string-format: 2.0.0
@@ -10089,14 +10089,14 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
-  /sp-entityportal-service/0.0.1:
+  /sp-entityportal-service/0.0.2:
     dependencies:
       '@pnp/common': 1.2.7
       '@pnp/odata': /@pnp/odata/1.2.7/@pnp!common@1.2.7
       '@pnp/sp': /@pnp/sp/1.2.7/376206e9a42dc3b8c8d92c54ac5d29c4
     dev: false
     resolution:
-      integrity: sha512-iZ/kTNfQEK/2rh4V1MF41RfeNqKzQUN6UUaV1mbk9jYwVtBAczXdHSINh6o/mmV7fid2S0b6Oh6KXkrYWUPzTA==
+      integrity: sha512-Aj+w4k8dPx2ifySlO/NdJl/2v7qghqS6n3l2EseaLFN4D07DAVo3qyHLuYt2Ih7FS22lYsCxADdYyTs9l120sA==
   /sp-hubsite-service/0.0.2:
     dev: false
     resolution:
@@ -11911,7 +11911,7 @@ specifiers:
   office-ui-fabric-react: 5.134.0
   react: 16.3.2
   react-dom: 16.3.2
-  sp-entityportal-service: 0.0.1
+  sp-entityportal-service: ^0.0.2
   sp-hubsite-service: ^0.0.2
   spfx-jsom: ^0.6.0
   spfx-pkgdeploy: ^0.2.1
