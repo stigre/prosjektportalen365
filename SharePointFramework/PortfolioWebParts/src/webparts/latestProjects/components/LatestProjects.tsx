@@ -42,7 +42,7 @@ export default class LatestProjects extends React.Component<ILatestProjectsProps
     if (sites.length > 0) {
       return sites.map(site => {
         let options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-        let created = new Date(site.Created).toLocaleString("nb-NO", options);
+        let created = new Date(site['Created']).toLocaleString("nb-NO", options);
         return (
           <div className={styles.linkItem}>
             <a className={styles.projectLink} href={site.Path}>{site.Title}</a>
@@ -81,7 +81,7 @@ export default class LatestProjects extends React.Component<ILatestProjectsProps
 
     const query: ISearchQueryBuilder = SearchQueryBuilder(queryText, _searchQuerySettings);
     let result = await sp.search(query);
-    let associatedSites = result.PrimarySearchResults.filter(site => id !== site.SiteId);
+    let associatedSites = result.PrimarySearchResults.filter(site => id !== site['SiteId']);
 
     this.setState({
       sites: associatedSites,
