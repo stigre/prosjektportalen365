@@ -3,7 +3,7 @@ import { Logger, LogLevel } from '@pnp/logging';
 import styles from './ProjectStatus.module.scss';
 import { DisplayMode } from '@microsoft/sp-core-library';
 import { IProjectStatusProps } from './IProjectStatusProps';
-import { IProjectStatusState } from './IProjectStatusState';
+import { IProjectStatusState, IProjectStatusData } from './IProjectStatusState';
 import { WebPartTitle } from "@pnp/spfx-controls-react/lib/WebPartTitle";
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
@@ -28,32 +28,75 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
   }
 
   public async componentDidMount() {
-    const { reportFields, entityFields, entityItem, reports } = await this.fetchData();
-    this.setState({
-      reportFields,
-      entityFields,
-      entityItem,
-      reports,
-      selectedReport: reports[0],
-      isLoading: false,
-    });
+    const data = await this.fetchData();
+    this.setState({ data, selectedReport: data.reports[0], isLoading: false });
   }
 
   public render(): React.ReactElement<IProjectStatusProps> {
-    if (this.state.isLoading) {
+    const { isLoading, data, selectedReport, showNewStatusReportModal } = this.state;
+
+    if (isLoading) {
       return <Spinner label={strings.LoadingText} />;
     }
     let reportOptions = this.getReportOptions();
     let webPartTitleText = this.props.title;
+    if (selectedReport) {
+      webPartTitleText = `${this.props.title} (${selectedReport.toString()})`;
+    }
+
+    return (
+      <div className={styles.projectStatus}>
+        <div className={styles.container}>
+          <div className={`${styles.projectStatusTopSection} ${styles.row}`}>
+            <div className={`${styles.title} ${styles.column12}`}>
+              <WebPartTitle
+                displayMode={DisplayMode.Read}
+                title={webPartTitleText}
+                updateProperty={_title => { }} />
+            </div>
+            <div className={`${styles.projectStatusActions} ${styles.column8}`}>
+              <DefaultButton
+                text={strings.NewStatusReportModalHeaderText}
+                onClick={this.onOpenNewStatusReportModal}
+                iconProps={{ iconName: 'NewFolder' }} />
+              <DefaultButton
+                disabled={!selectedReport}
+                text={strings.EditReportButtonText}
+                href={this.getSelectedReportEditFormUrl()}
+                iconProps={{ iconName: 'Edit' }} />
+            </div>
+            <div className={styles.column4}>
+              <Dropdown
+                onChanged={this.onReportChanged}
+                defaultSelectedKey='0'
+                options={reportOptions}
+                disabled={reportOptions.length === 0} />
+            </div>
+            <div className={`${styles.sections} ${styles.column12}`}>
+              {this.renderSections()}
+            </div>
+          </div>
+        </div>
+        {showNewStatusReportModal && (
+          <NewStatusReportModal
+            fields={data.reportFields}
+            onSave={this.onSaveReport}
+            onDismiss={this.onDismissNewStatusReportModal} />
+        )}
+      </div>
+    );
+  }
+
+  private renderSections() {
+    const baseProps = {
+      context: this.props.context,
+      report: this.state.selectedReport,
+      entityFields: this.state.data.entityFields,
+      entityItem: this.state.data.entityItem,
+    };
+    const data = this.state.selectedReport.item;
     let sections = [];
     if (this.state.selectedReport) {
-      const baseProps = {
-        context: this.props.context,
-        report: this.state.selectedReport,
-        entityFields: this.state.entityFields,
-        entityItem: this.state.entityItem,
-      };
-      const data = this.state.selectedReport.item;
       sections.push(
         <SummarySection
           entity={this.props.entity} {...baseProps} />,
@@ -74,45 +117,16 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
           headerProps={{ label: 'Gevinstoppnåelse', value: data.GtStatusGainAchievement, comment: data.GtStatusGainAchievementComment, iconName: 'Wines', iconSize: 50 }}
           {...baseProps} />,
       );
-      webPartTitleText = `${this.props.title} (${this.state.selectedReport.toString()})`;
     }
+    return sections;
+  }
 
-    return (
-      <div className={styles.projectStatus}>
-        <div className={styles.container}>
-          <div className={styles.row}>
-            <div className={styles.column12}>
-              <WebPartTitle
-                displayMode={DisplayMode.Read}
-                title={webPartTitleText}
-                updateProperty={_title => { }} />
-            </div>
-            <div className={styles.column8}>
-              <DefaultButton
-                text={strings.NewStatusReportModalHeaderText}
-                onClick={this.onOpenNewStatusReportModal}
-                iconProps={{ iconName: 'NewFolder' }} />
-            </div>
-            <div className={styles.column4}>
-              <Dropdown
-                onChanged={this.onReportChanged}
-                defaultSelectedKey='0'
-                options={reportOptions}
-                disabled={reportOptions.length === 0} />
-            </div>
-            <div className={`${styles.sections} ${styles.column12}`}>
-              {sections}
-            </div>
-          </div>
-        </div>
-        {this.state.showNewStatusReportModal && (
-          <NewStatusReportModal
-            fields={this.state.reportFields}
-            onSave={this.onSaveReport}
-            onDismiss={this.onDismissNewStatusReportModal} />
-        )}
-      </div>
-    );
+  private getSelectedReportEditFormUrl(): string {
+    const { selectedReport, data } = this.state;
+    if (selectedReport) {
+      return `${window.location.protocol}//${window.location.hostname}${data.reportEditFormUrl}?ID=${selectedReport.item.Id}&Source=${encodeURIComponent(window.location.href)}`;
+    }
+    return null;
   }
 
   @autobind
@@ -121,7 +135,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
   }
 
   private getReportOptions(): IDropdownOption[] {
-    let reportOptions: IDropdownOption[] = this.state.reports.map((report, idx) => ({
+    let reportOptions: IDropdownOption[] = this.state.data.reports.map((report, idx) => ({
       key: `${idx}`,
       text: report.toString(),
       data: report,
@@ -146,7 +160,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
     this.setState({ showNewStatusReportModal: false });
   }
 
-  private async fetchData() {
+  private async fetchData(): Promise<IProjectStatusData> {
     Logger.log({ message: '(ProjectStatus) fetchData: Fetching fields and reports', data: {}, level: LogLevel.Info });
     const { pageContext } = this.props.context;
     const { hubSiteId, groupId } = pageContext.legacyPageContext;
@@ -158,7 +172,16 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
       spEntityPortalService.GetEntityItemFieldValues(groupId),
       spEntityPortalService.GetEntityFields(),
     ]);
-    let reportFields = await this.hubSite.web.contentTypes.getById(this.props.reportCtId).fields.select('Title', 'InternalName', 'TypeAsString', 'Choices').filter(`(TypeAsString eq 'Note' or TypeAsString eq 'Text' or TypeAsString eq 'Choice') and InternalName ne 'Title' and InternalName ne 'GtGroupId'`).get();
+    let { DefaultEditFormUrl: reportEditFormUrl } = await this.reportList
+      .select('DefaultEditFormUrl')
+      .expand('DefaultEditFormUrl')
+      .get();
+    let reportFields = await this.hubSite.web.contentTypes
+      .getById(this.props.reportCtId)
+      .fields
+      .select('Title', 'InternalName', 'TypeAsString', 'Choices')
+      .filter(`(TypeAsString eq 'Note' or TypeAsString eq 'Text' or TypeAsString eq 'Choice') and InternalName ne 'Title' and InternalName ne 'GtGroupId'`)
+      .get();
     reportFields = reportFields.map(fld => ({
       title: fld.Title,
       fieldName: fld.InternalName,
@@ -167,6 +190,6 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
     }));
     let reports = await this.reportList.items.filter(`GtGroupId eq '${groupId}'`).get();
     reports = reports.map((r: any) => new ProjectStatusReport(r));
-    return { entityFields, entityItem, reportFields, reports };
+    return { entityFields, entityItem, reportFields, reportEditFormUrl, reports };
   }
 }

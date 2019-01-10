@@ -3,6 +3,7 @@ declare interface IProjectStatusWebPartStrings {
   SaveText: string;
   PickReportText: string;
   NewStatusReportModalHeaderText: string;
+  EditReportButtonText: string;
 }
 
 declare module 'ProjectStatusWebPartStrings' {

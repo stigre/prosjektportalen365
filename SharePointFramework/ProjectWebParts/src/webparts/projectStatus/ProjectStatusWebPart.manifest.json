@@ -22,7 +22,13 @@
       "properties": {
         "title": "Prosjektstatus",
         "reportListName": "Prosjektstatus",
-        "reportCtId": "0x010022252E35737A413FB56A1BA53862F6D5"
+        "reportCtId": "0x010022252E35737A413FB56A1BA53862F6D5",
+        "entity": {
+          "listName": "Prosjekter",
+          "contentTypeId": "0x0100805E9E4FEAAB4F0EABAB2600D30DB70C",
+          "fieldsGroupName": "Prosjektportalenkolonner",
+          "groupIdFieldName": "GtGroupId"
+        }
       }
     }
   ]

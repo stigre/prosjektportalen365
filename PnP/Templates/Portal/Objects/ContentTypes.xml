@@ -1,7 +1,7 @@
 <pnp:ContentTypes xmlns:pnp="http://schemas.dev.office.com/PnP/2018/05/ProvisioningSchema">
     <pnp:ContentType ID="0x0100805E9E4FEAAB4F0EABAB2600D30DB70C" Name="Prosjekt" Description="" Group="Prosjektportalen innholdstyper">
         <pnp:FieldRefs>
-            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="false" />
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" />
             <pnp:FieldRef ID="983d5ab3-0a6c-4f6a-a7b5-d34d52d73676" Name="GtProjectFinanceName" />
             <pnp:FieldRef ID="64d45745-0dd0-4c21-979b-67fb13748bb1" Name="GtProjectNumber" />
             <pnp:FieldRef ID="a59fe220-36c3-464a-8cfc-40d6d04debd2" Name="GtArchiveReference" />
@@ -23,6 +23,7 @@
     </pnp:ContentType>
     <pnp:ContentType ID="0x010022252E35737A413FB56A1BA53862F6D5" Name="Prosjektstatus" Description="" Group="Prosjektportalen innholdstyper">
         <pnp:FieldRefs>
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
             <pnp:FieldRef ID="86673e07-181e-4521-843c-b687d86a6f85" Name="GtMonthChoice" />
             <pnp:FieldRef ID="3e90aa95-4d32-4819-823f-10ae2fd412b5" Name="GtOverallStatus" />
             <pnp:FieldRef ID="1447ef51-8e9b-4d16-aa2a-526dc9f1539e" Name="GtStatusTime" />

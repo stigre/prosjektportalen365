@@ -10,6 +10,20 @@
     @include ms-Grid-row;
   }
 
+  .projectStatusTopSection {
+    width: auto;
+
+    .title {
+      margin: 0 0 20px 0;
+    }
+  }
+
+  .projectStatusActions {
+    >button { 
+      margin-right: 8px;
+    }
+  }
+
   .sections {
     margin-top: 25px;
   }
