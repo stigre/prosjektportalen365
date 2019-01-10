@@ -1,4 +1,5 @@
 import ProjectListModel from "../ProjectListModel";
+import Phase from "../../models/Phase";
 
 interface IProjectCardProps {
   project: ProjectListModel;

@@ -25,6 +25,7 @@ const ProjectCard = (props: IProjectCardProps): JSX.Element => {
     height: 140,
     width: 200
   };
+
   return (
     <DocumentCard
       className={styles.projectCard}
@@ -75,7 +76,7 @@ function getOwner(obj, rootUrl: string): IUserDetails {
 function getManager(obj, rootUrl: string): IUserDetails {
   let email = "";
   let name = strings.NotSet;
-  if (obj.Manager) [email, name] = obj.Owner.split("|");
+  if (obj.Manager) [email, name] = obj.Manager.split("|");
   const profileImageSrc = userPhoto(rootUrl, email);
   return { name, email, profileImageSrc };
 }
