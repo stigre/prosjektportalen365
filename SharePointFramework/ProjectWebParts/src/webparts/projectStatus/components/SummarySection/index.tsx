@@ -22,8 +22,8 @@ export default class SummarySection extends StatusSectionBase<ISummarySectionPro
                             <ProjectInformation
                                 title='Prosjektinformasjon'
                                 context={this.props.context}
-                                hideEditPropertiesButton={true}
-                                {...this.props.projectInformation} />
+                                entity={this.props.entity}
+                                hideEditPropertiesButton={true} />
                         </div>
                         <div className={styles.column6}>
                             <div className={styles.container}>
@@ -35,7 +35,7 @@ export default class SummarySection extends StatusSectionBase<ISummarySectionPro
                                         <StatusElement label='Fremdrift' value={data.GtStatusTime} comment={data.GtStatusTimeComment} iconName='AwayStatus' height={150} />
                                     </div>
                                     <div className={styles.column6}>
-                                        <StatusElement label='Økonomi' value={data.GtStatusBudget}  comment={data.GtStatusBudgetComment} iconName='Money' height={150} />
+                                        <StatusElement label='Økonomi' value={data.GtStatusBudget} comment={data.GtStatusBudgetComment} iconName='Money' height={150} />
                                     </div>
                                     <div className={styles.column6}>
                                         <StatusElement label='Kvalitet' value={data.GtStatusQuality} comment={data.GtStatusQualityComment} iconName='Equalizer' height={150} />

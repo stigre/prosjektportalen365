@@ -8,5 +8,4 @@ export interface IProjectPhasesProps extends IProjectPhasesWebPartProps {
   domElement: HTMLElement;
   web: Web;
   context: WebPartContext;
-  entityListName?: string;
 }

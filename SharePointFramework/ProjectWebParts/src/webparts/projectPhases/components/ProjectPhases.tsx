@@ -17,7 +17,6 @@ import HubSiteService from 'sp-hubsite-service';
 import SpEntityPortalService from 'sp-entityportal-service';
 
 export default class ProjectPhases extends React.Component<IProjectPhasesProps, IProjectPhasesState> {
-  public static defaultProps: Partial<IProjectPhasesProps> = { entityListName: 'Prosjekter' };
   private spEntityPortalService: SpEntityPortalService;
 
   /**
@@ -34,7 +33,7 @@ export default class ProjectPhases extends React.Component<IProjectPhasesProps, 
     if (this.props.phaseField) {
       const { pageContext } = this.props.context;
       const hubSite = await HubSiteService.GetHubSiteById(pageContext.web.absoluteUrl, pageContext.legacyPageContext.hubSiteId);
-      this.spEntityPortalService = new SpEntityPortalService(hubSite.url, this.props.entityListName, 'GtGroupId');
+      this.spEntityPortalService = new SpEntityPortalService({ webUrl: hubSite.url, ...this.props.entity });
       const checkPointStatuses = await this.fetchCheckPointStatuses();
       const { phases, currentPhase, phaseTextField } = await this.fetchData(checkPointStatuses);
       this.setState({

@@ -9,4 +9,10 @@ export interface IProjectPhasesWebPartProps {
     updateViewsTasks: boolean;
     updateViewsRisks: boolean;
     phaseSubTextProperty: string;
+    entity: {
+        listName: string;
+        contentTypeId: string;
+        fieldsGroupName: string;
+        groupIdFieldName: string;
+    };
 }

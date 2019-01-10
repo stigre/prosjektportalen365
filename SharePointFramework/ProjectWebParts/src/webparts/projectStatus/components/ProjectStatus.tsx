@@ -56,7 +56,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
       const data = this.state.selectedReport.item;
       sections.push(
         <SummarySection
-          projectInformation={this.props.projectInformation} {...baseProps} />,
+          entity={this.props.entity} {...baseProps} />,
         <StatusPropertySection
           headerProps={{ label: 'Fremdrift', value: data.GtStatusTime, comment: data.GtStatusTimeComment, iconName: 'AwayStatus', iconSize: 50 }}
           {...baseProps} />,
@@ -153,7 +153,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
     this.hubSite = await HubSiteService.GetHubSiteById(pageContext.web.absoluteUrl, hubSiteId);
     this.reportList = this.hubSite.web.lists.getByTitle(this.props.reportListName);
     Logger.log({ message: '(ProjectStatus) fetchData: Fetched hub site', data: { hubSite: this.hubSite }, level: LogLevel.Info });
-    const spEntityPortalService = new SpEntityPortalService(this.hubSite.url, this.props.projectInformation.entityListName, 'GtGroupId', this.props.projectInformation.entityCtId, this.props.projectInformation.entityFieldsGroup);
+    const spEntityPortalService = new SpEntityPortalService({ webUrl: this.hubSite.url, ...this.props.entity });
     const [entityItem, entityFields] = await Promise.all([
       spEntityPortalService.GetEntityItemFieldValues(groupId),
       spEntityPortalService.GetEntityFields(),

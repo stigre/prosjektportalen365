@@ -15,8 +15,8 @@ export class SetupProjectInformation extends BaseTask {
             Logger.log({ message: `(ProjectSetupApplicationCustomizer) SetupProjectInformation: Retrieving hub site`, data: { webAbsoluteUrl: pageContext.web.absoluteUrl, hubSiteId }, level: LogLevel.Info });
             const hubSite = await HubSiteService.GetHubSiteById(pageContext.web.absoluteUrl, hubSiteId);
             Logger.log({ message: `(ProjectSetupApplicationCustomizer) SetupProjectInformation: Retrieved hub site`, data: { hubSite }, level: LogLevel.Info });
-            const spEntityPortalService = new SpEntityPortalService(hubSite.SiteUrl, 'Prosjekter', 'GtGroupId');
-            Logger.log({ message: `(ProjectSetupApplicationCustomizer) SetupProjectInformation: Adding project to list 'Prosjekter' at ${hubSite.SiteUrl}`, data: { groupId }, level: LogLevel.Info });
+            const spEntityPortalService = new SpEntityPortalService({ webUrl: hubSite.url, listName: 'Prosjekter', groupIdFieldName: 'GtGroupId' });
+            Logger.log({ message: `(ProjectSetupApplicationCustomizer) SetupProjectInformation: Adding project to list 'Prosjekter' at ${hubSite.url}`, data: { groupId }, level: LogLevel.Info });
             await spEntityPortalService.NewEntity(pageContext.web.title, groupId);
         } catch (error) {
             throw new BaseTaskError('SetupProjectInformation', 'Unknown error');

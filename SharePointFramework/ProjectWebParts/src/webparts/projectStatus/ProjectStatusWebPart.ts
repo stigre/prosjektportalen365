@@ -12,10 +12,11 @@ export interface IProjectStatusWebPartProps {
   title: string;
   reportListName: string;
   reportCtId: string;
-  projectInformation: {
-    entityListName: string;
-    entityCtId: string;
-    entityFieldsGroup: string;
+  entity: {
+    listName: string;
+    contentTypeId: string;
+    fieldsGroupName: string;
+    groupIdFieldName: string;
   };
 }
 

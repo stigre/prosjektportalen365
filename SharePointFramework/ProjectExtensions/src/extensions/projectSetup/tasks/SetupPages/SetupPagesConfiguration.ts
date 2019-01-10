@@ -38,7 +38,13 @@ export function GetSetupPagesConfiguration(listsMap: { [key: string]: string }):
                                 updateViewsTasks: false,
                                 updateViewsRisks: false,
                                 gutter: 15,
-                                fontSize: 12
+                                fontSize: 12,
+                                entity: {
+                                    listName: 'Prosjekter',
+                                    contentTypeId: '0x0100805E9E4FEAAB4F0EABAB2600D30DB70C',
+                                    fieldsGroupName: 'Prosjektportalenkolonner',
+                                    groupIdFieldName: 'GtGroupId',
+                                },
                             }, '4449d3dc-fa58-4982-b87c-5a893114e7b7')]
                         },
                     ],
@@ -54,9 +60,12 @@ export function GetSetupPagesConfiguration(listsMap: { [key: string]: string }):
                             Controls: [
                                 new ClientSideWebpart('Prosjektinformasjon', null, {
                                     title: 'Prosjektinformasjon',
-                                    entityListName: 'Prosjekter',
-                                    entityCtId: '0x0100805E9E4FEAAB4F0EABAB2600D30DB70C',
-                                    entityFieldsGroup: 'Prosjektportalenkolonner',
+                                    entity: {
+                                        listName: 'Prosjekter',
+                                        contentTypeId: '0x0100805E9E4FEAAB4F0EABAB2600D30DB70C',
+                                        fieldsGroupName: 'Prosjektportalenkolonner',
+                                        groupIdFieldName: 'GtGroupId',
+                                    },
                                 }, 'b8bec0be-2354-443d-a3ca-24b36e8ea7dc'),
                                 new ClientSideWebpart('Usikkerhet', null, { isDocumentLibrary: false, selectedListId: listsMap['Usikkerhet'], webpartHeightKey: 4 }, 'f92bf067-bc19-489e-a556-7fe95f508720')
                             ]
@@ -89,10 +98,11 @@ export function GetSetupPagesConfiguration(listsMap: { [key: string]: string }):
                                 title: "Prosjektstatus",
                                 reportListName: "Prosjektstatus",
                                 reportCtId: "0x010022252E35737A413FB56A1BA53862F6D5",
-                                projectInformation: {
-                                    entityListName: 'Prosjekter',
-                                    entityCtId: '0x0100805E9E4FEAAB4F0EABAB2600D30DB70C',
-                                    entityFieldsGroup: 'Prosjektportalenkolonner',
+                                entity: {
+                                    listName: 'Prosjekter',
+                                    contentTypeId: '0x0100805E9E4FEAAB4F0EABAB2600D30DB70C',
+                                    fieldsGroupName: 'Prosjektportalenkolonner',
+                                    groupIdFieldName: 'GtGroupId',
                                 },
                             }, '681ad0dc-ddb5-4dba-a5d6-a42f6d1c90a6')]
                         },

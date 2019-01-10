@@ -8,9 +8,12 @@ import { sp } from '@pnp/sp';
 
 export interface IProjectInformationWebPartProps {
   title: string;
-  entityListName: string;
-  entityCtId: string;
-  entityFieldsGroup: string;
+  entity: {
+    listName: string;
+    contentTypeId: string;
+    fieldsGroupName: string;
+    groupIdFieldName: string;
+  };
 }
 
 export default class ProjectInformationWebPart extends BaseClientSideWebPart<IProjectInformationWebPartProps> {
