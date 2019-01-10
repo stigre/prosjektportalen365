@@ -7,21 +7,17 @@ import ProjectListModel, { IUserDetails } from './ProjectListModel';
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
+import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import ProjectCard from './ProjectCard/ProjectCard';
-import { autobind, values } from '@uifabric/utilities/lib';
 import { sp, SearchQuery, QueryPropertyValueType, SearchQueryBuilder, ISearchQueryBuilder } from '@pnp/sp';
-import { SPHttpClient, SPHttpClientResponse, SPHttpClientConfiguration } from '@microsoft/sp-http';
+import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 
 export default class ProjectList extends React.Component<IProjectListProps, IProjectListState> {
 
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      isLoading: true,
-      data: undefined
-    };
+    this.state = { isLoading: true, data: undefined };
   }
 
   public async componentDidMount() {
@@ -107,7 +103,7 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
 
     const query: ISearchQueryBuilder = SearchQueryBuilder(queryText, _searchQuerySettings);
     let result = await sp.search(query);
-    let associatedSites = result.PrimarySearchResults.filter(site => id !== site.SiteId);
+    let associatedSites = result.PrimarySearchResults.filter(site => id !== site['SiteId']);
 
     associatedSites.forEach(site => {
       let logo = site.SiteLogo;
