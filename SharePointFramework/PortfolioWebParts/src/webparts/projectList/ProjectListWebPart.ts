@@ -6,15 +6,12 @@ import {
   IPropertyPaneConfiguration,
   PropertyPaneTextField,
   WebPartContext,
-  BaseWebPartContext
 } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'ProjectListWebPartStrings';
 import ProjectList from './components/ProjectList';
 import { IProjectListProps } from './components/IProjectListProps';
-import { sp } from '@pnp/sp';
-import { SPHttpClient, SPHttpClientResponse, SPHttpClientConfiguration } from '@microsoft/sp-http';
-
+import { sp, Web } from '@pnp/sp';
 
 
 export interface IProjectListWebPartProps {
@@ -25,11 +22,14 @@ export interface IProjectListWebPartProps {
 
 export default class ProjectListWebPart extends BaseClientSideWebPart<IProjectListWebPartProps> {
 
+  private web: Web;
+
   public render(): void {
     const element: React.ReactElement<IProjectListProps> = React.createElement(
       ProjectList,
       {
         context: this.context,
+        web: this.web,
         serverRelativeUrl: this.context.pageContext.web.serverRelativeUrl,
         absoluteUrl: this.context.pageContext.web.absoluteUrl
       }
@@ -43,6 +43,7 @@ export default class ProjectListWebPart extends BaseClientSideWebPart<IProjectLi
       sp.setup({
         spfxContext: this.context
       });
+      this.web = new Web(this.context.pageContext.web.absoluteUrl);
     });
   }
 

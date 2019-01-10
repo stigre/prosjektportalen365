@@ -9,24 +9,27 @@ import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
 import ProjectCard from './ProjectCard/ProjectCard';
 import { autobind, values } from '@uifabric/utilities/lib';
-import { sp, SearchQuery, QueryPropertyValueType, SearchQueryBuilder, ISearchQueryBuilder } from '@pnp/sp';
+import { sp, SearchQuery, QueryPropertyValueType, SearchQueryBuilder, ISearchQueryBuilder, SearchResults } from '@pnp/sp';
 import { SPHttpClient, SPHttpClientResponse, SPHttpClientConfiguration } from '@microsoft/sp-http';
+import { taxonomy } from '@pnp/sp-taxonomy';
+import Phase from '../models/Phase';
 
 export default class ProjectList extends React.Component<IProjectListProps, IProjectListState> {
-
 
   constructor(props) {
     super(props);
 
     this.state = {
       isLoading: true,
-      data: undefined
+      data: undefined,
+      projects: [],
+      phases: [],
+      searchTerm: undefined
     };
   }
 
   public async componentDidMount() {
-    let projectData: IProjectListData = await this.fetchData();
-    this.setState({ data: projectData, isLoading: false, searchTerm: undefined });
+    await this.fetchData();
   }
 
   public render(): React.ReactElement<IProjectListProps> {
@@ -48,7 +51,9 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
   }
 
   private renderCards() {
-    const { projects, fields } = this.getFilteredData();
+    const { projects } = this.getFilteredData();
+    const phases = this.state.phases.slice();
+    const projectsData = this.state.projects.slice();
 
     return (
       <div className={styles.ppCardContainer}>
@@ -59,6 +64,8 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
               onClickHref={project.Url}
               showProjectInfo={e => this.setState({ showProjectInfo: project })}
               absoluteUrl={this.props.absoluteUrl}
+              phases={phases}
+              projectsData={projectsData}
             />
           ))}
       </div>
@@ -87,14 +94,21 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
   }
 
   private async fetchData() {
-    const testProjects: ProjectListModel[] = [];
+    const projectListItems: ProjectListModel[] = [];
     let id = await this.getHubId();
+    let projects = await sp.web.lists.getByTitle('Prosjekter').items.get();
+    let users = await sp.web.siteUsers.get();
+
+    const phaseField = await this.props.web.fields.getByInternalNameOrTitle('Fase').select('TermSetId').get();
+    const terms = await taxonomy.getDefaultSiteCollectionTermStore().getTermSetById(phaseField.TermSetId).terms.get();
+    const phases = terms.filter(term => term.LocalCustomProperties.ShowOnFrontPage !== 'false').map(term => new Phase(term, {}));
+
     let queryText = `DepartmentId:{${id}} contentclass:STS_Site`;
 
     const _searchQuerySettings: SearchQuery = {
       TrimDuplicates: false,
       RowLimit: 500,
-      SelectProperties: ['Title', 'Path', 'DepartmentId', 'SiteId', 'SiteLogo'],
+      SelectProperties: ['Title', 'Path', 'DepartmentId', 'SiteId', 'SiteLogo', 'ViewsLifetime'],
       Properties: [{
         Name: "EnableDynamicGroups",
         Value: {
@@ -110,30 +124,37 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
     let associatedSites = result.PrimarySearchResults.filter(site => id !== site.SiteId);
 
     associatedSites.forEach(site => {
-      let logo = site.SiteLogo;
-      if (site.SiteLogo.indexOf('GetGroupImage') > 0) logo = undefined;
+      let currentProject = projects.filter(p => site.Title === p.GtProjectFinanceName)[0];
+      let owner = users.filter(user => user.Id === currentProject.GtProjectOwnerId)[0];
+      let manager = users.filter(user => user.Id === currentProject.GtProjectManagerId)[0];
 
       let project: ProjectListModel = {
-        Logo: logo,
-        Manager: 'stian@pzlpart.onmicrosoft.com|Stian Grepperud',
-        Owner: 'stian@pzlpart.onmicrosoft.com|Stian Grepperud',
+        Logo: site.SiteLogo,
+        Manager: `${manager.Email}|${manager.Title}`,
+        Owner: `${owner.Email}|${owner.Title}`,
         Phase: 'Planlegge',
         ServiceArea: 'N/A',
         Title: site.Title,
         Type: 'N/A',
         Url: site.Path,
-        Views: 5,
+        Views: site.ViewsLifetime,
         RawObject: undefined
       };
 
-      testProjects.push(project);
+      projectListItems.push(project);
     });
 
     const testData: IProjectListData = {
-      projects: testProjects
+      projects: projectListItems
     };
 
-    return testData;
+    this.setState({
+      data: testData,
+      phases: phases,
+      projects: projects,
+      isLoading: false
+    });
+
   }
 
   private getHubId() {

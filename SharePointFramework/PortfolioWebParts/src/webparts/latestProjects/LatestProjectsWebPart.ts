@@ -11,7 +11,7 @@ import {
 import * as strings from 'LatestProjectsWebPartStrings';
 import LatestProjects from './components/LatestProjects';
 import { ILatestProjectsProps } from './components/ILatestProjectsProps';
-import { sp } from '@pnp/sp';
+import { sp, Web } from '@pnp/sp';
 
 export interface ILatestProjectsWebPartProps {
   absoluteUrl: string;
@@ -37,7 +37,7 @@ export default class LatestProjectsWebPart extends BaseClientSideWebPart<ILatest
   protected onInit(): Promise<void> {
     return super.onInit().then(_ => {
       sp.setup({
-        spfxContext: this.context
+        spfxContext: this.context,
       });
     });
   }

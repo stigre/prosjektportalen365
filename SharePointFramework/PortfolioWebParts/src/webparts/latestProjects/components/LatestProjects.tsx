@@ -3,7 +3,7 @@ import styles from './LatestProjects.module.scss';
 import * as strings from 'LatestProjectsWebPartStrings';
 import { ILatestProjectsProps } from './ILatestProjectsProps';
 import { ILatestProjectsState } from './ILatestProjectsState';
-import { SearchQuery, ISearchQueryBuilder, SearchQueryBuilder, sp, QueryPropertyValueType, SortDirection, SearchResult } from '@pnp/sp';
+import { SearchQuery, ISearchQueryBuilder, SearchQueryBuilder, sp, QueryPropertyValueType, SortDirection, SearchResult, Site } from '@pnp/sp';
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 import { Spinner, SpinnerType } from 'office-ui-fabric-react/lib/Spinner';
 import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
@@ -15,7 +15,7 @@ export default class LatestProjects extends React.Component<ILatestProjectsProps
 
     this.state = {
       isLoading: true,
-      sites: []
+      sites: [],
     };
   }
 
@@ -55,6 +55,7 @@ export default class LatestProjects extends React.Component<ILatestProjectsProps
 
   private async fetchData() {
     let id = await this.getHubId();
+
     let queryText = `DepartmentId:{${id}} contentclass:STS_Site`;
 
     const _searchQuerySettings: SearchQuery = {
@@ -82,7 +83,9 @@ export default class LatestProjects extends React.Component<ILatestProjectsProps
     let result = await sp.search(query);
     let associatedSites = result.PrimarySearchResults.filter(site => id !== site.SiteId);
 
-    this.setState({ sites: associatedSites, isLoading: false });
+    this.setState({
+      sites: associatedSites,
+      isLoading: false });
   }
 
   private getHubId() {

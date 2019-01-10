@@ -1,4 +1,5 @@
 import ProjectListModel from './ProjectListModel';
+import Phase from '../models/Phase';
 
 export interface IProjectListData {
   projects?: ProjectListModel[];
@@ -10,4 +11,6 @@ export interface IProjectListState {
   data?: IProjectListData;
   searchTerm?: string;
   showProjectInfo?: ProjectListModel;
+  projects: any[];
+  phases: Phase[];
 }
