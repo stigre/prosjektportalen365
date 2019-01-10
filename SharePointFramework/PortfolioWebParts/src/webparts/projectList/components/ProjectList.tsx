@@ -112,7 +112,6 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
     const query: ISearchQueryBuilder = SearchQueryBuilder(queryText, _searchQuerySettings);
     let result = await sp.search(query);
     let associatedSites = result.PrimarySearchResults.filter(site => id !== site['SiteId']);
-    console.log(projects);
 
     associatedSites.forEach(site => {
       let currentProject = projects.filter(p => site.Title === p.GtProjectFinanceName)[0];
