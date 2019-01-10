@@ -46,8 +46,6 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
 
   private renderCards() {
     const { projects } = this.getFilteredData();
-    const phases = this.state.phases.slice();
-    const projectsData = this.state.projects.slice();
 
     return (
       <div className={styles.ppCardContainer}>
@@ -58,8 +56,6 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
               onClickHref={project.Url}
               showProjectInfo={e => this.setState({ showProjectInfo: project })}
               absoluteUrl={this.props.absoluteUrl}
-              phases={phases}
-              projectsData={projectsData}
             />
           ))}
       </div>
@@ -116,17 +112,19 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
     const query: ISearchQueryBuilder = SearchQueryBuilder(queryText, _searchQuerySettings);
     let result = await sp.search(query);
     let associatedSites = result.PrimarySearchResults.filter(site => id !== site['SiteId']);
+    console.log(projects);
 
     associatedSites.forEach(site => {
       let currentProject = projects.filter(p => site.Title === p.GtProjectFinanceName)[0];
       let owner = users.filter(user => user.Id === currentProject.GtProjectOwnerId)[0];
       let manager = users.filter(user => user.Id === currentProject.GtProjectManagerId)[0];
+      let phase = phases.filter(p => p.id === currentProject.GtProjectPhase.TermGuid)[0].term.PathOfTerm;
 
       let project: ProjectListModel = {
         Logo: site.SiteLogo,
         Manager: `${manager.Email}|${manager.Title}`,
         Owner: `${owner.Email}|${owner.Title}`,
-        Phase: 'Planlegge',
+        Phase: phase,
         ServiceArea: 'N/A',
         Title: site.Title,
         Type: 'N/A',

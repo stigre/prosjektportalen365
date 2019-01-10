@@ -6,8 +6,6 @@ interface IProjectCardProps {
   onClickHref: string;
   showProjectInfo: (evt: any) => void;
   absoluteUrl: string;
-  phases: Phase[];
-  projectsData: any[];
 }
 
 export default IProjectCardProps;

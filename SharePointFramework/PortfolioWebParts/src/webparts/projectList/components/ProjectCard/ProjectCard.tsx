@@ -14,7 +14,6 @@ import {
 } from "office-ui-fabric-react/lib/DocumentCard";
 import { ImageFit } from 'office-ui-fabric-react/lib/Image';
 import { IUserDetails } from '../ProjectListModel';
-import { sp } from '@pnp/sp';
 
 
 const ProjectCard = (props: IProjectCardProps): JSX.Element => {
@@ -27,9 +26,6 @@ const ProjectCard = (props: IProjectCardProps): JSX.Element => {
     width: 200
   };
 
-  let project = props.projectsData.filter(item => item.Title === props.project.Title)[0];
-
-  let projectPhase = props.phases.filter(phase => phase.id === project.GtProjectPhase.TermGuid)[0];
   return (
     <DocumentCard
       className={styles.projectCard}
@@ -38,7 +34,7 @@ const ProjectCard = (props: IProjectCardProps): JSX.Element => {
     >
       <DocumentCardPreview previewImages={[previewImage]} />
       <DocumentCardTitle title={props.project.Title} shouldTruncate={false} />
-      <DocumentCardLocation location={projectPhase.term.PathOfTerm || strings.NotSet} />
+      <DocumentCardLocation location={props.project.Phase || strings.NotSet} />
       <DocumentCardActivity activity={strings.ProjectOwner} people={[getOwner(props.project, props.absoluteUrl)]} />
       <DocumentCardActivity activity={strings.ProjectManager} people={[getManager(props.project, props.absoluteUrl)]} />
       <DocumentCardActions
