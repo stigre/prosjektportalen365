@@ -88,15 +88,15 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
   }
 
   private renderSections() {
-    const baseProps = {
-      context: this.props.context,
-      report: this.state.selectedReport,
-      entityFields: this.state.data.entityFields,
-      entityItem: this.state.data.entityItem,
-    };
-    const data = this.state.selectedReport.item;
     let sections = [];
     if (this.state.selectedReport) {
+      const baseProps = {
+        context: this.props.context,
+        report: this.state.selectedReport,
+        entityFields: this.state.data.entityFields,
+        entityItem: this.state.data.entityItem,
+      };
+      const data = this.state.selectedReport.item;
       sections.push(
         <SummarySection
           entity={this.props.entity} {...baseProps} />,
