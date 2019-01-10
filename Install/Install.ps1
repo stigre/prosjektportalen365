@@ -1,19 +1,3 @@
-<#
-
-.SYNOPSIS
-This script will install Prosjektportalen to a site collection
-
-.DESCRIPTION
-Use the required -Url param to specify the target site collection. You can also install assets and default data to other site collections. The script will provision all the necessary lists, files and settings necessary for Prosjektportalen to work.
-
-.EXAMPLE
-./Install.ps1 -Url https://puzzlepart.sharepoint.com/sites/prosjektportalen
-
-.LINK
-https://github.com/Puzzlepart/prosjektportalen
-
-#>
-
 Param(
     [Parameter(Mandatory = $true, HelpMessage = "N/A")]
     [string]$AppCatalogUrl,
@@ -26,7 +10,11 @@ Param(
     [Parameter(Mandatory = $true, HelpMessage = "Application Id")]
     [string]$AppId,
     [Parameter(Mandatory = $true, HelpMessage = "Application Secret")]
-    [string]$AppSecret
+    [string]$AppSecret,
+    [Parameter(Mandatory = $false, HelpMessage = "N/A")]
+    [switch]$SkipTemplate,
+    [Parameter(Mandatory = $false, HelpMessage = "N/A")]
+    [switch]$SkipSiteDesign
 )
 
 function Connect-SharePoint {
@@ -87,10 +75,10 @@ Try {
     if ($null -eq $PortfolioSite) {
         Write-Host "[INFO] Creating portfolio site at [$Alias]"
         $PortfolioSiteUrl = New-PnPSite -Type TeamSite  -Title $Title -Alias $Alias -IsPublic:$true -ErrorAction Stop -Connection $AppCatalogSiteConnection 
-        Write-Host "[INFO] Portfolio site created at [$PortfolioSiteUrl]"
+        Write-Host "[INFO] Portfolio site created at [$PortfolioSiteUrl]" -ForegroundColor Green
     }
     Register-PnPHubSite -Site $PortfolioSiteUrl -ErrorAction SilentlyContinue -Connection $AdminSiteConnection 
-    Write-Host "[INFO] Portfolio site [$PortfolioSiteUrl] promoted to hub site"
+    Write-Host "[INFO] Portfolio site [$PortfolioSiteUrl] promoted to hub site" -ForegroundColor Green
 }
 Catch {
     Write-Host "[INFO] Failed to create site and promote to hub site: $($_.Exception.Message)"
@@ -105,60 +93,65 @@ Catch {
     exit 0
 }
 
-Try {
-    Write-Host "[INFO] Applying PnP template [Portal] to [$PortfolioSiteUrl]"
-    #Apply-PnPProvisioningTemplate ..\PnP\Templates\Portal\Portal.xml -Connection $PortfolioSiteConnection -ErrorAction Stop -Handlers Navigation
-}
-Catch {
-    Write-Host "[INFO] Failed to apply PnP template [Portal] to [$PortfolioSiteUrl]: $($_.Exception.Message)"
-    exit 0
+if(-not $SkipTemplate.IsPresent) {
+    Try {
+        Write-Host "[INFO] Applying PnP template [Portal] to [$PortfolioSiteUrl]"
+        #Apply-PnPProvisioningTemplate ..\PnP\Templates\Portal\Portal.xml -Connection $PortfolioSiteConnection -ErrorAction Stop -Handlers Navigation
+    }
+    Catch {
+        Write-Host "[INFO] Failed to apply PnP template [Portal] to [$PortfolioSiteUrl]: $($_.Exception.Message)"
+        exit 0
+    }
 }
 
-$SiteScriptIds = @()
 
-Try {
-    Write-Host "[INFO] Installing site scripts"
-    $SiteScripts = Get-PnPSiteScript -Connection $AdminSiteConnection
-    $SiteScriptSrc = Get-ChildItem "../SiteScripts/Src/*.txt"
-    foreach ($s in $SiteScriptSrc) {
-        $Title = $s.BaseName.Substring(9)
-        $Content = (Get-Content -Path $s.FullName -Raw | Out-String)
-        $SiteScript = $SiteScripts | Where-Object { $_.Title -eq $Title }
-        if ($null -ne $SiteScript) {
-            Set-PnPSiteScript -Identity $SiteScript -Content $Content -Connection $AdminSiteConnection  >$null 2>&1
+if(-not $SkipSiteDesign.IsPresent) {
+    $SiteScriptIds = @()
+
+    Try {
+        Write-Host "[INFO] Installing site scripts"
+        $SiteScripts = Get-PnPSiteScript -Connection $AdminSiteConnection
+        $SiteScriptSrc = Get-ChildItem "../SiteScripts/Src/*.txt"
+        foreach ($s in $SiteScriptSrc) {
+            $Title = $s.BaseName.Substring(9)
+            $Content = (Get-Content -Path $s.FullName -Raw | Out-String)
+            $SiteScript = $SiteScripts | Where-Object { $_.Title -eq $Title }
+            if ($null -ne $SiteScript) {
+                Set-PnPSiteScript -Identity $SiteScript -Content $Content -Connection $AdminSiteConnection  >$null 2>&1
+            }
+            else {
+                $SiteScript = Add-PnPSiteScript -Title $Title -Content $Content -Connection $AdminSiteConnection
+            }
+            $SiteScriptIds += $SiteScript.Id.Guid
+        }
+    }
+    Catch {
+        Write-Host "[INFO] Failed to install site scripts: $($_.Exception.Message)"
+        exit 0
+    }
+
+    Try {
+        Write-Host "[INFO] Installing site design"
+    
+        $SiteDesign = Get-PnPSiteDesign -Identity "Prosjektportalen" -Connection $AdminSiteConnection
+
+        if ($null -ne $SiteDesign) {
+            Write-Host "[INFO] Updating existing site design [Prosjektportalen]"
+            $SiteDesign = Set-PnPSiteDesign -Identity $SiteDesign -SiteScriptIds $SiteScriptIds -Description "" -Version "1" -Connection $AdminSiteConnection
         }
         else {
-            $SiteScript = Add-PnPSiteScript -Title $Title -Content $Content -Connection $AdminSiteConnection
+            Write-Host "[INFO] Creating new site design [Prosjektportalen]"
+            $SiteDesign = Add-PnPSiteDesign -Title "Prosjektportalen" -SiteScriptIds $SiteScriptIds -Description "" -WebTemplate TeamSite -Connection $AdminSiteConnection
         }
-        $SiteScriptIds += $SiteScript.Id.Guid
     }
-}
-Catch {
-    Write-Host "[INFO] Failed to install site scripts: $($_.Exception.Message)"
-    exit 0
+    Catch {
+        Write-Host "[INFO] Failed to install site design: $($_.Exception.Message)"
+        exit 0
+    }
 }
 
 Try {
-    Write-Host "[INFO] Installing site design"
-   
-    $SiteDesign = Get-PnPSiteDesign -Identity "Prosjektportalen" -Connection $AdminSiteConnection
-
-    if ($null -ne $SiteDesign) {
-        Write-Host "[INFO] Updating existing site design [Prosjektportalen]"
-        $SiteDesign = Set-PnPSiteDesign -Identity $SiteDesign -SiteScriptIds $SiteScriptIds -Description "" -Version "1" -Connection $AdminSiteConnection
-    }
-    else {
-        Write-Host "[INFO] Creating new site design [Prosjektportalen]"
-        $SiteDesign = Add-PnPSiteDesign -Title "Prosjektportalen" -SiteScriptIds $SiteScriptIds -Description "" -WebTemplate TeamSite -Connection $AdminSiteConnection
-    }
-}
-Catch {
-    Write-Host "[INFO] Failed to install site design: $($_.Exception.Message)"
-    exit 0
-}
-
-Try {
-    Write-Host "[INFO] Installing SharePoint Framework app packages"    
+    Write-Host "[INFO] Installing SharePoint Framework app packages to [$AppCatalogUrl]"
     $AppPackages = @(
         "..\SharePointFramework\PortfolioWebParts\sharepoint\solution\pp-portfolio-web-parts.sppkg",
         "..\SharePointFramework\ProjectExtensions\sharepoint\solution\pp-project-extensions.sppkg",
@@ -167,11 +160,12 @@ Try {
     $AppPackages | ForEach-Object {
         $AppPackage = Get-ChildItem $_.
         $App = Add-PnPApp -Path $AppPackage.FullName -Scope Tenant -Publish -Overwrite -ErrorAction Stop -Connection $AppCatalogSiteConnection
-        Install-PnPApp -Scope Tenant -Identity $App -ErrorAction Stop -Connection $AppCatalogSiteConnection >$null 2>&1
+        Install-PnPApp -Scope Tenant -Identity $App  -ErrorAction SilentlyContinue -Connection $AppCatalogSiteConnection >$null 2>&1
     }
+    Write-Host "[INFO] SharePoint Framework app packages successfully installed to [$AppCatalogUrl]" -ForegroundColor Green
 }
 Catch {
-    Write-Host "[INFO] Failed to install app packages: $($_.Exception.Message)"
+    Write-Host "[INFO] Failed to install app packages to [$AppCatalogUrl]: $($_.Exception.Message)"
     exit 0
 }
 

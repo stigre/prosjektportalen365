@@ -8,6 +8,8 @@ dependencies:
   '@pnp/logging': 1.2.7
   '@pnp/odata': 1.2.7
   '@pnp/sp': 1.2.7
+  '@pnp/sp-clientsvc': 1.2.7
+  '@pnp/sp-taxonomy': 1.2.7
   '@types/es6-promise': 0.0.33
   '@types/react': 16.4.2
   '@types/react-dom': 16.0.5
@@ -204,11 +206,7 @@ packages:
   /@microsoft/load-themed-styles/1.8.26:
     resolution:
       integrity: sha512-ztPv3RpUGayvwzSvXMzSQJrlEJqVpgSMbsauQy7i+kcN8pCu1PMPrX3acOtUaHVZ6aUfa7dSphyJDtqyfl2Ytg==
-  /@microsoft/load-themed-styles/1.8.52:
-    resolution:
-      integrity: sha512-mhWQb+YyFY79ZNtwU04gTz/xj/mIKRYamIPFtiR6LHbHfoXACM90ORMHUMwIL2VuVNgDR9u/gy/v7ucxDl36gg==
   /@microsoft/load-themed-styles/1.8.53:
-    dev: false
     resolution:
       integrity: sha512-knlhWjiWEQFrIaHqpSyI9arU+fQ7KCRfQuekVkczjTHwdb1K8ynxrBd1TmZFFz1cwlfVxtb06qmMv4GCNBDuYQ==
   /@microsoft/loader-cased-file/1.7.1/webpack@3.6.0:
@@ -702,6 +700,29 @@ packages:
       '@pnp/logging': 1.2.7
     resolution:
       integrity: sha512-7hgSZcC0mZd+6YaFWxT6l3QPu3HS2DknIECx/64YHEqF+0qXX6Tcg9Rtn7lsVt6kG3VXSnGnN0A5pCG6VaT5ag==
+  /@pnp/sp-clientsvc/1.2.7:
+    dependencies:
+      tslib: 1.9.3
+    dev: false
+    peerDependencies:
+      '@pnp/common': 1.2.7
+      '@pnp/logging': 1.2.7
+      '@pnp/odata': 1.2.7
+      '@pnp/sp': 1.2.7
+    resolution:
+      integrity: sha512-YiwCXHXojUPa+rP0+stoAGnFSPhJGU4WzH3k0K5nQsKtf/PONW/8v4hU9TsuOm5relk8VNquXlUPq33xiZmufQ==
+  /@pnp/sp-taxonomy/1.2.7:
+    dependencies:
+      tslib: 1.9.3
+    dev: false
+    peerDependencies:
+      '@pnp/common': 1.2.7
+      '@pnp/logging': 1.2.7
+      '@pnp/odata': 1.2.7
+      '@pnp/sp': 1.2.7
+      '@pnp/sp-clientsvc': 1.2.7
+    resolution:
+      integrity: sha512-74wDz2toFwK3mGg4W4XYbmV9BvOaDrfDpAsCP9DaiGU7AKtsIrlTcsO4WJpN8IFBIJPnCGSFsTRmNTefg+4iHw==
   /@pnp/sp/1.2.7:
     dependencies:
       tslib: 1.9.3
@@ -1136,7 +1157,7 @@ packages:
       integrity: sha512-3hC0itW/hWSD5J4uANzUKk8XVGWUNkU+VLjEjWsQ6i5lvwFGaanR6Qy0bTkZdFGqFWMXe91CkBHV7HnvEx7tCA==
   /@uifabric/styling/5.37.0/react-dom@16.3.2+react@16.3.2:
     dependencies:
-      '@microsoft/load-themed-styles': 1.8.52
+      '@microsoft/load-themed-styles': 1.8.53
       '@uifabric/merge-styles': 5.17.1
       '@uifabric/utilities': /@uifabric/utilities/5.34.2/react-dom@16.3.2+react@16.3.2
       tslib: 1.9.3
@@ -1685,7 +1706,7 @@ packages:
   /autoprefixer/6.7.7:
     dependencies:
       browserslist: 1.7.7
-      caniuse-db: 1.0.30000927
+      caniuse-db: 1.0.30000928
       normalize-range: 0.1.2
       num2fraction: 1.2.2
       postcss: 5.2.18
@@ -1696,7 +1717,7 @@ packages:
   /autoprefixer/9.1.5:
     dependencies:
       browserslist: 4.3.7
-      caniuse-lite: 1.0.30000927
+      caniuse-lite: 1.0.30000928
       normalize-range: 0.1.2
       num2fraction: 1.2.2
       postcss: 7.0.8
@@ -1830,7 +1851,7 @@ packages:
     dependencies:
       babel-core: 6.26.3
       babel-runtime: 6.26.0
-      core-js: 2.6.1
+      core-js: 2.6.2
       home-or-tmp: 2.0.0
       lodash: 4.17.11
       mkdirp: 0.5.1
@@ -1840,7 +1861,7 @@ packages:
       integrity: sha1-btAhFz4vy0htestFxgCahW9kcHE=
   /babel-runtime/6.26.0:
     dependencies:
-      core-js: 2.6.1
+      core-js: 2.6.2
       regenerator-runtime: 0.11.1
     dev: true
     resolution:
@@ -2161,7 +2182,7 @@ packages:
       integrity: sha512-Z942RysHXmJrhqk88FmKBVq/v5tqmSkDz7p54G/MGyjMnCFFnC79XWNbg+Vta8W6Wb2qtSZTSxIGkJrRpCFEiA==
   /browserslist/1.7.7:
     dependencies:
-      caniuse-db: 1.0.30000927
+      caniuse-db: 1.0.30000928
       electron-to-chromium: 1.3.100
     deprecated: Browserslist 2 could fail on reading Browserslist >3.0 config used in other tools.
     dev: true
@@ -2170,7 +2191,7 @@ packages:
       integrity: sha1-C9dnBCWL6CmyOYu1Dkti0aFmsLk=
   /browserslist/4.3.7:
     dependencies:
-      caniuse-lite: 1.0.30000927
+      caniuse-lite: 1.0.30000928
       electron-to-chromium: 1.3.100
       node-releases: 1.1.3
     dev: true
@@ -2315,20 +2336,20 @@ packages:
   /caniuse-api/1.6.1:
     dependencies:
       browserslist: 1.7.7
-      caniuse-db: 1.0.30000927
+      caniuse-db: 1.0.30000928
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
     dev: true
     resolution:
       integrity: sha1-tTTnxzTE+B7F++isoq0kNUuWLGw=
-  /caniuse-db/1.0.30000927:
+  /caniuse-db/1.0.30000928:
     dev: true
     resolution:
-      integrity: sha512-CX/QvLA8oh7kQ9cHCCzFm0UZW4KwSyQSRJ5A1XtH42HaMJQ0yh+9fEVWagMqv9I1vSCtaqA5Mb8k0uKfv7jhDw==
-  /caniuse-lite/1.0.30000927:
+      integrity: sha512-nAoeTspAEzLjqGSeibzM09WojORi08faeOOI5GBmFWC3/brydovb9lYJWM+p48rEQsdevfpufK58gPiDtwOWKw==
+  /caniuse-lite/1.0.30000928:
     dev: true
     resolution:
-      integrity: sha512-ogq4NbUWf1uG/j66k0AmiO3GjqJAlQyF8n4w8a954cbCyFKmYGvRtgz6qkq2fWuduTXHibX7GyYL5Pg58Aks2g==
+      integrity: sha512-aSpMWRXL6ZXNnzm8hgE4QDLibG5pVJ2Ujzsuj3icazlIkxXkPXtL+BWnMx6FBkWmkZgBHGUxPZQvrbRw2ZTxhg==
   /capture-exit/1.2.0:
     dependencies:
       rsvp: 3.6.2
@@ -2774,10 +2795,10 @@ packages:
   /core-js/1.2.7:
     resolution:
       integrity: sha1-ZSKUwUZR2yj6k70tX/KYOk8IxjY=
-  /core-js/2.6.1:
+  /core-js/2.6.2:
     dev: true
     resolution:
-      integrity: sha512-L72mmmEayPJBejKIWe2pYtGis5r0tQ5NaJekdhyXgeMQTpJoBsH0NL4ElY2LfSoV15xeQWKQ+XTTOZdyero5Xg==
+      integrity: sha512-NdBPF/RVwPW6jr0NCILuyN9RiqLo2b1mddWHkUL+VnvcB7dzlnBJ1bXYntjpTGOgkZiiLWj2JxmOr7eGE3qK6g==
   /core-util-is/1.0.2:
     dev: true
     resolution:
@@ -6364,7 +6385,7 @@ packages:
       chokidar: 1.7.0
       colors: 1.3.3
       connect: 3.6.6
-      core-js: 2.6.1
+      core-js: 2.6.2
       di: 0.0.1
       dom-serialize: 2.2.1
       expand-braces: 0.1.2
@@ -6395,7 +6416,7 @@ packages:
       colors: 1.3.3
       combine-lists: 1.0.1
       connect: 3.6.6
-      core-js: 2.6.1
+      core-js: 2.6.2
       di: 0.0.1
       dom-serialize: 2.2.1
       expand-braces: 0.1.2
@@ -7807,7 +7828,7 @@ packages:
       integrity: sha512-gcBs5HHr7tjkvk/+Ls10ttb3jEllRn7SvJitX/kx/gQq8BiFMSMKr1w+oNqXlh4EgkBHWUlJVPrYUu1KW/jVaQ==
   /office-ui-fabric-react/5.131.0/react-dom@16.3.2+react@16.3.2:
     dependencies:
-      '@microsoft/load-themed-styles': 1.8.52
+      '@microsoft/load-themed-styles': 1.8.53
       '@uifabric/icons': /@uifabric/icons/5.8.0/react-dom@16.3.2+react@16.3.2
       '@uifabric/merge-styles': 5.17.1
       '@uifabric/styling': /@uifabric/styling/5.37.0/react-dom@16.3.2+react@16.3.2
@@ -11694,6 +11715,8 @@ specifiers:
   '@pnp/logging': ^1.2.7
   '@pnp/odata': ^1.2.7
   '@pnp/sp': ^1.2.7
+  '@pnp/sp-clientsvc': ^1.2.7
+  '@pnp/sp-taxonomy': ^1.2.7
   '@types/chai': 3.4.34
   '@types/es6-promise': 0.0.33
   '@types/mocha': 2.2.38
