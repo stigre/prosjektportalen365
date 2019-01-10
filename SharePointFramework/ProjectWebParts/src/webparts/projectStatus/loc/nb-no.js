@@ -3,6 +3,7 @@ define([], function() {
     "LoadingText": "Laster prosjektstatus...",
     "SaveText": "Lagre",
     "PickReportText": "Velg rapport",
-    "NewStatusReportModalHeaderText": "Ny statusrapport"
+    "NewStatusReportModalHeaderText": "Ny statusrapport",
+    "EditReportButtonText": "Rediger status"
   }
 });
