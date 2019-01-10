@@ -17,7 +17,6 @@ import { IUserDetails } from '../ProjectListModel';
 
 
 const ProjectCard = (props: IProjectCardProps): JSX.Element => {
-  const fallbackIconProps = { iconName: 'History', styles: { root: { fontSize: 50, color: "rgb(51, 51, 51)", opacity: 0.5 } } };
   const previewImage: IDocumentCardPreviewImage = {
     previewImageSrc: props.project.Logo ? props.project.Logo : `${props.absoluteUrl}/SiteAssets/pp/img/ICO-Global-Project-11.png`,
     imageFit: ImageFit.cover,

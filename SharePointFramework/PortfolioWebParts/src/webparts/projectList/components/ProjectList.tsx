@@ -5,6 +5,7 @@ import { IProjectListProps } from './IProjectListProps';
 import { IProjectListState, IProjectListData } from './IProjectListState';
 import ProjectListModel, { IUserDetails } from './ProjectListModel';
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
+import { Modal } from "office-ui-fabric-react/lib/Modal";
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
@@ -19,7 +20,14 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
 
   constructor(props) {
     super(props);
-    this.state = { projects: [], phases: [], isLoading: true, data: undefined };
+    this.state = {
+      projects: [],
+      phases: [],
+      isLoading: true,
+      data: undefined,
+      showProjectInfo: false,
+      projectInfoData: undefined
+    };
   }
 
   public async componentDidMount() {
@@ -32,6 +40,11 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
 
     return (
       <div className={styles.projectListWebPartContainer}>
+{/*         {(this.state.showProjectInfo) ?
+          <Modal isOpen={this.state.projectInfoData !== undefined} isBlocking={true} isDarkOverlay={true} onDismiss={e => this.setState({ projectInfoData: undefined })}>
+            <div></div>
+          </Modal>
+          : null} */}
         <div className={styles.projectListSearchBox}>
           <SearchBox placeholder={strings.SearchBoxPlaceholderText} onChanged={this.onSearch} />
         </div>
@@ -54,12 +67,17 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
             <ProjectCard
               project={project}
               onClickHref={project.Url}
-              showProjectInfo={e => this.setState({ showProjectInfo: project })}
+              showProjectInfo={e => this.setState({ projectInfoData: project, showProjectInfo: true })}
               absoluteUrl={this.props.absoluteUrl}
             />
           ))}
       </div>
     );
+  }
+
+  private onDismiss = () => {
+    console.log('ondismiss clicked');
+    this.setState({ showProjectInfo: false, projectInfoData: undefined });
   }
 
   private getFilteredData(): IProjectListData {
@@ -124,12 +142,12 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
         Manager: `${manager.Email}|${manager.Title}`,
         Owner: `${owner.Email}|${owner.Title}`,
         Phase: phase,
-        ServiceArea: 'N/A',
+        ServiceArea: currentProject.GtProjectServiceArea[0].Label,
         Title: site.Title,
-        Type: 'N/A',
+        Type: currentProject.GtProjectType[0].Label,
         Url: site.Path,
         Views: site.ViewsLifetime,
-        RawObject: undefined
+        RawObject: currentProject
       };
 
       projectListItems.push(project);
