@@ -15,7 +15,6 @@ import {
 import { ImageFit } from 'office-ui-fabric-react/lib/Image';
 import { IUserDetails } from '../ProjectListModel';
 
-
 const ProjectCard = (props: IProjectCardProps): JSX.Element => {
   const previewImage: IDocumentCardPreviewImage = {
     previewImageSrc: props.project.Logo ? props.project.Logo : `${props.absoluteUrl}/SiteAssets/pp/img/ICO-Global-Project-11.png`,

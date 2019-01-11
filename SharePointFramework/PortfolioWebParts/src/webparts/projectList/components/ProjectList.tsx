@@ -3,7 +3,7 @@ import styles from './ProjectList.module.scss';
 import * as strings from 'ProjectListWebPartStrings';
 import { IProjectListProps } from './IProjectListProps';
 import { IProjectListState, IProjectListData } from './IProjectListState';
-import ProjectListModel, { IUserDetails } from './ProjectListModel';
+import ProjectListModel from './ProjectListModel';
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
@@ -14,7 +14,6 @@ import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 import { taxonomy } from '@pnp/sp-taxonomy';
 import Phase from '../models/Phase';
 import ProjectInfo from './ProjectInfo/ProjectInfo';
-
 
 export default class ProjectList extends React.Component<IProjectListProps, IProjectListState> {
 
@@ -35,9 +34,7 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
   }
 
   public render(): React.ReactElement<IProjectListProps> {
-
     if (this.state.isLoading) return <Spinner label={strings.LoadingProjectsLabel} type={SpinnerType.large} />;
-
     return (
       <div className={styles.projectListWebPartContainer}>
         {(this.state.showProjectInfo) ?
@@ -59,7 +56,6 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
 
   private renderCards() {
     const { projects } = this.getFilteredData();
-
     return (
       <div className={styles.ppCardContainer}>
         {projects.length === 0 ? <MessageBar>{strings.NoSearchResults}</MessageBar> :
@@ -132,8 +128,6 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
       let manager = users.filter(user => user.Id === currentProject.GtProjectManagerId)[0];
       let phase = phases.filter(p => p.id === currentProject.GtProjectPhase.TermGuid)[0].term.PathOfTerm;
 
-      console.log(currentProject);
-
       let project: ProjectListModel = {
         Logo: site.SiteLogo,
         Manager: `${manager.Email}|${manager.Title}`,
@@ -146,7 +140,6 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
         Views: site.ViewsLifetime,
         RawObject: currentProject
       };
-
       projectListItems.push(project);
     });
 
