@@ -12,14 +12,11 @@ import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import NewStatusReportModal from './NewStatusReportModal';
 import SummarySection from './SummarySection';
 import StatusPropertySection from './StatusPropertySection';
-import HubSiteService, { IHubSite } from 'sp-hubsite-service';
-import SpEntityPortalService from 'sp-entityportal-service';
 import ProjectStatusReport from '../models/ProjectStatusReport';
 import * as strings from 'ProjectStatusWebPartStrings';
 
 
 export default class ProjectStatus extends React.Component<IProjectStatusProps, IProjectStatusState> {
-  private hubSite: IHubSite;
   private reportList;
 
   constructor(props: IProjectStatusProps) {
@@ -88,15 +85,15 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
   }
 
   private renderSections() {
-    const baseProps = {
-      context: this.props.context,
-      report: this.state.selectedReport,
-      entityFields: this.state.data.entityFields,
-      entityItem: this.state.data.entityItem,
-    };
-    const data = this.state.selectedReport.item;
     let sections = [];
     if (this.state.selectedReport) {
+      const baseProps = {
+        context: this.props.context,
+        report: this.state.selectedReport,
+        entityFields: this.state.data.entityFields,
+        entityItem: this.state.data.entityItem,
+      };
+      const data = this.state.selectedReport.item;
       sections.push(
         <SummarySection
           entity={this.props.entity} {...baseProps} />,
@@ -162,21 +159,17 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
 
   private async fetchData(): Promise<IProjectStatusData> {
     Logger.log({ message: '(ProjectStatus) fetchData: Fetching fields and reports', data: {}, level: LogLevel.Info });
-    const { pageContext } = this.props.context;
-    const { hubSiteId, groupId } = pageContext.legacyPageContext;
-    this.hubSite = await HubSiteService.GetHubSiteById(pageContext.web.absoluteUrl, hubSiteId);
-    this.reportList = this.hubSite.web.lists.getByTitle(this.props.reportListName);
-    Logger.log({ message: '(ProjectStatus) fetchData: Fetched hub site', data: { hubSite: this.hubSite }, level: LogLevel.Info });
-    const spEntityPortalService = new SpEntityPortalService({ webUrl: this.hubSite.url, ...this.props.entity });
+    const { hubSite, spEntityPortalService, reportListName } = this.props;
+    this.reportList = hubSite.web.lists.getByTitle(reportListName);
     const [entityItem, entityFields] = await Promise.all([
-      spEntityPortalService.GetEntityItemFieldValues(groupId),
+      spEntityPortalService.GetEntityItemFieldValues(this.props.context.pageContext.legacyPageContext.groupId),
       spEntityPortalService.GetEntityFields(),
     ]);
     let { DefaultEditFormUrl: reportEditFormUrl } = await this.reportList
       .select('DefaultEditFormUrl')
       .expand('DefaultEditFormUrl')
       .get();
-    let reportFields = await this.hubSite.web.contentTypes
+    let reportFields = await hubSite.web.contentTypes
       .getById(this.props.reportCtId)
       .fields
       .select('Title', 'InternalName', 'TypeAsString', 'Choices')
@@ -188,7 +181,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
       fieldType: fld.TypeAsString.toLowerCase(),
       choices: fld.Choices || [],
     }));
-    let reports = await this.reportList.items.filter(`GtGroupId eq '${groupId}'`).get();
+    let reports = await this.reportList.items.filter(`GtGroupId eq '${this.props.context.pageContext.legacyPageContext.groupId}'`).get();
     reports = reports.map((r: any) => new ProjectStatusReport(r));
     return { entityFields, entityItem, reportFields, reportEditFormUrl, reports };
   }

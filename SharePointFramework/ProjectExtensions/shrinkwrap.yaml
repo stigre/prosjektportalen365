@@ -15,6 +15,7 @@ dependencies:
   '@types/react-dom': 16.0.5
   '@types/webpack-env': 1.13.1
   office-ui-fabric-react: 5.134.0
+  pnp-js-provisioning: 'link:../../../sp-js-provisioning'
   react: 16.3.2
   react-dom: 16.3.2
   sp-entityportal-service: 0.2.0
@@ -11751,6 +11752,7 @@ specifiers:
   gulp: ~3.9.1
   node-fetch: ^2.3.0
   office-ui-fabric-react: 5.134.0
+  pnp-js-provisioning: 'link:C:/code/sp-js-provisioning'
   react: 16.3.2
   react-dom: 16.3.2
   sp-entityportal-service: ^0.2.0

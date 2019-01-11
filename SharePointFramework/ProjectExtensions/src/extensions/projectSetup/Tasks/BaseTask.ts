@@ -1,9 +1,12 @@
 import { ApplicationCustomizerContext } from '@microsoft/sp-application-base';
 import { IProjectSetupApplicationCustomizerProperties } from '../IProjectSetupApplicationCustomizerProperties';
+import { IHubSite } from 'sp-hubsite-service';
 
 export interface IBaseTaskParams {
     context: ApplicationCustomizerContext;
     properties: IProjectSetupApplicationCustomizerProperties;
+    groupId: string;
+    hub: IHubSite;
 }
 
 export class BaseTaskError {

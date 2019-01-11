@@ -1,10 +1,11 @@
 import Phase from "../models/Phase";
+import { CheckPointStatus } from "./CheckPointStatus";
 
 export interface IProjectPhasesState {
   isLoading: boolean;
   currentPhase?: Phase;
   phases?: Array<Phase>;
-  checkPointStatuses?: { [termGuid: string]: { [status: string]: number } };
+  checkPointStatus?:CheckPointStatus;
   confirmPhase?: Phase;
   isChangingPhase?: boolean;
   showPhaseChangeMessage?: boolean;

@@ -2,11 +2,12 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { override } from '@microsoft/decorators';
 import { BaseApplicationCustomizer, PlaceholderName } from '@microsoft/sp-application-base';
-import { CheckHubAssosication, SetupPages, PlannerConfiguration, IBaseTaskParams, BaseTaskError, SetupViews, SetupProjectInformation } from './tasks';
+import { Tasks, IBaseTaskParams } from './tasks';
 import { sp } from "@pnp/sp";
 import { Logger, LogLevel, ConsoleListener } from "@pnp/logging";
 import { IProjectSetupApplicationCustomizerProperties } from './IProjectSetupApplicationCustomizerProperties';
 import ProgressModal from './components/ProgressModal';
+import HubSiteService from 'sp-hubsite-service';
 
 export default class ProjectSetupApplicationCustomizer extends BaseApplicationCustomizer<IProjectSetupApplicationCustomizerProperties> {
   @override
@@ -16,9 +17,7 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
       Logger.activeLogLevel = LogLevel.Info;
       sp.setup({ spfxContext: this.context });
       const topPlaceholder = this.context.placeholderProvider.tryCreateContent(PlaceholderName.Top);
-      const progressModal = React.createElement(ProgressModal, {
-        progressIndicatorProps: { label: 'Klargjør prosjektområdet', description: 'Vennligst vent..' },
-      });
+      const progressModal = React.createElement(ProgressModal, { progressIndicatorProps: { label: 'Klargjør prosjektområdet', description: 'Vennligst vent..' } });
       ReactDOM.render(progressModal, topPlaceholder.domElement);
       await this.runTasks();
     }
@@ -29,13 +28,14 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
   */
   public async runTasks(): Promise<void> {
     Logger.log({ message: '(ProjectSetupApplicationCustomizer) runTasks', level: LogLevel.Info });
-    const params: IBaseTaskParams = { context: this.context, properties: this.properties };
+    const { pageContext } = this.context;
+    const { hubSiteId, groupId } = pageContext.legacyPageContext;
+    const hub = await HubSiteService.GetHubSiteById(pageContext.web.absoluteUrl, hubSiteId);
+    const params: IBaseTaskParams = { context: this.context, properties: this.properties, groupId, hub };
     try {
-      await CheckHubAssosication.execute(params);
-      await SetupPages.execute(params);
-      await SetupViews.execute(params);
-      await PlannerConfiguration.execute(params);
-      await SetupProjectInformation.execute(params);
+      for (let i = 0; i < Tasks.length; i++) {
+        await Tasks[i].execute(params);
+      }
       await this.removeCustomizer(this.componentId, true);
     } catch (error) {
       Logger.log({ message: `(ProjectSetupApplicationCustomizer) runTasks: ${error.task} failed with message ${error.message}`, level: LogLevel.Error });
