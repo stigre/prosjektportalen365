@@ -13,8 +13,7 @@ import { IProjectPhasesProps } from './IProjectPhasesProps';
 import { IProjectPhasesState } from './IProjectPhasesState';
 import * as strings from 'ProjectPhasesWebPartStrings';
 import * as format from 'string-format';
-import HubSiteService from 'sp-hubsite-service';
-import SpEntityPortalService from 'sp-entityportal-service';
+import { CheckPointStatus } from './CheckPointStatus';
 
 export default class ProjectPhases extends React.Component<IProjectPhasesProps, IProjectPhasesState> {
   /**
@@ -29,13 +28,13 @@ export default class ProjectPhases extends React.Component<IProjectPhasesProps, 
 
   public async componentDidMount() {
     if (this.props.phaseField) {
-      const checkPointStatuses = await this.fetchCheckPointStatuses();
-      const { phases, currentPhase, phaseTextField } = await this.fetchData(checkPointStatuses);
+      const checkPointStatus = await this.fetchCheckPointStatus();
+      const { phases, currentPhase, phaseTextField } = await this.fetchData(checkPointStatus);
       this.setState({
         isLoading: false,
         currentPhase,
         phases,
-        checkPointStatuses,
+        checkPointStatus,
         phaseTextField,
       });
     }
@@ -49,7 +48,7 @@ export default class ProjectPhases extends React.Component<IProjectPhasesProps, 
   public async componentWillReceiveProps(nextProps: IProjectPhasesProps) {
     if (this.props.phaseField !== nextProps.phaseField) {
       this.setState({ isLoading: true });
-      const { phases, phaseTextField } = await this.fetchData(this.state.checkPointStatuses);
+      const { phases, phaseTextField } = await this.fetchData(this.state.checkPointStatus);
       this.setState({ isLoading: false, phases, phaseTextField });
     }
   }
@@ -198,12 +197,7 @@ export default class ProjectPhases extends React.Component<IProjectPhasesProps, 
    * @param {string} viewName View name
    */
   private async modifiyFrontpageViews(phaseTermName: string, viewName: string = 'Current phase') {
-    const {
-      web,
-      updateViewsDocuments,
-      updateViewsRisks,
-      updateViewsTasks,
-    } = this.props;
+    const { web, updateViewsDocuments, updateViewsRisks, updateViewsTasks } = this.props;
 
     const listsToUpdate = [
       updateViewsDocuments && strings.DocumentsListName,
@@ -276,7 +270,7 @@ export default class ProjectPhases extends React.Component<IProjectPhasesProps, 
    * 
    * @param {string} listName List name
    */
-  private async fetchCheckPointStatuses(listName: string = 'Fasesjekkliste'): Promise<{ [termGuid: string]: { [phase: string]: number } }> {
+  private async fetchCheckPointStatus(listName: string = 'Fasesjekkliste'): Promise<CheckPointStatus> {
     try {
       const checkpoints = await sp.web.lists.getByTitle(listName).items.select('GtProjectPhase', 'GtChecklistStatus').get();
       const checkPointStatuses = checkpoints
@@ -297,21 +291,28 @@ export default class ProjectPhases extends React.Component<IProjectPhasesProps, 
   /***
    * Fetch phase terms
    * 
-   * @param {Object} checkPointStatuses Check point statuses
+   * @param {CheckPointStatus} checkPointStatus Check point status
    */
-  private async fetchData(checkPointStatuses: { [termGuid: string]: { [status: string]: number } }): Promise<{ currentPhase: Phase, phases: Array<Phase>, phaseTextField: string }> {
+  private async fetchData(checkPointStatus: CheckPointStatus): Promise<{ currentPhase: Phase, phases: Array<Phase>, phaseTextField: string }> {
     Logger.log({ message: '(ProjectPhases) fetchData: Fetching TermSetId for selected field', data: { phaseField: this.props.phaseField }, level: LogLevel.Info });
+    const { web, spEntityPortalService } = this.props;
     try {
-      const phaseField = await this.props.web.fields.getByInternalNameOrTitle(this.props.phaseField).select('TermSetId').get();
-      const phaseTextField = await this.props.web.fields.getByInternalNameOrTitle(`${this.props.phaseField}_0`).select('InternalName').get();
-      const phaseTerms = await taxonomy.getDefaultSiteCollectionTermStore().getTermSetById(phaseField.TermSetId).terms.get();
-      const phases = phaseTerms.filter(term => term.LocalCustomProperties.ShowOnFrontpage !== 'false').map(term => new Phase(term, checkPointStatuses[term.Id] || {}));
-      const entityItem = await this.props.spEntityPortalService.GetEntityItem(this.props.context.pageContext.legacyPageContext.groupId);
+      const [{ TermSetId: termSetId }, { InternalName: phaseTextField }] = await Promise.all([
+        web.fields.getByInternalNameOrTitle(this.props.phaseField).select('TermSetId').get(),
+        web.fields.getByInternalNameOrTitle(`${this.props.phaseField}_0`).select('InternalName').get(),
+      ]);
+      const [phaseTerms, entityItem] = await Promise.all([
+        taxonomy.getDefaultSiteCollectionTermStore().getTermSetById(termSetId).terms.get(),
+        spEntityPortalService.GetEntityItem(this.props.context.pageContext.legacyPageContext.groupId),
+      ]);
+      const phases = phaseTerms
+        .filter(term => term.LocalCustomProperties.ShowOnFrontpage !== 'false')
+        .map(term => new Phase(term, checkPointStatus[term.Id] || {}));
       let currentPhase: Phase = null;
       if (entityItem && entityItem.GtProjectPhase) {
         [currentPhase] = phases.filter(p => p.id.indexOf(entityItem.GtProjectPhase.TermGuid) !== -1);
       }
-      Logger.log({ message: '(ProjectPhases) fetchData: Successfully loaded phases', data: { phases: phases.map(p => p.name), currentPhase: currentPhase ? currentPhase.name : null, phaseTextField: phaseTextField.InternalName }, level: LogLevel.Info });
+      Logger.log({ message: '(ProjectPhases) fetchData: Successfully loaded phases', level: LogLevel.Info });
       return ({ currentPhase, phases, phaseTextField: phaseTextField.InternalName });
     } catch (err) {
       throw err;

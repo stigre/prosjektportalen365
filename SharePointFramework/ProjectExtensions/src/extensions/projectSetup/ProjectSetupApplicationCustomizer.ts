@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { override } from '@microsoft/decorators';
 import { BaseApplicationCustomizer, PlaceholderName } from '@microsoft/sp-application-base';
-import { CheckHubAssosication, SetupPages, PlannerConfiguration, IBaseTaskParams, BaseTaskError, SetupViews, SetupProjectInformation } from './tasks';
+import { Tasks, IBaseTaskParams } from './tasks';
 import { sp } from "@pnp/sp";
 import { Logger, LogLevel, ConsoleListener } from "@pnp/logging";
 import { IProjectSetupApplicationCustomizerProperties } from './IProjectSetupApplicationCustomizerProperties';
@@ -31,12 +31,10 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
     Logger.log({ message: '(ProjectSetupApplicationCustomizer) runTasks', level: LogLevel.Info });
     const params: IBaseTaskParams = { context: this.context, properties: this.properties };
     try {
-      await CheckHubAssosication.execute(params);
-      await SetupPages.execute(params);
-      await SetupViews.execute(params);
-      await PlannerConfiguration.execute(params);
-      await SetupProjectInformation.execute(params);
-      await this.removeCustomizer(this.componentId, true);
+      for (let i = 0; i < Tasks.length; i++) {
+        await Tasks[i].execute(params);
+      }
+      // await this.removeCustomizer(this.componentId, true);
     } catch (error) {
       Logger.log({ message: `(ProjectSetupApplicationCustomizer) runTasks: ${error.task} failed with message ${error.message}`, level: LogLevel.Error });
     }
