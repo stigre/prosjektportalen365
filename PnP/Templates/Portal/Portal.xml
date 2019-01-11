@@ -8,6 +8,8 @@
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Lists.xml" />
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/RegionalSettings.xml" />
             <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Navigation.xml" />
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/SupportedUILanguages.xml" />
+            <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Objects/Files.xml" />
         </pnp:ProvisioningTemplate>
     </pnp:Templates>
 </pnp:Provisioning>

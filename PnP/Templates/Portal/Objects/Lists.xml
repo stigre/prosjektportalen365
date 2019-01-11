@@ -9,4 +9,8 @@
             <pnp:ContentTypeBinding ContentTypeID="0x010022252E35737A413FB56A1BA53862F6D5" Default="true" />
         </pnp:ContentTypeBindings>
     </pnp:ListInstance>
+    <pnp:ListInstance Title="Prosjektmaler" Description="" DocumentTemplate="" TemplateType="101" Url="Prosjektmaler" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0">
+    </pnp:ListInstance>
+    <pnp:ListInstance Title="Prosjekttillegg" Description="" DocumentTemplate="" TemplateType="101" Url="Prosjekttillegg" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0">
+    </pnp:ListInstance>
 </pnp:Lists>

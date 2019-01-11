@@ -1,0 +1,159 @@
+{
+    "Navigation": {
+        "QuickLaunch": [
+            {
+                "Url": "SitePages/Hjem.aspx",
+                "Title": "Hjem",
+                "IgnoreExisting": true
+            }
+        ]
+    },
+    "WebSettings": {
+        "WelcomePage": "SitePages/Hjem.aspx"
+    },
+    "ClientSidePages": [
+        {
+            "Name": "Hjem.aspx",
+            "Title": "Hjem",
+            "LibraryTitle": "Områdesider",
+            "PageLayoutType": "Home",
+            "CommentsDisabled": true,
+            "Sections": [
+                {
+                    "Columns": [
+                        {
+                            "Factor": 12,
+                            "Controls": [
+                                {
+                                    "Title": "Fasevelger",
+                                    "Description": "",
+                                    "ClientSideComponentId": "4449d3dc-fa58-4982-b87c-5a893114e7b7",
+                                    "ClientSideComponentProperties": {
+                                        "description": "",
+                                        "phaseSubTextProperty": "",
+                                        "phaseField": "Fase",
+                                        "automaticReload": true,
+                                        "confirmPhaseChange": true,
+                                        "reloadTimeout": 0,
+                                        "updateViewsDocuments": false,
+                                        "updateViewsTasks": false,
+                                        "updateViewsRisks": false,
+                                        "gutter": 15,
+                                        "fontSize": 13,
+                                        "entity": {
+                                            "listName": "Prosjekter",
+                                            "contentTypeId": "0x0100805E9E4FEAAB4F0EABAB2600D30DB70C",
+                                            "fieldsGroupName": "Prosjektportalenkolonner",
+                                            "groupIdFieldName": "GtGroupId"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "Columns": [
+                        {
+                            "Factor": 8,
+                            "Controls": [
+                                {
+                                    "Title": "Prosjektdokumenter",
+                                    "Description": "",
+                                    "ClientSideComponentId": "f92bf067-bc19-489e-a556-7fe95f508720",
+                                    "ClientSideComponentProperties": {
+                                        "isDocumentLibrary": true,
+                                        "selectedListId": "{listid:Prosjektdokumenter}",
+                                        "webpartHeightKey": 4
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "Factor": 4,
+                            "Controls": [
+                                {
+                                    "Title": "Prosjektinformasjon",
+                                    "Description": "",
+                                    "ClientSideComponentId": "b8bec0be-2354-443d-a3ca-24b36e8ea7dc",
+                                    "ClientSideComponentProperties": {
+                                        "title": "Prosjektinformasjon",
+                                        "entity": {
+                                            "listName": "Prosjekter",
+                                            "contentTypeId": "0x0100805E9E4FEAAB4F0EABAB2600D30DB70C",
+                                            "fieldsGroupName": "Prosjektportalenkolonner",
+                                            "groupIdFieldName": "GtGroupId"
+                                        }
+                                    }
+                                },
+                                {
+                                    "Title": "Usikkerhet",
+                                    "Description": "",
+                                    "ClientSideComponentId": "f92bf067-bc19-489e-a556-7fe95f508720",
+                                    "ClientSideComponentProperties": {
+                                        "isDocumentLibrary": false,
+                                        "selectedListId": "{listid:Usikkerhet}",
+                                        "webpartHeightKey": 4
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "Lists": [
+        {
+            "Title": "Fasesjekkliste",
+            "Description": "",
+            "Template": 100
+        },
+        {
+            "Title": "Informasjon",
+            "Description": "",
+            "Template": 100
+        },
+        {
+            "Title": "Interessentregister",
+            "Description": "",
+            "Template": 100
+        },
+        {
+            "Title": "Kommunikasjonsplan",
+            "Description": "",
+            "Template": 100
+        },
+        {
+            "Title": "Milepæler",
+            "Description": "",
+            "Template": 100
+        },
+        {
+            "Title": "Prosjektlogg",
+            "Description": "",
+            "Template": 100
+        },
+        {
+            "Title": "Prosjektleveranser",
+            "Description": "",
+            "Template": 100
+        },
+        {
+            "Title": "Usikkerhet",
+            "Description": "",
+            "Template": 100
+        },
+        {
+            "Title": "Møtekalender",
+            "Description": "",
+            "Template": 106
+        },
+        {
+            "Title": "Prosjektdokumenter",
+            "Description": "",
+            "Template": 101,
+            "ContentTypesEnabled": false
+        }
+    ]
+}

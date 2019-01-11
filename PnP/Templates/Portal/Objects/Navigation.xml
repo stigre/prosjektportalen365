@@ -4,6 +4,8 @@
             <pnp:NavigationNode Title="Hjem" Url="{site}/SitePages/Home.aspx" />
             <pnp:NavigationNode Title="Prosjekter" Url="{site}/Lists/Prosjekter/AllItems.aspx" />
             <pnp:NavigationNode Title="Prosjektstatus" Url="{site}/Lists/Prosjektstatus/AllItems.aspx" />
+            <pnp:NavigationNode Title="Prosjektmaler" Url="{site}/Prosjektmaler/Forms/AllItems.aspx" />
+            <pnp:NavigationNode Title="Prosjekttillegg" Url="{site}/Prosjekttillegg/Forms/AllItems.aspx" />
         </pnp:StructuralNavigation>
     </pnp:CurrentNavigation>
 </pnp:Navigation>
