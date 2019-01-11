@@ -13,13 +13,21 @@ import { sp, SearchQuery, QueryPropertyValueType, SearchQueryBuilder, ISearchQue
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 import { taxonomy } from '@pnp/sp-taxonomy';
 import Phase from '../models/Phase';
+import ProjectInfo from './ProjectInfo/ProjectInfo';
 
 
 export default class ProjectList extends React.Component<IProjectListProps, IProjectListState> {
 
   constructor(props) {
     super(props);
-    this.state = { projects: [], phases: [], isLoading: true, data: undefined };
+
+    this.state = {
+      projects: [],
+      phases: [],
+      isLoading: true,
+      data: undefined,
+      showProjectInfo: undefined
+    };
   }
 
   public async componentDidMount() {
@@ -32,6 +40,10 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
 
     return (
       <div className={styles.projectListWebPartContainer}>
+        {(this.state.showProjectInfo) ?
+          <ProjectInfo
+            showProjectInfo={this.state.showProjectInfo}
+            onDismiss={e => this.setState({ showProjectInfo: undefined })} /> : null}
         <div className={styles.projectListSearchBox}>
           <SearchBox placeholder={strings.SearchBoxPlaceholderText} onChanged={this.onSearch} />
         </div>
@@ -124,12 +136,12 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
         Manager: `${manager.Email}|${manager.Title}`,
         Owner: `${owner.Email}|${owner.Title}`,
         Phase: phase,
-        ServiceArea: 'N/A',
+        ServiceArea: currentProject.GtProjectServiceArea[0].Label,
         Title: site.Title,
-        Type: 'N/A',
+        Type: currentProject.GtProjectType[0].Label,
         Url: site.Path,
         Views: site.ViewsLifetime,
-        RawObject: undefined
+        RawObject: currentProject
       };
 
       projectListItems.push(project);
