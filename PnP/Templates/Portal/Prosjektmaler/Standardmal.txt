@@ -3,8 +3,55 @@
         "QuickLaunch": [
             {
                 "Url": "SitePages/Hjem.aspx",
-                "Title": "Hjem",
-                "IgnoreExisting": true
+                "Title": "Hjem"
+            },
+            {
+                "Url": "SitePages/Prosjektstatus.aspx",
+                "Title": "Prosjektstatus"
+            },
+            {
+                "Url": "Lists/Prosjektlogg/AllItems.aspx",
+                "Title": "Prosjektlogg"
+            },
+            {
+                "Url": "Lists/Interessentregister/AllItems.aspx",
+                "Title": "Interessentregister"
+            },
+            {
+                "Url": "Lists/Kommunikasjonsplan/AllItems.aspx",
+                "Title": "Kommunikasjonsplan"
+            },
+            {
+                "Url": "Lists/Usikkerhet/AllItems.aspx",
+                "Title": "Usikkerhet"
+            },
+            {
+                "Url": "Lists/Mtekalender/calendar.aspx",
+                "Title": "Møtekalender"
+            },
+            {
+                "Url": "Prosjektdokumenter/Forms/AllItems.aspx",
+                "Title": "Prosjektdokumenter"
+            },
+            {
+                "Url": "Lists/Fasesjekkliste/AllItems.aspx",
+                "Title": "Fasesjekkliste"
+            },
+            {
+                "Url": "#",
+                "Title": "Notatblokk"
+            },
+            {
+                "Url": "SitePages/Gevinstoversikt.aspx",
+                "Title": "Gevinstoversikt"
+            },
+            {
+                "Url": "Lists/Prosjektleveranser/AllItems.aspx",
+                "Title": "Prosjektleveranser"
+            },
+            {
+                "Url": "_layouts/15/viewlsts.aspx",
+                "Title": "Områdeinnhold"
             }
         ]
     },
@@ -94,6 +141,66 @@
                                         "isDocumentLibrary": false,
                                         "selectedListId": "{listid:Usikkerhet}",
                                         "webpartHeightKey": 4
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Name": "Gevinstoversikt.aspx",
+            "Title": "Gevinstoversikt",
+            "LibraryTitle": "Områdesider",
+            "PageLayoutType": "SingleWebPartAppPage",
+            "CommentsDisabled": true,
+            "Sections": [
+                {
+                    "Columns": [
+                        {
+                            "Factor": 12,
+                            "Controls": [
+                                {
+                                    "Title": "Gevinstoversikt",
+                                    "Description": "",
+                                    "ClientSideComponentId": "c7ff77cd-07e3-435e-971a-8845fa28ba8e",
+                                    "ClientSideComponentProperties": {
+                                        "title": "Gevinstoversikt"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "Name": "Prosjektstatus.aspx",
+            "Title": "Prosjektstatus",
+            "LibraryTitle": "Områdesider",
+            "PageLayoutType": "SingleWebPartAppPage",
+            "CommentsDisabled": true,
+            "Sections": [
+                {
+                    "Columns": [
+                        {
+                            "Factor": 12,
+                            "Controls": [
+                                {
+                                    "Title": "Prosjektstatus",
+                                    "Description": "",
+                                    "ClientSideComponentId": "681ad0dc-ddb5-4dba-a5d6-a42f6d1c90a6",
+                                    "ClientSideComponentProperties": {
+                                        "title": "Prosjektstatus",
+                                        "reportListName": "Prosjektstatus",
+                                        "reportCtId": "0x010022252E35737A413FB56A1BA53862F6D5",
+                                        "entity": {
+                                            "listName": "Prosjekter",
+                                            "contentTypeId": "0x0100805E9E4FEAAB4F0EABAB2600D30DB70C",
+                                            "fieldsGroupName": "Prosjektportalenkolonner",
+                                            "groupIdFieldName": "GtGroupId"
+                                        }
                                     }
                                 }
                             ]
