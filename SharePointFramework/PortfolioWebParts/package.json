@@ -36,7 +36,9 @@
     "@types/webpack-env": "1.13.1",
     "office-ui-fabric-react": "5.134.0",
     "react": "16.3.2",
-    "react-dom": "16.3.2"
+    "react-dom": "16.3.2",
+    "sp-entityportal-service": "^0.2.0",
+    "sp-hubsite-service": "^0.1.0"
   },
   "resolutions": {
     "@types/react": "16.4.2"

@@ -42,6 +42,7 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
       <div className={styles.projectListWebPartContainer}>
         {(this.state.showProjectInfo) ?
           <ProjectInfo
+            context={this.props.context}
             showProjectInfo={this.state.showProjectInfo}
             onDismiss={e => this.setState({ showProjectInfo: undefined })} /> : null}
         <div className={styles.projectListSearchBox}>
@@ -130,6 +131,8 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
       let owner = users.filter(user => user.Id === currentProject.GtProjectOwnerId)[0];
       let manager = users.filter(user => user.Id === currentProject.GtProjectManagerId)[0];
       let phase = phases.filter(p => p.id === currentProject.GtProjectPhase.TermGuid)[0].term.PathOfTerm;
+
+      console.log(currentProject);
 
       let project: ProjectListModel = {
         Logo: site.SiteLogo,

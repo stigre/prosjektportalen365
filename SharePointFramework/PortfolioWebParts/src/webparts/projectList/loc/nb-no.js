@@ -8,6 +8,7 @@ define([], function() {
     "ProjectOwner": "Prosjekteier",
     "ProjectManager": "Prosjektleder",
     "SearchBoxPlaceholderText": "Søk i alle prosjekter...",
-    "NoSearchResults": "Søket ga ingen resultater"
+    "NoSearchResults": "Søket ga ingen resultater",
+    "Loading": "Laster..."
   }
 });
