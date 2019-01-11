@@ -9,6 +9,8 @@ define([], function() {
     "ProjectManager": "Project manager",
     "SearchBoxPlaceholderText": "Search in all projects...",
     "NoSearchResults": "No search results",
-    "Loading": "Loading..."
+    "Loading": "Loading...",
+    "MissingProperties": "Projects has missing properties",
+    "NoProperties": "Project has no properties"
   }
 });

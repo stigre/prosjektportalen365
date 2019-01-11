@@ -47,16 +47,11 @@ export default class ProjectInfo extends React.Component<IProjectInfoProps, IPro
   private renderProperties(properties) {
     const propertiesToRender = properties.filter(p => !p.empty && p.showInDisplayForm);
     const hasMissingProps = properties.filter(p => p.required && p.empty).length > 0;
-    if (hasMissingProps) {
-      return <MessageBar messageBarType={MessageBarType.error}>'Missing properties'</MessageBar>;
-    }
-    if (propertiesToRender.length === 0) {
-      return <MessageBar>'No properties'</MessageBar>;
-    }
+    if (hasMissingProps) return <MessageBar messageBarType={MessageBarType.error}>{strings.MissingProperties}</MessageBar>;
+    if (propertiesToRender.length === 0) return <MessageBar>{strings.NoProperties}</MessageBar>;
     return (
       <div className={styles.propertiesContainer}>
         {propertiesToRender.map(p => {
-          console.log(p);
           return <div className={styles.property}><p className={styles.propertyHeader}>{p.displayName}</p><p className={styles.propertyValue}>{p.value}</p></div>;
         })}
       </div>
