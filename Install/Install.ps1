@@ -11,11 +11,17 @@ Param(
     [string]$AppId,
     [Parameter(Mandatory = $true, HelpMessage = "Application Secret")]
     [string]$AppSecret,
-    [Parameter(Mandatory = $false, HelpMessage = "N/A")]
+    [Parameter(Mandatory = $false, HelpMessage = "Skip PnP template")]
     [switch]$SkipTemplate,
-    [Parameter(Mandatory = $false, HelpMessage = "N/A")]
-    [switch]$SkipSiteDesign
+    [Parameter(Mandatory = $false, HelpMessage = "Skip Site Design")]
+    [switch]$SkipSiteDesign,
+    [Parameter(Mandatory = $false, HelpMessage = "Skip app packages")]
+    [switch]$SkipAppPackages,
+    [Parameter(Mandatory = $false, HelpMessage = "Skip site creation")]
+    [switch]$SkipSiteCreation
+    
 )
+
 
 function Connect-SharePoint {
     Param(
@@ -42,10 +48,6 @@ function Connect-SharePoint {
     return $Connection
 }
 
-#Prereq: SharePoint admin permissions
-#Prereq: App-catalog må være opprettet
-#Laste opp sitescript for portefølje
-
 [System.Uri]$AppCatalogUri = $AppCatalogUrl
 $AdminSiteUrl = (@($AppCatalogUri.Scheme, "://", $AppCatalogUri.Authority) -join "").Replace(".sharepoint.com", "-admin.sharepoint.com")
 $PortfolioSiteUrl = @($AppCatalogUri.Scheme, "://", $AppCatalogUri.Authority, "/sites/", $Alias) -join ""
@@ -70,19 +72,21 @@ Catch {
     exit 0
 }
 
-Try {
-    $PortfolioSite = Get-PnPTenantSite -Url $PortfolioSiteUrl -Connection $AdminSiteConnection -ErrorAction SilentlyContinue
-    if ($null -eq $PortfolioSite) {
-        Write-Host "[INFO] Creating portfolio site at [$Alias]"
-        $PortfolioSiteUrl = New-PnPSite -Type TeamSite  -Title $Title -Alias $Alias -IsPublic:$true -ErrorAction Stop -Connection $AppCatalogSiteConnection 
-        Write-Host "[INFO] Portfolio site created at [$PortfolioSiteUrl]" -ForegroundColor Green
+if(-not $SkipSiteCreation.IsPresent) {
+    Try {
+        $PortfolioSite = Get-PnPTenantSite -Url $PortfolioSiteUrl -Connection $AdminSiteConnection -ErrorAction SilentlyContinue
+        if ($null -eq $PortfolioSite) {
+            Write-Host "[INFO] Creating portfolio site at [$PortfolioSiteUrl]"
+            $PortfolioSiteUrl = New-PnPSite -Type TeamSite  -Title $Title -Alias $Alias -IsPublic:$true -ErrorAction Stop -Connection $AppCatalogSiteConnection 
+            Write-Host "[INFO] Portfolio site created at [$PortfolioSiteUrl]" -ForegroundColor Green
+        }
+        Register-PnPHubSite -Site $PortfolioSiteUrl -ErrorAction SilentlyContinue -Connection $AdminSiteConnection 
+        Write-Host "[INFO] Portfolio site [$PortfolioSiteUrl] promoted to hub site" -ForegroundColor Green
     }
-    Register-PnPHubSite -Site $PortfolioSiteUrl -ErrorAction SilentlyContinue -Connection $AdminSiteConnection 
-    Write-Host "[INFO] Portfolio site [$PortfolioSiteUrl] promoted to hub site" -ForegroundColor Green
-}
-Catch {
-    Write-Host "[INFO] Failed to create site and promote to hub site: $($_.Exception.Message)"
-    exit 0
+    Catch {
+        Write-Host "[INFO] Failed to create site and promote to hub site: $($_.Exception.Message)"
+        exit 0
+    }
 }
 
 Try {
@@ -96,7 +100,7 @@ Catch {
 if(-not $SkipTemplate.IsPresent) {
     Try {
         Write-Host "[INFO] Applying PnP template [Portal] to [$PortfolioSiteUrl]"
-        #Apply-PnPProvisioningTemplate ..\PnP\Templates\Portal\Portal.xml -Connection $PortfolioSiteConnection -ErrorAction Stop -Handlers Navigation
+        Apply-PnPProvisioningTemplate ..\PnP\Templates\Portal\Portal.xml -Connection $PortfolioSiteConnection -ErrorAction Stop
     }
     Catch {
         Write-Host "[INFO] Failed to apply PnP template [Portal] to [$PortfolioSiteUrl]: $($_.Exception.Message)"
@@ -150,25 +154,26 @@ if(-not $SkipSiteDesign.IsPresent) {
     }
 }
 
-Try {
-    Write-Host "[INFO] Installing SharePoint Framework app packages to [$AppCatalogUrl]"
-    $AppPackages = @(
-        "..\SharePointFramework\PortfolioWebParts\sharepoint\solution\pp-portfolio-web-parts.sppkg",
-        "..\SharePointFramework\ProjectExtensions\sharepoint\solution\pp-project-extensions.sppkg",
-        "..\SharePointFramework\ProjectWebParts\sharepoint\solution\pp-project-web-parts.sppkg"
-    )
-    $AppPackages | ForEach-Object {
-        $AppPackage = Get-ChildItem $_.
-        $App = Add-PnPApp -Path $AppPackage.FullName -Scope Tenant -Publish -Overwrite -ErrorAction Stop -Connection $AppCatalogSiteConnection
-        Install-PnPApp -Scope Tenant -Identity $App  -ErrorAction SilentlyContinue -Connection $AppCatalogSiteConnection >$null 2>&1
+if(-not $SkipAppPackages.IsPresent) {
+    Try {
+        Write-Host "[INFO] Installing SharePoint Framework app packages to [$AppCatalogUrl]"
+        $AppPackages = @(
+            "..\SharePointFramework\PortfolioWebParts\sharepoint\solution\pp-portfolio-web-parts.sppkg",
+            "..\SharePointFramework\ProjectExtensions\sharepoint\solution\pp-project-extensions.sppkg",
+            "..\SharePointFramework\ProjectWebParts\sharepoint\solution\pp-project-web-parts.sppkg"
+        )
+        $AppPackages | ForEach-Object {
+            $AppPackage = Get-ChildItem $_.
+            $App = Add-PnPApp -Path $AppPackage.FullName -Scope Tenant -Publish -Overwrite -ErrorAction Stop -Connection $AppCatalogSiteConnection
+            Install-PnPApp -Scope Tenant -Identity $App  -ErrorAction SilentlyContinue -Connection $AppCatalogSiteConnection >$null 2>&1
+        }
+        Write-Host "[INFO] SharePoint Framework app packages successfully installed to [$AppCatalogUrl]" -ForegroundColor Green
     }
-    Write-Host "[INFO] SharePoint Framework app packages successfully installed to [$AppCatalogUrl]" -ForegroundColor Green
+    Catch {
+        Write-Host "[INFO] Failed to install app packages to [$AppCatalogUrl]: $($_.Exception.Message)"
+        exit 0
+    }
 }
-Catch {
-    Write-Host "[INFO] Failed to install app packages to [$AppCatalogUrl]: $($_.Exception.Message)"
-    exit 0
-}
-
 
 Write-Host "[INFO] Installation done" -ForegroundColor Green
 
