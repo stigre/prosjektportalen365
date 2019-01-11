@@ -10,8 +10,7 @@ export interface IProjectListState {
   isLoading: boolean;
   data?: IProjectListData;
   searchTerm?: string;
-  showProjectInfo?: boolean;
   projects: any[];
   phases: Phase[];
-  projectInfoData?: ProjectListModel;
+  showProjectInfo?: ProjectListModel;
 }
