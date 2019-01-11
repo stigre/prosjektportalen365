@@ -1,4 +1,6 @@
-export interface IProjectPhasesWebPartProps {
+import  { IBaseWebPartProps } from '../baseWebPart';
+
+export interface IProjectPhasesWebPartProps extends IBaseWebPartProps {
     phaseField: string;
     automaticReload: boolean;
     reloadTimeout: number;
@@ -9,10 +11,4 @@ export interface IProjectPhasesWebPartProps {
     updateViewsTasks: boolean;
     updateViewsRisks: boolean;
     phaseSubTextProperty: string;
-    entity: {
-        listName: string;
-        contentTypeId: string;
-        fieldsGroupName: string;
-        groupIdFieldName: string;
-    };
 }

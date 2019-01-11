@@ -1,27 +1,23 @@
 import * as React from 'react';
-import * as ReactDom from 'react-dom';
-import { Logger, LogLevel, ConsoleListener } from '@pnp/logging';
 import "@pnp/polyfill-ie11";
-import { sp, Web, PermissionKind } from '@pnp/sp';
-import { BaseClientSideWebPart, IPropertyPaneConfiguration, PropertyPaneTextField, PropertyPaneSlider, PropertyPaneToggle, PropertyPaneDropdown, IPropertyPaneDropdownOption } from '@microsoft/sp-webpart-base';
+import { Web, PermissionKind } from '@pnp/sp';
+import { IPropertyPaneConfiguration, PropertyPaneTextField, PropertyPaneSlider, PropertyPaneToggle, PropertyPaneDropdown, IPropertyPaneDropdownOption } from '@microsoft/sp-webpart-base';
 import * as strings from 'ProjectPhasesWebPartStrings';
 import { IProjectPhasesWebPartProps } from './IProjectPhasesWebPartProps';
 import ProjectPhases from './components/ProjectPhases';
-import { IProjectPhasesProps } from './components/IProjectPhasesProps';
+import BaseWebPart from '../baseWebPart';
 
-export default class ProjectPhasesWebPart extends BaseClientSideWebPart<IProjectPhasesWebPartProps> {
+export default class ProjectPhasesWebPart extends BaseWebPart<IProjectPhasesWebPartProps> {
   private web: Web;
   private currentUserManageWeb: boolean = false;
   private optionsPhaseField: IPropertyPaneDropdownOption[] = [];
 
   constructor() {
     super();
-    Logger.activeLogLevel = LogLevel.Info;
-    Logger.subscribe(new ConsoleListener());
   }
 
   public async onInit() {
-    sp.setup({ spfxContext: this.context });
+    await super.onInit();
     this.web = new Web(this.context.pageContext.web.absoluteUrl);
     const [currentUserManageWeb, taxonomyFields] = await Promise.all([
       this.getCurrentUserManageWeb(),
@@ -29,22 +25,16 @@ export default class ProjectPhasesWebPart extends BaseClientSideWebPart<IProject
     ]);
     this.currentUserManageWeb = currentUserManageWeb;
     this.optionsPhaseField = taxonomyFields.map(field => ({ key: field.Title, text: field.Title }));
+    this.isInitialized = true;
   }
 
   public render(): void {
-    const element: React.ReactElement<IProjectPhasesProps> = React.createElement(
-      ProjectPhases,
-      {
-        ...this.properties,
-        currentUserManageWeb: this.currentUserManageWeb,
-        webAbsoluteUrl: this.context.pageContext.web.absoluteUrl,
-        web: this.web,
-        domElement: this.domElement,
-        context: this.context,
-      }
-    );
-
-    ReactDom.render(element, this.domElement);
+    super._render(ProjectPhases, {
+      currentUserManageWeb: this.currentUserManageWeb,
+      webAbsoluteUrl: this.context.pageContext.web.absoluteUrl,
+      web: this.web,
+      domElement: this.domElement,
+    });
   }
 
   protected async getCurrentUserManageWeb(): Promise<boolean> {

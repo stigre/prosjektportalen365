@@ -17,8 +17,6 @@ import HubSiteService from 'sp-hubsite-service';
 import SpEntityPortalService from 'sp-entityportal-service';
 
 export default class ProjectPhases extends React.Component<IProjectPhasesProps, IProjectPhasesState> {
-  private spEntityPortalService: SpEntityPortalService;
-
   /**
    * Constructor
    * 
@@ -31,9 +29,6 @@ export default class ProjectPhases extends React.Component<IProjectPhasesProps, 
 
   public async componentDidMount() {
     if (this.props.phaseField) {
-      const { pageContext } = this.props.context;
-      const hubSite = await HubSiteService.GetHubSiteById(pageContext.web.absoluteUrl, pageContext.legacyPageContext.hubSiteId);
-      this.spEntityPortalService = new SpEntityPortalService({ webUrl: hubSite.url, ...this.props.entity });
       const checkPointStatuses = await this.fetchCheckPointStatuses();
       const { phases, currentPhase, phaseTextField } = await this.fetchData(checkPointStatuses);
       this.setState({
@@ -124,7 +119,7 @@ export default class ProjectPhases extends React.Component<IProjectPhasesProps, 
     let properties: { [key: string]: string } = {};
     properties[this.state.phaseTextField] = phase.toString();
     Logger.log({ message: '(ProjectPhases) updatePhase', data: { properties }, level: LogLevel.Info });
-    await this.spEntityPortalService.UpdateEntityItem(this.props.context.pageContext.legacyPageContext.groupId, properties);
+    await this.props.spEntityPortalService.UpdateEntityItem(this.props.context.pageContext.legacyPageContext.groupId, properties);
   }
 
   /**
@@ -311,10 +306,10 @@ export default class ProjectPhases extends React.Component<IProjectPhasesProps, 
       const phaseTextField = await this.props.web.fields.getByInternalNameOrTitle(`${this.props.phaseField}_0`).select('InternalName').get();
       const phaseTerms = await taxonomy.getDefaultSiteCollectionTermStore().getTermSetById(phaseField.TermSetId).terms.get();
       const phases = phaseTerms.filter(term => term.LocalCustomProperties.ShowOnFrontpage !== 'false').map(term => new Phase(term, checkPointStatuses[term.Id] || {}));
-      const item = await this.spEntityPortalService.GetEntityItem(this.props.context.pageContext.legacyPageContext.groupId);
+      const entityItem = await this.props.spEntityPortalService.GetEntityItem(this.props.context.pageContext.legacyPageContext.groupId);
       let currentPhase: Phase = null;
-      if (item && item.GtProjectPhase) {
-        [currentPhase] = phases.filter(p => p.id.indexOf(item.GtProjectPhase.TermGuid) !== -1);
+      if (entityItem && entityItem.GtProjectPhase) {
+        [currentPhase] = phases.filter(p => p.id.indexOf(entityItem.GtProjectPhase.TermGuid) !== -1);
       }
       Logger.log({ message: '(ProjectPhases) fetchData: Successfully loaded phases', data: { phases: phases.map(p => p.name), currentPhase: currentPhase ? currentPhase.name : null, phaseTextField: phaseTextField.InternalName }, level: LogLevel.Info });
       return ({ currentPhase, phases, phaseTextField: phaseTextField.InternalName });

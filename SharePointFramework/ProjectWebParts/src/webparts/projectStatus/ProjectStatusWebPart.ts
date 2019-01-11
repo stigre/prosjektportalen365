@@ -1,70 +1,29 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
-import { Logger, LogLevel, ConsoleListener } from '@pnp/logging';
 import "@pnp/polyfill-ie11";
-import { sp } from '@pnp/sp';
-import { Version } from '@microsoft/sp-core-library';
-import { BaseClientSideWebPart, IPropertyPaneConfiguration } from '@microsoft/sp-webpart-base';
 import ProjectStatus from './components/ProjectStatus';
-import { IProjectStatusProps } from './components/IProjectStatusProps';
+import BaseWebPart, { IBaseWebPartProps } from '../baseWebPart';
 
-export interface IProjectStatusWebPartProps {
-  title: string;
+export interface IProjectStatusWebPartProps extends IBaseWebPartProps {
   reportListName: string;
   reportCtId: string;
-  entity: {
-    listName: string;
-    contentTypeId: string;
-    fieldsGroupName: string;
-    groupIdFieldName: string;
-  };
 }
 
-export default class ProjectStatusWebPart extends BaseClientSideWebPart<IProjectStatusWebPartProps> {
+export default class ProjectStatusWebPart extends BaseWebPart<IProjectStatusWebPartProps> {
   constructor() {
     super();
-    Logger.activeLogLevel = LogLevel.Info;
-    Logger.subscribe(new ConsoleListener());
   }
 
   public async onInit() {
-    sp.setup({ spfxContext: this.context });
+    await super.onInit();
+    this.isInitialized = true;
   }
 
   public render(): void {
-    const element: React.ReactElement<IProjectStatusProps> = React.createElement(
-      ProjectStatus, {
-        ...this.properties,
-        context: this.context,
-      }
-    );
-
-    ReactDom.render(element, this.domElement);
+    super._render(ProjectStatus);
   }
 
   protected onDispose(): void {
     ReactDom.unmountComponentAtNode(this.domElement);
-  }
-
-  protected get dataVersion(): Version {
-    return Version.parse(this.manifest.version);
-  }
-
-  protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
-    return {
-      pages: [
-        {
-          header: {
-            description: ''
-          },
-          groups: [
-            {
-              groupName: '',
-              groupFields: []
-            }
-          ]
-        }
-      ]
-    };
   }
 }
