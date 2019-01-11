@@ -1,7 +1,7 @@
 import { override } from '@microsoft/decorators';
 import { BaseTask, IBaseTaskParams, BaseTaskError } from '../BaseTask';
 import { Logger, LogLevel } from '@pnp/logging';
-import { WebProvisioner, Web, Schema } from 'sp-js-provisioning/lib';
+import { WebProvisioner, Web, Schema } from 'pnp-js-provisioning';
 
 export default class ApplyTemplate extends BaseTask {
     @override
@@ -9,23 +9,19 @@ export default class ApplyTemplate extends BaseTask {
         super.execute(params);
         try {
             Logger.log({ message: '(ProjectSetupApplicationCustomizer) ApplyTemplate', level: LogLevel.Info });
+            const templatesLibrary = params.hub.web.lists.getByTitle('Prosjektmaler');
+            const templates = await templatesLibrary.rootFolder.files.get();
+            const template: Schema = await params.hub.web.getFileByServerRelativeUrl(templates[0].ServerRelativeUrl).getJSON();
             const web = new Web(params.context.pageContext.web.absoluteUrl);
             const provisioner = new WebProvisioner(web);
-            provisioner.setup({ spfxContext: params.context, activeLogLevel: 1 });
-            const template: Schema = {
-                Navigation: {
-                    QuickLaunch: [
-                        {
-                            Url: "SitePages/Hjem.aspx",
-                            Title: "Hjem",
-                            IgnoreExisting: true
-                        },
-                    ],
+            provisioner.setup({
+                spfxContext: params.context,
+                logging: {
+                    prefix: '(ProjectSetupApplicationCustomizer) (ApplyTemplate)',
+                    activeLogLevel: 1
                 },
-            };
-            await provisioner.applyTemplate(template, msg => {
-                Logger.log({ message: '(ProjectSetupApplicationCustomizer) ApplyTemplate', data: { msg }, level: LogLevel.Info });
             });
+            await provisioner.applyTemplate(template);
         } catch (error) {
             console.log(error);
             throw new BaseTaskError('ApplyTemplate', 'Unknown error');

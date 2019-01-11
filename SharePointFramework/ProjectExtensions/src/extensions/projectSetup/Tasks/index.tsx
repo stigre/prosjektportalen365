@@ -1,6 +1,4 @@
 import CheckHubAssosication from './CheckHubAssosication';
-import SetupPages from './SetupPages';
-import SetupViews from './SetupViews';
 import PlannerConfiguration from './PlannerConfiguration';
 import SetupProjectInformation from './SetupProjectInformation';
 import ApplyTemplate from './ApplyTemplate';
@@ -14,6 +12,11 @@ export * from './BaseTask';
 //     SetupProjectInformation,
 // ];
 
-const Tasks = [new ApplyTemplate()];
+const Tasks = [
+    new CheckHubAssosication(),
+    new PlannerConfiguration(),
+    new SetupProjectInformation(),
+    new ApplyTemplate(),
+];
 
 export { Tasks };
