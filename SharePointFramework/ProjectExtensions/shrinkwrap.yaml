@@ -15,7 +15,7 @@ dependencies:
   '@types/react-dom': 16.0.5
   '@types/webpack-env': 1.13.1
   office-ui-fabric-react: 5.134.0
-  pnp-js-provisioning: 0.9.19
+  pnp-js-provisioning: 0.9.24
   react: 16.3.2
   react-dom: 16.3.2
   sp-entityportal-service: 0.2.0
@@ -8389,7 +8389,7 @@ packages:
     dev: true
     resolution:
       integrity: sha512-2qHaIQr2VLRFoxe2nASzsV6ef4yOOH+Fi9FBOVH6cqeSgUnoyySPZkxzLuzd+RYOQTRpROA0ztTMqxROKSb/nA==
-  /pnp-js-provisioning/0.9.19:
+  /pnp-js-provisioning/0.9.24:
     dependencies:
       '@pnp/common': 1.2.8
       '@pnp/logging': 1.2.8
@@ -8402,7 +8402,7 @@ packages:
       xml-js: 1.6.9
     dev: false
     resolution:
-      integrity: sha512-aFnl/8/oFwcnZCqkg6oSqfK+p2cuDSFxGzdR/8pMFVKUIyzzQowqQ9dcX36Lp5RHv9DnOpVM0PvPvPbU2CYJpQ==
+      integrity: sha512-P+etbqeIBZtQJjREVwaiZaVihbhcXbiJ5Tc8m3KcFOykOYHeQVqpfuoRnk61vTOa4Ob0KljJDWueWWGPTPtZWw==
   /posix-character-classes/0.1.1:
     dev: true
     engines:
@@ -11875,7 +11875,7 @@ specifiers:
   gulp: ~3.9.1
   node-fetch: ^2.3.0
   office-ui-fabric-react: 5.134.0
-  pnp-js-provisioning: ^0.9.19
+  pnp-js-provisioning: ^0.9.24
   react: 16.3.2
   react-dom: 16.3.2
   sp-entityportal-service: ^0.2.0

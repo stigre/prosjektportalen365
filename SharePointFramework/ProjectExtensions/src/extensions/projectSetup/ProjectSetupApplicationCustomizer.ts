@@ -20,8 +20,9 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
         sp: { headers: { Accept: "application/json; odata=verbose" } },
       });
       const topPlaceholder = this.context.placeholderProvider.tryCreateContent(PlaceholderName.Top);
-      const progressModal = React.createElement(ProgressModal, { progressIndicatorProps: { label: 'Klargjør prosjektområdet', description: 'Vennligst vent..' } });
-      ReactDOM.render(progressModal, topPlaceholder.domElement);
+      const domElement = topPlaceholder.domElement;
+      const progressModal = React.createElement(ProgressModal, { progressIndicatorProps: { label: 'Klargjør prosjektområdet', description: 'Vennligst vent. Ikke lukk nettleservinduet.' } });
+      ReactDOM.render(progressModal, domElement);
       await this.runTasks();
     }
   }
@@ -31,15 +32,24 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
   */
   public async runTasks(): Promise<void> {
     Logger.log({ message: '(ProjectSetupApplicationCustomizer) runTasks', level: LogLevel.Info });
-    const { pageContext } = this.context;
-    const { hubSiteId, groupId } = pageContext.legacyPageContext;
-    const hub = await HubSiteService.GetHubSiteById(pageContext.web.absoluteUrl, hubSiteId);
-    const params: IBaseTaskParams = { context: this.context, properties: this.properties, groupId, hub };
+
     try {
-      for (let i = 0; i < Tasks.length; i++) {
-        await Tasks[i].execute(params);
+      const { pageContext } = this.context;
+      const { hubSiteId, groupId } = pageContext.legacyPageContext;
+      if (hubSiteId) {
+        const hub = await HubSiteService.GetHubSiteById(pageContext.web.absoluteUrl, hubSiteId);
+        for (let i = 0; i < Tasks.length; i++) {
+          await Tasks[i].execute({
+            context: this.context,
+            properties: this.properties,
+            groupId,
+            hub,
+          });
+        }
+        await this.removeCustomizer(this.componentId, true);
+      } else {
+
       }
-      await this.removeCustomizer(this.componentId, true);
     } catch (error) {
       Logger.log({ message: `(ProjectSetupApplicationCustomizer) runTasks: ${error.task} failed with message ${error.message}`, level: LogLevel.Error });
     }

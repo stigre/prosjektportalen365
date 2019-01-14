@@ -1,12 +1,13 @@
 import { ApplicationCustomizerContext } from '@microsoft/sp-application-base';
 import { IProjectSetupApplicationCustomizerProperties } from '../IProjectSetupApplicationCustomizerProperties';
 import { IHubSite } from 'sp-hubsite-service';
+import ProgressModal, { IProgressModalProps } from '../components/ProgressModal';
 
 export interface IBaseTaskParams {
     context: ApplicationCustomizerContext;
     properties: IProjectSetupApplicationCustomizerProperties;
     groupId: string;
-    hub: IHubSite;
+    hub?: IHubSite;
 }
 
 export class BaseTaskError {

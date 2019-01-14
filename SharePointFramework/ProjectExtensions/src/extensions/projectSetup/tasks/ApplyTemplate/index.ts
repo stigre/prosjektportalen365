@@ -1,6 +1,5 @@
 import { override } from '@microsoft/decorators';
 import { BaseTask, IBaseTaskParams, BaseTaskError } from '../BaseTask';
-import { Logger, LogLevel } from '@pnp/logging';
 import { WebProvisioner, Web, Schema } from 'pnp-js-provisioning';
 
 export default class ApplyTemplate extends BaseTask {
@@ -8,7 +7,6 @@ export default class ApplyTemplate extends BaseTask {
     public async execute(params: IBaseTaskParams) {
         super.execute(params);
         try {
-            Logger.log({ message: '(ProjectSetupApplicationCustomizer) ApplyTemplate', level: LogLevel.Info });
             const templatesLibrary = params.hub.web.lists.getByTitle('Prosjektmaler');
             const templates = await templatesLibrary.rootFolder.files.get();
             const template: Schema = await params.hub.web.getFileByServerRelativeUrl(templates[0].ServerRelativeUrl).getJSON();
@@ -22,7 +20,8 @@ export default class ApplyTemplate extends BaseTask {
                 },
                 parameters: { fieldsgroup: "Prosjektportalenkolonner" },
             });
-            await provisioner.applyTemplate(template);
+            // await provisioner.applyTemplate(template, ['SiteFields', 'ContentTypes']);
+            await provisioner.applyTemplate(template, ['ContentTypes']);
         } catch (error) {
             console.log(error);
             throw new BaseTaskError('ApplyTemplate', 'Unknown error');

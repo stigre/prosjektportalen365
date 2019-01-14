@@ -1,7 +1,6 @@
 import { override } from '@microsoft/decorators';
 import { BaseTask, IBaseTaskParams, BaseTaskError } from '../BaseTask';
 import { Logger, LogLevel } from '@pnp/logging';
-import HubSiteService from 'sp-hubsite-service';
 import SpEntityPortalService from 'sp-entityportal-service';
 
 export default class SetupProjectInformation extends BaseTask {
