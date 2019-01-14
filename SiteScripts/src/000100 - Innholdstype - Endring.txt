@@ -4,8 +4,8 @@
         {
             "verb": "createContentType",
             "description": "Opprett et nytt listeelement.",
-            "id": "0x01004785A2C9AAC44D0EBBBB447A7032A643",
-            "name": "Gevinstoppfølging",
+            "id": "0x01001AF93A93F5534B5FBAF750572B11BB7F",
+            "name": "Endring",
             "hidden": false
         }
     ],

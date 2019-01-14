@@ -4,8 +4,8 @@
         {
             "verb": "createContentType",
             "description": "Opprett et nytt listeelement.",
-            "id": "0x01004785A2C9AAC44D0EBBBB447A7032A643",
-            "name": "Gevinstoppfølging",
+            "id": "0x010004EAFF7AFCC94C2680042E6881264120",
+            "name": "Ressursallokering",
             "hidden": false
         }
     ],
