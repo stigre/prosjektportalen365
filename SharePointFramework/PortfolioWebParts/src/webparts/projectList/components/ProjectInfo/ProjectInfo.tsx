@@ -12,13 +12,6 @@ import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBa
 
 export default class ProjectInfo extends React.Component<IProjectInfoProps, IProjectInfoState> {
 
-  private projectsEntity = {
-    listName: 'Prosjekter',
-    contentTypeId: '0x0100805E9E4FEAAB4F0EABAB2600D30DB70C',
-    fieldsGroupName: 'Prosjektportalenkolonner',
-    groupIdFieldName: 'GtGroupId',
-  };
-
   constructor(props) {
     super(props);
 
@@ -65,7 +58,7 @@ export default class ProjectInfo extends React.Component<IProjectInfoProps, IPro
       const { hubSiteId } = pageContext.legacyPageContext;
       const groupId = this.props.showProjectInfo.RawObject.GtGroupId;
       const hubSite = await HubSiteService.GetHubSiteById(pageContext.web.absoluteUrl, hubSiteId);
-      const spEntityPortalService = new SpEntityPortalService({ webUrl: hubSite.url, ...this.projectsEntity });
+      const spEntityPortalService = new SpEntityPortalService({ webUrl: hubSite.url, ...this.props.projectsEntity });
 
       const [entityItem, entityFields, editFormUrl] = await Promise.all([
         spEntityPortalService.GetEntityItemFieldValues(groupId),

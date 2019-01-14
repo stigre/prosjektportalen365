@@ -6,4 +6,10 @@ export interface IProjectListProps {
   web: Web;
   serverRelativeUrl: string;
   context: WebPartContext;
+  projectsEntity: {
+    listName: string;
+    contentTypeId: string;
+    fieldsGroupName: string;
+    groupIdFieldName: string;
+  };
 }

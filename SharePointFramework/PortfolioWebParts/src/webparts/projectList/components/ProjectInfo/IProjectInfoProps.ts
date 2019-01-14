@@ -4,4 +4,10 @@ export interface IProjectInfoProps {
   showProjectInfo?: ProjectListModel;
   onDismiss: any;
   context: WebPartContext;
+  projectsEntity: {
+    listName: string;
+    contentTypeId: string;
+    fieldsGroupName: string;
+    groupIdFieldName: string;
+  };
 }

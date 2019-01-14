@@ -18,6 +18,12 @@ export interface IProjectListWebPartProps {
   absoluteUrl: string;
   serverRelativeUrl: string;
   context: WebPartContext;
+  projectsEntity: {
+    listName: string;
+    contentTypeId: string;
+    fieldsGroupName: string;
+    groupIdFieldName: string;
+  };
 }
 
 export default class ProjectListWebPart extends BaseClientSideWebPart<IProjectListWebPartProps> {
@@ -28,6 +34,7 @@ export default class ProjectListWebPart extends BaseClientSideWebPart<IProjectLi
     const element: React.ReactElement<IProjectListProps> = React.createElement(
       ProjectList,
       {
+        projectsEntity: this.properties.projectsEntity,
         context: this.context,
         web: this.web,
         serverRelativeUrl: this.context.pageContext.web.serverRelativeUrl,
