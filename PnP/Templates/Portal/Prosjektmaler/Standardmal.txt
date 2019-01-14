@@ -1,15 +1,230 @@
 {
     "ContentTypes": [
         {
-            "ID": "0x010088578E7470CC4AA68D5663464831070206",
+            "ID": "0x0100A87AE71CBF2643A6BC9D0948BD2EE897",
+            "Name": "Usikkerhet",
+            "Description": "",
+            "Group": "Prosjektportalen innholdstyper",
+            "FieldRefs": [
+                {
+                    "ID": "325543a5-815d-485d-a9a5-e0773ad762e9",
+                    "Name": "GtProjectPhase"
+                },
+                {
+                    "ID": "c755525b-3716-4ee8-a4f4-f9684808c009",
+                    "Name": "GtRiskProximity"
+                },
+                {
+                    "ID": "6219fd33-2f3c-42f5-9790-174143bfb99c",
+                    "Name": "GtRiskAction"
+                },
+                {
+                    "ID": "04cfd3c0-5f18-4906-bdca-b5f84b693437",
+                    "Name": "GtRiskStrategy"
+                },
+                {
+                    "ID": "2ae541a5-5ecc-481d-afb6-c03a6f1e71b4",
+                    "Name": "GtActionResponsible"
+                },
+                {
+                    "ID": "0e1b295d-2bfb-4ef6-ae92-e72068e56111",
+                    "Name": "GtRiskProbability"
+                },
+                {
+                    "ID": "554d32a0-0148-4b3c-bfc4-f101232ee501",
+                    "Name": "GtRiskConsequence"
+                },
+                {
+                    "ID": "8499bd48-4c5d-43ae-8e27-7968d49ca14f",
+                    "Name": "GtRiskFactor"
+                },
+                {
+                    "ID": "f81ebcb7-8791-44b0-9919-08ed5524b11d",
+                    "Name": "GtRiskProbabilityPostAction"
+                },
+                {
+                    "ID": "00f17233-d4c0-49d0-aebd-5004552abb17",
+                    "Name": "GtRiskConsequencePostAction"
+                },
+                {
+                    "ID": "62f0454d-1150-4d55-86ef-075f786d6e5c",
+                    "Name": "GtRiskFactorPostAction"
+                },
+                {
+                    "ID": "6c2da0dc-77b1-4152-b751-97adf436faa0",
+                    "Name": "GtRiskStatus"
+                },
+                {
+                    "ID": "6bd17911-c48a-4900-be61-54ae26207d78",
+                    "Name": "GtShowInPortfolio"
+                }
+            ]
+        },
+        {
+            "ID": "0x0100A87AE71CBF2643A6BC9D0948BD2EE89701",
+            "Name": "Risiko",
+            "Description": "",
+            "Group": "Prosjektportalen innholdstyper"
+        },
+        {
+            "ID": "0x0100A87AE71CBF2643A6BC9D0948BD2EE89702",
+            "Name": "Mulighet",
+            "Description": "",
+            "Group": "Prosjektportalen innholdstyper"
+        },
+        {
+            "ID": "0x010072C95831F8434782AB2FF6BE3E596F46",
+            "Name": "Interessent",
+            "Description": "",
+            "Group": "Prosjektportalen innholdstyper",
+            "FieldRefs": [
+                {
+                    "ID": "2847b3b0-ed22-4c47-b7c0-3ebfc83dae4a",
+                    "Name": "GtStakeholderGroup"
+                },
+                {
+                    "ID": "970ed1b2-9e71-45aa-8f8d-c391a15f067f",
+                    "Name": "GtStakeholderContext"
+                },
+                {
+                    "ID": "1150d6bd-c9ba-4014-bd74-7d559110841d",
+                    "Name": "GtStakeholderStrategy"
+                },
+                {
+                    "ID": "748ae9b5-223d-4daa-b8f8-dc14284b59db",
+                    "Name": "GtStakeholderInterest"
+                },
+                {
+                    "ID": "475d2ca1-5b8e-4479-96ae-81c0a89354f3",
+                    "Name": "GtStakeholderInfluence"
+                },
+                {
+                    "ID": "2bb7e155-3af4-4353-a460-8da404c4e748",
+                    "Name": "GtStakeholderInfluencePossibilty"
+                },
+                {
+                    "ID": "45d5b378-67ce-4f21-b622-fe54b27c83a6",
+                    "Name": "GtStakeholderActions"
+                }
+            ]
+        },
+        {
+            "ID": "0x010065CE65D51354419EA794C6FACD4FA2EB",
+            "Name": "Kommunikasjonselement",
+            "Description": "",
+            "Group": "Prosjektportalen innholdstyper",
+            "FieldRefs": [
+                {
+                    "ID": "325543a5-815d-485d-a9a5-e0773ad762e9",
+                    "Name": "GtProjectPhase"
+                },
+                {
+                    "ID": "bf340fba-c512-4a07-a543-cdf2d10c578e",
+                    "Name": "GtActionStatus"
+                },
+                {
+                    "ID": "4d5e69a2-2eb5-422c-af04-70b67697cd23",
+                    "Name": "GtActionChannel"
+                },
+                {
+                    "ID": "77450582-a061-4416-af17-6dfb99fa9036",
+                    "Name": "GtActionDate"
+                },
+                {
+                    "ID": "2ae541a5-5ecc-481d-afb6-c03a6f1e71b4",
+                    "Name": "GtActionResponsible"
+                }
+            ]
+        },
+        {
+            "ID": "0x0100486B1F8AEA24486FBA1C1BA9146C360C",
+            "Name": "Sjekkpunkt",
+            "Description": "",
+            "Group": "Prosjektportalen innholdstyper",
+            "FieldRefs": [
+                {
+                    "ID": "325543a5-815d-485d-a9a5-e0773ad762e9",
+                    "Name": "GtProjectPhase"
+                },
+                {
+                    "ID": "249527a3-c7f9-4ea5-9c33-f942c06c9215",
+                    "Name": "GtChecklistStatus"
+                },
+                {
+                    "ID": "509a6bfe-004e-41f9-bd73-9a0e02d5c4a7",
+                    "Name": "GtComment"
+                },
+                {
+                    "ID": "0e82c395-9ed9-43f9-871a-208215b18558",
+                    "Name": "GtSortOrder"
+                }
+            ]
+        },
+        {
+            "ID": "0x0100D7B74DE815F946D3B0F99D19F9B36B68",
+            "Name": "Prosjektleveranse",
+            "Description": "",
+            "Group": "Prosjektportalen innholdstyper",
+            "FieldRefs": [
+                {
+                    "ID": "99430a99-1354-418f-921f-7ddfdb6c0d7f",
+                    "Name": "GtProductDescription"
+                },
+                {
+                    "ID": "219a5cdf-799c-48ee-8869-ea39e4b9a6aa",
+                    "Name": "GtProductStartTime"
+                },
+                {
+                    "ID": "eb78509b-4109-474e-aca8-90d024a960de",
+                    "Name": "GtProductEndTime"
+                },
+                {
+                    "ID": "c8e260c2-6887-4f9e-a713-7200246c3b1c",
+                    "Name": "GtProductQualityExpectations"
+                },
+                {
+                    "ID": "149a30c2-056d-44f0-9cb5-29bfc632ca25",
+                    "Name": "GtProductAcceptanceCriteria"
+                },
+                {
+                    "ID": "3dd7058b-0ba1-46e5-b40a-4f2f542638ea",
+                    "Name": "GtProductQualityTolerance"
+                },
+                {
+                    "ID": "c845028e-3395-49d4-86fe-6d94992c38c2",
+                    "Name": "GtProductQualityResponsible"
+                },
+                {
+                    "ID": "3bcfaa2c-e9bd-4a22-bf65-af4d68c308e7",
+                    "Name": "GtProductAcceptanceMethod"
+                },
+                {
+                    "ID": "dc856c1d-0b98-4d38-9918-d7068f74bd8b",
+                    "Name": "GtProductAcceptanceResponsible"
+                },
+                {
+                    "ID": "ce9474dd-407b-4480-951a-5381857fad6a",
+                    "Name": "GtProductAcceptanceDate"
+                },
+                {
+                    "ID": "4322afd6-5f0f-4a22-819a-cb61668e6ede",
+                    "Name": "GtProductStatus"
+                },
+                {
+                    "ID": "4393ed3c-1599-4ab3-8444-444ab35754bb",
+                    "Name": "GtProductStatusComment"
+                }
+            ]
+        },
+        {
+            "ID": "0x01004EDD18CB92C14EBA97103D909C897810",
             "Name": "Prosjektloggelement",
             "Description": "",
             "Group": "Prosjektportalen innholdstyper",
             "FieldRefs": [
                 {
                     "ID": "2391d165-5d13-46b7-87d2-e32040293210",
-                    "Name": "GtProjectLogType",
-                    "Required": true
+                    "Name": "GtProjectLogType"
                 },
                 {
                     "ID": "49b0ba6b-d1ec-4644-91b7-691a33524c90",
@@ -38,6 +253,76 @@
                 {
                     "ID": "6539658a-b186-402c-b224-9fb41cb48596",
                     "Name": "GtProjectLogActors"
+                }
+            ]
+        },
+        {
+            "ID": "0x01007CFA9140CFBF430EB3A6CE7272E89CFB",
+            "Name": "Infoelement",
+            "Description": "",
+            "Group": "Prosjektportalen innholdstyper",
+            "FieldRefs": [
+                {
+                    "ID": "a3038ecc-69db-4179-b23b-5fdb0535b38c",
+                    "Name": "GtProjectInfoDescription",
+                    "Required": true
+                }
+            ]
+        },
+        {
+            "ID": "0x0101008D35AAEBAF8A44A9B3264C70348EB42B",
+            "Name": "Prosjektdokument",
+            "Description": "",
+            "Group": "Prosjektportalen innholdstyper",
+            "FieldRefs": [
+                {
+                    "ID": "325543a5-815d-485d-a9a5-e0773ad762e9",
+                    "Name": "GtProjectPhase"
+                }
+            ]
+        },
+        {
+            "ID": "0x010200C19C974828B24D469B69C22B2D1FFB63",
+            "Name": "Prosjekthendelse",
+            "Description": "",
+            "Group": "Prosjektportalen innholdstyper"
+        },
+        {
+            "ID": "0x01080024FEF2F7FA284B7CB33E6635D636E380",
+            "Name": "Prosjektoppgave",
+            "Description": "",
+            "Group": "Prosjektportalen innholdstyper",
+            "FieldRefs": [
+                {
+                    "ID": "325543a5-815d-485d-a9a5-e0773ad762e9",
+                    "Name": "GtProjectPhase"
+                }
+            ]
+        },
+        {
+            "ID": "0x01002CC709404B5B4751B6E1CD1CC0A3ED10",
+            "Name": "Milepæl",
+            "Group": "Prosjektportalen innholdstyper",
+            "FieldRefs": [
+                {
+                    "ID": "325543a5-815d-485d-a9a5-e0773ad762e9",
+                    "Name": "GtProjectPhase"
+                },
+                {
+                    "ID": "1fa322ec-6b56-4ea9-a1fd-2623e34083e6",
+                    "Name": "GtMilestonePlannedDate"
+                },
+                {
+                    "ID": "cbf2ae22-2c77-4ad0-a639-07fddfb5cd81",
+                    "Name": "GtMilestoneActualDate"
+                },
+                {
+                    "ID": "17a4b359-5819-4e7c-9894-a154320a661d",
+                    "Name": "GtMilestoneStatus"
+                },
+                {
+                    "ID": "dabdcbab-7bab-4fb2-8d65-85bd03809a8d",
+                    "Name": "GtMilestoneComment"
                 }
             ]
         }
@@ -332,7 +617,56 @@
         {
             "Title": "Fasesjekkliste",
             "Description": "",
-            "Template": 100
+            "Template": 100,
+            "ContentTypesEnabled": true,
+            "RemoveExistingContentTypes": true,
+            "ContentTypeBindings": [
+                {
+                    "ContentTypeID": "0x0100486B1F8AEA24486FBA1C1BA9146C360C"
+                }
+            ],
+            "AdditionalSettings": {
+                "EnableVersioning": true
+            },
+            "Views": [
+                {
+                    "Title": "Alle elementer",
+                    "ViewFields": [
+                        "LinkTitle",
+                        "GtProjectPhase",
+                        "GtChecklistStatus",
+                        "GtComment"
+                    ],
+                    "AdditionalSettings": {
+                        "RowLimit": 50,
+                        "ViewQuery": "<OrderBy><FieldRef Name=\"GtSortOrder\" /><FieldRef Name=\"ID\" /></OrderBy><Where><Neq><FieldRef Name=\"GtChecklistStatus\" /><Value Type=\"Text\">Arkivert</Value></Neq>\n</Where>"
+                    }
+                },
+                {
+                    "Title": "Arkivert",
+                    "ViewFields": [
+                        "LinkTitle",
+                        "GtProjectPhase",
+                        "GtComment"
+                    ],
+                    "AdditionalSettings": {
+                        "RowLimit": 50,
+                        "ViewQuery": "<OrderBy><FieldRef Name=\"GtSortOrder\" /><FieldRef Name=\"ID\" /></OrderBy><Where><Eq><FieldRef Name=\"GtChecklistStatus\" /><Value Type=\"Text\">Arkivert</Value></Eq>\n</Where>"
+                    }
+                },
+                {
+                    "Title": "Per status",
+                    "ViewFields": [
+                        "LinkTitle",
+                        "GtProjectPhase",
+                        "GtComment"
+                    ],
+                    "AdditionalSettings": {
+                        "RowLimit": 50,
+                        "ViewQuery": "<GroupBy Collapse=\"TRUE\" GroupLimit=\"30\">\n  <FieldRef Name=\"GtChecklistStatus\" Ascending=\"FALSE\" />\n</GroupBy>\n<OrderBy><FieldRef Name=\"GtSortOrder\" /><FieldRef Name=\"ID\" />\n</OrderBy>"
+                    }
+                }
+            ]
         },
         {
             "Title": "Informasjon",
