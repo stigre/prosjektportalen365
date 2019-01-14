@@ -4,8 +4,8 @@
         {
             "verb": "createContentType",
             "description": "Opprett et nytt listeelement.",
-            "parentId": "0x01",
-            "name": "Endring",
+            "id": "0x010072C95831F8434782AB2FF6BE3E596F46",
+            "name": "Interessent",
             "hidden": false
         }
     ],

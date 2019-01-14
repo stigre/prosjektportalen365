@@ -3,9 +3,9 @@
     "actions": [
         {
             "verb": "createContentType",
-            "description": "Opprett et nytt listeelement.",
-            "parentId": "0x01",
-            "name": "Endring",
+            "description": "Opprett et nytt dokument.",
+            "id": "0x0101008D35AAEBAF8A44A9B3264C70348EB42B",
+            "name": "Prosjektdokument",
             "hidden": false
         }
     ],

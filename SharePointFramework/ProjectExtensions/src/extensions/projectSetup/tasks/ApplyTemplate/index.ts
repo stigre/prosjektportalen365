@@ -20,6 +20,7 @@ export default class ApplyTemplate extends BaseTask {
                     prefix: '(ProjectSetupApplicationCustomizer) (ApplyTemplate)',
                     activeLogLevel: 1
                 },
+                parameters: { fieldsgroup: "Prosjektportalenkolonner" },
             });
             await provisioner.applyTemplate(template);
         } catch (error) {
