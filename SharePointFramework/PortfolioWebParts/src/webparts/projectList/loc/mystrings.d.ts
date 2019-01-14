@@ -8,6 +8,9 @@ declare interface IProjectListWebPartStrings {
   ProjectManager: string;
   SearchBoxPlaceholderText: string;
   NoSearchResults: string;
+  Loading: string;
+  MissingProperties: string;
+  NoProperties: string;
 }
 
 declare module 'ProjectListWebPartStrings' {

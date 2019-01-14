@@ -8,6 +8,9 @@ define([], function() {
     "ProjectOwner": "Project owner",
     "ProjectManager": "Project manager",
     "SearchBoxPlaceholderText": "Search in all projects...",
-    "NoSearchResults": "No search results"
+    "NoSearchResults": "No search results",
+    "Loading": "Loading...",
+    "MissingProperties": "Projects has missing properties",
+    "NoProperties": "Project has no properties"
   }
 });
