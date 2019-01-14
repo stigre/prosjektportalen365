@@ -15,7 +15,10 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
     if (this.context.pageContext.legacyPageContext.isSiteAdmin) {
       Logger.subscribe(new ConsoleListener());
       Logger.activeLogLevel = LogLevel.Info;
-      sp.setup({ spfxContext: this.context });
+      sp.setup({
+        spfxContext: this.context,
+        sp: { headers: { Accept: "application/json; odata=verbose" } },
+      });
       const topPlaceholder = this.context.placeholderProvider.tryCreateContent(PlaceholderName.Top);
       const progressModal = React.createElement(ProgressModal, { progressIndicatorProps: { label: 'Klargjør prosjektområdet', description: 'Vennligst vent..' } });
       ReactDOM.render(progressModal, topPlaceholder.domElement);

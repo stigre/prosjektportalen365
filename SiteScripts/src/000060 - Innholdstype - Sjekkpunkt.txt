@@ -4,8 +4,8 @@
         {
             "verb": "createContentType",
             "description": "Opprett et nytt listeelement.",
-            "parentId": "0x01",
-            "name": "Endring",
+            "id": "0x0100486B1F8AEA24486FBA1C1BA9146C360C",
+            "name": "Sjekkpunkt",
             "hidden": false
         }
     ],
