@@ -39,6 +39,7 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
       <div className={styles.projectListWebPartContainer}>
         {(this.state.showProjectInfo) ?
           <ProjectInfo
+            projectsEntity={this.props.projectsEntity}
             context={this.props.context}
             showProjectInfo={this.state.showProjectInfo}
             onDismiss={e => this.setState({ showProjectInfo: undefined })} /> : null}
