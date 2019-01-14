@@ -54,23 +54,23 @@ while (-not $CreatedSiteUrl) {
 
 Write-Host "[INFO] Connecting to $CreatedSiteUrl"
 $CreatedSiteConnection = Connect-PnPOnline -Url $CreatedSiteUrl -Credentials $Credentials -ReturnConnection
-# Try {
-#     if ($Invoke.IsPresent) {
-#         Write-Host "[INFO] Invoking Site Design $SiteDesignTitle using Invoke-PnPSiteDesign"
-#         Invoke-PnPSiteDesign -Identity $SiteDesignTitle -Connection $CreatedSiteConnection -ErrorAction Stop
-#     }
-#     else {
-#         if (-not [string]::IsNullOrWhiteSpace($AdminSiteUrl)) {
-#             Write-Host "[INFO] Connecting to $AdminSiteUrl"
-#             Connect-SPOService -Url $AdminSiteUrl -Credential (New-Object System.Management.Automation.PSCredential $UserName, $Password)
-#             $SiteDesign = Get-SPOSiteDesign | Where-Object { $_.Title -eq $SiteDesignTitle }
-#             Write-Host "[INFO] Invoking Site Design $SiteDesignTitle using Add-SPOSiteDesignTask"
-#             Add-SPOSiteDesignTask -SiteDesignId $SiteDesign.Id.Guid -WebUrl $CreatedSiteUrl
-#             Start-Process "chrome.exe" $CreatedSiteUrl
-#         }
-#     }
-# }
-# Catch [Exception] {
-#     Write-Host $_.Exception.Message
-# }
+Try {
+    if ($Invoke.IsPresent) {
+        Write-Host "[INFO] Invoking Site Design $SiteDesignTitle using Invoke-PnPSiteDesign"
+        Invoke-PnPSiteDesign -Identity $SiteDesignTitle -Connection $CreatedSiteConnection -ErrorAction Stop
+    }
+    else {
+        if (-not [string]::IsNullOrWhiteSpace($AdminSiteUrl)) {
+            Write-Host "[INFO] Connecting to $AdminSiteUrl"
+            Connect-SPOService -Url $AdminSiteUrl -Credential (New-Object System.Management.Automation.PSCredential $UserName, $Password)
+            $SiteDesign = Get-SPOSiteDesign | Where-Object { $_.Title -eq $SiteDesignTitle }
+            Write-Host "[INFO] Invoking Site Design $SiteDesignTitle using Add-SPOSiteDesignTask"
+            Add-SPOSiteDesignTask -SiteDesignId $SiteDesign.Id.Guid -WebUrl $CreatedSiteUrl
+            Start-Process "chrome.exe" $CreatedSiteUrl
+        }
+    }
+}
+Catch [Exception] {
+    Write-Host $_.Exception.Message
+}
 Disconnect-PnPOnline -Connection $CreatedSiteConnection

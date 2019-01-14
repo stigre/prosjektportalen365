@@ -3,7 +3,7 @@
     "actions": [
         {
             "verb": "joinHubSite",
-            "hubSiteId": "48616843-6521-4555-9253-6b303cb92443"
+            "hubSiteId": "ad787cb5-faa3-4039-9b20-86271e5db6ef"
         }
     ],
     "$schema": "schema.json",
