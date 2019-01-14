@@ -20,8 +20,7 @@ export default class ApplyTemplate extends BaseTask {
                 },
                 parameters: { fieldsgroup: "Prosjektportalenkolonner" },
             });
-            // await provisioner.applyTemplate(template, ['SiteFields', 'ContentTypes']);
-            await provisioner.applyTemplate(template, ['ContentTypes']);
+            await provisioner.applyTemplate(template);
         } catch (error) {
             console.log(error);
             throw new BaseTaskError('ApplyTemplate', 'Unknown error');

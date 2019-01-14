@@ -41,7 +41,7 @@ $CreatedSiteUrl = $null
 while (-not $CreatedSiteUrl) {
     Try {
         $Title = $SiteUrlTemplate -f $idx
-        Write-Host "[VERBOSE] Attempting to create site $Title"
+        # Write-Host "[VERBOSE] Attempting to create site $Title"
         $CreatedSiteUrl = New-PnPSite -Type TeamSite -Title $Title -Alias $Title -IsPublic:$true -Connection $SiteConnection -ErrorAction Stop 
         Write-Host "[INFO] Successfully created site $CreatedSiteUrl"
         Disconnect-PnPOnline -Connection $SiteConnection
