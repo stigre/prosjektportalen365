@@ -671,48 +671,388 @@
         {
             "Title": "Informasjon",
             "Description": "",
-            "Template": 100
+            "Template": 100,
+            "ContentTypesEnabled": true,
+            "RemoveExistingContentTypes": true,
+            "ContentTypeBindings": [
+                {
+                    "ContentTypeID": "0x01007CFA9140CFBF430EB3A6CE7272E89CFB"
+                }
+            ],
+            "AdditionalSettings": {
+                "EnableVersioning": true
+            },
+            "Views": [
+                {
+                    "Title": "Alle elementer",
+                    "ViewFields": [
+                        "LinkTitle",
+                        "GtProjectInfoDescription"
+                    ],
+                    "AdditionalSettings": {
+                        "RowLimit": 30,
+                        "Paged": true,
+                        "ViewQuery": ""
+                    }
+                }
+            ]
         },
         {
             "Title": "Interessentregister",
             "Description": "",
-            "Template": 100
+            "Template": 100,
+            "ContentTypesEnabled": true,
+            "RemoveExistingContentTypes": true,
+            "ContentTypeBindings": [
+                {
+                    "ContentTypeID": "0x010072C95831F8434782AB2FF6BE3E596F46"
+                }
+            ],
+            "AdditionalSettings": {
+                "EnableVersioning": true
+            },
+            "Views": [
+                {
+                    "Title": "Alle elementer",
+                    "ViewFields": [
+                        "LinkTitle",
+                        "GtStakeholderGroup",
+                        "GtStakeholderContext",
+                        "GtStakeholderStrategy",
+                        "GtStakeholderInterest",
+                        "GtStakeholderInfluence",
+                        "GtStakeholderInfluencePossibilty",
+                        "GtStakeholderActions"
+                    ],
+                    "AdditionalSettings": {
+                        "RowLimit": 30,
+                        "Paged": true,
+                        "ViewQuery": ""
+                    }
+                }
+            ]
         },
         {
             "Title": "Kommunikasjonsplan",
             "Description": "",
-            "Template": 100
+            "Template": 100,
+            "ContentTypesEnabled": true,
+            "RemoveExistingContentTypes": true,
+            "ContentTypeBindings": [
+                {
+                    "ContentTypeID": "0x010065CE65D51354419EA794C6FACD4FA2EB"
+                }
+            ],
+            "AdditionalSettings": {
+                "EnableVersioning": true
+            },
+            "Fields": [
+                "<Field Type=\"LookupMulti\" DisplayName=\"Målgruppe\" List=\"{listid:Interessentregister}\" ShowField=\"Title\" ID=\"{d685f33f-51b5-4e9f-a314-4b3d9467a7e4}\" StaticName=\"GtCommunicationTarget\" Name=\"GtCommunicationTarget\" Mult=\"TRUE\" />"
+            ],
+            "Views": [
+                {
+                    "Title": "Alle elementer",
+                    "ViewFields": [
+                        "LinkTitle",
+                        "GtProjectPhase",
+                        "GtActionDate",
+                        "GtActionResponsible"
+                    ],
+                    "AdditionalSettings": {
+                        "RowLimit": 10,
+                        "Paged": true,
+                        "ViewQuery": ""
+                    }
+                }
+            ]
         },
         {
             "Title": "Milepæler",
             "Description": "",
-            "Template": 100
+            "Template": 100,
+            "ContentTypesEnabled": true,
+            "RemoveExistingContentTypes": true,
+            "ContentTypeBindings": [
+                {
+                    "ContentTypeID": "0x01002CC709404B5B4751B6E1CD1CC0A3ED10"
+                }
+            ],
+            "AdditionalSettings": {
+                "EnableVersioning": true
+            },
+            "Views": [
+                {
+                    "Title": "Alle elementer",
+                    "ViewFields": [
+                        "LinkTitle",
+                        "GtMilestonePlannedDate",
+                        "GtMilestoneActualDate",
+                        "GtMilestoneStatus",
+                        "GtMilestoneComment"
+                    ],
+                    "AdditionalSettings": {
+                        "RowLimit": 30,
+                        "Paged": true,
+                        "ViewQuery": "<OrderBy><FieldRef Name=\"GtMilestonePlannedDate\" Ascending=\"TRUE\" /></OrderBy>"
+                    }
+                }
+            ]
         },
         {
             "Title": "Prosjektlogg",
             "Description": "",
-            "Template": 100
+            "Template": 100,
+            "ContentTypesEnabled": true,
+            "RemoveExistingContentTypes": true,
+            "ContentTypeBindings": [
+                {
+                    "ContentTypeID": "0x01004EDD18CB92C14EBA97103D909C897810"
+                }
+            ],
+            "AdditionalSettings": {
+                "EnableVersioning": true
+            },
+            "Fields": [
+                "<Field Type=\"Lookup\" DisplayName=\"Påvirker leveranse\" List=\"{listid:Prosjektleveranser}\" ShowField=\"Title\" ID=\"{022cc93f-13df-4420-bd47-55e4fdae5d18}\" StaticName=\"GtProjectLogProductLookup\" Name=\"GtProjectLogProductLookup\" />"
+            ],
+            "Views": [
+                {
+                    "Title": "Alle elementer",
+                    "ViewFields": [
+                        "LinkTitle",
+                        "GtProjectLogType",
+                        "GtProjectLogReporter",
+                        "GtProjectLogResponsible",
+                        "GtProjectLogConsequence",
+                        "GtProjectLogRecommendation",
+                        "GtProjectLogExperience"
+                    ],
+                    "AdditionalSettings": {
+                        "RowLimit": 30,
+                        "Paged": true,
+                        "ViewQuery": ""
+                    }
+                }
+            ]
         },
         {
             "Title": "Prosjektleveranser",
             "Description": "",
-            "Template": 100
+            "Template": 100,
+            "ContentTypesEnabled": true,
+            "RemoveExistingContentTypes": true,
+            "ContentTypeBindings": [
+                {
+                    "ContentTypeID": "0x0100D7B74DE815F946D3B0F99D19F9B36B68"
+                }
+            ],
+            "AdditionalSettings": {
+                "EnableVersioning": true
+            },
+            "Fields": [
+                "<Field Type=\"LookupMulti\" DisplayName=\"Interessent(er)\" List=\"{listid:Interessentregister}\" ShowField=\"Title\" ID=\"{6d90e0b6-73e6-48fb-aa1e-b897b214f934}\" Name=\"GtProductInteressent\" StaticName=\"GtProductInteressent\" Name=\"GtProductInteressent\" Mult=\"TRUE\" />"
+            ],
+            "Views": [
+                {
+                    "Title": "Alle elementer",
+                    "ViewFields": [
+                        "LinkTitle",
+                        "GtProductDescription",
+                        "GtProductStartTime",
+                        "GtProductEndTime",
+                        "GtProductStatus",
+                        "GtProductStatusComment",
+                        "GtProductPhase"
+                    ],
+                    "AdditionalSettings": {
+                        "RowLimit": 30,
+                        "Paged": true,
+                        "ViewQuery": ""
+                    }
+                },
+                {
+                    "Title": "Leveransefase",
+                    "ViewFields": [
+                        "LinkTitle",
+                        "GtProductDescription",
+                        "GtProductStartTime",
+                        "GtProductEndTime",
+                        "GtProductStatus",
+                        "GtProductStatusComment"
+                    ],
+                    "AdditionalSettings": {
+                        "RowLimit": 30,
+                        "Paged": true,
+                        "ViewQuery": "<GroupBy Collapse=\"FALSE\" GroupLimit=\"30\"><FieldRef Name=\"GtProductPhase\" /></GroupBy>"
+                    }
+                }
+            ]
         },
         {
             "Title": "Usikkerhet",
             "Description": "",
-            "Template": 100
+            "Template": 100,
+            "ContentTypesEnabled": true,
+            "RemoveExistingContentTypes": true,
+            "ContentTypeBindings": [
+                {
+                    "ContentTypeID": "0x0100A87AE71CBF2643A6BC9D0948BD2EE89701"
+                },
+                {
+                    "ContentTypeID": "0x0100A87AE71CBF2643A6BC9D0948BD2EE89702"
+                }
+            ],
+            "AdditionalSettings": {
+                "EnableVersioning": true
+            },
+            "Views": [
+                {
+                    "Title": "Alle elementer",
+                    "ViewFields": [
+                        "ID",
+                        "LinkTitle",
+                        "GtRiskProbability",
+                        "GtRiskConsequence",
+                        "GtRiskFactor",
+                        "GtRiskStatus",
+                        "GtRiskStrategy",
+                        "GtRiskAction",
+                        "GtRiskProbabilityPostAction",
+                        "GtRiskConsequencePostAction",
+                        "GtRiskFactorPostAction",
+                        "Modified"
+                    ],
+                    "AdditionalSettings": {
+                        "RowLimit": 100,
+                        "Paged": true,
+                        "ViewQuery": "<FieldRef Name=\"GtRiskFactor\" Ascending=\"FALSE\" />"
+                    }
+                },
+                {
+                    "Title": "Aktuell risiko",
+                    "ViewFields": [
+                        "ID",
+                        "LinkTitle",
+                        "GtRiskProbability",
+                        "GtRiskConsequence",
+                        "GtRiskFactor",
+                        "GtRiskStatus",
+                        "GtRiskStrategy",
+                        "GtRiskAction",
+                        "Modified"
+                    ],
+                    "AdditionalSettings": {
+                        "RowLimit": 100,
+                        "Paged": true,
+                        "ViewQuery": "<GroupBy Collapse=\"TRUE\" GroupLimit=\"30\"><FieldRef Name=\"GtRiskStatus\" Ascending=\"FALSE\" /></GroupBy><OrderBy><FieldRef Name=\"GtRiskFactor\" Ascending=\"FALSE\" /></OrderBy><Where><Neq>  <FieldRef Name=\"GtRiskStatus\" />  <Value Type=\"Text\">Ikke lenger aktuell</Value></Neq></Where>"
+                    }
+                },
+                {
+                    "Title": "Uakseptabel risiko",
+                    "ViewFields": [
+                        "ID",
+                        "LinkTitle",
+                        "GtRiskProbability",
+                        "GtRiskConsequence",
+                        "GtRiskFactor",
+                        "GtRiskStatus",
+                        "GtRiskStrategy",
+                        "GtRiskAction",
+                        "Modified"
+                    ],
+                    "AdditionalSettings": {
+                        "RowLimit": 100,
+                        "Paged": true,
+                        "ViewQuery": "<GroupBy Collapse=\"TRUE\" GroupLimit=\"30\"><FieldRef Name=\"GtRiskStatus\" Ascending=\"FALSE\" /></GroupBy><OrderBy><FieldRef Name=\"GtRiskFactor\" Ascending=\"FALSE\" /></OrderBy><Where><And>  <Neq>    <FieldRef Name=\"GtRiskStatus\" />    <Value Type=\"Text\">Ikke lenger aktuell</Value>  </Neq>  <Gt>    <FieldRef Name=\"GtRiskFactor\" />    <Value Type=\"Number\">10</Value>  </Gt></And></Where>"
+                    }
+                },
+                {
+                    "Title": "Avklart risiko",
+                    "ViewFields": [
+                        "ID",
+                        "LinkTitle",
+                        "GtRiskProbability",
+                        "GtRiskConsequence",
+                        "GtRiskFactor",
+                        "GtRiskStatus",
+                        "GtRiskStrategy",
+                        "GtRiskAction",
+                        "GtRiskProbabilityPostAction",
+                        "GtRiskConsequencePostAction",
+                        "GtRiskFactorPostAction",
+                        "Modified"
+                    ],
+                    "AdditionalSettings": {
+                        "RowLimit": 100,
+                        "Paged": true,
+                        "ViewQuery": "<OrderBy><FieldRef Name=\"GtRiskFactor\" Ascending=\"FALSE\" /></OrderBy><Where><Eq>  <FieldRef Name=\"GtRiskStatus\" />  <Value Type=\"Text\">Ikke lenger aktuell</Value></Eq></Where>"
+                    }
+                },
+                {
+                    "Title": "Uten ansvarlig",
+                    "ViewFields": [
+                        "ID",
+                        "LinkTitle",
+                        "GtRiskFactor",
+                        "GtRiskStatus",
+                        "GtRiskAction",
+                        "GtActionResponsible",
+                        "Modified"
+                    ],
+                    "AdditionalSettings": {
+                        "RowLimit": 100,
+                        "Paged": true,
+                        "ViewQuery": " <OrderBy><FieldRef Name=\"GtRiskFactor\" Ascending=\"FALSE\" /></OrderBy><Where><IsNull>  <FieldRef Name=\"GtActionResponsible\" /></IsNull></Where>"
+                    }
+                }
+            ]
         },
         {
             "Title": "Møtekalender",
             "Description": "",
-            "Template": 106
+            "Template": 106,
+            "ContentTypesEnabled": true,
+            "RemoveExistingContentTypes": true,
+            "ContentTypeBindings": [
+                {
+                    "ContentTypeID": "0x010200C19C974828B24D469B69C22B2D1FFB63"
+                }
+            ],
+            "AdditionalSettings": {
+                "EnableVersioning": true
+            }
         },
         {
             "Title": "Prosjektdokumenter",
             "Description": "",
             "Template": 101,
-            "ContentTypesEnabled": false
+            "ContentTypesEnabled": false,
+            "RemoveExistingContentTypes": true,
+            "ContentTypeBindings": [
+                {
+                    "ContentTypeID": "0x0101008D35AAEBAF8A44A9B3264C70348EB42B"
+                }
+            ],
+            "AdditionalSettings": {
+                "EnableVersioning": true
+            },
+            "Views": [
+                {
+                    "Title": "Alle dokumenter",
+                    "ViewFields": [
+                        "DocIcon",
+                        "LinkFilename",
+                        "GtProjectPhase",
+                        "Modified",
+                        "Editor"
+                    ],
+                    "AdditionalSettings": {
+                        "RowLimit": 30,
+                        "Paged": true,
+                        "ViewQuery": ""
+                    }
+                }
+            ]
         }
     ]
 }
