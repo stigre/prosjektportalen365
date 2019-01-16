@@ -2,7 +2,7 @@ import * as React from 'react';
 import styles from './ProjectInformation.module.scss';
 import { DisplayMode } from '@microsoft/sp-core-library';
 import { IProjectInformationProps } from './IProjectInformationProps';
-import { IProjectInformationState } from './IProjectInformationState';
+import { IProjectInformationState, IProjectInformationData } from './IProjectInformationState';
 import { WebPartTitle } from "@pnp/spfx-controls-react/lib/WebPartTitle";
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner';
@@ -21,14 +21,15 @@ export default class ProjectInformation extends React.Component<IProjectInformat
 
   constructor(props: IProjectInformationProps) {
     super(props);
-    this.state = { properties: [], isLoading: true };
+    this.state = { isLoading: true, data: {} };
   }
 
   public async componentDidMount() {
     try {
-      const { properties, editFormUrl, itemId } = await this.fetchData();
-      this.setState({ properties, editFormUrl, itemId, isLoading: false });
+      const data = await this.fetchData();
+      this.setState({ data, isLoading: false });
     } catch (err) {
+      console.log(err);
       this.setState({ isLoading: false });
     }
   }
@@ -51,7 +52,7 @@ export default class ProjectInformation extends React.Component<IProjectInformat
                     <div className={styles.editPropertiesButton} hidden={this.props.hideEditPropertiesButton}>
                       <DefaultButton
                         text={strings.EditPropertiesText}
-                        href={this.state.editFormUrl}
+                        href={this.state.data.editFormUrl}
                         iconProps={{ iconName: 'Edit' }} />
                     </div>
                   </div>
@@ -64,24 +65,28 @@ export default class ProjectInformation extends React.Component<IProjectInformat
   }
 
   private renderProperties() {
-    const propertiesToRender = this.state.properties.filter(p => !p.empty && p.showInDisplayForm);
-    const hasMissingProps = this.state.properties.filter(p => p.required && p.empty).length > 0;
-    if (hasMissingProps) {
-      return <MessageBar messageBarType={MessageBarType.error}>{strings.MissingPropertiesMessage}</MessageBar>;
+    if (this.state.data.properties) {
+      const propertiesToRender = this.state.data.properties.filter(p => !p.empty && p.showInDisplayForm);
+      const hasMissingProps = this.state.data.properties.filter(p => p.required && p.empty).length > 0;
+      if (hasMissingProps) {
+        return <MessageBar messageBarType={MessageBarType.error}>{strings.MissingPropertiesMessage}</MessageBar>;
+      }
+      if (propertiesToRender.length === 0) {
+        return <MessageBar>{strings.NoPropertiesMessage}</MessageBar>;
+      }
+      return (
+        <div>
+          {propertiesToRender.map((model, key) => {
+            return <ProjectProperty key={key} model={model} />;
+          })}
+        </div>
+      );
+    } else {
+      return null;
     }
-    if (propertiesToRender.length === 0) {
-      return <MessageBar>{strings.NoPropertiesMessage}</MessageBar>;
-    }
-    return (
-      <div>
-        {propertiesToRender.map((model, key) => {
-          return <ProjectProperty key={key} model={model} />;
-        })}
-      </div>
-    );
   }
 
-  private async fetchData() {
+  private async fetchData(): Promise<IProjectInformationData> {
     try {
       const { context } = this.props;
       const { pageContext } = context;
@@ -94,14 +99,13 @@ export default class ProjectInformation extends React.Component<IProjectInformat
         spEntityPortalService.GetEntityEditFormUrl(groupId, pageContext.web.absoluteUrl),
       ]);
       let properties = Object.keys(entityItem)
-        .map(n => ({
-          field: entityFields.filter(fld => fld.InternalName === n)[0],
-          value: entityItem[n],
+        .map(fieldName => ({
+          field: entityFields.filter(fld => fld.InternalName === fieldName)[0],
+          value: entityItem[fieldName],
         }))
         .filter(prop => prop.field)
         .map(({ field, value }) => new ProjectPropertyModel(field, value));
       const data = { properties, editFormUrl, itemId: entityItem.Id };
-
       return data;
     } catch (error) {
       throw error;

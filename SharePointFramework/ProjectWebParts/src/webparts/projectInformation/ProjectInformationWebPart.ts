@@ -44,20 +44,6 @@ export default class ProjectInformationWebPart extends BaseClientSideWebPart<IPr
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
-    return {
-      pages: [
-        {
-          header: {
-            description: ''
-          },
-          groups: [
-            {
-              groupName: '',
-              groupFields: []
-            }
-          ]
-        }
-      ]
-    };
+    return { pages: [] };
   }
 }

@@ -20,7 +20,13 @@
       },
       "officeFabricIconFontName": "Page",
       "properties": {
-        "title": "Prosjektinformasjon"
+        "title": "Prosjektinformasjon",
+        "entity": {
+          "listName": "Prosjekter",
+          "contentTypeId": "0x0100805E9E4FEAAB4F0EABAB2600D30DB70C",
+          "fieldsGroupName": "Prosjektportalenkolonner",
+          "groupIdFieldName": "GtGroupId"
+        }
       }
     }
   ]
