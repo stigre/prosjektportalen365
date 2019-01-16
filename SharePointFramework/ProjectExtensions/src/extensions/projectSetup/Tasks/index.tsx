@@ -4,6 +4,8 @@ import ApplyTemplate from './ApplyTemplate';
 export * from './BaseTask';
 
 const Tasks = [
+    new PlannerConfiguration(),
+    new SetupProjectInformation(),
     new ApplyTemplate(),
 ];
 
