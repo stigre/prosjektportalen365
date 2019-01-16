@@ -21,11 +21,8 @@ export const Body = (props: IBodyProps) => {
         case View.ChangingPhase: {
             return <ChangingPhaseView newPhase={props.newPhase} />;
         }
-        case View.Confirm: {
-            return <div className="inner"></div>;
-        }
         default: {
-            return <div className="inner"></div>;
+            return null;
         }
     }
 };

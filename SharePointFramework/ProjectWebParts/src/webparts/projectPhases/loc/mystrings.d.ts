@@ -42,6 +42,8 @@ declare interface IProjectPhasesWebPartStrings {
   StatusStillOpen: string;
   StatusClosed: string;
   CommentLabel: string;
+  ChangingPhaseLabel: string;
+  ChangingPhaseDescription: string;
 }
 
 declare module 'ProjectPhasesWebPartStrings' {

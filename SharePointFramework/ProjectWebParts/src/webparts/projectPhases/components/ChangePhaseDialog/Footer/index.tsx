@@ -10,26 +10,26 @@ import * as strings from 'ProjectPhasesWebPartStrings';
 /**
  * Footer
  */
-export const Footer = (props: IFooterProps) => {
+export const Footer = ({ isLoading, newPhase, currentView, onChangeView, onChangePhase, onDismiss }: IFooterProps) => {
     let actions = [];
 
-    switch (props.currentView) {
+    switch (currentView) {
         case View.Initial: {
             actions.push({
                 text: strings.Skip,
-                disabled: props.isLoading,
-                onClick: () => props.onChangeView(View.Confirm),
+                disabled: isLoading,
+                onClick: () => onChangeView(View.Confirm),
             });
         }
             break;
         case View.Confirm: {
             actions.push({
                 text: strings.Yes,
-                disabled: props.isLoading,
+                disabled: isLoading,
                 onClick: async () => {
-                    props.onChangeView(View.ChangingPhase);
-                    await props.onChangePhase(props.newPhase);
-                    props.onDismiss(null, true);
+                    onChangeView(View.ChangingPhase);
+                    await onChangePhase(newPhase);
+                    onDismiss(null, true);
                 },
             });
         }
@@ -37,10 +37,8 @@ export const Footer = (props: IFooterProps) => {
         case View.Summary: {
             actions.push({
                 text: strings.MoveOn,
-                disabled: props.isLoading,
-                onClick: () => {
-                    props.onChangeView(View.Confirm);
-                },
+                disabled: isLoading,
+                onClick: () => onChangeView(View.Confirm),
             });
         }
             break;
@@ -51,10 +49,7 @@ export const Footer = (props: IFooterProps) => {
             {actions.map((buttonProps, index) => {
                 return <PrimaryButton key={`FooterAction_${index}`} {...buttonProps} />;
             })}
-            <DefaultButton
-                text={strings.Close}
-                disabled={props.isLoading}
-                onClick={props.onDismiss} />
+            <DefaultButton text={strings.Close} disabled={isLoading} onClick={onDismiss} />
         </DialogFooter>
     );
 };

@@ -5,7 +5,6 @@ import { taxonomy } from "@pnp/sp-taxonomy";
 import { Spinner } from 'office-ui-fabric-react/lib/Spinner';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
-import ConfirmPhaseDialog from './ConfirmPhaseDialog';
 import ChangePhaseDialog from './ChangePhaseDialog';
 import ProjectPhaseCallout from './ProjectPhaseCallout';
 import Phase from "../models/Phase";

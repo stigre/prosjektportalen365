@@ -42,6 +42,8 @@ define([], function () {
     StatusOpen: "Åpen",
     StatusStillOpen: "Forsatt åpen",
     StatusClosed: "Utført",
-    CommentLabel: "Kommentar"
+    CommentLabel: "Kommentar",
+    ChangingPhaseLabel: "Vennligst vent",
+    ChangingPhaseDescription: "Endrer fase til {0}"
   }
 });
