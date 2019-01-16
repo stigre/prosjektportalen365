@@ -22,9 +22,26 @@ define([], function () {
     DocumentsListName: "Prosjektdokumenter",
     RiskRegisterListName: "Usikkerhet",
     TasksListName: "Oppgaver",
+    PhaseChecklistName: 'Fasesjekkliste',
     Yes: "Ja",
     No: "Nei",
+    MoveOn: "Gå videre",
+    Close: "Lukk",
+    Skip: "Hopp over alle",
     CheckPointsMarkedAsText: "sjekkpunkter markert som",
-    GoToPhaseChecklist: "Gå til fasesjekklisten"
+    GoToPhaseChecklist: "Gå til fasesjekklisten",
+    ChangePhaseText: "Endre til denne fasen",
+    ConfirmChangePhase: "Vil du endre fase til {0}?",
+    PhaseChecklistViewUrl: "../Lists/Fasesjekkliste/AllItems.aspx",
+    CheckpointNotRelevantTooltipCommentEmpty: "Du kan ikke sette sjekkpunktet som 'Ikke relevant' uten å legge inn enn kommentar.",
+    CheckpointNotRelevantTooltip: "Sjekkpunktet er ikke relevant",
+    CheckpointStillOpenTooltipCommentEmpty: "Du kan ikke sette sjekkpunktet som 'Fortsatt åpen' uten å legge inn enn kommentar.",
+    CheckpointStillOpenTooltip: "Sjekkpunktet er forsatt åpent",
+    CheckpointDoneTooltip: "Sjekkpunktet er utført",
+    StatusNotRelevant: "Ikke relevant",
+    StatusOpen: "Åpen",
+    StatusStillOpen: "Forsatt åpen",
+    StatusClosed: "Utført",
+    CommentLabel: "Kommentar"
   }
 });

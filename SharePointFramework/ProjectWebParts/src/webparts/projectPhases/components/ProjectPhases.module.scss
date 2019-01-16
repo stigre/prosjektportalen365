@@ -6,7 +6,7 @@
       display: inline-block;
       height: 100px;
       vertical-align: top;
-      background-color: #2777b8;
+      background-color: "[theme: themePrimary, default: #2777b8]";
       transition: background-color 1s ease 0.2s;
       color: $ms-color-white;
       box-sizing: border-box;
@@ -17,10 +17,10 @@
       }
 
       &.phaseItemActive, &:hover {
-        background-color: #8E8277;
+        background-color: "[theme: themeTertiary, default: #8E8277]";
         transition: background-color 1s ease 0.2s;
         &:after {                
-          border-left-color: #8E8277;
+          border-left-color: "[theme: themeTertiary, default: #8E8277]";
           transition: border-left-color 1s ease 0.2s;
         }
       }
@@ -45,7 +45,7 @@
       }
       &:after {
         right: -50px;     
-        border-left-color: #2777b8;
+        border-left-color: "[theme: themePrimary, default: #2777b8]";
         transition: border-left-color 1s ease 0.2s;
         z-index: 20;
       }

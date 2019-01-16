@@ -1,14 +1,18 @@
 import Phase from "../models/Phase";
-import { CheckPointStatus } from "./CheckPointStatus";
+import { ChecklistData } from "./ChecklistData";
+
+export interface IProjectPhasesData {
+  phases?: Array<Phase>;
+  currentPhase?: Phase;  
+  checklistData?:ChecklistData;
+  phaseTextField?: string;
+}
 
 export interface IProjectPhasesState {
   isLoading: boolean;
-  currentPhase?: Phase;
-  phases?: Array<Phase>;
-  checkPointStatus?:CheckPointStatus;
+  data: IProjectPhasesData;
   confirmPhase?: Phase;
   isChangingPhase?: boolean;
   showPhaseChangeMessage?: boolean;
   phaseMouseOver?: { htmlElement: EventTarget & HTMLDivElement, model: Phase };
-  phaseTextField?: string;
 }

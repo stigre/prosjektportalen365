@@ -21,10 +21,27 @@ declare interface IProjectPhasesWebPartStrings {
   DocumentsListName: string;
   RiskRegisterListName: string;
   TasksListName: string;
+  PhaseChecklistName: string;
   Yes: string;
   No: string;
+  MoveOn: string;
+  Close: string;
+  Skip: string;
   CheckPointsMarkedAsText: string;
   GoToPhaseChecklist: string;
+  ChangePhaseText: string;
+  ConfirmChangePhase: string;
+  PhaseChecklistViewUrl: string;
+  CheckpointNotRelevantTooltipCommentEmpty: string;
+  CheckpointNotRelevantTooltip: string;
+  CheckpointStillOpenTooltipCommentEmpty: string;
+  CheckpointStillOpenTooltip: string;
+  CheckpointDoneTooltip: string;
+  StatusNotRelevant: string;
+  StatusOpen: string;
+  StatusStillOpen: string;
+  StatusClosed: string;
+  CommentLabel: string;
 }
 
 declare module 'ProjectPhasesWebPartStrings' {

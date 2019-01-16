@@ -3,7 +3,7 @@
   "id": "4449d3dc-fa58-4982-b87c-5a893114e7b7",
   "alias": "ProjectPhasesWebPart",
   "componentType": "WebPart",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "manifestVersion": 2,
   "requiresCustomScript": false,
   "preconfiguredEntries": [
@@ -19,7 +19,25 @@
         "default": " "
       },
       "officeFabricIconFontName": "Page",
-      "properties": {}
+      "properties": {
+        "description": "",
+        "phaseSubTextProperty": "",
+        "phaseField": "Fase",
+        "automaticReload": true,
+        "confirmPhaseChange": true,
+        "reloadTimeout": 0,
+        "updateViewsDocuments": false,
+        "updateViewsTasks": false,
+        "updateViewsRisks": false,
+        "gutter": 15,
+        "fontSize": 13,
+        "entity": {
+          "listName": "Prosjekter",
+          "contentTypeId": "0x0100805E9E4FEAAB4F0EABAB2600D30DB70C",
+          "fieldsGroupName": "Prosjektportalenkolonner",
+          "groupIdFieldName": "GtGroupId"
+        }
+      }
     }
   ]
 }

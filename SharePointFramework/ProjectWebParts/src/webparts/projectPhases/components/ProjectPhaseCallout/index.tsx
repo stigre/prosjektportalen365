@@ -29,7 +29,7 @@ export default class ProjectPhaseCallout extends React.Component<IProjectPhaseCa
      * Renders the <ProjectPhaseCallout /> component
      */
     public render(): JSX.Element {
-        const { htmlElement, model: { term, checkPointStatus } } = this.props.phase;
+        const { htmlElement, model } = this.props.phase;
         return (
             <Callout
                 gapSpace={0}
@@ -39,19 +39,20 @@ export default class ProjectPhaseCallout extends React.Component<IProjectPhaseCa
                 hidden={false}>
                 <div className={styles.projectPhaseCallout}>
                     <div className={styles.header}>
-                        <p className={styles.title}>{term.Name}</p>
+                        <p className={styles.title}>{model.name}</p>
                     </div>
                     <div className={styles.inner}>
                         <div className={styles.content}>
-                            <p className={styles.subText}>{term.LocalCustomProperties.PhasePurpose}</p>
-                            <hr />
+                            <p className={styles.subText}>{model.term.LocalCustomProperties.PhasePurpose}</p>
                             <div>
-                                {Object.keys(checkPointStatus).map(status => {
-                                    return <div className={styles.addText}><span>{checkPointStatus[status]} {strings.CheckPointsMarkedAsText} {status}</span></div>;
-                                })}
+                                <div className={styles.checkPointStatus} hidden={Object.keys(model.checklistData.stats).length === 0}>
+                                    {Object.keys(model.checklistData.stats).map(status => {
+                                        return <div className={styles.addText}><span>{model.checklistData.stats[status]} {strings.CheckPointsMarkedAsText} {status}</span></div>;
+                                    })}
+                                </div>
                                 <div className={styles.addText}><a href={this.getFilteredPhaseChecklistViewUrl()}>{strings.GoToPhaseChecklist}</a></div>
+                                <div className={styles.addText}><a href='#' onClick={_ => this.props.onChangePhase(this.props.phase.model)}>{strings.ChangePhaseText}</a></div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -60,6 +61,6 @@ export default class ProjectPhaseCallout extends React.Component<IProjectPhaseCa
     }
 
     protected getFilteredPhaseChecklistViewUrl(): string {
-        return `${this.props.phaseChecklistViewUrl}?FilterField1=GtProjectPhase&FilterValue1=${this.props.phase.model.term.Name}`;
+        return `${strings.PhaseChecklistViewUrl}?FilterField1=GtProjectPhase&FilterValue1=${this.props.phase.model.term.Name}`;
     }
 }
