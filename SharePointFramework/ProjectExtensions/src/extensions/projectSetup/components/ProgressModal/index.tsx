@@ -4,8 +4,6 @@ import { Modal } from 'office-ui-fabric-react/lib/Modal';
 import { ProgressIndicator } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import { IProgressModalProps } from './IProgressModalProps';
 
-export { IProgressModalProps };
-
 export default class ProgressModal extends React.Component<IProgressModalProps, {}> {
     public render(): React.ReactElement<IProgressModalProps> {
         return (
@@ -21,3 +19,5 @@ export default class ProgressModal extends React.Component<IProgressModalProps, 
         );
     }
 }
+
+export { IProgressModalProps };

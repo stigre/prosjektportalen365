@@ -1,13 +1,11 @@
 import { ApplicationCustomizerContext } from '@microsoft/sp-application-base';
 import { IProjectSetupApplicationCustomizerProperties } from '../IProjectSetupApplicationCustomizerProperties';
-import { IHubSite } from 'sp-hubsite-service';
-import ProgressModal, { IProgressModalProps } from '../components/ProgressModal';
+import IProjectSetupApplicationCustomizerData from '../IProjectSetupApplicationCustomizerData';
 
 export interface IBaseTaskParams {
     context: ApplicationCustomizerContext;
     properties: IProjectSetupApplicationCustomizerProperties;
-    groupId: string;
-    hub?: IHubSite;
+    data: IProjectSetupApplicationCustomizerData;
 }
 
 export class BaseTaskError {
@@ -23,11 +21,12 @@ export class BaseTaskError {
 export class BaseTask {
     public params: IBaseTaskParams;
 
-    constructor() {
+    constructor(public name?: string) {
+        this.name = name;
         this.params = null;
     }
 
-    public async execute(params: IBaseTaskParams): Promise<void> {
+    public async execute(params: IBaseTaskParams, _onProgress?: (status: string) => void): Promise<void> {
         this.params = params;
     }
 }
