@@ -46,10 +46,7 @@ export default class TemplateSelectModal extends React.Component<ITemplateSelect
                                 <div className={styles.listContentList}>
                                     {this.props.data.listContentConfig.map((lcc, idx) => (
                                         <div key={`${idx}`} className={styles.listContentItem}>
-                                            <Toggle
-                                                label={lcc.title}
-                                                defaultChecked={lcc.isDefault}
-                                                onChanged={checked => this.onListContentItemToggle(lcc, checked)} />
+                                            <Toggle label={lcc.title} defaultChecked={lcc.isDefault} onChanged={checked => this.onListContentItemToggle(lcc, checked)} />
                                         </div>
                                     ))}
                                 </div>
@@ -59,9 +56,7 @@ export default class TemplateSelectModal extends React.Component<ITemplateSelect
                                 <div className={styles.extensionsList}>
                                     {this.props.data.extensions.map((ext, idx) => (
                                         <div key={`${idx}`} className={styles.extensionItem}>
-                                            <Toggle
-                                                label={ext.title}
-                                                onChanged={checked => this.onExtensionItemToggle(ext, checked)} />
+                                            <Toggle label={ext.title} onChanged={checked => this.onExtensionItemToggle(ext, checked)} />
                                         </div>
                                     ))}
                                 </div>

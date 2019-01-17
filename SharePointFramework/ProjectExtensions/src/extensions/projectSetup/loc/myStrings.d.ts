@@ -15,6 +15,8 @@ declare interface IProjectSetupApplicationCustomizerStrings {
   ProgressModalDescription: string;
   TemplateSelectModalFooterText: string;
   ApplyExtensionText: string;
+  CopyListDataText: string;
+  EditPropertiesLinkText: string;
 }
 
 declare module 'ProjectSetupApplicationCustomizerStrings' {

@@ -18,7 +18,7 @@ dependencies:
   pnp-js-provisioning: 0.9.26
   react: 16.3.2
   react-dom: 16.3.2
-  sp-entityportal-service: 0.2.0
+  sp-entityportal-service: 0.3.2
   sp-hubsite-service: 0.1.0
   string-format: 2.0.0
 devDependencies:
@@ -9971,15 +9971,15 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
-  /sp-entityportal-service/0.2.0:
+  /sp-entityportal-service/0.3.2:
     dependencies:
-      '@pnp/common': 1.2.7
-      '@pnp/logging': 1.2.7
-      '@pnp/odata': /@pnp/odata/1.2.7/2f60dda3223b9f76cd6b54bcd199880e
-      '@pnp/sp': /@pnp/sp/1.2.7/5e4bfbec60dd1a26b5584e8bd12afffd
+      '@pnp/common': 1.2.8
+      '@pnp/logging': 1.2.8
+      '@pnp/odata': /@pnp/odata/1.2.8/82a89168aacb3c85a1a4cf893f3df09a
+      '@pnp/sp': /@pnp/sp/1.2.8/a5b008a2c6ae6c74ebd8838b8c712611
     dev: false
     resolution:
-      integrity: sha512-s5KW0Wz4O09IrfvCSpF+z5TUPcLSverkBHJoEdM/9Ev90POrV4KVIE5MY/d/h4OSG/P7fD8D/yfeXwmPbtfr3g==
+      integrity: sha512-ay7MLwstnTdZ9ikpEQJm1OdwMT5ZWaaAmybclxWS3IP1Z+K3UV4JqpmCEn54No3v6JWb8xv/cZiFDqdmXcwhmA==
   /sp-hubsite-service/0.1.0:
     dependencies:
       '@pnp/common': 1.2.7
@@ -11883,7 +11883,7 @@ specifiers:
   pnp-js-provisioning: ^0.9.26
   react: 16.3.2
   react-dom: 16.3.2
-  sp-entityportal-service: ^0.2.0
+  sp-entityportal-service: ^0.3.2
   sp-hubsite-service: ^0.1.0
   spfx-pkgdeploy: ^0.2.1
   string-format: ^2.0.0

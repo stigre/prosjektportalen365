@@ -1,6 +1,7 @@
 import { override } from '@microsoft/decorators';
-import { BaseTask, IBaseTaskParams } from '../BaseTask';
+import { BaseTask } from '../BaseTask';
 import { Logger, LogLevel } from '@pnp/logging';
+import { IBaseTaskParams } from '../IBaseTaskParams';
 
 export default class PlannerConfiguration extends BaseTask {
     constructor() {
@@ -8,8 +9,8 @@ export default class PlannerConfiguration extends BaseTask {
     }
 
     @override
-    public async execute(params: IBaseTaskParams) {
-        super.execute(params);
+    public async execute(params: IBaseTaskParams, _onProgress: (status: string) => void): Promise<IBaseTaskParams> {
         Logger.log({ message: '(ProjectSetupApplicationCustomizer) PlannerConfiguration', level: LogLevel.Info });
+        return params;
     }
 }

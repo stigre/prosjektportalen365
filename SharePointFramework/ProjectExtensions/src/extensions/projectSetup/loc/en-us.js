@@ -15,6 +15,8 @@ define([], function () {
     ProgressModalLabel: "Klargjør prosjektområdet",
     ProgressModalDescription: "Vennligst vent. Ikke lukk nettleservinduet.",
     TemplateSelectModalFooterText: "Oppsettet av prosjektområdet tar omtrent 10 minutter. Ikke lukk nettleservinduet.",
-    ApplyExtensionText: "Installer prosjekttilegget {0}"
+    ApplyExtensionText: "Installer prosjekttilegget {0}",
+    CopyListDataText: "Kopierer listeinnhold fra {0} til {1}",
+    EditPropertiesLinkText: "Du kan allerede nå<A HREF=\"{0}\" TARGET=\"_BLANK\">redigere egenskaper</A> for prosjektet (åpnes i ny fane)."
   }
 });

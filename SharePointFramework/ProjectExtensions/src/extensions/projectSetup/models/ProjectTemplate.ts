@@ -3,11 +3,13 @@ import { Schema } from 'pnp-js-provisioning';
 
 
 export default class ProjectTemplate {
-    constructor(
-        public title: string,
-        public serverRelativeUrl: string,
-        public web: any
-    ) { }
+    public title: string;
+    public serverRelativeUrl: string;
+
+    constructor(spFile: any, public web: any) {
+        this.title = spFile.Title;
+        this.serverRelativeUrl = spFile.ServerRelativeUrl;
+    }
 
     public async getSchema(): Promise<Schema> {
         return await this.web.getFileByServerRelativeUrl(this.serverRelativeUrl).getJSON();

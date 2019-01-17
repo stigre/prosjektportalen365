@@ -6,6 +6,7 @@ import { Tasks } from './tasks';
 import { sp } from '@pnp/sp';
 import { Logger, LogLevel, ConsoleListener } from '@pnp/logging';
 import { IProgressIndicatorProps } from 'office-ui-fabric-react/lib/ProgressIndicator';
+import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { IProjectSetupApplicationCustomizerProperties } from './IProjectSetupApplicationCustomizerProperties';
 import { ProgressModal, TemplateSelectModal } from './components';
 import HubSiteService from 'sp-hubsite-service';
@@ -14,12 +15,14 @@ import ProjectTemplate from './models/ProjectTemplate';
 import * as strings from 'ProjectSetupApplicationCustomizerStrings';
 import ListContentConfig from './models/ListContentConfig';
 import { ITemplateSelectModalState } from './components/TemplateSelectModal/ITemplateSelectModalState';
+import { IBaseTaskParams } from './tasks/IBaseTaskParams';
 
 export default class ProjectSetupApplicationCustomizer extends BaseApplicationCustomizer<IProjectSetupApplicationCustomizerProperties> {
   private domElement: HTMLDivElement;
   private templateSelectModalContainer: HTMLElement;
   private progressModalContainer: HTMLElement;
   private data: IProjectSetupApplicationCustomizerData;
+  private taskParams: IBaseTaskParams;
 
   @override
   public async onInit(): Promise<void> {
@@ -32,9 +35,13 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
         const topPlaceholder = this.context.placeholderProvider.tryCreateContent(PlaceholderName.Top);
         this.domElement = topPlaceholder.domElement;
         const templateInfo = await this.getTemplateInfo();
+        ReactDOM.unmountComponentAtNode(this.templateSelectModalContainer);
         this.data = { ...this.data, ...templateInfo };
+        this.taskParams = { context: this.context, properties: this.properties, data: this.data };
         this.renderProgressModal({ label: strings.ProgressModalLabel, description: strings.ProgressModalDescription });
         await this.runTasks();
+      } else {
+        // TODO: Handle hub site error
       }
     }
   }
@@ -47,17 +54,12 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
       const templateSelectModal = React.createElement(TemplateSelectModal, {
         key: 'ProjectSetupApplicationCustomizer_TemplateSelectModal',
         data: this.data,
-        onSubmit: (state: ITemplateSelectModalState) => {
-          this.templateSelectModalContainer.remove();
-          resolve(state);
-        },
+        onSubmit: (state: ITemplateSelectModalState) => resolve(state),
         isBlocking: true,
         isDarkOverlay: true,
       });
-      if (!this.templateSelectModalContainer) {
-        this.templateSelectModalContainer = document.createElement('DIV');
-        this.domElement.appendChild(this.templateSelectModalContainer);
-      }
+      this.templateSelectModalContainer = document.createElement('DIV');
+      this.domElement.appendChild(this.templateSelectModalContainer);
       ReactDOM.render(templateSelectModal, this.templateSelectModalContainer);
     });
   }
@@ -69,6 +71,7 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
     const progressModal = React.createElement(ProgressModal, {
       key: 'ProjectSetupApplicationCustomizer_ProgressModal',
       progressIndicatorProps,
+      taskParams: this.taskParams,
       isBlocking: true,
       isDarkOverlay: true,
     });
@@ -86,14 +89,17 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
     Logger.log({ message: '(ProjectSetupApplicationCustomizer) runTasks', data: { properties: this.properties, tasks: Tasks.map(t => t.name) }, level: LogLevel.Info });
     try {
       for (let i = 0; i < Tasks.length; i++) {
-        await Tasks[i].execute({ context: this.context, properties: this.properties, data: this.data }, (status) => {
-          this.renderProgressModal({ label: strings.ProgressModalLabel, description: status });
-        });
+        this.taskParams = await Tasks[i].execute(this.taskParams, this.onTaskStatusUpdated);
       }
-      await this.removeCustomizer(this.componentId, true);
+      await this.removeCustomizer(this.componentId, !this.isDebug());
     } catch (error) {
       Logger.log({ message: `(ProjectSetupApplicationCustomizer) runTasks: ${error.task} failed with message ${error.message}`, level: LogLevel.Error });
     }
+  }
+
+  @autobind
+  private onTaskStatusUpdated(status: string) {
+    this.renderProgressModal({ label: strings.ProgressModalLabel, description: status });
   }
 
   /**
@@ -126,12 +132,23 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
       const templatesLibrary = data.hub.web.lists.getByTitle(this.properties.templatesLibrary);
       const extensionsLibrary = data.hub.web.lists.getByTitle(this.properties.extensionsLibrary);
       const listContentList = data.hub.web.lists.getByTitle(this.properties.contentConfigList);
-      data.templates = (await templatesLibrary.rootFolder.files.get()).map(file => new ProjectTemplate(file.Title, file.ServerRelativeUrl, data.hub.web));
-      data.extensions = (await extensionsLibrary.rootFolder.files.get()).map(file => new ProjectTemplate(file.Title, file.ServerRelativeUrl, data.hub.web));
-      data.listContentConfig = (await listContentList.items.get()).map(item => new ListContentConfig(item.Title, item.GtLccSourceList, item.GtLccDestinationList, item.GtLccDestinationLibrary, item.GtLccFields, item.GtLccDefault, data.hub.web));
-      return data;
+      const [templates, extensions, listContentConfig] = await Promise.all([
+        (async () => (await templatesLibrary.rootFolder.files.get()).map(file => new ProjectTemplate(file, data.hub.web)))(),
+        (async () => (await extensionsLibrary.rootFolder.files.get()).map(file => new ProjectTemplate(file, data.hub.web)))(),
+        (async () => (await listContentList.items.get()).map(item => new ListContentConfig(item, data.hub.web)))(),
+      ]);
+      return { ...data, templates, extensions, listContentConfig };
     } else {
       return null;
     }
+  }
+
+  /**
+   * Is debug
+   * 
+   * Typically true when running 'gulp serve'
+   */
+  private isDebug(): boolean {
+    return document.location.search.toLowerCase().indexOf('debugmanifestsfile') !== -1;
   }
 }
