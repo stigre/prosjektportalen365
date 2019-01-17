@@ -1141,6 +1141,18 @@
                         "Paged": true,
                         "ViewQuery": " <OrderBy><FieldRef Name=\"GtRiskFactor\" Ascending=\"FALSE\" /></OrderBy><Where><IsNull>  <FieldRef Name=\"GtActionResponsible\" /></IsNull></Where>"
                     }
+                },
+                {
+                    "Title": "Gjeldende fase",
+                    "ViewFields": [
+                        "ID",
+                        "LinkTitle"
+                    ],
+                    "AdditionalSettings": {
+                        "RowLimit": 100,
+                        "Paged": true,
+                        "ViewQuery": ""
+                    }
                 }
             ]
         },
@@ -1180,6 +1192,20 @@
                         "DocIcon",
                         "LinkFilename",
                         "GtProjectPhase",
+                        "Modified",
+                        "Editor"
+                    ],
+                    "AdditionalSettings": {
+                        "RowLimit": 30,
+                        "Paged": true,
+                        "ViewQuery": ""
+                    }
+                },
+                {
+                    "Title": "Gjeldende fase",
+                    "ViewFields": [
+                        "DocIcon",
+                        "LinkFilename",
                         "Modified",
                         "Editor"
                     ],
