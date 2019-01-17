@@ -7,10 +7,14 @@ declare interface IProjectSetupApplicationCustomizerStrings {
   ApplyTemplateSiteFields: string;
   ApplyTemplateContentTypes: string;
   ApplyTemplateClientSidePages: string;
-  TemplateSelectModalTitle: string;
-  RunText: string;
+  TemplateSelectTitle: string;
+  ListContentTitle: string;
+  ExtensionsTitle: string;
+  TemplateSelectModalSubmitButtonText: string;
   ProgressModalLabel: string;
   ProgressModalDescription: string;
+  TemplateSelectModalFooterText: string;
+  ApplyExtensionText: string;
 }
 
 declare module 'ProjectSetupApplicationCustomizerStrings' {

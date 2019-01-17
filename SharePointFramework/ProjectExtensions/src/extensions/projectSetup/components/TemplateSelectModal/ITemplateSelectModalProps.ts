@@ -1,8 +1,9 @@
 
 import { IModalProps } from 'office-ui-fabric-react/lib/Modal';
-import ProjectTemplate from '../../models/ProjectTemplate';
+import IProjectSetupApplicationCustomizerData from '../../IProjectSetupApplicationCustomizerData';
+import { ITemplateSelectModalState } from './ITemplateSelectModalState';
 
 export interface ITemplateSelectModalProps extends IModalProps {
-    templates: ProjectTemplate[];
-    onTemplateSelected: (template: any) => void;
+    data: IProjectSetupApplicationCustomizerData;
+    onSubmit: (state: ITemplateSelectModalState) => void;
 }

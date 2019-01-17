@@ -12,6 +12,8 @@ import HubSiteService from 'sp-hubsite-service';
 import IProjectSetupApplicationCustomizerData from './IProjectSetupApplicationCustomizerData';
 import ProjectTemplate from './models/ProjectTemplate';
 import * as strings from 'ProjectSetupApplicationCustomizerStrings';
+import ListContentConfig from './models/ListContentConfig';
+import { ITemplateSelectModalState } from './components/TemplateSelectModal/ITemplateSelectModalState';
 
 export default class ProjectSetupApplicationCustomizer extends BaseApplicationCustomizer<IProjectSetupApplicationCustomizerProperties> {
   private domElement: HTMLDivElement;
@@ -29,7 +31,8 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
       if (this.data) {
         const topPlaceholder = this.context.placeholderProvider.tryCreateContent(PlaceholderName.Top);
         this.domElement = topPlaceholder.domElement;
-        this.data.selectedTemplate = await this.getTemplate();
+        const templateInfo = await this.getTemplateInfo();
+        this.data = { ...this.data, ...templateInfo };
         this.renderProgressModal({ label: strings.ProgressModalLabel, description: strings.ProgressModalDescription });
         await this.runTasks();
       }
@@ -39,18 +42,22 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
   /**
    * Render TemplateSelectModal
    */
-  private getTemplate(): Promise<ProjectTemplate> {
+  private getTemplateInfo(): Promise<ITemplateSelectModalState> {
     return new Promise(resolve => {
       const templateSelectModal = React.createElement(TemplateSelectModal, {
         key: 'ProjectSetupApplicationCustomizer_TemplateSelectModal',
-        templates: this.data.templates,
-        onTemplateSelected: (template: ProjectTemplate) => {
-          this.unmountTemplateSelectModal();
-          resolve(template);
-        }
+        data: this.data,
+        onSubmit: (state: ITemplateSelectModalState) => {
+          this.templateSelectModalContainer.remove();
+          resolve(state);
+        },
+        isBlocking: true,
+        isDarkOverlay: true,
       });
-      this.templateSelectModalContainer = document.createElement('DIV');
-      this.domElement.appendChild(this.templateSelectModalContainer);
+      if (!this.templateSelectModalContainer) {
+        this.templateSelectModalContainer = document.createElement('DIV');
+        this.domElement.appendChild(this.templateSelectModalContainer);
+      }
       ReactDOM.render(templateSelectModal, this.templateSelectModalContainer);
     });
   }
@@ -59,28 +66,27 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
    * Render ProgressModal
    */
   private renderProgressModal(progressIndicatorProps: IProgressIndicatorProps) {
-    const progressModal = React.createElement(ProgressModal, { key: 'ProjectSetupApplicationCustomizer_ProgressModal', progressIndicatorProps });
-    this.progressModalContainer = document.createElement('DIV');
-    this.domElement.appendChild(this.progressModalContainer);
+    const progressModal = React.createElement(ProgressModal, {
+      key: 'ProjectSetupApplicationCustomizer_ProgressModal',
+      progressIndicatorProps,
+      isBlocking: true,
+      isDarkOverlay: true,
+    });
+    if (!this.progressModalContainer) {
+      this.progressModalContainer = document.createElement('DIV');
+      this.domElement.appendChild(this.progressModalContainer);
+    }
     ReactDOM.render(progressModal, this.progressModalContainer);
-  }
-
-  private unmountTemplateSelectModal(): boolean {
-    return ReactDOM.unmountComponentAtNode(this.templateSelectModalContainer);
   }
 
   /**
   * Run tasks
   */
   private async runTasks(): Promise<void> {
-    Logger.log({ message: '(ProjectSetupApplicationCustomizer) runTasks', data: { tasks: Tasks.map(t => t.name) }, level: LogLevel.Info });
+    Logger.log({ message: '(ProjectSetupApplicationCustomizer) runTasks', data: { properties: this.properties, tasks: Tasks.map(t => t.name) }, level: LogLevel.Info });
     try {
       for (let i = 0; i < Tasks.length; i++) {
-        await Tasks[i].execute({
-          context: this.context,
-          properties: this.properties,
-          data: this.data,
-        }, (status) => {
+        await Tasks[i].execute({ context: this.context, properties: this.properties, data: this.data }, (status) => {
           this.renderProgressModal({ label: strings.ProgressModalLabel, description: status });
         });
       }
@@ -97,12 +103,12 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
    * @param {boolean} reload Reload page after customizer removal
    */
   private async removeCustomizer(componentId: string, reload: boolean): Promise<void> {
-    Logger.log({ message: '(ProjectSetupApplicationCustomizer) removeCustomizer', level: LogLevel.Info });
     let customActions = await sp.web.userCustomActions.get();
     for (let i = 0; i < customActions.length; i++) {
-      var instance = customActions[i];
-      if (instance.ClientSideComponentId === componentId) {
-        await sp.web.userCustomActions.getById(instance.Id).delete();
+      var { ClientSideComponentId, Id } = customActions[i];
+      if (ClientSideComponentId === componentId) {
+        Logger.log({ message: `(ProjectSetupApplicationCustomizer) removeCustomizer: Removing custom action ${Id}`, level: LogLevel.Info });
+        await sp.web.userCustomActions.getById(Id).delete();
         break;
       }
     }
@@ -117,9 +123,12 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
     if (hubSiteId) {
       let data: IProjectSetupApplicationCustomizerData = {};
       data.hub = await HubSiteService.GetHubSiteById(pageContext.web.absoluteUrl, hubSiteId);
-      const templatesLibrary = data.hub.web.lists.getByTitle('Prosjektmaler');
+      const templatesLibrary = data.hub.web.lists.getByTitle(this.properties.templatesLibrary);
+      const extensionsLibrary = data.hub.web.lists.getByTitle(this.properties.extensionsLibrary);
+      const listContentList = data.hub.web.lists.getByTitle(this.properties.contentConfigList);
       data.templates = (await templatesLibrary.rootFolder.files.get()).map(file => new ProjectTemplate(file.Title, file.ServerRelativeUrl, data.hub.web));
-      console.log(data.templates);
+      data.extensions = (await extensionsLibrary.rootFolder.files.get()).map(file => new ProjectTemplate(file.Title, file.ServerRelativeUrl, data.hub.web));
+      data.listContentConfig = (await listContentList.items.get()).map(item => new ListContentConfig(item.Title, item.GtLccSourceList, item.GtLccDestinationList, item.GtLccDestinationLibrary, item.GtLccFields, item.GtLccDefault, data.hub.web));
       return data;
     } else {
       return null;

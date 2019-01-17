@@ -8,9 +8,13 @@ define([], function () {
     ApplyTemplateSiteFields: "Legger inn felter",
     ApplyTemplateContentTypes: "Legger inn innholdstyper",
     ApplyTemplateClientSidePages: "Legger inn filer og webdeler",
-    TemplateSelectModalTitle: "Velg prosjektmal",
-    RunText: "Kjør",
+    TemplateSelectTitle: "Velg prosjektmal",
+    ListContentTitle: "Velg standardinnhold",
+    ExtensionsTitle: "Velg prosjekttillegg",
+    TemplateSelectModalSubmitButtonText: "Kjør",
     ProgressModalLabel: "Klargjør prosjektområdet",
-    ProgressModalDescription: "Vennligst vent. Ikke lukk nettleservinduet."
+    ProgressModalDescription: "Vennligst vent. Ikke lukk nettleservinduet.",
+    TemplateSelectModalFooterText: "Oppsettet av prosjektområdet tar omtrent 10 minutter. Ikke lukk nettleservinduet mens området settes opp.",
+    ApplyExtensionText: "Installer prosjekttilegget {0}"
   }
 });

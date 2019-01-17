@@ -1,14 +1,70 @@
+@import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
+
 .templateSelectModal {
-    width: 450px;
+    width: 550px;
     padding: 40px 60px;
-    box-sizing: border-box;
+    box-sizing: border-box;    
+    .templateSelectModalInner {
+        @include ms-Grid;
 
+        .templateSelectModalBody {
+            @include ms-Grid-row;
+            margin: 0 0 15px 0;
 
-    .templateSelectModalTitle {
-        font-size: 18px;
-    }
+            .templateSelect {                    
+                @include ms-Grid-col;
+                @include ms-sm12;
 
-    .templateSelectModalDropdown {
-        margin: 10px 0 10px 0;
+                .templateSelectTitle {
+                    font-size: 18px;
+                }
+
+                .templateSelectDropdown {
+                    margin: 10px 0 25px 0;
+                }
+            }
+
+            .listContent {            
+                @include ms-Grid-col;
+                @include ms-sm6;
+
+                .listContentTitle {
+                    font-size: 18px;
+                }
+
+                .listContentList {
+                    margin: 10px 0 25px 0;
+
+                    .listContentItem {
+                        margin: 0 0 5px 0;
+                    }
+                }
+            }
+
+            .extensions {            
+                @include ms-Grid-col;
+                @include ms-sm6;
+
+                .extensionsTitle {
+                    font-size: 18px;
+                }
+
+                .extensionsList {
+                    margin: 10px 0 25px 0;
+
+                    .extensionItem {
+                        margin: 0 0 5px 0;
+                    }
+                }
+            }
+        }
+        .templateSelectModalFooter {
+            @include ms-Grid-row;
+            margin: 0 0 5px 0;
+
+            .templateSelectModalSubmitButton {
+                margin: 0 0 15px 0;
+            }
+        }
     }
 }

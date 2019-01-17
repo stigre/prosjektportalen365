@@ -10,8 +10,8 @@ export default class ProgressModal extends React.Component<IProgressModalProps, 
             <Modal
                 isOpen={true}
                 onDismiss={this.props.onDismiss}
-                isBlocking={true}
-                isDarkOverlay={true}>
+                isBlocking={this.props.isBlocking}
+                isDarkOverlay={this.props.isDarkOverlay}>
                 <div className={styles.progressModal}>
                     <ProgressIndicator {...this.props.progressIndicatorProps} />
                 </div>

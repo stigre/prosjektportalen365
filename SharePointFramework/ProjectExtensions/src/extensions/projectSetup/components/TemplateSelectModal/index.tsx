@@ -2,17 +2,24 @@ import * as React from 'react';
 import styles from './TemplateSelectModal.module.scss';
 import { Modal } from 'office-ui-fabric-react/lib/Modal';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
+import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
+import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
 import { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { ITemplateSelectModalProps } from './ITemplateSelectModalProps';
 import { ITemplateSelectModalState } from './ITemplateSelectModalState';
 import * as strings from 'ProjectSetupApplicationCustomizerStrings';
 import ProjectTemplate from '../../models/ProjectTemplate';
+import ListContentConfig from '../../models/ListContentConfig';
 
 export default class TemplateSelectModal extends React.Component<ITemplateSelectModalProps, ITemplateSelectModalState> {
     constructor(props: ITemplateSelectModalProps) {
         super(props);
-        this.state = { selectedTemplate: props.templates[0] };
+        this.state = {
+            selectedTemplate: props.data.templates[0],
+            selectedExtensions: [],
+            selectedListConfig: props.data.listContentConfig.filter(lcc => lcc.isDefault),
+        };
     }
 
     public render(): React.ReactElement<ITemplateSelectModalProps> {
@@ -20,25 +27,87 @@ export default class TemplateSelectModal extends React.Component<ITemplateSelect
             <Modal
                 isOpen={true}
                 onDismiss={this.props.onDismiss}
-                isBlocking={true}
-                isDarkOverlay={true}>
+                isBlocking={this.props.isBlocking}
+                isDarkOverlay={this.props.isDarkOverlay}>
                 <div className={styles.templateSelectModal}>
-                    <div className={styles.templateSelectModalTitle}>{strings.TemplateSelectModalTitle}</div>
-                    <div className={styles.templateSelectModalDropdown}>
-                        <Dropdown
-                            defaultSelectedKey='0'
-                            onChanged={this.onTemplateSelected}
-                            options={this.getTemplateOptions()} />
+                    <div className={styles.templateSelectModalInner}>
+                        <div className={styles.templateSelectModalBody}>
+                            <div className={styles.templateSelect}>
+                                <div className={styles.templateSelectTitle}>{strings.TemplateSelectTitle}</div>
+                                <div className={styles.templateSelectDropdown}>
+                                    <Dropdown
+                                        defaultSelectedKey='0'
+                                        onChanged={this.onTemplateSelected}
+                                        options={this.getTemplateOptions()} />
+                                </div>
+                            </div>
+                            <div className={styles.listContent}>
+                                <div className={styles.listContentTitle}>{strings.ListContentTitle}</div>
+                                <div className={styles.listContentList}>
+                                    {this.props.data.listContentConfig.map((lcc, idx) => (
+                                        <div key={`${idx}`} className={styles.listContentItem}>
+                                            <Toggle
+                                                label={lcc.title}
+                                                defaultChecked={lcc.isDefault}
+                                                onChanged={checked => this.onListContentItemToggle(lcc, checked)} />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                            <div className={styles.extensions}>
+                                <div className={styles.extensionsTitle}>{strings.ExtensionsTitle}</div>
+                                <div className={styles.extensionsList}>
+                                    {this.props.data.extensions.map((ext, idx) => (
+                                        <div key={`${idx}`} className={styles.extensionItem}>
+                                            <Toggle
+                                                label={ext.title}
+                                                onChanged={checked => this.onExtensionItemToggle(ext, checked)} />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles.templateSelectModalFooter}>
+                            <DefaultButton
+                                className={styles.templateSelectModalSubmitButton}
+                                text={strings.TemplateSelectModalSubmitButtonText}
+                                iconProps={{ iconName: 'Running' }}
+                                onClick={this.onSubmit} />
+                            <MessageBar>{strings.TemplateSelectModalFooterText}</MessageBar>
+                        </div>
                     </div>
-                    <DefaultButton text={strings.RunText} onClick={this.submit} />
                 </div>
             </Modal>
         );
     }
 
+    private onExtensionItemToggle(extension: ProjectTemplate, checked: boolean): void {
+        if (checked) {
+            this.setState((prevState: ITemplateSelectModalState) => ({
+                selectedExtensions: [extension, ...prevState.selectedExtensions],
+            }));
+        } else {
+            this.setState((prevState: ITemplateSelectModalState) => ({
+                selectedExtensions: prevState.selectedExtensions.filter(ext => extension.title !== ext.title),
+            }));
+        }
+    }
+
+    private onListContentItemToggle(listContentConfig: ListContentConfig, checked: boolean): void {
+        if (checked) {
+            this.setState((prevState: ITemplateSelectModalState) => ({
+                selectedListConfig: [listContentConfig, ...prevState.selectedListConfig],
+            }));
+        } else {
+            this.setState((prevState: ITemplateSelectModalState) => ({
+                selectedListConfig: prevState.selectedListConfig.filter(lcc => listContentConfig.title !== lcc.title),
+            }));
+        }
+    }
+
     @autobind
-    private submit() {
-        this.props.onTemplateSelected(this.state.selectedTemplate);
+    private onSubmit() {
+        this.props.onSubmit(this.state);
     }
 
     @autobind
@@ -47,12 +116,8 @@ export default class TemplateSelectModal extends React.Component<ITemplateSelect
     }
 
     private getTemplateOptions(): IDropdownOption[] {
-        return this.props.templates.map((template, idx) => {
-            return {
-                key: `${idx}`,
-                text: template.title,
-                data: template,
-            };
+        return this.props.data.templates.map((template, idx) => {
+            return { key: `${idx}`, text: template.title, data: template };
         });
     }
 }

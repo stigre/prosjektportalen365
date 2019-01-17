@@ -9,20 +9,30 @@
   },
   "serveConfigurations": {
     "default": {
-      "pageUrl": "https://olemp.sharepoint.com/sites/Prosjektportalen-03-01-51",
+      "pageUrl": "https://olemp.sharepoint.com/sites/Prosjektportalen-03-01-61",
       "customActions": {
         "ce34553d-ab47-4107-8dd1-e980d953996d": {
           "location": "ClientSideExtension.ApplicationCustomizer",
-          "properties": {}
+          "properties": {
+            "templatesLibrary": "Prosjektmaler",
+            "extensionsLibrary": "Prosjekttillegg",
+            "projectsList": "Prosjekter",
+            "contentConfigList": "Listeinnhold"
+          }
         }
       }
     },
     "projectSetup": {
-      "pageUrl": "https://olemp.sharepoint.com/sites/Prosjektportalen-03-01-50",
+      "pageUrl": "https://olemp.sharepoint.com/sites/Prosjektportalen-03-01-61",
       "customActions": {
         "ce34553d-ab47-4107-8dd1-e980d953996d": {
           "location": "ClientSideExtension.ApplicationCustomizer",
-          "properties": {}
+          "properties": {
+            "templatesLibrary": "Prosjektmaler",
+            "extensionsLibrary": "Prosjekttillegg",
+            "projectsList": "Prosjekter",
+            "contentConfigList": "Listeinnhold"
+          }
         }
       }
     }
