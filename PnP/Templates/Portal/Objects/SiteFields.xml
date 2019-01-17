@@ -317,4 +317,6 @@
     <Field Type="Boolean" DisplayName="{resource:SiteFields_GtLccDefault_DisplayName}" Description="{resource:SiteFields_GtLccDefault_Description}" ID="{19c0c03c-678a-4c2a-ab9b-cb9ffd903012}" StaticName="GtLccDefault" Name="GtLccDefault" Group="Prosjektportalenkolonner">
         <Default>1</Default>
     </Field>
+    <Field ID="{0e82c395-9ed9-43f9-871a-208215b18558}" Name="GtSortOrder" DisplayName="{resource:SiteFields_GtSortOrder_DisplayName}" Type="Number" Group="{resource:SiteFields_Group}" Description="{resource:SiteFields_GtSortOrder_Description}" StaticName="GtSortOrder" />
+
 </pnp:SiteFields>
