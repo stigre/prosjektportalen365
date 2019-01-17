@@ -6,6 +6,7 @@
             "title": "ProjectSetupApplicationCustomizer",
             "location": "ClientSideExtension.ApplicationCustomizer",
             "clientSideComponentId": "ce34553d-ab47-4107-8dd1-e980d953996d",
+            "clientSideComponentProperties": "{ \"templatesLibrary\": \"Prosjektmaler\", \"projectsList\": \"Prosjekter\" }",
             "scope": "Web"
         }
     ],
