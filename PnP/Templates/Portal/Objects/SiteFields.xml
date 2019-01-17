@@ -56,12 +56,8 @@
         </CHOICES>
     </Field>
     <Field ID="{cb41572a-78c6-4e33-8505-b97bfd8fd162}" Name="GtStatusGainAchievementComment" DisplayName="Kommentar, gevinstoppnåelse" Type="Note" Group="Prosjektportalenkolonner" Description="Kommentar til status gevinstoppnåelse angitt over" NumLines="3" UnlimitedLengthInDocumentLibrary="TRUE" AppendOnly="FALSE" StaticName="GtStatusGainAchievementComment" />
-
     <Field ID="{3121ac55-d68e-4fcb-8fc8-3d8ed8a601b2}" Name="GtProjectOwner" DisplayName="Prosjekteier" Type="User" Group="Prosjektportalenkolonner" Description="" StaticName="GtProjectOwner" />
-
     <Field ID="{d46bed8f-0fb6-4684-8221-632fdb12598f}" Name="GtProjectManager" DisplayName="Prosjektleder" Type="User" Group="Prosjektportalenkolonner" Description="" StaticName="GtProjectManager" />
-
-
     <Field ID="{325543a5-815d-485d-a9a5-e0773ad762e9}" Name="GtProjectPhase" DisplayName="Fase" Type="TaxonomyFieldType" WebId="{siteid}" Group="Prosjektportalenkolonner" Description="" Indexed="TRUE" StaticName="GtProjectPhase" SourceID="{{siteid}}" List="{{listid:TaxonomyHiddenList}}" ShowField="Term1044">
         <Customization>
             <ArrayOfProperty>
@@ -311,5 +307,14 @@
             <CHOICE>November</CHOICE>
             <CHOICE>Desember</CHOICE>
         </CHOICES>
+    </Field>
+    <Field Type="Text" DisplayName="{resource:SiteFields_GtLccSourceList_DisplayName}" Description="{resource:SiteFields_GtLccSourceList_Description}" ID="{82c3fe98-7bce-4234-9eea-0ae30984dbd8}" StaticName="GtLccSourceList" Name="GtLccSourceList" Group="Prosjektportalenkolonner" />
+    <Field Type="Text" DisplayName="{resource:SiteFields_GtLccDestinationList_DisplayName}" Description="{resource:SiteFields_GtLccDestinationList_Description}" ID="{008bb566-26c3-4cac-8d16-9bf3b1c5fb4b}" StaticName="GtLccDestinationList" Name="GtLccDestinationList" Group="Prosjektportalenkolonner" />
+    <Field Type="Text" DisplayName="{resource:SiteFields_GtLccDestinationLibrary_DisplayName}" Description="{resource:SiteFields_GtLccDestinationLibrary_Description}" ID="{91d0b1bf-0a05-44f1-9885-cab0f3c3b77c}" StaticName="GtLccDestinationLibrary" Name="GtLccDestinationLibrary" Group="Prosjektportalenkolonner" />
+    <Field Type="Text" DisplayName="{resource:SiteFields_GtLccFields_DisplayName}" Description="{resource:SiteFields_GtLccFields_Description}" ID="{525a7269-b880-4266-8482-fe7a1bfaac3e}" StaticName="GtLccFields" Name="GtLccFields" Group="Prosjektportalenkolonner">
+        <Default>Title</Default>
+    </Field>
+    <Field Type="Boolean" DisplayName="{resource:SiteFields_GtLccDefault_DisplayName}" Description="{resource:SiteFields_GtLccDefault_Description}" ID="{19c0c03c-678a-4c2a-ab9b-cb9ffd903012}" StaticName="GtLccDefault" Name="GtLccDefault" Group="Prosjektportalenkolonner">
+        <Default>1</Default>
     </Field>
 </pnp:SiteFields>
