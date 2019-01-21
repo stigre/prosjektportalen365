@@ -9,6 +9,7 @@ import HubSiteService from 'sp-hubsite-service';
 import SpEntityPortalService from 'sp-entityportal-service';
 import ProjectPropertyModel from './ProjectPropertyModel';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
+import { Button } from 'office-ui-fabric-react/lib/Button';
 
 export default class ProjectInfo extends React.Component<IProjectInfoProps, IProjectInfoState> {
 
@@ -31,6 +32,10 @@ export default class ProjectInfo extends React.Component<IProjectInfoProps, IPro
         {(this.state.isLoading) ? <Spinner className={styles.spinner} label={strings.Loading} size={SpinnerSize.medium} /> :
           <div className={styles.propertiesModalInner}>
             <span className={styles.propertiesModalHeader}>{this.props.showProjectInfo.Title}</span>
+            <div className={styles.headerButtons}>
+              <Button iconProps={{ iconName: 'Home' }} text={strings.ProjectLinkText} onClick={() => location.replace(this.props.showProjectInfo.Url)} />
+              <Button iconProps={{ iconName: "BarChart4" }} text={strings.ProjectStatusLinkText} />
+            </div>
             {this.renderProperties(this.state.data.properties.slice())}
           </div>}
       </Modal>
@@ -45,7 +50,12 @@ export default class ProjectInfo extends React.Component<IProjectInfoProps, IPro
     return (
       <div className={styles.propertiesContainer}>
         {propertiesToRender.map(p => {
-          return <div className={styles.property}><p className={styles.propertyHeader}>{p.displayName}</p><p className={styles.propertyValue}>{p.value}</p></div>;
+          return (
+            <div className={styles.property}>
+              <p className={styles.propertyHeader}>{p.displayName}</p>
+              <p className={styles.propertyValue}>{p.value}</p>
+            </div>
+          );
         })}
       </div>
     );

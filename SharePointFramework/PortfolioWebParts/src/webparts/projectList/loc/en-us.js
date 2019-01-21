@@ -11,6 +11,8 @@ define([], function() {
     "NoSearchResults": "No search results",
     "Loading": "Loading...",
     "MissingProperties": "Projects has missing properties",
-    "NoProperties": "Project has no properties"
+    "NoProperties": "Project has no properties",
+    "ProjectLinkText": "Go to project site",
+    "ProjectStatusLinkText": "Go to project status"
   }
 });
