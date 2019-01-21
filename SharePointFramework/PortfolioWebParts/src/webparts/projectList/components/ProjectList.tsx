@@ -124,7 +124,7 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
     let associatedSites = result.PrimarySearchResults.filter(site => id !== site['SiteId']);
 
     associatedSites.forEach(site => {
-      let currentProject = projects.filter(p => site.Title === p.GtProjectFinanceName)[0];
+      let currentProject = projects.filter(p => site.Title === p.Title)[0];
       let owner = users.filter(user => user.Id === currentProject.GtProjectOwnerId)[0];
       let manager = users.filter(user => user.Id === currentProject.GtProjectManagerId)[0];
       let phase = phases.filter(p => p.id === currentProject.GtProjectPhase.TermGuid)[0].term.PathOfTerm;
