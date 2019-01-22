@@ -29,15 +29,22 @@ export default class ProjectInfo extends React.Component<IProjectInfoProps, IPro
   public render() {
     return (
       <Modal className={styles.modal} isOpen={this.props.showProjectInfo !== undefined} isBlocking={false} isDarkOverlay={true} onDismiss={this.props.onDismiss}>
-        {(this.state.isLoading) ? <Spinner className={styles.spinner} label={strings.Loading} size={SpinnerSize.medium} /> :
-          <div className={styles.propertiesModalInner}>
-            <span className={styles.propertiesModalHeader}>{this.props.showProjectInfo.Title}</span>
+
+        <div className={styles.propertiesModalInner}>
+          <span className={styles.propertiesModalHeader}>{this.props.showProjectInfo.Title}</span>
+          {(this.state.isLoading) ? <Spinner className={styles.spinner} label={strings.Loading} size={SpinnerSize.medium} /> :
             <div className={styles.headerButtons}>
-              <Button iconProps={{ iconName: 'Home' }} text={strings.ProjectLinkText} onClick={() => location.replace(this.props.showProjectInfo.Url)} />
-              <Button iconProps={{ iconName: "BarChart4" }} text={strings.ProjectStatusLinkText} />
-            </div>
-            {this.renderProperties(this.state.data.properties.slice())}
-          </div>}
+              <Button
+                iconProps={{ iconName: 'Home' }}
+                text={strings.ProjectLinkText}
+                onClick={() => location.replace(this.props.showProjectInfo.Url)} />
+              <Button
+                iconProps={{ iconName: "BarChart4" }}
+                text={strings.ProjectStatusLinkText}
+                onClick={() => location.replace(`${this.props.showProjectInfo.Url}/SitePages/ProjectStatus.aspx`)} />
+              {this.renderProperties(this.state.data.properties.slice())}
+            </div>}
+        </div>
       </Modal>
     );
   }
