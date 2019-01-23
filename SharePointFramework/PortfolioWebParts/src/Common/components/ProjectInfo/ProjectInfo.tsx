@@ -7,7 +7,7 @@ import { IProjectInfoState } from './IProjectInfoState';
 import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
 import HubSiteService from 'sp-hubsite-service';
 import SpEntityPortalService from 'sp-entityportal-service';
-import ProjectPropertyModel from './ProjectPropertyModel';
+import ProjectPropertyModel from '../../models/ProjectPropertyModel';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
 import { Button } from 'office-ui-fabric-react/lib/Button';
 
