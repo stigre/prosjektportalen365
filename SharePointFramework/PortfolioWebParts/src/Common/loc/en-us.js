@@ -4,6 +4,7 @@ define([], function() {
     "MissingProperties": "Projects has missing properties",
     "NoProperties": "Project has no properties",
     "ProjectLinkText": "Go to project site",
-    "ProjectStatusLinkText": "Go to project status"
+    "ProjectStatusLinkText": "Go to project status",
+    "NoGrouping": "No grouping"
   }
 });
