@@ -6,6 +6,7 @@ import { IListState } from './IListState';
 import { CommandBar, ICommandBarItemProps } from 'office-ui-fabric-react/lib/CommandBar';
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { ExcelExportStatus } from '../../ExportToExcel';
+import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 
 export default class List extends React.Component<IListProps, IListState> {
   public static defaultProps: Partial<IListProps> = {
@@ -19,13 +20,17 @@ export default class List extends React.Component<IListProps, IListState> {
     this.state = {
       groupBy: this.props.defaultGroupBy
     };
-
   }
 
   public render() {
     return (
       <div>
         {this._renderCommandBar()}
+        <div hidden={!this.props.showSearchBox}>
+          <SearchBox
+            placeholder={strings.SearchBoxPlaceholder}
+            onChanged={this._onSearch} />
+        </div>
       </div>
     );
   }
@@ -58,31 +63,38 @@ export default class List extends React.Component<IListProps, IListState> {
 
     if (this.props.excelExportEnabled && this.props.excelExportConfig) {
       items.push({
-          key: "ExcelExport",
-          name: this.props.excelExportConfig.buttonLabel,
-          iconProps: {
-              iconName: this.props.excelExportConfig.buttonIcon,
-              styles: { root: { color: "green !important" } },
-          },
-          disabled: this.state.excelExportStatus === ExcelExportStatus.Exporting,
-          onClick: evt => {
-              evt.preventDefault();
-              this._exportToExcel();
-          },
+        key: "ExcelExport",
+        name: this.props.excelExportConfig.buttonLabel,
+        iconProps: {
+          iconName: this.props.excelExportConfig.buttonIcon,
+          styles: { root: { color: "green !important" } },
+        },
+        disabled: this.state.excelExportStatus === ExcelExportStatus.Exporting,
+        onClick: evt => {
+          evt.preventDefault();
+          this._exportToExcel();
+        },
       });
-  }
+    }
 
-    return (
-      <CommandBar
-        hidden={!this.props.showCommandBar}
-        items={items}
-        farItems={farItems}
-      />
-    );
+    if (items.length > 0 || farItems.length > 0) {
+      return (
+        <CommandBar
+          hidden={!this.props.showCommandBar}
+          items={items}
+          farItems={farItems}
+        />
+      );
+    }
+    return null;
   }
 
   private _exportToExcel() {
     console.log('exporting');
+  }
+
+  private _onSearch() {
+    console.log('Search');
   }
 
 }

@@ -5,6 +5,7 @@ define([], function() {
     "NoProperties": "Project has no properties",
     "ProjectLinkText": "Go to project site",
     "ProjectStatusLinkText": "Go to project status",
-    "NoGrouping": "No grouping"
+    "NoGrouping": "No grouping",
+    "SearchBoxPlaceholder": "Search all log entries..."
   }
 });

@@ -5,6 +5,7 @@ declare interface ICommonStrings {
   ProjectLinkText: string;
   ProjectStatusLinkText: string;
   NoGrouping: string;
+  SearchBoxPlaceholder: string;
 }
 
 declare module 'CommonStrings' {

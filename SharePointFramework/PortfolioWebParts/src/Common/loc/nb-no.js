@@ -5,6 +5,7 @@ define([], function() {
     "NoProperties": "Det er ikke satt noen egenskaper for prosjektet",
     "ProjectLinkText": "Gå til prosjektområde",
     "ProjectStatusLinkText": "Gå til prosjektstatus",
-    "NoGrouping": "Ingen gruppering"
+    "NoGrouping": "Ingen gruppering",
+    "SearchBoxPlaceholder": "Søk i alle loggelementer..."
   }
 });
