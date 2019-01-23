@@ -28,8 +28,12 @@ export default class ProjectInfo extends React.Component<IProjectInfoProps, IPro
 
   public render() {
     return (
-      <Modal className={styles.modal} isOpen={this.props.showProjectInfo !== undefined} isBlocking={false} isDarkOverlay={true} onDismiss={this.props.onDismiss}>
-
+      <Modal
+        className={styles.modal}
+        isOpen={this.props.showProjectInfo !== undefined}
+        isBlocking={false}
+        isDarkOverlay={true}
+        onDismiss={this.props.onDismiss}>
         <div className={styles.propertiesModalInner}>
           <span className={styles.propertiesModalHeader}>{this.props.showProjectInfo.Title}</span>
           {(this.state.isLoading) ? <Spinner className={styles.spinner} label={strings.Loading} size={SpinnerSize.medium} /> :
@@ -70,8 +74,7 @@ export default class ProjectInfo extends React.Component<IProjectInfoProps, IPro
 
   private async fetchData() {
     try {
-      const { context } = this.props;
-      const { pageContext } = context;
+      const { pageContext } = this.props;
       const { hubSiteId } = pageContext.legacyPageContext;
       const groupId = this.props.showProjectInfo.RawObject.GtGroupId;
       const hubSite = await HubSiteService.GetHubSiteById(pageContext.web.absoluteUrl, hubSiteId);

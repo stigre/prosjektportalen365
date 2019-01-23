@@ -40,7 +40,7 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
         {(this.state.showProjectInfo) ?
           <ProjectInfo
             projectsEntity={this.props.projectsEntity}
-            context={this.props.context}
+            pageContext={this.props.pageContext}
             showProjectInfo={this.state.showProjectInfo}
             onDismiss={e => this.setState({ showProjectInfo: undefined })} /> : null}
         <div className={styles.projectListSearchBox}>
@@ -162,7 +162,7 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
     let url = `${rootUrl}/_api/HubSites?$filter=SiteUrl eq '${this.props.absoluteUrl}'`;
     let id: string = '';
 
-    return this.props.context.spHttpClient.get(url, SPHttpClient.configurations.v1, {
+    return this.props.spHttpClient.get(url, SPHttpClient.configurations.v1, {
       headers: {
         'Accept': 'application/json;odata=nometadata',
         'odata-version': '',

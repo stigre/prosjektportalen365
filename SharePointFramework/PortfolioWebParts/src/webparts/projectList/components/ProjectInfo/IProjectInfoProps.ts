@@ -1,9 +1,9 @@
 import ProjectListModel from "../ProjectListModel";
-import { WebPartContext } from "@microsoft/sp-webpart-base";
+import { PageContext } from "@microsoft/sp-page-context";
 export interface IProjectInfoProps {
   showProjectInfo?: ProjectListModel;
   onDismiss: any;
-  context: WebPartContext;
+  pageContext: PageContext;
   projectsEntity: {
     listName: string;
     contentTypeId: string;

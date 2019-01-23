@@ -35,7 +35,8 @@ export default class ProjectListWebPart extends BaseClientSideWebPart<IProjectLi
       ProjectList,
       {
         projectsEntity: this.properties.projectsEntity,
-        context: this.context,
+        pageContext: this.context.pageContext,
+        spHttpClient: this.context.spHttpClient,
         web: this.web,
         serverRelativeUrl: this.context.pageContext.web.serverRelativeUrl,
         absoluteUrl: this.context.pageContext.web.absoluteUrl
