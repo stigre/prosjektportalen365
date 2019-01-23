@@ -1,6 +1,6 @@
 import * as React from 'react';
-import styles from '../ProjectList.module.scss';
-import * as strings from 'ProjectListWebPartStrings';
+import styles from './ProjectInfo.module.scss';
+import * as strings from 'CommonStrings';
 import { Modal } from "office-ui-fabric-react/lib/Modal";
 import { IProjectInfoProps } from './IProjectInfoProps';
 import { IProjectInfoState } from './IProjectInfoState';

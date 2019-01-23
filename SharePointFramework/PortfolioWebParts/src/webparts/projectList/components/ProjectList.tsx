@@ -3,7 +3,7 @@ import styles from './ProjectList.module.scss';
 import * as strings from 'ProjectListWebPartStrings';
 import { IProjectListProps } from './IProjectListProps';
 import { IProjectListState, IProjectListData } from './IProjectListState';
-import ProjectListModel from './ProjectListModel';
+import ProjectListModel from '../../../Common/models/ProjectListModel';
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
@@ -13,7 +13,7 @@ import { sp, SearchQuery, QueryPropertyValueType, SearchQueryBuilder, ISearchQue
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 import { taxonomy } from '@pnp/sp-taxonomy';
 import Phase from '../models/Phase';
-import ProjectInfo from './ProjectInfo/ProjectInfo';
+import ProjectInfo from '../../../Common/components/ProjectInfo/ProjectInfo';
 
 export default class ProjectList extends React.Component<IProjectListProps, IProjectListState> {
 

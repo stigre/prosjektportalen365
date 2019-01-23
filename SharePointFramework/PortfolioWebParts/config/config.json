@@ -53,6 +53,7 @@
   },
   "externals": {},
   "localizedResources": {
+    "CommonStrings": "lib/Common/loc/{locale}.js",
     "DeliveriesOverviewWebPartStrings": "lib/webparts/deliveriesOverview/loc/{locale}.js",
     "BenefitsOverviewWebPartStrings": "lib/webparts/benefitsOverview/loc/{locale}.js",
     "ProjectInsightsWebPartStrings": "lib/webparts/projectInsights/loc/{locale}.js",
