@@ -1,8 +1,12 @@
 import IGroupByOption from '../../../Common/interfaces/IGroupByOption';
 import IExcelExportConfig from '../../../Common/interfaces/IExcelExportConfig';
 import * as strings from 'ExperienceLogWebPartStrings';
+import { SPHttpClient } from '@microsoft/sp-http';
 
 export interface IExperienceLogProps {
+  spHttpClient: SPHttpClient;
+  absoluteUrl: string;
+  serverRelativeUrl: string;
   groupByOptions: IGroupByOption[];
   excelExportEnabled: boolean;
   excelExportConfig: IExcelExportConfig;
