@@ -130,12 +130,12 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
 
       let project: ProjectListModel = {
         Logo: site.SiteLogo,
-        Manager: `${manager.Email}|${manager.Title}`,
-        Owner: `${owner.Email}|${owner.Title}`,
+        Manager: manager ? `${manager.Email}|${manager.Title}`: null,
+        Owner: owner ? `${owner.Email}|${owner.Title}` : null,
         Phase: phase,
-        ServiceArea: currentProject.GtProjectServiceArea[0].Label,
+        ServiceArea: null,
         Title: site.Title,
-        Type: currentProject.GtProjectType[0].Label,
+        Type: null,
         Url: site.Path,
         Views: site.ViewsLifetime,
         RawObject: currentProject
