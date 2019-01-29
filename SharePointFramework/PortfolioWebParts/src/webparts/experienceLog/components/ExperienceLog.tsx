@@ -27,17 +27,17 @@ export default class ExperienceLog extends React.Component<IExperienceLogProps, 
   public render(): React.ReactElement<IExperienceLogProps> {
     return (
       <div>
-      <List
-        showCommandBar={true}
-        groupByOptions={this.props.groupByOptions}
-        excelExportEnabled={this.props.excelExportEnabled}
-        excelExportConfig={this.props.excelExportConfig}
-      />
-      {(this.state.items) ?
-        this.state.items.map(item => {
-          return <div><a>{item.Title}</a><a href={item.SPWebUrl}>{item.SiteTitle}</a></div>;
-        })
-        : null}
+        <List
+          showCommandBar={true}
+          groupByOptions={this.props.groupByOptions}
+          excelExportEnabled={this.props.excelExportEnabled}
+          excelExportConfig={this.props.excelExportConfig}
+        />
+        {(this.state.items) ?
+          this.state.items.map(item => {
+            return <div><a>{item.Title}</a><a href={item.SPWebUrl}>{item.SiteTitle}</a></div>;
+          })
+          : null}
       </div>
     );
   }

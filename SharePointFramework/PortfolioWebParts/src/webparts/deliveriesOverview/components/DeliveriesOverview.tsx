@@ -9,7 +9,7 @@ export default class DeliveriesOverview extends React.Component<IDeliveriesOverv
         <div className={styles.container}>
           <div className={styles.row}>
             <div className={styles.column}>
-
+              <span className={styles.title}>Leveranseoversikt</span>
             </div>
           </div>
         </div>
