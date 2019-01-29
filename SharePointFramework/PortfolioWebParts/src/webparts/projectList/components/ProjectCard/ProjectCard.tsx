@@ -2,18 +2,9 @@ import * as React from 'react';
 import styles from '../ProjectList.module.scss';
 import * as strings from 'ProjectListWebPartStrings';
 import IProjectCardProps from './IProjectCardProps';
-import {
-  DocumentCard,
-  DocumentCardPreview,
-  DocumentCardTitle,
-  DocumentCardLocation,
-  DocumentCardActivity,
-  DocumentCardActions,
-  DocumentCardType,
-  IDocumentCardPreviewImage
-} from "office-ui-fabric-react/lib/DocumentCard";
+import { DocumentCard, DocumentCardPreview, DocumentCardTitle, DocumentCardLocation, DocumentCardActivity, DocumentCardActions, DocumentCardType, IDocumentCardPreviewImage } from "office-ui-fabric-react/lib/DocumentCard";
 import { ImageFit } from 'office-ui-fabric-react/lib/Image';
-import { IUserDetails } from '../../../../Common/models/ProjectListModel';
+import { IUserDetails } from '../../../../common/models/ProjectListModel';
 
 const ProjectCard = (props: IProjectCardProps): JSX.Element => {
   const previewImage: IDocumentCardPreviewImage = {

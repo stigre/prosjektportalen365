@@ -11,18 +11,13 @@ import * as strings from 'DeliveriesOverviewWebPartStrings';
 import DeliveriesOverview from './components/DeliveriesOverview';
 import { IDeliveriesOverviewProps } from './components/IDeliveriesOverviewProps';
 
-export interface IDeliveriesOverviewWebPartProps {
-  description: string;
-}
+export interface IDeliveriesOverviewWebPartProps {}
 
 export default class DeliveriesOverviewWebPart extends BaseClientSideWebPart<IDeliveriesOverviewWebPartProps> {
 
   public render(): void {
     const element: React.ReactElement<IDeliveriesOverviewProps > = React.createElement(
-      DeliveriesOverview,
-      {
-        description: this.properties.description
-      }
+      DeliveriesOverview,      {      }
     );
 
     ReactDom.render(element, this.domElement);
@@ -40,17 +35,9 @@ export default class DeliveriesOverviewWebPart extends BaseClientSideWebPart<IDe
     return {
       pages: [
         {
-          header: {
-            description: strings.PropertyPaneDescription
-          },
           groups: [
             {
-              groupName: strings.BasicGroupName,
-              groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
-                })
-              ]
+              groupFields: [              ]
             }
           ]
         }

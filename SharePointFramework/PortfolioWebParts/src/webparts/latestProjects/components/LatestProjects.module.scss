@@ -2,13 +2,8 @@
 .latestProjects {
     .title {
         @include ms-font-xl;
-        color: #0078d4;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
+        color: "[theme: themePrimary, default: #0078d4]";
+        cursor: pointer;
     }
     .arrowIcon {
       float: right;
@@ -21,16 +16,16 @@
             .projectLink {
                 @include ms-font-m;
                 text-decoration: none;
-                color: #0078d4;
+                color: "[theme: themeTertiary, default: #0078d4]";
                 &:hover {
                     text-decoration: underline;
-                    color: #0078d4;
+                    color: "[theme: themeTertiary, default: #0078d4]";
                 }
                 &:visited {
-                    color: #0078d4;
+                    color: "[theme: themeTertiary, default: #0078d4]";
                 }
                 &:active {
-                    color: #0078d4;
+                    color: "[theme: themeTertiary, default: #0078d4]";
                 }
             }
             .subTitle {

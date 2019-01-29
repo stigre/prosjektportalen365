@@ -1,5 +1,5 @@
-import IGroupByOption from '../../../Common/interfaces/IGroupByOption';
-import IExcelExportConfig from '../../../Common/interfaces/IExcelExportConfig';
+import IGroupByOption from '../../../common/interfaces/IGroupByOption';
+import IExcelExportConfig from '../../../common/interfaces/IExcelExportConfig';
 import * as strings from 'ExperienceLogWebPartStrings';
 import { SPHttpClient } from '@microsoft/sp-http';
 

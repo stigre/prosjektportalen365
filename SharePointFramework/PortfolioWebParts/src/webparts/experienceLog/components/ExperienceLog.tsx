@@ -1,8 +1,7 @@
 import * as React from 'react';
-import styles from './ExperienceLog.module.scss';
 import { IExperienceLogProps, ExperienceLogDefaultProps } from './IExperienceLogProps';
 import { IExperienceLogState } from './IExperienceLogState';
-import List from '../../../Common/components/List/List';
+import List from '../../../common/components/List/List';
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 import { sp, SearchQuery, QueryPropertyValueType, ISearchQueryBuilder, SearchQueryBuilder } from '@pnp/sp';
 import LogElement from './LogElement';

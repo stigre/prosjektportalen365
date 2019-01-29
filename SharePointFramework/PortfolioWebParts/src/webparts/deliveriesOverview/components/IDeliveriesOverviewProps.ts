@@ -1,3 +1,1 @@
-export interface IDeliveriesOverviewProps {
-  description: string;
-}
+export interface IDeliveriesOverviewProps {}

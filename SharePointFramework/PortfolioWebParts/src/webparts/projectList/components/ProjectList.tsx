@@ -3,30 +3,23 @@ import styles from './ProjectList.module.scss';
 import * as strings from 'ProjectListWebPartStrings';
 import { IProjectListProps } from './IProjectListProps';
 import { IProjectListState, IProjectListData } from './IProjectListState';
-import ProjectListModel from '../../../Common/models/ProjectListModel';
+import ProjectListModel from '../../../common/models/ProjectListModel';
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import ProjectCard from './ProjectCard/ProjectCard';
 import { sp, SearchQuery, QueryPropertyValueType, SearchQueryBuilder, ISearchQueryBuilder } from '@pnp/sp';
-import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 import { taxonomy } from '@pnp/sp-taxonomy';
 import Phase from '../models/Phase';
-import ProjectInfo from '../../../Common/components/ProjectInfo/ProjectInfo';
+import ProjectInfo from '../../../common/components/ProjectInfo/ProjectInfo';
 
 export default class ProjectList extends React.Component<IProjectListProps, IProjectListState> {
 
   constructor(props) {
     super(props);
 
-    this.state = {
-      projects: [],
-      phases: [],
-      isLoading: true,
-      data: undefined,
-      showProjectInfo: undefined
-    };
+    this.state = { projects: [], isLoading: true };
   }
 
   public async componentDidMount() {
@@ -126,11 +119,11 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
       let currentProject = projects.filter(p => site.Title === p.Title)[0];
       let owner = users.filter(user => user.Id === currentProject.GtProjectOwnerId)[0];
       let manager = users.filter(user => user.Id === currentProject.GtProjectManagerId)[0];
-      let phase = phases.filter(p => p.id === currentProject.GtProjectPhase.TermGuid)[0].term.PathOfTerm;
+      let phase = currentProject.GtProjectPhase ? phases.filter(p => p.id === currentProject.GtProjectPhase.TermGuid)[0].term.PathOfTerm : '';
 
       let project: ProjectListModel = {
         Logo: site.SiteLogo,
-        Manager: manager ? `${manager.Email}|${manager.Title}`: null,
+        Manager: manager ? `${manager.Email}|${manager.Title}` : null,
         Owner: owner ? `${owner.Email}|${owner.Title}` : null,
         Phase: phase,
         ServiceArea: null,
@@ -143,17 +136,9 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
       projectListItems.push(project);
     });
 
-    const testData: IProjectListData = {
-      projects: projectListItems
-    };
+    const data: IProjectListData = { projects: projectListItems };
 
-    this.setState({
-      data: testData,
-      phases: phases,
-      projects: projects,
-      isLoading: false
-    });
-
+    this.setState({ data, projects, isLoading: false });
   }
 }
 

@@ -1,8 +1,4 @@
-declare interface IDeliveriesOverviewWebPartStrings {
-  PropertyPaneDescription: string;
-  BasicGroupName: string;
-  DescriptionFieldLabel: string;
-}
+declare interface IDeliveriesOverviewWebPartStrings {}
 
 declare module 'DeliveriesOverviewWebPartStrings' {
   const strings: IDeliveriesOverviewWebPartStrings;

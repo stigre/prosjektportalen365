@@ -1,5 +1,5 @@
-import ProjectListModel from '../../../Common/models/ProjectListModel';
-import Phase from '../models/Phase';
+import ProjectListModel from '../../../common/models/ProjectListModel';
+
 export interface IProjectListData {
   projects?: ProjectListModel[];
   fields?: { [key: string]: string };
@@ -7,8 +7,7 @@ export interface IProjectListData {
 export interface IProjectListState {
   isLoading: boolean;
   data?: IProjectListData;
-  searchTerm?: string;
-  projects: any[];
-  phases: Phase[];
   showProjectInfo?: ProjectListModel;
+  searchTerm?: string;
+  projects: ProjectListModel[];
 }

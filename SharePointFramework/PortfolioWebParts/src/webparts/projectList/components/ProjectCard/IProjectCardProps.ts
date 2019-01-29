@@ -1,5 +1,4 @@
-import ProjectListModel from "../../../../Common/models/ProjectListModel";
-import Phase from "../../models/Phase";
+import ProjectListModel from "../../../../common/models/ProjectListModel";
 
 interface IProjectCardProps {
   project: ProjectListModel;
