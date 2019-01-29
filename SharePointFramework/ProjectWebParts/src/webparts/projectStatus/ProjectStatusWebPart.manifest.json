@@ -6,6 +6,7 @@
   "version": "0.0.1",
   "manifestVersion": 2,
   "requiresCustomScript": false,
+  "hiddenFromToolbox": true,
   "preconfiguredEntries": [
     {
       "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
@@ -18,7 +19,7 @@
       "description": {
         "default": " "
       },
-      "officeFabricIconFontName": "Page",
+      "officeFabricIconFontName": "AwayStatus",
       "properties": {
         "title": "Prosjektstatus",
         "reportListName": "Prosjektstatus",
