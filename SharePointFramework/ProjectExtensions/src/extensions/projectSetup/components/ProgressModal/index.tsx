@@ -14,7 +14,7 @@ export default class ProgressModal extends React.Component<IProgressModalProps, 
                 isBlocking={this.props.isBlocking}
                 isDarkOverlay={this.props.isDarkOverlay}>
                 <div className={styles.progressModal}>
-                    <ProgressIndicator {...this.props.progressIndicatorProps} />
+                    <ProgressIndicator label={this.props.text} description={this.props.subText} />
                     {this.props.taskParams.entity && <EditPropertiesLink editFormUrl={this.props.taskParams.entity.editFormUrl} />}
                 </div>
             </Modal>

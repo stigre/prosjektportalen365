@@ -1,4 +1,5 @@
 import { sp, Web } from '@pnp/sp';
+import { Logger, LogLevel } from '@pnp/logging';
 import { override } from '@microsoft/decorators';
 import { BaseTask } from '../BaseTask';
 import * as strings from 'ProjectSetupApplicationCustomizerStrings';
@@ -26,13 +27,14 @@ export default class CopyListData extends BaseTask {
     }
 
     private async processListItems(listConfig: ListContentConfig) {
+        Logger.log({ message: '(ProjectSetupApplicationCustomizer) CopyListData: Processing list items', data: { listConfig }, level: LogLevel.Info });
         let sourceItems = await (listConfig.web as Web).lists.getByTitle(listConfig.sourceList).get<any[]>();
         let destList = sp.web.lists.getByTitle(listConfig.destinationList);
         let destListItemEntityTypeFullName = (await destList.select('ListItemEntityTypeFullName').get<{ ListItemEntityTypeFullName: string }>()).ListItemEntityTypeFullName;
 
         for (var i = 0; i < sourceItems.length; i++) {
             let properties = listConfig.fields.reduce((_properties, fieldName) => {
-                _properties[fieldName] = sourceItems[0][fieldName];
+                _properties[fieldName] = sourceItems[i][fieldName];
                 return _properties;
             }, {});
             await destList.items.add(properties, destListItemEntityTypeFullName);

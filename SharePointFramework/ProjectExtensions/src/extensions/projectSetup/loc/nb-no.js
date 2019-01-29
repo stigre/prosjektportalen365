@@ -11,7 +11,7 @@ define([], function () {
     TemplateSelectTitle: "Velg prosjektmal",
     ListContentTitle: "Velg standardinnhold",
     ExtensionsTitle: "Velg prosjekttillegg",
-    TemplateSelectModalSubmitButtonText: "Kjør",
+    TemplateSelectModalSubmitButtonText: "Installer",
     ProgressModalLabel: "Klargjør prosjektområdet",
     ProgressModalDescription: "Vennligst vent. Ikke lukk nettleservinduet.",
     TemplateSelectModalFooterText: "Oppsettet av prosjektområdet tar omtrent 10 minutter. Ikke lukk nettleservinduet mens området settes opp.",

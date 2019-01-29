@@ -6,6 +6,7 @@ import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
 import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
 import { Dropdown, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
+import CollapsableSection from '../CollapsableSection';
 import { ITemplateSelectModalProps } from './ITemplateSelectModalProps';
 import { ITemplateSelectModalState } from './ITemplateSelectModalState';
 import * as strings from 'ProjectSetupApplicationCustomizerStrings';
@@ -19,6 +20,8 @@ export default class TemplateSelectModal extends React.Component<ITemplateSelect
             selectedTemplate: props.data.templates[0],
             selectedExtensions: [],
             selectedListConfig: props.data.listContentConfig.filter(lcc => lcc.isDefault),
+            listContentHidden: true,
+            extensionsHidden: true,
         };
     }
 
@@ -41,32 +44,39 @@ export default class TemplateSelectModal extends React.Component<ITemplateSelect
                                         options={this.getTemplateOptions()} />
                                 </div>
                             </div>
-                            <div className={styles.listContent}>
-                                <div className={styles.listContentTitle}>{strings.ListContentTitle}</div>
-                                <div className={styles.listContentList}>
-                                    {this.props.data.listContentConfig.map((lcc, idx) => (
-                                        <div key={`${idx}`} className={styles.listContentItem}>
-                                            <Toggle label={lcc.title} defaultChecked={lcc.isDefault} onChanged={checked => this.onListContentItemToggle(lcc, checked)} />
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className={styles.extensions}>
-                                <div className={styles.extensionsTitle}>{strings.ExtensionsTitle}</div>
-                                <div className={styles.extensionsList}>
-                                    {this.props.data.extensions.map((ext, idx) => (
-                                        <div key={`${idx}`} className={styles.extensionItem}>
-                                            <Toggle label={ext.title} onChanged={checked => this.onExtensionItemToggle(ext, checked)} />
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
+                            <CollapsableSection
+                                title={strings.ListContentTitle}
+                                className={styles.listContent}
+                                titleClassName={styles.listContentTitle}
+                                contentClassName={styles.listContentList}>
+                                {this.props.data.listContentConfig.map((lcc, idx) => (
+                                    <div key={`${idx}`} className={styles.listContentItem}>
+                                        <Toggle
+                                            label={lcc.title}
+                                            defaultChecked={lcc.isDefault}
+                                            onChanged={checked => this.onListContentItemToggle(lcc, checked)} />
+                                    </div>
+                                ))}
+                            </CollapsableSection>
+                            <CollapsableSection
+                                title={strings.ExtensionsTitle}
+                                className={styles.extensions}
+                                titleClassName={styles.extensionsTitle}
+                                contentClassName={styles.extensionsList}>
+                                {this.props.data.extensions.map((ext, idx) => (
+                                    <div key={`${idx}`} className={styles.extensionItem}>
+                                        <Toggle
+                                            label={ext.title}
+                                            defaultChecked={false}
+                                            onChanged={checked => this.onExtensionItemToggle(ext, checked)} />
+                                    </div>
+                                ))}
+                            </CollapsableSection>
                         </div>
                         <div className={styles.templateSelectModalFooter}>
                             <DefaultButton
                                 className={styles.templateSelectModalSubmitButton}
                                 text={strings.TemplateSelectModalSubmitButtonText}
-                                iconProps={{ iconName: 'Running' }}
                                 onClick={this.onSubmit} />
                             <MessageBar>{strings.TemplateSelectModalFooterText}</MessageBar>
                         </div>
@@ -102,7 +112,8 @@ export default class TemplateSelectModal extends React.Component<ITemplateSelect
 
     @autobind
     private onSubmit() {
-        this.props.onSubmit(this.state);
+        const { selectedExtensions, selectedListConfig, selectedTemplate } = this.state;
+        this.props.onSubmit({ selectedExtensions, selectedListConfig, selectedTemplate });
     }
 
     @autobind

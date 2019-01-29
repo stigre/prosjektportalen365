@@ -5,7 +5,6 @@ import { BaseApplicationCustomizer, PlaceholderName } from '@microsoft/sp-applic
 import { Tasks } from './tasks';
 import { sp } from '@pnp/sp';
 import { Logger, LogLevel, ConsoleListener } from '@pnp/logging';
-import { IProgressIndicatorProps } from 'office-ui-fabric-react/lib/ProgressIndicator';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { IProjectSetupApplicationCustomizerProperties } from './IProjectSetupApplicationCustomizerProperties';
 import { ProgressModal, TemplateSelectModal } from './components';
@@ -16,6 +15,7 @@ import * as strings from 'ProjectSetupApplicationCustomizerStrings';
 import ListContentConfig from './models/ListContentConfig';
 import { ITemplateSelectModalState } from './components/TemplateSelectModal/ITemplateSelectModalState';
 import { IBaseTaskParams } from './tasks/IBaseTaskParams';
+import { IProgressModalProps } from './components/ProgressModal/IProgressModalProps';
 
 export default class ProjectSetupApplicationCustomizer extends BaseApplicationCustomizer<IProjectSetupApplicationCustomizerProperties> {
   private domElement: HTMLDivElement;
@@ -38,7 +38,7 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
         ReactDOM.unmountComponentAtNode(this.templateSelectModalContainer);
         this.data = { ...this.data, ...templateInfo };
         this.taskParams = { context: this.context, properties: this.properties, data: this.data };
-        this.renderProgressModal({ label: strings.ProgressModalLabel, description: strings.ProgressModalDescription });
+        this.renderProgressModal({ text: strings.ProgressModalLabel, subText: strings.ProgressModalDescription });
         await this.runTasks();
       } else {
         // TODO: Handle hub site error
@@ -49,12 +49,12 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
   /**
    * Render TemplateSelectModal
    */
-  private getTemplateInfo(): Promise<ITemplateSelectModalState> {
+  private getTemplateInfo(): Promise<IProjectSetupApplicationCustomizerData> {
     return new Promise(resolve => {
       const templateSelectModal = React.createElement(TemplateSelectModal, {
         key: 'ProjectSetupApplicationCustomizer_TemplateSelectModal',
         data: this.data,
-        onSubmit: (state: ITemplateSelectModalState) => resolve(state),
+        onSubmit: (data: IProjectSetupApplicationCustomizerData) => resolve(data),
         isBlocking: true,
         isDarkOverlay: true,
       });
@@ -67,10 +67,10 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
   /**
    * Render ProgressModal
    */
-  private renderProgressModal(progressIndicatorProps: IProgressIndicatorProps) {
+  private renderProgressModal(props: IProgressModalProps) {
     const progressModal = React.createElement(ProgressModal, {
       key: 'ProjectSetupApplicationCustomizer_ProgressModal',
-      progressIndicatorProps,
+      ...props,
       taskParams: this.taskParams,
       isBlocking: true,
       isDarkOverlay: true,
@@ -99,7 +99,7 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
 
   @autobind
   private onTaskStatusUpdated(status: string) {
-    this.renderProgressModal({ label: strings.ProgressModalLabel, description: status });
+    this.renderProgressModal({ text: strings.ProgressModalLabel, subText: status });
   }
 
   /**
