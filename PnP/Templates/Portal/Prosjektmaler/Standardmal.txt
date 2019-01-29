@@ -622,9 +622,9 @@
                                         "automaticReload": true,
                                         "confirmPhaseChange": true,
                                         "reloadTimeout": 0,
-                                        "updateViewsDocuments": false,
-                                        "updateViewsTasks": false,
-                                        "updateViewsRisks": false,
+                                        "updateViewsDocuments": true,
+                                        "updateViewsRisks": true,
+                                        "updateViewName": "Gjeldende fase",
                                         "gutter": 15,
                                         "fontSize": 13,
                                         "entity": {

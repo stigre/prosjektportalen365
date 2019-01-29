@@ -1,0 +1,26 @@
+<pnp:ClientSidePages xmlns:pnp="http://schemas.dev.office.com/PnP/2018/05/ProvisioningSchema">
+    <pnp:ClientSidePage PageName="Home.aspx" PromoteAsNewsArticle="false" Overwrite="true" Layout="Home" EnableComments="false" Title="Home">
+        <pnp:Header Type="None" />
+    </pnp:ClientSidePage>
+    <pnp:ClientSidePage PageName="Porteføljeoversikt.aspx" PromoteAsNewsArticle="false" Overwrite="true" Layout="Home" EnableComments="false" Title="Porteføljeoversikt">
+        <pnp:Header Type="None" />
+    </pnp:ClientSidePage>
+    <pnp:ClientSidePage PageName="Porteføljeinnsikt.aspx" PromoteAsNewsArticle="false" Overwrite="true" Layout="Home" EnableComments="false" Title="Porteføljeinnsikt">
+        <pnp:Header Type="None" />
+    </pnp:ClientSidePage>
+    <pnp:ClientSidePage PageName="Gevinstoversikt.aspx" PromoteAsNewsArticle="false" Overwrite="true" Layout="Home" EnableComments="false" Title="Gevinstoversikt">
+        <pnp:Header Type="None" />
+    </pnp:ClientSidePage>
+    <pnp:ClientSidePage PageName="Erfaringslogg.aspx" PromoteAsNewsArticle="false" Overwrite="true" Layout="Home" EnableComments="false" Title="Erfaringslogg">
+        <pnp:Header Type="None" />
+    </pnp:ClientSidePage>
+    <pnp:ClientSidePage PageName="Leveranseoversikt.aspx" PromoteAsNewsArticle="false" Overwrite="true" Layout="Home" EnableComments="false" Title="Leveranseoversikt">
+        <pnp:Header Type="None" />
+    </pnp:ClientSidePage>
+    <pnp:ClientSidePage PageName="Risikooversikt.aspx" PromoteAsNewsArticle="false" Overwrite="true" Layout="Home" EnableComments="false" Title="Risikooversikt">
+        <pnp:Header Type="None" />
+    </pnp:ClientSidePage>
+    <pnp:ClientSidePage PageName="Ressursallokering.aspx" PromoteAsNewsArticle="false" Overwrite="true" Layout="Home" EnableComments="false" Title="Ressursallokering">
+        <pnp:Header Type="None" />
+    </pnp:ClientSidePage>
+</pnp:ClientSidePages>
