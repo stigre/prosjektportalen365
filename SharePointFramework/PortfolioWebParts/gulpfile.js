@@ -1,5 +1,5 @@
 'use strict';
-
+const fs = require('fs');
 const gulp = require('gulp');
 const build = require('@microsoft/sp-build-web');
 const spfxPkgDeploy = require('spfx-pkgdeploy').default;
