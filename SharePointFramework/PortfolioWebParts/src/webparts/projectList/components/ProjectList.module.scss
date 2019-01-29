@@ -36,34 +36,3 @@
         }
     }
 }
-
-.modal {
-    >div {
-        min-height: 150px;
-        min-width: 150px;
-        .spinner {
-          padding: 50px;
-        }
-    }
-    .propertiesModalInner {
-        min-width: 400px;
-        padding: 50px;
-        .propertiesModalHeader {
-            @include ms-font-xxl;
-        }
-        .propertiesContainer {
-            margin-top: 10px;
-            .property {
-                margin: 0 0 10px;
-                .propertyHeader {
-                    @include ms-fontWeight-semibold;
-                    margin: 3px 0;
-                }
-                .propertyValue {
-                    @include ms-font-m;
-                    margin: 0;
-                }
-            }
-        }
-    }
-}

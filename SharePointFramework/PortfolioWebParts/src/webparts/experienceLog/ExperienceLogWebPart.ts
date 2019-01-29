@@ -4,42 +4,28 @@ import { Version } from '@microsoft/sp-core-library';
 import {
   BaseClientSideWebPart,
   IPropertyPaneConfiguration,
-  PropertyPaneTextField,
-  WebPartContext,
+  PropertyPaneTextField
 } from '@microsoft/sp-webpart-base';
 
-import * as strings from 'ProjectListWebPartStrings';
-import ProjectList from './components/ProjectList';
-import { IProjectListProps } from './components/IProjectListProps';
-import { sp, Web } from '@pnp/sp';
+import * as strings from 'ExperienceLogWebPartStrings';
+import ExperienceLog from './components/ExperienceLog';
+import { IExperienceLogProps } from './components/IExperienceLogProps';
+import { sp } from '@pnp/sp';
 
-
-export interface IProjectListWebPartProps {
+export interface IExperienceLogWebPartProps {
   absoluteUrl: string;
   serverRelativeUrl: string;
-  context: WebPartContext;
-  projectsEntity: {
-    listName: string;
-    contentTypeId: string;
-    fieldsGroupName: string;
-    groupIdFieldName: string;
-  };
 }
 
-export default class ProjectListWebPart extends BaseClientSideWebPart<IProjectListWebPartProps> {
-
-  private web: Web;
+export default class ExperienceLogWebPart extends BaseClientSideWebPart<IExperienceLogWebPartProps> {
 
   public render(): void {
-    const element: React.ReactElement<IProjectListProps> = React.createElement(
-      ProjectList,
+    const element: React.ReactElement<IExperienceLogProps > = React.createElement(
+      ExperienceLog,
       {
-        projectsEntity: this.properties.projectsEntity,
-        pageContext: this.context.pageContext,
+        absoluteUrl: this.context.pageContext.web.absoluteUrl,
         spHttpClient: this.context.spHttpClient,
-        web: this.web,
         serverRelativeUrl: this.context.pageContext.web.serverRelativeUrl,
-        absoluteUrl: this.context.pageContext.web.absoluteUrl
       }
     );
 
@@ -51,7 +37,6 @@ export default class ProjectListWebPart extends BaseClientSideWebPart<IProjectLi
       sp.setup({
         spfxContext: this.context
       });
-      this.web = new Web(this.context.pageContext.web.absoluteUrl);
     });
   }
 

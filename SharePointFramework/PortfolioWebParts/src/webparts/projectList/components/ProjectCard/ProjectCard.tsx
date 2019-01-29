@@ -13,7 +13,7 @@ import {
   IDocumentCardPreviewImage
 } from "office-ui-fabric-react/lib/DocumentCard";
 import { ImageFit } from 'office-ui-fabric-react/lib/Image';
-import { IUserDetails } from '../ProjectListModel';
+import { IUserDetails } from '../../../../Common/models/ProjectListModel';
 
 const ProjectCard = (props: IProjectCardProps): JSX.Element => {
   const previewImage: IDocumentCardPreviewImage = {

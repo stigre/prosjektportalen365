@@ -3,7 +3,7 @@ import styles from './ProjectList.module.scss';
 import * as strings from 'ProjectListWebPartStrings';
 import { IProjectListProps } from './IProjectListProps';
 import { IProjectListState, IProjectListData } from './IProjectListState';
-import ProjectListModel from './ProjectListModel';
+import ProjectListModel from '../../../Common/models/ProjectListModel';
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
@@ -13,7 +13,7 @@ import { sp, SearchQuery, QueryPropertyValueType, SearchQueryBuilder, ISearchQue
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 import { taxonomy } from '@pnp/sp-taxonomy';
 import Phase from '../models/Phase';
-import ProjectInfo from './ProjectInfo/ProjectInfo';
+import ProjectInfo from '../../../Common/components/ProjectInfo/ProjectInfo';
 
 export default class ProjectList extends React.Component<IProjectListProps, IProjectListState> {
 
@@ -40,7 +40,7 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
         {(this.state.showProjectInfo) ?
           <ProjectInfo
             projectsEntity={this.props.projectsEntity}
-            context={this.props.context}
+            pageContext={this.props.pageContext}
             showProjectInfo={this.state.showProjectInfo}
             onDismiss={e => this.setState({ showProjectInfo: undefined })} /> : null}
         <div className={styles.projectListSearchBox}>
@@ -124,7 +124,7 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
     let associatedSites = result.PrimarySearchResults.filter(site => id !== site['SiteId']);
 
     associatedSites.forEach(site => {
-      let currentProject = projects.filter(p => site.Title === p.GtProjectFinanceName)[0];
+      let currentProject = projects.filter(p => site.Title === p.Title)[0];
       let owner = users.filter(user => user.Id === currentProject.GtProjectOwnerId)[0];
       let manager = users.filter(user => user.Id === currentProject.GtProjectManagerId)[0];
       let phase = phases.filter(p => p.id === currentProject.GtProjectPhase.TermGuid)[0].term.PathOfTerm;
@@ -162,7 +162,7 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
     let url = `${rootUrl}/_api/HubSites?$filter=SiteUrl eq '${this.props.absoluteUrl}'`;
     let id: string = '';
 
-    return this.props.context.spHttpClient.get(url, SPHttpClient.configurations.v1, {
+    return this.props.spHttpClient.get(url, SPHttpClient.configurations.v1, {
       headers: {
         'Accept': 'application/json;odata=nometadata',
         'odata-version': '',

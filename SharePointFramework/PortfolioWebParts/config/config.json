@@ -49,15 +49,25 @@
           "manifest": "./src/webparts/latestProjects/LatestProjectsWebPart.manifest.json"
         }
       ]
+    },
+    "experience-log-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/experienceLog/ExperienceLogWebPart.js",
+          "manifest": "./src/webparts/experienceLog/ExperienceLogWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
+    "CommonStrings": "lib/Common/loc/{locale}.js",
     "DeliveriesOverviewWebPartStrings": "lib/webparts/deliveriesOverview/loc/{locale}.js",
     "BenefitsOverviewWebPartStrings": "lib/webparts/benefitsOverview/loc/{locale}.js",
     "ProjectInsightsWebPartStrings": "lib/webparts/projectInsights/loc/{locale}.js",
     "PortfolioOverviewWebPartStrings": "lib/webparts/portfolioOverview/loc/{locale}.js",
     "ProjectListWebPartStrings": "lib/webparts/projectList/loc/{locale}.js",
-    "LatestProjectsWebPartStrings": "lib/webparts/latestProjects/loc/{locale}.js"
+    "LatestProjectsWebPartStrings": "lib/webparts/latestProjects/loc/{locale}.js",
+    "ExperienceLogWebPartStrings": "lib/webparts/experienceLog/loc/{locale}.js"
   }
 }

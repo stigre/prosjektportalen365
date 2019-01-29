@@ -1,14 +1,15 @@
 import * as React from 'react';
-import styles from '../ProjectList.module.scss';
-import * as strings from 'ProjectListWebPartStrings';
+import styles from './ProjectInfo.module.scss';
+import * as strings from 'CommonStrings';
 import { Modal } from "office-ui-fabric-react/lib/Modal";
 import { IProjectInfoProps } from './IProjectInfoProps';
 import { IProjectInfoState } from './IProjectInfoState';
 import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
 import HubSiteService from 'sp-hubsite-service';
 import SpEntityPortalService from 'sp-entityportal-service';
-import ProjectPropertyModel from './ProjectPropertyModel';
+import ProjectPropertyModel from '../../models/ProjectPropertyModel';
 import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
+import { Button } from 'office-ui-fabric-react/lib/Button';
 
 export default class ProjectInfo extends React.Component<IProjectInfoProps, IProjectInfoState> {
 
@@ -27,12 +28,27 @@ export default class ProjectInfo extends React.Component<IProjectInfoProps, IPro
 
   public render() {
     return (
-      <Modal className={styles.modal} isOpen={this.props.showProjectInfo !== undefined} isBlocking={false} isDarkOverlay={true} onDismiss={this.props.onDismiss}>
-        {(this.state.isLoading) ? <Spinner className={styles.spinner} label={strings.Loading} size={SpinnerSize.medium} /> :
-          <div className={styles.propertiesModalInner}>
-            <span className={styles.propertiesModalHeader}>{this.props.showProjectInfo.Title}</span>
-            {this.renderProperties(this.state.data.properties.slice())}
-          </div>}
+      <Modal
+        className={styles.modal}
+        isOpen={this.props.showProjectInfo !== undefined}
+        isBlocking={false}
+        isDarkOverlay={true}
+        onDismiss={this.props.onDismiss}>
+        <div className={styles.propertiesModalInner}>
+          <span className={styles.propertiesModalHeader}>{this.props.showProjectInfo.Title}</span>
+          {(this.state.isLoading) ? <Spinner className={styles.spinner} label={strings.Loading} size={SpinnerSize.medium} /> :
+            <div className={styles.headerButtons}>
+              <Button
+                iconProps={{ iconName: 'Home' }}
+                text={strings.ProjectLinkText}
+                onClick={() => location.replace(this.props.showProjectInfo.Url)} />
+              <Button
+                iconProps={{ iconName: "BarChart4" }}
+                text={strings.ProjectStatusLinkText}
+                onClick={() => location.replace(`${this.props.showProjectInfo.Url}/SitePages/ProjectStatus.aspx`)} />
+              {this.renderProperties(this.state.data.properties.slice())}
+            </div>}
+        </div>
       </Modal>
     );
   }
@@ -45,7 +61,12 @@ export default class ProjectInfo extends React.Component<IProjectInfoProps, IPro
     return (
       <div className={styles.propertiesContainer}>
         {propertiesToRender.map(p => {
-          return <div className={styles.property}><p className={styles.propertyHeader}>{p.displayName}</p><p className={styles.propertyValue}>{p.value}</p></div>;
+          return (
+            <div className={styles.property}>
+              <p className={styles.propertyHeader}>{p.displayName}</p>
+              <p className={styles.propertyValue}>{p.value}</p>
+            </div>
+          );
         })}
       </div>
     );
@@ -53,8 +74,7 @@ export default class ProjectInfo extends React.Component<IProjectInfoProps, IPro
 
   private async fetchData() {
     try {
-      const { context } = this.props;
-      const { pageContext } = context;
+      const { pageContext } = this.props;
       const { hubSiteId } = pageContext.legacyPageContext;
       const groupId = this.props.showProjectInfo.RawObject.GtGroupId;
       const hubSite = await HubSiteService.GetHubSiteById(pageContext.web.absoluteUrl, hubSiteId);
