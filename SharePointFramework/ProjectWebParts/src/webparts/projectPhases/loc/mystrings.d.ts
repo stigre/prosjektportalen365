@@ -9,8 +9,8 @@ declare interface IProjectPhasesWebPartStrings {
   FontSizeFieldLabel: string;
   GutterFieldLabel: string;
   UpdateViewsDocumentsFieldLabel: string;
-  UpdateViewsTasksFieldLabel: string;
   UpdateViewsRisksFieldLabel: string;
+  UpdateViewNameFieldLabel: string;
   ConfirmPhaseChangeFieldLabel: string;
   PhaseSubTextPropertyFieldLabel: string;
   ConfirmPhaseDialogTitle: string;
@@ -44,6 +44,7 @@ declare interface IProjectPhasesWebPartStrings {
   CommentLabel: string;
   ChangingPhaseLabel: string;
   ChangingPhaseDescription: string;
+  LoadingText: string;
 }
 
 declare module 'ProjectPhasesWebPartStrings' {

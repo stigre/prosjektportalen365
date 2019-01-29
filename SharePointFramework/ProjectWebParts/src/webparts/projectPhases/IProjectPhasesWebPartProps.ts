@@ -8,7 +8,7 @@ export interface IProjectPhasesWebPartProps extends IBaseWebPartProps {
     fontSize: number;
     gutter: number;
     updateViewsDocuments: boolean;
-    updateViewsTasks: boolean;
     updateViewsRisks: boolean;
+    updateViewName: string;
     phaseSubTextProperty: string;
 }

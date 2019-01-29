@@ -10,8 +10,8 @@ define([], function () {
     FontSizeFieldLabel: "Skriftstørrelse",
     GutterFieldLabel: "Avstand mellom fasene",
     UpdateViewsDocumentsFieldLabel: "Opppdater Prosjektdokumenter",
-    UpdateViewsTasksFieldLabel: "Oppdater Oppgaver",
     UpdateViewsRisksFieldLabel: "Oppdater Usikkerhet",
+    UpdateViewNameFieldLabel: "Visningsnavn",
     ConfirmPhaseChangeFieldLabel: "Bekreft faseenendring",
     PhaseSubTextPropertyFieldLabel: "Egenskap for undertekst",
     ConfirmPhaseDialogTitle: "Endre fase",
@@ -44,6 +44,7 @@ define([], function () {
     StatusClosed: "Utført",
     CommentLabel: "Kommentar",
     ChangingPhaseLabel: "Vennligst vent",
-    ChangingPhaseDescription: "Endrer fase til {0}"
+    ChangingPhaseDescription: "Endrer fase til {0}",
+    LoadingText: "Laster fasevelger...",
   }
 });

@@ -82,11 +82,11 @@ export default class ProjectPhasesWebPart extends BaseWebPart<IProjectPhasesWebP
                 PropertyPaneToggle('updateViewsDocuments', {
                   label: strings.UpdateViewsDocumentsFieldLabel,
                 }),
-                PropertyPaneToggle('updateViewsTasks', {
-                  label: strings.UpdateViewsTasksFieldLabel,
-                }),
                 PropertyPaneToggle('updateViewsRisks', {
                   label: strings.UpdateViewsRisksFieldLabel,
+                }),
+                PropertyPaneTextField('updateViewName', {
+                  label: strings.UpdateViewNameFieldLabel,
                 }),
               ]
             },

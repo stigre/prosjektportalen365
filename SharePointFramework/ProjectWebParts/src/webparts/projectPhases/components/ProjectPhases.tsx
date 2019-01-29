@@ -53,7 +53,7 @@ export default class ProjectPhases extends React.Component<IProjectPhasesProps, 
       return (
         <div className={styles.projectPhases}>
           <div className={styles.container} ref='container'>
-            <Spinner />
+            <Spinner label={strings.LoadingText} />
           </div>
         </div>
       );
@@ -143,47 +143,30 @@ export default class ProjectPhases extends React.Component<IProjectPhasesProps, 
    * Modify frontpage views
    * 
    * @param {string} phaseTermName Phase term name
-   * @param {string} viewName View name
    */
-  private async modifiyFrontpageViews(phaseTermName: string, viewName: string = 'Current phase') {
-    // const { web, updateViewsDocuments, updateViewsRisks, updateViewsTasks } = this.props;
-    // const listsToUpdate = [
-    //   updateViewsDocuments && strings.DocumentsListName,
-    //   updateViewsRisks && strings.RiskRegisterListName,
-    //   updateViewsTasks && strings.TasksListName,
-    // ].filter(l => l);
-    // const lists = web.lists;
-    // const viewsPromises = listsToUpdate.map(t => lists.getByTitle(t).views.get());
-    // const viewsResult = await Promise.all(viewsPromises);
-    // for (let i = 0; i < viewsResult.length; i++) {
-    //   const listName = listsToUpdate[i];
-    //   const [frontpageView] = viewsResult[i].filter(v => v.Title === viewName);
-    //   if (frontpageView) {
-    //     const pnpFrontpageView = lists.getByTitle(listName).views.getById(frontpageView.Id);
-    //     const { ViewQuery } = await pnpFrontpageView.select('ViewQuery').get();
-    //     const viewQueryDom = new DOMParser().parseFromString(`<Query>${ViewQuery}</Query>`, 'text/xml');
-    //     const orderByDomElement = viewQueryDom.getElementsByTagName('OrderBy')[0];
-    //     const orderBy = orderByDomElement ? orderByDomElement.outerHTML : '';
-    //     try {
-    //       await pnpFrontpageView.update({
-    //         ViewQuery: [
-    //           orderBy,
-    //           `<Where>
-    //           <Eq>
-    //             <FieldRef Name='GtProjectPhase' />
-    //             <Value Type='Text'>${phaseTermName}</Value>
-    //           </Eq>
-    //         </Where>`
-    //         ].join('')
-    //       });
-    //       Logger.write(`(ProjectPhases) modifiyFrontpageViews:  Successfully updated ViewQuery for view '${viewName}' for list '${listName}'`, LogLevel.Info);
-    //     } catch (err) {
-    //       Logger.write(`(ProjectPhases) modifiyFrontpageViews: Failed to update ViewQuery for view '${viewName}' for list '${listName}'`, LogLevel.Error);
-    //     }
-    //   } else {
-    //     Logger.write(`(ProjectPhases) modifiyFrontpageViews: No '${viewName}' view found for list '${listName}'`, LogLevel.Warning);
-    //   }
-    // }
+  private async modifiyFrontpageViews(phaseTermName: string) {
+    const { web, updateViewsDocuments, updateViewsRisks, updateViewName } = this.props;
+    const listsToUpdate = [updateViewsDocuments && strings.DocumentsListName, updateViewsRisks && strings.RiskRegisterListName].filter(l => l);
+    const viewsPromises = listsToUpdate.map(t => web.lists.getByTitle(t).views.get());
+    const viewsResult = await Promise.all(viewsPromises);
+    for (let i = 0; i < viewsResult.length; i++) {
+      const listName = listsToUpdate[i];
+      const [frontpageView] = viewsResult[i].filter(v => v.Title === updateViewName);
+      if (frontpageView) {
+        const pnpFrontpageView = web.lists.getByTitle(listName).views.getById(frontpageView.Id);
+        const { ViewQuery } = await pnpFrontpageView.select('ViewQuery').get();
+        const viewQueryDom = new DOMParser().parseFromString(`<Query>${ViewQuery}</Query>`, 'text/xml');
+        const orderByDomElement = viewQueryDom.getElementsByTagName('OrderBy')[0];
+        const orderBy = orderByDomElement ? orderByDomElement.outerHTML : '';
+        const newViewQuery = [orderBy, `<Where><Eq><FieldRef Name='GtProjectPhase' /><Value Type='Text'>${phaseTermName}</Value></Eq></Where>`].join('');
+        try {
+          await pnpFrontpageView.update({ ViewQuery: newViewQuery });
+          Logger.write(`(ProjectPhases) modifiyFrontpageViews: Successfully updated ViewQuery for view '${updateViewName}' for list '${listName}'`, LogLevel.Info);
+        } catch (err) {
+          Logger.write(`(ProjectPhases) modifiyFrontpageViews: Failed to update ViewQuery for view '${updateViewName}' for list '${listName}'`, LogLevel.Error);
+        }
+      }
+    }
   }
 
   /**
