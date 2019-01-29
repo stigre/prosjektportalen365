@@ -95,7 +95,6 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
 
   private async fetchData() {
     const projectListItems: ProjectListModel[] = [];
-    let id = await this.getHubId();
     let projects = await sp.web.lists.getByTitle('Prosjekter').items.get();
     let users = await sp.web.siteUsers.get();
 
@@ -103,7 +102,7 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
     const terms = await taxonomy.getDefaultSiteCollectionTermStore().getTermSetById(phaseField.TermSetId).terms.get();
     const phases = terms.filter(term => term.LocalCustomProperties.ShowOnFrontPage !== 'false').map(term => new Phase(term, {}));
 
-    let queryText = `DepartmentId:{${id}} contentclass:STS_Site`;
+    let queryText = `DepartmentId:${this.props.pageContext.legacyPageContext.siteId} contentclass:STS_Site`;
 
     const _searchQuerySettings: SearchQuery = {
       TrimDuplicates: false,
@@ -121,7 +120,7 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
 
     const query: ISearchQueryBuilder = SearchQueryBuilder(queryText, _searchQuerySettings);
     let result = await sp.search(query);
-    let associatedSites = result.PrimarySearchResults.filter(site => id !== site['SiteId']);
+    let associatedSites = result.PrimarySearchResults.filter(site => this.props.pageContext.legacyPageContext.siteId.indexOf(site['SiteId']) === -1);
 
     associatedSites.forEach(site => {
       let currentProject = projects.filter(p => site.Title === p.Title)[0];
@@ -156,27 +155,5 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
     });
 
   }
-
-  private getHubId() {
-    let rootUrl = this.props.absoluteUrl.replace(this.props.serverRelativeUrl, '');
-    let url = `${rootUrl}/_api/HubSites?$filter=SiteUrl eq '${this.props.absoluteUrl}'`;
-    let id: string = '';
-
-    return this.props.spHttpClient.get(url, SPHttpClient.configurations.v1, {
-      headers: {
-        'Accept': 'application/json;odata=nometadata',
-        'odata-version': '',
-      }
-    }).then((response: SPHttpClientResponse) => {
-      return response.json();
-    }).then((responseJSON) => {
-      let responseItems = responseJSON.value;
-      if (responseItems.length > 0) {
-        id = responseItems[0].ID;
-      }
-      return id;
-    });
-  }
-
 }
 
