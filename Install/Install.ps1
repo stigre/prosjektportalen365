@@ -54,7 +54,6 @@ $PortfolioSiteUrl = @($AppCatalogUri.Scheme, "://", $AppCatalogUri.Authority, "/
 $AppCatalogSiteConnection = $null
 $AdminSiteConnection = $null
 $PortfolioSiteConnection = $null
-$PortfolioSiteUrl
 
 Try {
     $AppCatalogSiteConnection = Connect-SharePoint -Url $AppCatalogUrl -ErrorAction Stop
@@ -99,6 +98,7 @@ Catch {
 
 if(-not $SkipTemplate.IsPresent) {
     Try {
+        Set-PnPTraceLog -Level Debug -On
         Write-Host "[INFO] Applying PnP template [Portal] to [$PortfolioSiteUrl]"
         Apply-PnPProvisioningTemplate ..\PnP\Templates\Portal\Portal.xml -Connection $PortfolioSiteConnection -ErrorAction Stop
     }
@@ -106,6 +106,7 @@ if(-not $SkipTemplate.IsPresent) {
         Write-Host "[INFO] Failed to apply PnP template [Portal] to [$PortfolioSiteUrl]: $($_.Exception.Message)"
         exit 0
     }
+    Set-PnPTraceLog -Off
 }
 
 
@@ -165,7 +166,7 @@ if(-not $SkipAppPackages.IsPresent) {
         $AppPackages | ForEach-Object {
             $AppPackage = Get-ChildItem $_.
             $App = Add-PnPApp -Path $AppPackage.FullName -Scope Tenant -Publish -Overwrite -ErrorAction Stop -Connection $AppCatalogSiteConnection
-            Install-PnPApp -Scope Tenant -Identity $App  -ErrorAction SilentlyContinue -Connection $AppCatalogSiteConnection >$null 2>&1
+            Install-PnPApp -Scope Tenant -Identity $App -ErrorAction SilentlyContinue -Connection $AppCatalogSiteConnection >$null 2>&1
         }
         Write-Host "[INFO] SharePoint Framework app packages successfully installed to [$AppCatalogUrl]" -ForegroundColor Green
     }
@@ -177,12 +178,6 @@ if(-not $SkipAppPackages.IsPresent) {
 
 Write-Host "[INFO] Installation done" -ForegroundColor Green
 
-#Sjekke at app-catalogen finnes
-
-#Last opp app-pakker for portefølje og prosjekt (-publish)
-
 Disconnect-PnPOnline -Connection $AppCatalogSiteConnection
 Disconnect-PnPOnline -Connection $AdminSiteConnection
 Disconnect-PnPOnline -Connection $PortfolioSiteConnection
-
-# Start-Process "chrome.exe" $PortfolioSiteUrl
