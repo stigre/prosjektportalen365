@@ -37,7 +37,7 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
         ReactDOM.unmountComponentAtNode(this.templateSelectModalContainer);
         this.data = { ...this.data, ...templateInfo };
         this.taskParams = { context: this.context, properties: this.properties, data: this.data };
-        this.renderProgressModal({ text: strings.ProgressModalLabel, subText: strings.ProgressModalDescription });
+        this.renderProgressModal({ text: strings.ProgressModalLabel, subText: strings.ProgressModalDescription, iconName: 'Page' });
         await this.runTasks();
       } else {
         Logger.log({ message: '(ProjectSetupApplicationCustomizer) onInit: The site is not connected to a hub', level: LogLevel.Error });
@@ -97,8 +97,8 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
   }
 
   @autobind
-  private onTaskStatusUpdated(status: string) {
-    this.renderProgressModal({ text: strings.ProgressModalLabel, subText: status });
+  private onTaskStatusUpdated(status: string, iconName: string) {
+    this.renderProgressModal({ text: strings.ProgressModalLabel, subText: status, iconName });
   }
 
   /**

@@ -49,7 +49,7 @@ export default class ProjectInformation extends React.Component<IProjectInformat
                 : (
                   <div>
                     {this.renderProperties()}
-                    <div className={styles.editPropertiesButton} hidden={this.props.hideEditPropertiesButton}>
+                    <div className={styles.editPropertiesButton} hidden={this.props.hideEditPropertiesButton || !this.props.context.pageContext.legacyPageContext.isSiteAdmin}>
                       <DefaultButton
                         text={strings.EditPropertiesText}
                         href={this.state.data.editFormUrl}

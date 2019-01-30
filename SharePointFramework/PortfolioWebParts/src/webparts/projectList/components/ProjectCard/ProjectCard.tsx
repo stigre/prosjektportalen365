@@ -21,8 +21,12 @@ const ProjectCard = ({ project, onClickHref, showProjectInfo, fallbackPreviewIma
       <DocumentCardPreview previewImages={[previewImage]} />
       <DocumentCardTitle title={project.Title} shouldTruncate={false} />
       <DocumentCardLocation location={project.Phase || strings.NotSet} />
-      <DocumentCardActivity activity={strings.ProjectOwner} people={[{ name: project.Owner.Title, profileImageSrc: getUserPhoto(project.Owner.Email) }]} />
-      <DocumentCardActivity activity={strings.ProjectManager} people={[{ name: project.Manager.Title, profileImageSrc: getUserPhoto(project.Manager.Email) }]} />
+      <DocumentCardActivity
+        activity={strings.ProjectOwner}
+        people={project.Owner ? [{ name: project.Owner.Title, profileImageSrc: getUserPhoto(project.Owner.Email) }] : []} />
+      <DocumentCardActivity
+        activity={strings.ProjectManager}
+        people={project.Manager ? [{ name: project.Manager.Title, profileImageSrc: getUserPhoto(project.Manager.Email) }] : []} />
       <DocumentCardActions
         actions={
           [{

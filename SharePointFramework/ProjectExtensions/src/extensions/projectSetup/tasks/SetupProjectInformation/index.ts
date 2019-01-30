@@ -1,5 +1,5 @@
 import { override } from '@microsoft/decorators';
-import { BaseTask } from '../BaseTask';
+import { BaseTask, OnProgressCallbackFunction } from '../BaseTask';
 import { Logger, LogLevel } from '@pnp/logging';
 import { IBaseTaskParams } from '../IBaseTaskParams';
 import { BaseTaskError } from '../BaseTaskError';
@@ -11,7 +11,7 @@ export default class SetupProjectInformation extends BaseTask {
     }
 
     @override
-    public async execute(params: IBaseTaskParams, _onProgress: (status: string) => void): Promise<IBaseTaskParams> {
+    public async execute(params: IBaseTaskParams, _onProgress: OnProgressCallbackFunction): Promise<IBaseTaskParams> {
         try {
             const { groupId } = params.context.pageContext.legacyPageContext;
             const spEntityPortalService = new SpEntityPortalService({

@@ -20,9 +20,8 @@ export interface ILatestProjectsWebPartProps {
 }
 
 export default class LatestProjectsWebPart extends BaseClientSideWebPart<ILatestProjectsWebPartProps> {
-
   public render(): void {
-    const element: React.ReactElement<ILatestProjectsProps > = React.createElement(
+    const element: React.ReactElement<ILatestProjectsProps> = React.createElement(
       LatestProjects,
       {
         context: this.context,
@@ -36,9 +35,7 @@ export default class LatestProjectsWebPart extends BaseClientSideWebPart<ILatest
 
   protected onInit(): Promise<void> {
     return super.onInit().then(_ => {
-      sp.setup({
-        spfxContext: this.context,
-      });
+      sp.setup({ spfxContext: this.context });
     });
   }
 
@@ -47,28 +44,12 @@ export default class LatestProjectsWebPart extends BaseClientSideWebPart<ILatest
   }
 
   protected get dataVersion(): Version {
-    return Version.parse('1.0');
+    return Version.parse(this.manifest.version);
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
     return {
-      pages: [
-        {
-          header: {
-            description: strings.PropertyPaneDescription
-          },
-          groups: [
-            {
-              groupName: strings.BasicGroupName,
-              groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
-                })
-              ]
-            }
-          ]
-        }
-      ]
+      pages: []
     };
   }
 }

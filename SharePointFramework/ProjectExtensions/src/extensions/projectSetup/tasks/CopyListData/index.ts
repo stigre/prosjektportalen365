@@ -1,7 +1,7 @@
 import { sp, Web } from '@pnp/sp';
 import { Logger, LogLevel } from '@pnp/logging';
 import { override } from '@microsoft/decorators';
-import { BaseTask } from '../BaseTask';
+import { BaseTask, OnProgressCallbackFunction } from '../BaseTask';
 import * as strings from 'ProjectSetupApplicationCustomizerStrings';
 import * as stringFormat from 'string-format';
 import { IBaseTaskParams } from '../IBaseTaskParams';
@@ -14,11 +14,12 @@ export default class CopyListData extends BaseTask {
     }
 
     @override
-    public async execute(params: IBaseTaskParams, onProgress: (status: string) => void): Promise<IBaseTaskParams> {
+    public async execute(params: IBaseTaskParams, onProgress:OnProgressCallbackFunction): Promise<IBaseTaskParams> {
         try {
             for (let i = 0; i < params.data.selectedListConfig.length; i++) {
-                onProgress(stringFormat(strings.CopyListDataText, params.data.selectedListConfig[i].sourceList, params.data.selectedListConfig[i].destinationLibrary || params.data.selectedListConfig[i].destinationList));
-                await this.processListItems(params.data.selectedListConfig[i]);
+                const listConfig = params.data.selectedListConfig[i];
+                onProgress(stringFormat(strings.CopyListDataText, listConfig.sourceList, listConfig.destinationLibrary || listConfig.destinationList), 'List');
+                await this.processListItems(listConfig);
             }
             return params;
         } catch (error) {

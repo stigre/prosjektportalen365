@@ -30,7 +30,7 @@ export default class ProjectPhaseCallout extends React.PureComponent<IProjectPha
                 hidden={false}>
                 <div className={styles.projectPhaseCallout}>
                     <div className={styles.header}>
-                        <p className={styles.title}>{phase.model.name}</p>
+                        <span className={styles.title}>{phase.model.name}</span>
                     </div>
                     <div className={styles.inner}>
                         <div className={styles.content}>
