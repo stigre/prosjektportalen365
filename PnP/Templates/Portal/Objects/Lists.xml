@@ -10,6 +10,27 @@
         </pnp:ContentTypeBindings>
     </pnp:ListInstance>
     <pnp:ListInstance Title="Prosjektmaler" Description="" DocumentTemplate="" TemplateType="101" Url="Prosjektmaler" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0">
+        <pnp:Views RemoveExistingViews="true">
+            <View DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" Type="HTML" DisplayName="Alle maler" Url="{site}/Prosjektmaler/Forms/AllItems.aspx" Level="1" BaseViewID="1" ContentTypeID="0x" ImageUrl="/_layouts/15/images/dlicon.png?rev=45">
+                <Query>
+                    <OrderBy>
+                        <FieldRef Name="FileLeafRef" />
+                    </OrderBy>
+                </Query>
+                <ViewFields>
+                    <FieldRef Name="LinkFilename" />
+                    <FieldRef Name="Title" />
+                    <FieldRef Name="GtDescription" />
+                    <FieldRef Name="_UIVersionString" />
+                </ViewFields>
+                <RowLimit Paged="TRUE">30</RowLimit>
+                <Aggregations Value="Off" />
+                <JSLink>clienttemplates.js</JSLink>
+            </View>
+        </pnp:Views>
+        <pnp:FieldRefs>
+            <pnp:FieldRef ID="c3beecea-c0e5-4d18-9b45-3c7d7949bee4" Name="GtDescription" />
+        </pnp:FieldRefs>
     </pnp:ListInstance>
     <pnp:ListInstance Title="Prosjekttillegg" Description="" DocumentTemplate="" TemplateType="101" Url="Prosjekttillegg" MinorVersionLimit="0" MaxVersionLimit="0" DraftVersionVisibility="0">
     </pnp:ListInstance>
@@ -39,7 +60,7 @@
         </pnp:Views>
     </pnp:ListInstance>
     <pnp:ListInstance Title="Fasesjekkliste" Description="" DocumentTemplate="" TemplateType="100" Url="Lists/Fasesjekkliste" EnableVersioning="true" MinorVersionLimit="0" MaxVersionLimit="50000" DraftVersionVisibility="0" ContentTypesEnabled="false" RemoveExistingContentTypes="true" EnableFolderCreation="false">
-        <pnp:ContentTypeBindings>
+        <pnp:ContentTypeBindings>        
             <pnp:ContentTypeBinding ContentTypeID="0x0100486B1F8AEA24486FBA1C1BA9146C360C" Default="true" />
         </pnp:ContentTypeBindings>
         <pnp:Views RemoveExistingViews="true">
