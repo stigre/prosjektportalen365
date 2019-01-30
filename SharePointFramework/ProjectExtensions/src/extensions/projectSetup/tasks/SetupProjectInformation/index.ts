@@ -14,9 +14,14 @@ export default class SetupProjectInformation extends BaseTask {
     public async execute(params: IBaseTaskParams, _onProgress: (status: string) => void): Promise<IBaseTaskParams> {
         try {
             const { groupId } = params.context.pageContext.legacyPageContext;
-            const spEntityPortalService = new SpEntityPortalService({ webUrl: params.data.hub.url, listName: params.properties.projectsList, groupIdFieldName: 'GtGroupId' });
+            const spEntityPortalService = new SpEntityPortalService({
+                webUrl: params.data.hub.url,
+                listName: params.properties.projectsList,
+                groupIdFieldName: 'GtGroupId',
+                siteUrlFieldName: 'GtSiteUrl',
+            });
             Logger.log({ message: `(ProjectSetupApplicationCustomizer) SetupProjectInformation: Adding project to list '${params.properties.projectsList}' at ${params.data.hub.url}`, data: { groupId: groupId }, level: LogLevel.Info });
-            const entity = await spEntityPortalService.newEntity(params.context.pageContext.web.title, groupId, params.data.hub.url);
+            const entity = await spEntityPortalService.newEntity(params.context.pageContext, params.data.hub.url);
             return { ...params, entity };
         } catch (error) {
             throw new BaseTaskError('SetupProjectInformation', 'Unknown error');

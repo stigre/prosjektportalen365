@@ -13,7 +13,6 @@ import IProjectSetupApplicationCustomizerData from './IProjectSetupApplicationCu
 import ProjectTemplate from './models/ProjectTemplate';
 import * as strings from 'ProjectSetupApplicationCustomizerStrings';
 import ListContentConfig from './models/ListContentConfig';
-import { ITemplateSelectModalState } from './components/TemplateSelectModal/ITemplateSelectModalState';
 import { IBaseTaskParams } from './tasks/IBaseTaskParams';
 import { IProgressModalProps } from './components/ProgressModal/IProgressModalProps';
 
@@ -41,7 +40,7 @@ export default class ProjectSetupApplicationCustomizer extends BaseApplicationCu
         this.renderProgressModal({ text: strings.ProgressModalLabel, subText: strings.ProgressModalDescription });
         await this.runTasks();
       } else {
-        // TODO: Handle hub site error
+        Logger.log({ message: '(ProjectSetupApplicationCustomizer) onInit: The site is not connected to a hub', level: LogLevel.Error });
       }
     }
   }

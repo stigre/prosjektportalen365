@@ -28,24 +28,39 @@ export default class CopyListData extends BaseTask {
 
     private async processListItems(listConfig: ListContentConfig) {
         Logger.log({ message: '(ProjectSetupApplicationCustomizer) CopyListData: Processing list items', data: { listConfig }, level: LogLevel.Info });
-        let sourceItems = await (listConfig.web as Web).lists.getByTitle(listConfig.sourceList).get<any[]>();
         let destList = sp.web.lists.getByTitle(listConfig.destinationList);
-        let destListItemEntityTypeFullName = (await destList.select('ListItemEntityTypeFullName').get<{ ListItemEntityTypeFullName: string }>()).ListItemEntityTypeFullName;
-
-        for (var i = 0; i < sourceItems.length; i++) {
+        let [sourceItems, sourceFields, { ListItemEntityTypeFullName }] = await Promise.all([
+            (listConfig.web as Web).lists.getByTitle(listConfig.sourceList).items.select(...listConfig.fields, 'TaxCatchAll/ID', 'TaxCatchAll/Term').expand('TaxCatchAll').get<any[]>(),
+            (listConfig.web as Web).lists.getByTitle(listConfig.sourceList).fields.select('Id', 'InternalName', 'TypeAsString', 'TextField').get<Array<{ Id: string, InternalName: string, TypeAsString: string, TextField: string }>>(),
+            destList.select('ListItemEntityTypeFullName').get<{ ListItemEntityTypeFullName: string }>(),
+        ]);
+        for (let i = 0; i < sourceItems.length; i++) {
             let properties = listConfig.fields.reduce((_properties, fieldName) => {
-                _properties[fieldName] = sourceItems[i][fieldName];
+                let fieldValue = sourceItems[i][fieldName];
+                if (fieldValue) {
+                    const [field] = sourceFields.filter(fld => fld.InternalName === fieldName);
+                    if (field) {
+                        switch (field.TypeAsString) {
+                            case 'TaxonomyFieldType': {
+                                const [textField] = sourceFields.filter(fld => fld.Id === field.TextField);
+                                if (textField) {
+                                    const [taxonomyFieldValue] = sourceItems[i].TaxCatchAll.filter((tca: { ID: number, Term: string }) => tca.ID === fieldValue.WssId);
+                                    if (taxonomyFieldValue) {
+                                        fieldValue = taxonomyFieldValue.Term;
+                                        _properties[textField.InternalName] = fieldValue;
+                                    }
+                                }
+                            }
+                                break;
+                            default: {
+                                _properties[fieldName] = fieldValue;
+                            }
+                        }
+                    }
+                }
                 return _properties;
             }, {});
-            await destList.items.add(properties, destListItemEntityTypeFullName);
+            await destList.items.add(properties, ListItemEntityTypeFullName);
         }
-    }
-
-    private delaySeconds(seconds: number) {
-        return new Promise(resolve => {
-            window.setTimeout(() => {
-                resolve();
-            }, seconds * 1000);
-        });
     }
 }
