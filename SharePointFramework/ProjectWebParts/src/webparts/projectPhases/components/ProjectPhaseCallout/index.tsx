@@ -6,7 +6,7 @@ import styles from './ProjectPhaseCallout.module.scss';
 import * as strings from 'ProjectPhasesWebPartStrings';
 
 // ProjectPhaseCallout
-export default class ProjectPhaseCallout extends React.Component<IProjectPhaseCalloutProps, {}> {
+export default class ProjectPhaseCallout extends React.PureComponent<IProjectPhaseCalloutProps, {}> {
     /**
      * Constructor
      * 
@@ -17,41 +17,36 @@ export default class ProjectPhaseCallout extends React.Component<IProjectPhaseCa
     }
 
     /**
-     * Should component update
-     * 
-     * @param {IProjectPhaseCalloutProps} nextProps Next props
-     */
-    public shouldComponentUpdate(nextProps: IProjectPhaseCalloutProps): boolean {
-        return (this.props.phase.model.term.Id !== nextProps.phase.model.term.Id);
-    }
-
-    /**
      * Renders the <ProjectPhaseCallout /> component
      */
     public render(): JSX.Element {
-        const { htmlElement, model } = this.props.phase;
+        const { phase, isCurrentPhase, onChangePhase } = this.props;
         return (
             <Callout
                 gapSpace={0}
-                target={htmlElement}
+                target={phase.htmlElement}
                 onDismiss={this.props.onDismiss}
                 setInitialFocus={true}
                 hidden={false}>
                 <div className={styles.projectPhaseCallout}>
                     <div className={styles.header}>
-                        <p className={styles.title}>{model.name}</p>
+                        <p className={styles.title}>{phase.model.name}</p>
                     </div>
                     <div className={styles.inner}>
                         <div className={styles.content}>
-                            <p className={styles.subText}>{model.term.LocalCustomProperties.PhasePurpose}</p>
+                            <p className={styles.subText}>{phase.model.term.LocalCustomProperties.PhasePurpose}</p>
                             <div>
-                                <div className={styles.checkPointStatus} hidden={Object.keys(model.checklistData.stats).length === 0}>
-                                    {Object.keys(model.checklistData.stats).map(status => {
-                                        return <div className={styles.addText}><span>{model.checklistData.stats[status]} {strings.CheckPointsMarkedAsText} {status}</span></div>;
+                                <div className={styles.checkPointStatus} hidden={Object.keys(phase.model.checklistData.stats).length === 0}>
+                                    {Object.keys(phase.model.checklistData.stats).map(status => {
+                                        return <div className={styles.addText}><span>{phase.model.checklistData.stats[status]} {strings.CheckPointsMarkedAsText} {status}</span></div>;
                                     })}
                                 </div>
-                                <div className={styles.addText}><a href={this.getFilteredPhaseChecklistViewUrl()}>{strings.GoToPhaseChecklist}</a></div>
-                                <div className={styles.addText}><a href='#' onClick={_ => this.props.onChangePhase(this.props.phase.model)}>{strings.ChangePhaseText}</a></div>
+                                <div className={styles.addText}>
+                                    <a href={this.getFilteredPhaseChecklistViewUrl()}>{strings.GoToPhaseChecklist}</a>
+                                </div>
+                                <div className={styles.addText} hidden={isCurrentPhase}>
+                                    <a href='#' onClick={_ => onChangePhase(phase.model)}>{strings.ChangePhaseText}</a>
+                                </div>
                             </div>
                         </div>
                     </div>
