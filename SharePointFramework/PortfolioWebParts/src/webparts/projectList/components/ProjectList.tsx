@@ -100,13 +100,14 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
         }]
       }),
     ]);
+    console.log(phaseTerms);
     let projects = associatedSites
       .map(site => {
         let [item] = projectListItems.filter(p => site.Title === p.Title);
         if (item) {
           let [owner] = users.filter(user => user.Id === item.GtProjectOwnerId);
           let [manager] = users.filter(user => user.Id === item.GtProjectManagerId);
-          let phase = item.GtProjectPhase ? phaseTerms.filter(p => p.Id.indexOf(item.GtProjectPhase.TermGuid) !== -1)[0].PathOfTerm : '';
+          let phase = item.GtProjectPhase ? phaseTerms.filter(p => p.Id.indexOf(item.GtProjectPhase.TermGuid) !== -1)[0].Name : '';
 
           return {
             Logo: site.SiteLogo,
