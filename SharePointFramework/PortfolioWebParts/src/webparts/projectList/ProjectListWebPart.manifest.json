@@ -10,11 +10,11 @@
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", 
     "group": { "default": "Other" },
     "title": { "default": "Prosjektutlisting" },
-    "description": { "default": " " },
+    "description": { "default": "Viser prosjekter under porteføljen" },
     "officeFabricIconFontName": "ViewListGroup",
     "properties": {
-      "description": "Viser prosjekter under porteføljen",
-      "projectsEntity": {
+      "phaseTermSetId": "abcfc9d9-a263-4abb-8234-be973c46258a",
+      "entity": {
         "listName": "Prosjekter",
         "contentTypeId": "0x0100805E9E4FEAAB4F0EABAB2600D30DB70C",
         "fieldsGroupName": "Prosjektportalenkolonner",

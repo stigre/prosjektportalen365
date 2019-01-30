@@ -4,13 +4,11 @@ import * as strings from 'ProjectListWebPartStrings';
 import IProjectCardProps from './IProjectCardProps';
 import { DocumentCard, DocumentCardPreview, DocumentCardTitle, DocumentCardLocation, DocumentCardActivity, DocumentCardActions, DocumentCardType, IDocumentCardPreviewImage } from "office-ui-fabric-react/lib/DocumentCard";
 import { ImageFit } from 'office-ui-fabric-react/lib/Image';
-import { IUserDetails } from '../../../../common/models/ProjectListModel';
 
-const ProjectCard = (props: IProjectCardProps): JSX.Element => {
+const ProjectCard = ({ project, onClickHref, showProjectInfo, fallbackPreviewImage }: IProjectCardProps): JSX.Element => {
   const previewImage: IDocumentCardPreviewImage = {
-    previewImageSrc: props.project.Logo ? props.project.Logo : `${props.absoluteUrl}/SiteAssets/pp/img/ICO-Global-Project-11.png`,
+    previewImageSrc: project.Logo ? project.Logo : fallbackPreviewImage,
     imageFit: ImageFit.cover,
-    accentColor: stringToColor(props.project.Phase),
     height: 140,
     width: 200
   };
@@ -19,59 +17,31 @@ const ProjectCard = (props: IProjectCardProps): JSX.Element => {
     <DocumentCard
       className={styles.projectCard}
       type={DocumentCardType.normal}
-      onClickHref={props.onClickHref}
-    >
+      onClickHref={onClickHref}    >
       <DocumentCardPreview previewImages={[previewImage]} />
-      <DocumentCardTitle title={props.project.Title} shouldTruncate={false} />
-      <DocumentCardLocation location={props.project.Phase || strings.NotSet} />
-      <DocumentCardActivity activity={strings.ProjectOwner} people={[getOwner(props.project, props.absoluteUrl)]} />
-      <DocumentCardActivity activity={strings.ProjectManager} people={[getManager(props.project, props.absoluteUrl)]} />
+      <DocumentCardTitle title={project.Title} shouldTruncate={false} />
+      <DocumentCardLocation location={project.Phase || strings.NotSet} />
+      <DocumentCardActivity activity={strings.ProjectOwner} people={[{ name: project.Owner.Title, profileImageSrc: getUserPhoto(project.Owner.Email) }]} />
+      <DocumentCardActivity activity={strings.ProjectManager} people={[{ name: project.Manager.Title, profileImageSrc: getUserPhoto(project.Manager.Email) }]} />
       <DocumentCardActions
         actions={
           [{
             iconProps: { iconName: "AlignCenter" },
-            onClick: e => {
-              e.preventDefault();
-              e.stopPropagation();
-              props.showProjectInfo(e);
+            onClick: event => {
+              event.preventDefault();
+              event.stopPropagation();
+              showProjectInfo();
             },
           },
           ]}
-        views={props.project.Views}
+        views={project.Views}
       />
     </DocumentCard>
   );
 };
 
-function stringToColor(str: string): string {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) hash = str.charCodeAt(i) + ((hash << 5) - hash);
-  let color = "#";
-  for (let i = 0; i < 3; i++) {
-    let value = (hash >> (i * 8)) & 0xFF;
-    color += ("00" + value.toString(16)).substr(-2);
-  }
-  return color;
-}
-
-function getOwner(obj, rootUrl: string): IUserDetails {
-  let email = "";
-  let name = strings.NotSet;
-  if (obj.Owner) [email, name] = obj.Owner.split("|");
-  const profileImageSrc = userPhoto(rootUrl, email);
-  return { name, email, profileImageSrc };
-}
-
-function getManager(obj, rootUrl: string): IUserDetails {
-  let email = "";
-  let name = strings.NotSet;
-  if (obj.Manager) [email, name] = obj.Manager.split("|");
-  const profileImageSrc = userPhoto(rootUrl, email);
-  return { name, email, profileImageSrc };
-}
-
-function userPhoto(rootUrl: string, email: string, size = "L"): string {
-  return `${rootUrl}/_layouts/15/userphoto.aspx?size=${size}&accountname=${email}`;
+function getUserPhoto(email: string, size = "L"): string {
+  return `/_layouts/15/userphoto.aspx?size=${size}&accountname=${email}`;
 }
 
 export default ProjectCard;

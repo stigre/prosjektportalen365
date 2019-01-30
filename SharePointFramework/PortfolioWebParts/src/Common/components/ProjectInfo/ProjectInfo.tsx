@@ -16,10 +16,7 @@ export default class ProjectInfo extends React.Component<IProjectInfoProps, IPro
   constructor(props) {
     super(props);
 
-    this.state = {
-      isLoading: true,
-      data: null
-    };
+    this.state = { isLoading: true, data: null };
   }
 
   public async componentDidMount() {
@@ -78,8 +75,7 @@ export default class ProjectInfo extends React.Component<IProjectInfoProps, IPro
       const { hubSiteId } = pageContext.legacyPageContext;
       const groupId = this.props.showProjectInfo.RawObject.GtGroupId;
       const hubSite = await HubSiteService.GetHubSiteById(pageContext.web.absoluteUrl, hubSiteId);
-      const spEntityPortalService = new SpEntityPortalService({ webUrl: hubSite.url, ...this.props.projectsEntity });
-
+      const spEntityPortalService = new SpEntityPortalService({ webUrl: hubSite.url, ...this.props.entity });
       const [entityItem, entityFields, editFormUrl] = await Promise.all([
         spEntityPortalService.GetEntityItemFieldValues(groupId),
         spEntityPortalService.GetEntityFields(),

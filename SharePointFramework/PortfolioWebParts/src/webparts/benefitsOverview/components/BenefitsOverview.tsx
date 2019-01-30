@@ -9,7 +9,7 @@ export default class BenefitsOverview extends React.Component<IBenefitsOverviewP
         <div className={styles.container}>
           <div className={styles.row}>
             <div className={styles.column}>
-              <span className={styles.title}>Erfaringslogg</span>
+              <span className={styles.title}>Gevinstoversikt</span>
             </div>
           </div>
         </div>

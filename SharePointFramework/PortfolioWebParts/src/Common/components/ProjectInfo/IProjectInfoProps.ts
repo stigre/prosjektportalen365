@@ -4,7 +4,7 @@ export interface IProjectInfoProps {
   showProjectInfo?: ProjectListModel;
   onDismiss: any;
   pageContext: PageContext;
-  projectsEntity: {
+  entity: {
     listName: string;
     contentTypeId: string;
     fieldsGroupName: string;

@@ -1,24 +1,15 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
-import {
-  BaseClientSideWebPart,
-  IPropertyPaneConfiguration,
-  PropertyPaneTextField,
-  WebPartContext,
-} from '@microsoft/sp-webpart-base';
-
-import * as strings from 'ProjectListWebPartStrings';
+import { BaseClientSideWebPart, IPropertyPaneConfiguration, } from '@microsoft/sp-webpart-base';
 import ProjectList from './components/ProjectList';
 import { IProjectListProps } from './components/IProjectListProps';
 import { sp, Web } from '@pnp/sp';
 
 
 export interface IProjectListWebPartProps {
-  absoluteUrl: string;
-  serverRelativeUrl: string;
-  context: WebPartContext;
-  projectsEntity: {
+  phaseTermSetId: string;
+  entity: {
     listName: string;
     contentTypeId: string;
     fieldsGroupName: string;
@@ -34,12 +25,12 @@ export default class ProjectListWebPart extends BaseClientSideWebPart<IProjectLi
     const element: React.ReactElement<IProjectListProps> = React.createElement(
       ProjectList,
       {
-        projectsEntity: this.properties.projectsEntity,
+        ...this.properties,
         pageContext: this.context.pageContext,
         spHttpClient: this.context.spHttpClient,
         web: this.web,
-        serverRelativeUrl: this.context.pageContext.web.serverRelativeUrl,
-        absoluteUrl: this.context.pageContext.web.absoluteUrl
+        webServerRelativeUrl: this.context.pageContext.web.serverRelativeUrl,
+        webAbsoluteUrl: this.context.pageContext.web.absoluteUrl
       }
     );
 
@@ -48,9 +39,7 @@ export default class ProjectListWebPart extends BaseClientSideWebPart<IProjectLi
 
   protected onInit(): Promise<void> {
     return super.onInit().then(_ => {
-      sp.setup({
-        spfxContext: this.context
-      });
+      sp.setup({ spfxContext: this.context });
       this.web = new Web(this.context.pageContext.web.absoluteUrl);
     });
   }
@@ -60,24 +49,16 @@ export default class ProjectListWebPart extends BaseClientSideWebPart<IProjectLi
   }
 
   protected get dataVersion(): Version {
-    return Version.parse('1.0');
+    return Version.parse(this.manifest.version);
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
     return {
       pages: [
         {
-          header: {
-            description: strings.PropertyPaneDescription
-          },
           groups: [
             {
-              groupName: strings.BasicGroupName,
-              groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
-                })
-              ]
+              groupFields: []
             }
           ]
         }

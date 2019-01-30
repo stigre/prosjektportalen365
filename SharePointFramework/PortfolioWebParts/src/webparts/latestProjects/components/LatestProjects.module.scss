@@ -16,16 +16,12 @@
             .projectLink {
                 @include ms-font-m;
                 text-decoration: none;
-                color: "[theme: themeTertiary, default: #0078d4]";
-                &:hover {
-                    text-decoration: underline;
-                    color: "[theme: themeTertiary, default: #0078d4]";
-                }
+                color: "[theme: themePrimary, default: #444444]";
                 &:visited {
-                    color: "[theme: themeTertiary, default: #0078d4]";
+                    color: "[theme: themePrimary, default: #444444]";
                 }
-                &:active {
-                    color: "[theme: themeTertiary, default: #0078d4]";
+                &:hover, &:active {
+                    color: "[theme: themeTertiary, default: #444444]";
                 }
             }
             .subTitle {

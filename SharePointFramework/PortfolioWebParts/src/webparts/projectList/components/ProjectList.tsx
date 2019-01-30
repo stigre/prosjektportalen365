@@ -3,22 +3,18 @@ import styles from './ProjectList.module.scss';
 import * as strings from 'ProjectListWebPartStrings';
 import { IProjectListProps } from './IProjectListProps';
 import { IProjectListState, IProjectListData } from './IProjectListState';
-import ProjectListModel from '../../../common/models/ProjectListModel';
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import ProjectCard from './ProjectCard/ProjectCard';
-import { sp, SearchQuery, QueryPropertyValueType, SearchQueryBuilder, ISearchQueryBuilder } from '@pnp/sp';
+import { sp, QueryPropertyValueType } from '@pnp/sp';
 import { taxonomy } from '@pnp/sp-taxonomy';
-import Phase from '../models/Phase';
 import ProjectInfo from '../../../common/components/ProjectInfo/ProjectInfo';
 
 export default class ProjectList extends React.Component<IProjectListProps, IProjectListState> {
-
-  constructor(props) {
+  constructor(props: IProjectListProps) {
     super(props);
-
     this.state = { projects: [], isLoading: true };
   }
 
@@ -30,12 +26,12 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
     if (this.state.isLoading) return <Spinner label={strings.LoadingProjectsLabel} type={SpinnerType.large} />;
     return (
       <div className={styles.projectListWebPartContainer}>
-        {(this.state.showProjectInfo) ?
+        {this.state.showProjectInfo &&
           <ProjectInfo
-            projectsEntity={this.props.projectsEntity}
+            entity={this.props.entity}
             pageContext={this.props.pageContext}
             showProjectInfo={this.state.showProjectInfo}
-            onDismiss={e => this.setState({ showProjectInfo: undefined })} /> : null}
+            onDismiss={(_event: any) => this.setState({ showProjectInfo: null })} />}
         <div className={styles.projectListSearchBox}>
           <SearchBox placeholder={strings.SearchBoxPlaceholderText} onChanged={this.onSearch} />
         </div>
@@ -57,9 +53,8 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
             <ProjectCard
               project={project}
               onClickHref={project.Url}
-              showProjectInfo={e => this.setState({ showProjectInfo: project })}
-              absoluteUrl={this.props.absoluteUrl}
-            />
+              showProjectInfo={() => this.setState({ showProjectInfo: project })}
+              fallbackPreviewImage={`${this.props.webAbsoluteUrl}/SiteAssets/pp/img/ICO-Global-Project-11.png`} />
           ))}
       </div>
     );
@@ -87,56 +82,51 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
   }
 
   private async fetchData() {
-    const projectListItems: ProjectListModel[] = [];
-    let projects = await sp.web.lists.getByTitle('Prosjekter').items.get();
-    let users = await sp.web.siteUsers.get();
+    let [projectListItems, users, phaseTerms, { PrimarySearchResults: associatedSites }] = await Promise.all([
+      sp.web.lists.getByTitle(this.props.entity.listName).items.usingCaching().get(),
+      sp.web.siteUsers.usingCaching().get(),
+      taxonomy.getDefaultSiteCollectionTermStore().getTermSetById(this.props.phaseTermSetId).terms.usingCaching().get(),
+      sp.search({
+        Querytext: `DepartmentId:${this.props.pageContext.legacyPageContext.siteId} contentclass:STS_Site`,
+        TrimDuplicates: false,
+        RowLimit: 500,
+        SelectProperties: ['Title', 'Path', 'DepartmentId', 'SiteId', 'SiteLogo', 'ViewsLifetime'],
+        Properties: [{
+          Name: "EnableDynamicGroups",
+          Value: {
+            BoolVal: true,
+            QueryPropertyValueTypeIndex: QueryPropertyValueType.BooleanType
+          }
+        }]
+      }),
+    ]);
+    console.log(phaseTerms);
+    let projects = associatedSites
+      .map(site => {
+        let [item] = projectListItems.filter(p => site.Title === p.Title);
+        if (item) {
+          let [owner] = users.filter(user => user.Id === item.GtProjectOwnerId);
+          let [manager] = users.filter(user => user.Id === item.GtProjectManagerId);
+          let phase = item.GtProjectPhase ? phaseTerms.filter(p => p.Id.indexOf(item.GtProjectPhase.TermGuid) !== -1)[0].PathOfTerm : '';
 
-    const phaseField = await this.props.web.fields.getByInternalNameOrTitle('Fase').select('TermSetId').get();
-    const terms = await taxonomy.getDefaultSiteCollectionTermStore().getTermSetById(phaseField.TermSetId).terms.get();
-    const phases = terms.filter(term => term.LocalCustomProperties.ShowOnFrontPage !== 'false').map(term => new Phase(term, {}));
-
-    let queryText = `DepartmentId:${this.props.pageContext.legacyPageContext.siteId} contentclass:STS_Site`;
-
-    const _searchQuerySettings: SearchQuery = {
-      TrimDuplicates: false,
-      RowLimit: 500,
-      SelectProperties: ['Title', 'Path', 'DepartmentId', 'SiteId', 'SiteLogo', 'ViewsLifetime'],
-      Properties: [{
-        Name: "EnableDynamicGroups",
-        Value: {
-          BoolVal: true,
-          QueryPropertyValueTypeIndex: QueryPropertyValueType.BooleanType
+          return {
+            Logo: site.SiteLogo,
+            Manager: manager,
+            Owner: owner,
+            Phase: phase,
+            ServiceArea: null,
+            Title: site.Title,
+            Type: null,
+            Url: site.Path,
+            Views: site.ViewsLifetime,
+            RawObject: item,
+          };
         }
-      }
-      ]
-    };
+        return null;
+      })
+      .filter(p => p);
 
-    const query: ISearchQueryBuilder = SearchQueryBuilder(queryText, _searchQuerySettings);
-    let result = await sp.search(query);
-    let associatedSites = result.PrimarySearchResults.filter(site => this.props.pageContext.legacyPageContext.siteId.indexOf(site['SiteId']) === -1);
-
-    associatedSites.forEach(site => {
-      let currentProject = projects.filter(p => site.Title === p.Title)[0];
-      let owner = users.filter(user => user.Id === currentProject.GtProjectOwnerId)[0];
-      let manager = users.filter(user => user.Id === currentProject.GtProjectManagerId)[0];
-      let phase = currentProject.GtProjectPhase ? phases.filter(p => p.id === currentProject.GtProjectPhase.TermGuid)[0].term.PathOfTerm : '';
-
-      let project: ProjectListModel = {
-        Logo: site.SiteLogo,
-        Manager: manager ? `${manager.Email}|${manager.Title}` : null,
-        Owner: owner ? `${owner.Email}|${owner.Title}` : null,
-        Phase: phase,
-        ServiceArea: null,
-        Title: site.Title,
-        Type: null,
-        Url: site.Path,
-        Views: site.ViewsLifetime,
-        RawObject: currentProject
-      };
-      projectListItems.push(project);
-    });
-
-    const data: IProjectListData = { projects: projectListItems };
+    const data: IProjectListData = { projects };
 
     this.setState({ data, projects, isLoading: false });
   }
