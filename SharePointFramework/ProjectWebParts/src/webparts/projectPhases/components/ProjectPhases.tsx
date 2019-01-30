@@ -70,17 +70,10 @@ export default class ProjectPhases extends React.Component<IProjectPhasesProps, 
             </div>
           ))}
         </div>
-        {(currentPhase && this.state.showPhaseChangeMessage) &&
-          <div style={{ marginTop: 20 }}>
-            <MessageBar messageBarType={MessageBarType.info}>
-              <p>{format(strings.PhaseChangedMessage, currentPhase.name)}</p>
-            </MessageBar>
-          </div>
-        }
         {this.state.phaseMouseOver && (
           <ProjectPhaseCallout
             phase={this.state.phaseMouseOver}
-            isCurrentPhase={this.state.phaseMouseOver.model.id === currentPhase.id}
+            isCurrentPhase={currentPhase && (this.state.phaseMouseOver.model.id === currentPhase.id)}
             phaseSubTextProperty={this.props.phaseSubTextProperty}
             onChangePhase={phase => this.setState({ confirmPhase: phase })}
             onDismiss={this.onProjectPhaseCalloutDismiss} />
@@ -128,13 +121,12 @@ export default class ProjectPhases extends React.Component<IProjectPhasesProps, 
       this.setState({ isChangingPhase: true });
       await this.updatePhase(phase);
       await this.modifiyFrontpageViews(phase.name);
-      this.setState({ data: { ...this.state.data, currentPhase: phase }, confirmPhase: null, showPhaseChangeMessage: true, isChangingPhase: false });
+      this.setState({ data: { ...this.state.data, currentPhase: phase }, confirmPhase: null,  isChangingPhase: false });
       if (this.props.automaticReload) {
         window.setTimeout(() => {
           document.location.href = this.props.webAbsoluteUrl;
         }, (this.props.reloadTimeout * 5000));
       }
-      window.setTimeout(() => this.setState({ showPhaseChangeMessage: false }), 5000);
     } catch (err) {
       this.setState({ confirmPhase: null, isChangingPhase: false });
     }

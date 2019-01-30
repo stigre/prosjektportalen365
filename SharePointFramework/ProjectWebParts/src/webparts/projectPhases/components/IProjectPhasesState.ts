@@ -13,6 +13,5 @@ export interface IProjectPhasesState {
   data: IProjectPhasesData;
   confirmPhase?: Phase;
   isChangingPhase?: boolean;
-  showPhaseChangeMessage?: boolean;
   phaseMouseOver?: { htmlElement: EventTarget & HTMLDivElement, model: Phase };
 }

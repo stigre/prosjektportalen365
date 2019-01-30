@@ -15,7 +15,6 @@ declare interface IProjectPhasesWebPartStrings {
   PhaseSubTextPropertyFieldLabel: string;
   ConfirmPhaseDialogTitle: string;
   ConfirmPhaseDialogSubText: string;
-  PhaseChangedMessage: string;
   PageReloadMessage: string;
   WebPartNotConfiguredMessage: string;
   DocumentsListName: string;

@@ -7,18 +7,18 @@ import * as format from 'string-format';
 import * as strings from 'ProjectPhasesWebPartStrings';
 
 // ConfirmPhaseDialog
-const ConfirmPhaseDialog = (props: IConfirmPhaseDialogProps) => {
+const ConfirmPhaseDialog = ({ phase, isChangingPhase, isBlocking, onConfirm }: IConfirmPhaseDialogProps) => {
     return (
         <Dialog
             hidden={false}
-            onDismiss={e => props.onConfirm(false)}
+            onDismiss={e => onConfirm(false)}
             dialogContentProps={{
                 type: DialogType.normal,
                 title: strings.ConfirmPhaseDialogTitle,
-                subText: format(strings.ConfirmPhaseDialogSubText, props.phase.name),
+                subText: format(strings.ConfirmPhaseDialogSubText, phase.name),
             }}
-            modalProps={{ isBlocking: props.isBlocking }}>
-            {props.isChangingPhase
+            modalProps={{ isBlocking: isBlocking }}>
+            {isChangingPhase
                 ? (
                     <DialogFooter>
                         <Spinner />
@@ -26,8 +26,8 @@ const ConfirmPhaseDialog = (props: IConfirmPhaseDialogProps) => {
                 )
                 : (
                     <DialogFooter>
-                        <PrimaryButton onClick={e => props.onConfirm(true)} text={strings.Yes} />
-                        <DefaultButton onClick={e => props.onConfirm(false)} text={strings.No} />
+                        <PrimaryButton onClick={_event => onConfirm(true)} text={strings.Yes} />
+                        <DefaultButton onClick={_event => onConfirm(false)} text={strings.No} />
                     </DialogFooter>
                 )}
         </Dialog>
