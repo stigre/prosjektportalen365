@@ -4,7 +4,7 @@ Param(
     [Parameter(Mandatory = $false)]
     [string]$Credentials,
     [Parameter(Mandatory = $false)]
-    $SiteUrlTemplate = "Prosjektportalen-03-01-{0}",
+    $SiteUrlTemplate = "Prosjektportalen-03-03-{0}",
     [Parameter(Mandatory = $false)]
     $StartIndex = 1,
     [Parameter(Mandatory = $false)]
