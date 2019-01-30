@@ -100,7 +100,6 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
         }]
       }),
     ]);
-    console.log(phaseTerms);
     let projects = associatedSites
       .map(site => {
         let [item] = projectListItems.filter(p => site.Title === p.Title);

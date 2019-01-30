@@ -90,11 +90,9 @@ export default class List extends React.Component<IListProps, IListState> {
   }
 
   private _exportToExcel() {
-    console.log('exporting');
   }
 
   private _onSearch() {
-    console.log('Search');
   }
 
 }

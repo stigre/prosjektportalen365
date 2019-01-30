@@ -21,7 +21,6 @@ export default class ExperienceLog extends React.Component<IExperienceLogProps, 
 
   public async componentDidMount() {
     await this.fetchData();
-    console.log(this.state.items);
   }
 
   public render(): React.ReactElement<IExperienceLogProps> {
@@ -64,11 +63,8 @@ export default class ExperienceLog extends React.Component<IExperienceLogProps, 
 
     const query: ISearchQueryBuilder = SearchQueryBuilder(queryText, _searchQuerySettings);
     let result = await sp.search(query);
-    console.log(result.PrimarySearchResults);
     let items = result.PrimarySearchResults.map(r => new LogElement(r));
-
     this.setState({ items });
-
   }
 
   private getHubId() {
