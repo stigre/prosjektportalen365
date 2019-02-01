@@ -20,7 +20,7 @@ export interface IExperienceLogWebPartProps {
 export default class ExperienceLogWebPart extends BaseClientSideWebPart<IExperienceLogWebPartProps> {
 
   public render(): void {
-    const element: React.ReactElement<IExperienceLogProps > = React.createElement(
+    const element: React.ReactElement<IExperienceLogProps> = React.createElement(
       ExperienceLog,
       {
         absoluteUrl: this.context.pageContext.web.absoluteUrl,
@@ -34,9 +34,7 @@ export default class ExperienceLogWebPart extends BaseClientSideWebPart<IExperie
 
   protected onInit(): Promise<void> {
     return super.onInit().then(_ => {
-      sp.setup({
-        spfxContext: this.context
-      });
+      sp.setup({ spfxContext: this.context });
     });
   }
 
@@ -50,23 +48,7 @@ export default class ExperienceLogWebPart extends BaseClientSideWebPart<IExperie
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
     return {
-      pages: [
-        {
-          header: {
-            description: strings.PropertyPaneDescription
-          },
-          groups: [
-            {
-              groupName: strings.BasicGroupName,
-              groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
-                })
-              ]
-            }
-          ]
-        }
-      ]
+      pages: [  ]
     };
   }
 }

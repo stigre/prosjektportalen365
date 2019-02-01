@@ -19,6 +19,7 @@
             <pnp:FieldRef ID="9076c206-ca80-4e17-b6f4-6fa3b90c421a" Name="GtProjectForecast" />
             <pnp:FieldRef ID="f4623214-ab74-4160-82a7-37d46901bc1b" Name="GtBudgetLastReportDate" />
             <pnp:FieldRef ID="fba7ced6-9970-4b14-ab9c-7c809310d86d" Name="GtGroupId" />
+            <pnp:FieldRef ID="871c1234-9ac5-4841-8b56-50839c34a7a1" Name="GtSiteUrl" />
         </pnp:FieldRefs>
     </pnp:ContentType>
     <pnp:ContentType ID="0x010022252E35737A413FB56A1BA53862F6D5" Name="Prosjektstatus" Description="" Group="Prosjektportalen innholdstyper">
