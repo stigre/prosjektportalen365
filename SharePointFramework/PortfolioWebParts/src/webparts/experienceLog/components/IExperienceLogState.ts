@@ -1,5 +1,6 @@
 import LogElement from "./LogElement";
 
 export interface IExperienceLogState {
-  items: LogElement[];
+  isLoading: boolean;
+  items?: LogElement[];
 }

@@ -23,6 +23,7 @@ export default class ExperienceLogWebPart extends BaseClientSideWebPart<IExperie
     const element: React.ReactElement<IExperienceLogProps> = React.createElement(
       ExperienceLog,
       {
+        hubSiteId: this.context.pageContext.legacyPageContext.hubSiteId,
         absoluteUrl: this.context.pageContext.web.absoluteUrl,
         spHttpClient: this.context.spHttpClient,
         serverRelativeUrl: this.context.pageContext.web.serverRelativeUrl,
