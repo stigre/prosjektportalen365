@@ -9,6 +9,7 @@ import { CommandBar, ICommandBarItemProps } from 'office-ui-fabric-react/lib/Com
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { ExcelExportStatus } from '../../ExportToExcel';
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
+import ModalLink from '../ModalLink/ModalLink';
 
 export default class List extends React.Component<IListProps, IListState> {
   public static defaultProps: Partial<IListProps> = {
@@ -40,7 +41,7 @@ export default class List extends React.Component<IListProps, IListState> {
           items={items}
           columns={columns}
           groups={groups}
-          onRenderItemColumn={this._onRenderItemColumn}
+          // onRenderItemColumn={this._onRenderItemColumn}
         />
       </div>
     );
