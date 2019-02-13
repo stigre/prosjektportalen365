@@ -18,7 +18,7 @@ dependencies:
   office-ui-fabric-react: 5.134.0
   react: 16.3.2
   react-dom: 16.3.2
-  sp-entityportal-service: 0.2.0
+  sp-entityportal-service: 0.5.0
   sp-hubsite-service: 0.1.0
 devDependencies:
   '@microsoft/sp-build-web': 1.7.1
@@ -688,12 +688,25 @@ packages:
     dev: false
     resolution:
       integrity: sha512-sN2bjf2QbCAiTmzFzs2no4sPNKwW1TLuAxqU78BA3zopGXjA6DWzkYKP2tI7uSkFmiydoEpQBbHRcCwNLP66GA==
+  /@pnp/common/1.2.9:
+    dependencies:
+      adal-angular: 1.0.17
+      tslib: 1.9.3
+    dev: false
+    resolution:
+      integrity: sha512-wVu8yJZvdnN99hhpmHxhK0HbUVMg61y8o8vC2w3MK+nql65GH9YaxkDQotNSKlYjDakzG/HYa8cZW3TIaCFPcg==
   /@pnp/logging/1.2.8:
     dependencies:
       tslib: 1.9.3
     dev: false
     resolution:
       integrity: sha512-nyKAaQzn1PB6bOs8PMbGatzTcaukoFNyQrsvBlkrMFtKHSBFqGfNlg5mlGxEdn0pWqtQ5NFgsQcXo64YmaBamg==
+  /@pnp/logging/1.2.9:
+    dependencies:
+      tslib: 1.9.3
+    dev: false
+    resolution:
+      integrity: sha512-JNxoHkPhPnnC1PHnU+wQVkDkaBzrskDvLHn7bq84Uz+ppZEnKp0IuOxvmkAPMwD1NVP5qRbbiBh7dIHu8b9rNw==
   /@pnp/odata/1.2.8:
     dependencies:
       tslib: 1.9.3
@@ -715,6 +728,18 @@ packages:
       '@pnp/logging': 1.2.8
     resolution:
       integrity: sha512-q8h6EZ5cjd5GKov4Y8dTpH773f3scFAQU0hhMlO1Yt8e7SyJGsToGMhSFrWkrC2JgBnt4duRb34T/snES7MYRg==
+  /@pnp/odata/1.2.9/28cb6535a15dc732baaced2ce4af8eca:
+    dependencies:
+      '@pnp/common': 1.2.9
+      '@pnp/logging': 1.2.9
+      tslib: 1.9.3
+    dev: false
+    id: registry.npmjs.org/@pnp/odata/1.2.9
+    peerDependencies:
+      '@pnp/common': 1.2.9
+      '@pnp/logging': 1.2.9
+    resolution:
+      integrity: sha512-mE4bY5PQXxNYJIyh5Mgqda4AeX5DWEjT9NuUH7G05JOKwV51DbUX+UPIIy7AqBXDjo05S3QvOJw6+4OfeMQuZQ==
   /@pnp/sp-clientsvc/1.2.8:
     dependencies:
       tslib: 1.9.3
@@ -762,6 +787,20 @@ packages:
       '@pnp/odata': 1.2.8
     resolution:
       integrity: sha512-dHy7Pt0PWzShbCEIG5iI8ukBtN9uWHkU2lIBHlCkNxhDP8djAm+7a5blNxyR1kG8LXHLRqPQStlYa4DItvV1QA==
+  /@pnp/sp/1.2.9/224bb72205021d1659ef0fb1d2cc092c:
+    dependencies:
+      '@pnp/common': 1.2.9
+      '@pnp/logging': 1.2.9
+      '@pnp/odata': /@pnp/odata/1.2.9/28cb6535a15dc732baaced2ce4af8eca
+      tslib: 1.9.3
+    dev: false
+    id: registry.npmjs.org/@pnp/sp/1.2.9
+    peerDependencies:
+      '@pnp/common': 1.2.9
+      '@pnp/logging': 1.2.9
+      '@pnp/odata': 1.2.9
+    resolution:
+      integrity: sha512-O+V/IrI/dqDtc/d42HsTlPbqNqLut6/UiTkWwuZMwbhJeNmb9S/CyygTaa2luyvVw2UaVa1x70zdoslxU0Itew==
   /@pnpm/link-bins/1.0.3/@pnpm!logger@1.0.2:
     dependencies:
       '@pnpm/logger': 1.0.2
@@ -9971,15 +10010,16 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
-  /sp-entityportal-service/0.2.0:
+  /sp-entityportal-service/0.5.0:
     dependencies:
-      '@pnp/common': 1.2.8
-      '@pnp/logging': 1.2.8
-      '@pnp/odata': /@pnp/odata/1.2.8/82a89168aacb3c85a1a4cf893f3df09a
-      '@pnp/sp': /@pnp/sp/1.2.8/a5b008a2c6ae6c74ebd8838b8c712611
+      '@microsoft/sp-page-context': 1.7.1
+      '@pnp/common': 1.2.9
+      '@pnp/logging': 1.2.9
+      '@pnp/odata': /@pnp/odata/1.2.9/28cb6535a15dc732baaced2ce4af8eca
+      '@pnp/sp': /@pnp/sp/1.2.9/224bb72205021d1659ef0fb1d2cc092c
     dev: false
     resolution:
-      integrity: sha512-s5KW0Wz4O09IrfvCSpF+z5TUPcLSverkBHJoEdM/9Ev90POrV4KVIE5MY/d/h4OSG/P7fD8D/yfeXwmPbtfr3g==
+      integrity: sha512-omPjne/2gswy1Qgoz+ZIB6Eqr1RYDTCyLvSXzglq4oZmsYiJw6hmbHf4VRlSVNPkRkMolcBaNAyLdg0LDmPEJg==
   /sp-hubsite-service/0.1.0:
     dependencies:
       '@pnp/common': 1.2.8
@@ -11808,7 +11848,7 @@ specifiers:
   office-ui-fabric-react: 5.134.0
   react: 16.3.2
   react-dom: 16.3.2
-  sp-entityportal-service: ^0.2.0
+  sp-entityportal-service: ^0.5.0
   sp-hubsite-service: ^0.1.0
   spfx-pkgdeploy: ^0.2.1
   tslint: 5.9.1
