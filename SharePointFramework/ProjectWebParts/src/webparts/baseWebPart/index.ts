@@ -13,7 +13,7 @@ export interface IBaseWebPartProps {
     listName: string;
     contentTypeId: string;
     fieldsGroupName: string;
-    groupIdFieldName: string;
+    siteIdFieldName: string;
   };
 }
 

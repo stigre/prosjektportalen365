@@ -143,7 +143,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
   @autobind
   private async onSaveReport(model: { [key: string]: string }) {
     this.setState({ showNewStatusReportModal: false });
-    const report = { GtGroupId: this.props.context.pageContext.legacyPageContext.groupId, ...model };
+    const report = { GtSiteId: this.props.context.pageContext.legacyPageContext.groupId, ...model };
     await this.reportList.items.add(report);
   }
 
@@ -173,7 +173,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
       .getById(this.props.reportCtId)
       .fields
       .select('Title', 'InternalName', 'TypeAsString', 'Choices')
-      .filter(`(TypeAsString eq 'Note' or TypeAsString eq 'Text' or TypeAsString eq 'Choice') and InternalName ne 'Title' and InternalName ne 'GtGroupId'`)
+      .filter(`(TypeAsString eq 'Note' or TypeAsString eq 'Text' or TypeAsString eq 'Choice') and InternalName ne 'Title' and InternalName ne 'GtSiteId'`)
       .get();
     reportFields = reportFields.map(fld => ({
       title: fld.Title,
@@ -181,7 +181,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
       fieldType: fld.TypeAsString.toLowerCase(),
       choices: fld.Choices || [],
     }));
-    let reports = await this.reportList.items.filter(`GtGroupId eq '${this.props.context.pageContext.legacyPageContext.groupId}'`).get();
+    let reports = await this.reportList.items.filter(`GtSiteId eq '${this.props.context.pageContext.legacyPageContext.groupId}'`).get();
     reports = reports.map((r: any) => new ProjectStatusReport(r));
     return { entityFields, entityItem, reportFields, reportEditFormUrl, reports };
   }

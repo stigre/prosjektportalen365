@@ -8,6 +8,6 @@ export interface IProjectInfoProps {
     listName: string;
     contentTypeId: string;
     fieldsGroupName: string;
-    groupIdFieldName: string;
+    siteIdFieldName: string;
   };
 }

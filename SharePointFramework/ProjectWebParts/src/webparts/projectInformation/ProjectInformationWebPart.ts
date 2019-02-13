@@ -12,7 +12,7 @@ export interface IProjectInformationWebPartProps {
     listName: string;
     contentTypeId: string;
     fieldsGroupName: string;
-    groupIdFieldName: string;
+    siteIdFieldName: string;
   };
 }
 

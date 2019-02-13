@@ -17,7 +17,7 @@ export default class SetupProjectInformation extends BaseTask {
             const spEntityPortalService = new SpEntityPortalService({
                 webUrl: params.data.hub.url,
                 listName: params.properties.projectsList,
-                groupIdFieldName: 'GtGroupId',
+                siteIdFieldName: 'GtSiteId',
                 siteUrlFieldName: 'GtSiteUrl',
             });
             Logger.log({ message: `(ProjectSetupApplicationCustomizer) SetupProjectInformation: Adding project to list '${params.properties.projectsList}' at ${params.data.hub.url}`, data: { groupId: groupId }, level: LogLevel.Info });

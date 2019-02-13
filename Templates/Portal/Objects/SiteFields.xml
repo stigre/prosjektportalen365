@@ -101,7 +101,7 @@
             </ArrayOfProperty>
         </Customization>
     </Field>
-    <Field Description="" DisplayName="Gruppe ID" Group="Prosjektportalenkolonner" ID="{fba7ced6-9970-4b14-ab9c-7c809310d86d}" Name="GtGroupId" ShowInDisplayForm="FALSE" ShowInEditForm="FALSE" ShowInNewForm="FALSE" StaticName="GtGroupId" Type="Text" />
+    <Field Description="" DisplayName="Område-ID" Group="Prosjektportalenkolonner" ID="{fba7ced6-9970-4b14-ab9c-7c809310d86d}" Name="GtSiteId" ShowInDisplayForm="FALSE" ShowInEditForm="FALSE" ShowInNewForm="FALSE" StaticName="GtSiteId" Type="Text" />
     <Field Description="" DisplayName="Områdeadresse" Group="Prosjektportalenkolonner" ID="{871c1234-9ac5-4841-8b56-50839c34a7a1}" Name="GtSiteUrl" ShowInDisplayForm="FALSE" ShowInEditForm="FALSE" ShowInNewForm="FALSE" StaticName="GtSiteUrl" Type="Text" />
     <Field Description="" DisplayName="Måned" Format="RadioButtons" Group="Prosjektportalenkolonner" ID="{86673e07-181e-4521-843c-b687d86a6f85}" Name="GtMonthChoice" ShowInEditForm="FALSE" StaticName="GtMonthChoice" Type="Choice">
         <CHOICES>

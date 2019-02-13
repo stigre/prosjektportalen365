@@ -73,7 +73,7 @@ export default class ProjectInfo extends React.Component<IProjectInfoProps, IPro
     try {
       const { pageContext } = this.props;
       const { hubSiteId } = pageContext.legacyPageContext;
-      const groupId = this.props.showProjectInfo.RawObject.GtGroupId;
+      const groupId = this.props.showProjectInfo.RawObject.GtSiteId;
       const hubSite = await HubSiteService.GetHubSiteById(pageContext.web.absoluteUrl, hubSiteId);
       const spEntityPortalService = new SpEntityPortalService({ webUrl: hubSite.url, ...this.props.entity });
       const [entityItem, entityFields, editFormUrl] = await Promise.all([
