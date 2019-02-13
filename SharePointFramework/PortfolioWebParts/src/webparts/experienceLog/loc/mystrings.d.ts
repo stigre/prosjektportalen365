@@ -1,6 +1,14 @@
 declare interface IExperienceLogWebPartStrings {
+  LoadingLabel: string;
   ExcelExportFileNamePrefix: string;
   ExcelExportButtonLabel: string;
+  TitleColumnDisplayName: string;
+  SiteTitleColumnDisplayName: string;
+  DescriptionColumnDisplayName: string;
+  ResponsibleColumnDisplayName: string;
+  ConsequenceColumnDisplayName: string;
+  RecommendationColumnDisplayName: string;
+  ActorsColumnDisplayName: string;
 }
 
 declare module 'ExperienceLogWebPartStrings' {

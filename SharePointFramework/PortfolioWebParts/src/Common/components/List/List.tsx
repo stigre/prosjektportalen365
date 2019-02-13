@@ -1,8 +1,10 @@
 import * as React from 'react';
+import * as unique from 'array-unique';
 import styles from './List.module.scss';
 import * as strings from 'CommonStrings';
 import { IListProps } from './IListProps';
 import { IListState } from './IListState';
+import { DetailsList, IColumn, IGroup, SelectionMode, DetailsListLayoutMode, ConstrainMode } from "office-ui-fabric-react/lib/DetailsList";
 import { CommandBar, ICommandBarItemProps } from 'office-ui-fabric-react/lib/CommandBar';
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { ExcelExportStatus } from '../../ExportToExcel';
@@ -18,11 +20,13 @@ export default class List extends React.Component<IListProps, IListState> {
     super(props);
 
     this.state = {
+      searchTerm: '',
       groupBy: this.props.defaultGroupBy
     };
   }
 
   public render() {
+    let { items, columns, groups } = this._getFilteredData();
     return (
       <div>
         {this._renderCommandBar()}
@@ -31,6 +35,11 @@ export default class List extends React.Component<IListProps, IListState> {
             placeholder={strings.SearchBoxPlaceholder}
             onChanged={this._onSearch} />
         </div>
+        <DetailsList
+          items={items}
+          columns={columns}
+          groups={groups}
+        />
       </div>
     );
   }
@@ -87,6 +96,35 @@ export default class List extends React.Component<IListProps, IListState> {
       );
     }
     return null;
+  }
+
+  private _getFilteredData(): { items: any[], columns: any[], groups: IGroup[] } {
+    let columns = [].concat(this.props.columns);
+    let groups: IGroup[] = null;
+    if (this.state.groupBy.key !== 'NoGrouping') {
+      const groupItems = this.props.items.sort((a, b) => a[this.state.groupBy.key] > b[this.state.groupBy.key] ? -1 : 1);
+      const groupNames = groupItems.map(g => g[this.state.groupBy.key]);
+      groups = unique([].concat(groupNames)).map((name, idx) => ({
+        key: idx,
+        name: `${this.state.groupBy.name}: ${name}`,
+        count: [].concat(groupNames).filter(n => n === name).length,
+        isCollapsed: false,
+        isShowingAll: true,
+        isDropEnabled: false
+      }));
+    }
+    const filteredItems = this.props.items.filter(itm => {
+      const matches = Object.keys(itm).filter(key => {
+        const value = itm[key];
+        return value && typeof value === 'string' && value.toLowerCase().indexOf(this.state.searchTerm) !== -1;
+      }).length;
+      return matches > 0;
+    });
+    return {
+      items: filteredItems,
+      columns: columns,
+      groups: groups
+    };
   }
 
   private _exportToExcel() {
