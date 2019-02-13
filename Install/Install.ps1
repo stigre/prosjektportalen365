@@ -165,8 +165,7 @@ if(-not $SkipAppPackages.IsPresent) {
         )
         $AppPackages | ForEach-Object {
             $AppPackage = Get-ChildItem $_.
-            $App = Add-PnPApp -Path $AppPackage.FullName -Scope Tenant -Publish -Overwrite -ErrorAction Stop -Connection $AppCatalogSiteConnection
-            Install-PnPApp -Scope Tenant -Identity $App -ErrorAction SilentlyContinue -Connection $AppCatalogSiteConnection >$null 2>&1
+            Add-PnPApp -Path $AppPackage.FullName -Scope Tenant -Publish -Overwrite -SkipFeatureDeployment -ErrorAction Stop -Connection $AppCatalogSiteConnection
         }
         Write-Host "[INFO] SharePoint Framework app packages successfully installed to [$AppCatalogUrl]" -ForegroundColor Green
     }
