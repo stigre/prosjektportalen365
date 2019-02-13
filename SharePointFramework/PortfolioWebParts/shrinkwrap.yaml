@@ -15,6 +15,7 @@ dependencies:
   '@types/react': 16.4.2
   '@types/react-dom': 16.0.5
   '@types/webpack-env': 1.13.1
+  array-unique: 0.3.2
   office-ui-fabric-react: 5.134.0
   react: 16.3.2
   react-dom: 16.3.2
@@ -1659,7 +1660,6 @@ packages:
     resolution:
       integrity: sha1-odl8yvy8JiXMcPrc6zalDFiwGlM=
   /array-unique/0.3.2:
-    dev: true
     engines:
       node: '>=0.10.0'
     resolution:
@@ -11842,6 +11842,7 @@ specifiers:
   '@types/react-dom': 16.0.5
   '@types/webpack-env': 1.13.1
   ajv: ~5.2.2
+  array-unique: ^0.3.2
   bluebird: ^3.5.3
   gulp: ~3.9.1
   node-fetch: ^2.3.0

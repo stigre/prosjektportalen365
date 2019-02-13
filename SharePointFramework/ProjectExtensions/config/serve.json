@@ -9,7 +9,7 @@
   },
   "serveConfigurations": {
     "default": {
-      "pageUrl": "https://olemp.sharepoint.com/sites/Prosjektportalen-03-07-10/SitePages/Hjem.aspx",
+      "pageUrl": "https://olemp.sharepoint.com/sites/Prosjektportalen-v3-002-001",
       "customActions": {
         "ce34553d-ab47-4107-8dd1-e980d953996d": {
           "location": "ClientSideExtension.ApplicationCustomizer",
@@ -23,7 +23,7 @@
       }
     },
     "projectSetup": {
-      "pageUrl": "https://olemp.sharepoint.com/sites/Prosjektportalen-03-07-10/SitePages/Hjem.aspx",
+      "pageUrl": "https://olemp.sharepoint.com/sites/Prosjektportalen-v3-002-001",
       "customActions": {
         "ce34553d-ab47-4107-8dd1-e980d953996d": {
           "location": "ClientSideExtension.ApplicationCustomizer",

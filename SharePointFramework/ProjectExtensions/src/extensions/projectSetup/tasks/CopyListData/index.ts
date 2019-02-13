@@ -14,7 +14,7 @@ export default class CopyListData extends BaseTask {
     }
 
     @override
-    public async execute(params: IBaseTaskParams, onProgress:OnProgressCallbackFunction): Promise<IBaseTaskParams> {
+    public async execute(params: IBaseTaskParams, onProgress: OnProgressCallbackFunction): Promise<IBaseTaskParams> {
         try {
             for (let i = 0; i < params.data.selectedListConfig.length; i++) {
                 const listConfig = params.data.selectedListConfig[i];
@@ -47,8 +47,7 @@ export default class CopyListData extends BaseTask {
                                 if (textField) {
                                     const [taxonomyFieldValue] = sourceItems[i].TaxCatchAll.filter((tca: { ID: number, Term: string }) => tca.ID === fieldValue.WssId);
                                     if (taxonomyFieldValue) {
-                                        fieldValue = taxonomyFieldValue.Term;
-                                        _properties[textField.InternalName] = fieldValue;
+                                        _properties[textField.InternalName] = `-1;#${taxonomyFieldValue.Term}|${fieldValue.TermGuid}`;
                                     }
                                 }
                             }
@@ -61,6 +60,7 @@ export default class CopyListData extends BaseTask {
                 }
                 return _properties;
             }, {});
+            Logger.log({ message: `(ProjectSetupApplicationCustomizer) CopyListData: Processing list item ${i + 1}`, data: { properties, TaxCatchAll: sourceItems[i].TaxCatchAll }, level: LogLevel.Info });
             await destList.items.add(properties, ListItemEntityTypeFullName);
         }
     }

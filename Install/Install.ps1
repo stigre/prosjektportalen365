@@ -76,7 +76,7 @@ if(-not $SkipSiteCreation.IsPresent) {
         $PortfolioSite = Get-PnPTenantSite -Url $PortfolioSiteUrl -Connection $AdminSiteConnection -ErrorAction SilentlyContinue
         if ($null -eq $PortfolioSite) {
             Write-Host "[INFO] Creating portfolio site at [$PortfolioSiteUrl]"
-            $PortfolioSiteUrl = New-PnPSite -Type TeamSite  -Title $Title -Alias $Alias -IsPublic:$true -ErrorAction Stop -Connection $AppCatalogSiteConnection 
+            $PortfolioSiteUrl = New-PnPSite -Type TeamSite  -Title $Title -Alias $Alias -IsPublic:$true -ErrorAction Stop -Connection $AppCatalogSiteConnection -Lcid 1044
             Write-Host "[INFO] Portfolio site created at [$PortfolioSiteUrl]" -ForegroundColor Green
         }
         Register-PnPHubSite -Site $PortfolioSiteUrl -ErrorAction SilentlyContinue -Connection $AdminSiteConnection 
@@ -100,7 +100,7 @@ if(-not $SkipTemplate.IsPresent) {
     Try {
         Set-PnPTraceLog -Level Debug -On
         Write-Host "[INFO] Applying PnP template [Portal] to [$PortfolioSiteUrl]"
-        Apply-PnPProvisioningTemplate ..\PnP\Templates\Portal\Portal.xml -Connection $PortfolioSiteConnection -ErrorAction Stop
+        Apply-PnPProvisioningTemplate ..\Templates\Portal\Portal.xml -Connection $PortfolioSiteConnection -ErrorAction Stop
     }
     Catch {
         Write-Host "[INFO] Failed to apply PnP template [Portal] to [$PortfolioSiteUrl]: $($_.Exception.Message)"
