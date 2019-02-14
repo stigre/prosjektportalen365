@@ -25,6 +25,7 @@ export default class ExperienceLogWebPart extends BaseClientSideWebPart<IExperie
       {
         hubSiteId: this.context.pageContext.legacyPageContext.hubSiteId,
         absoluteUrl: this.context.pageContext.web.absoluteUrl,
+        pageContext: this.context.pageContext,
         spHttpClient: this.context.spHttpClient,
         serverRelativeUrl: this.context.pageContext.web.serverRelativeUrl,
       }

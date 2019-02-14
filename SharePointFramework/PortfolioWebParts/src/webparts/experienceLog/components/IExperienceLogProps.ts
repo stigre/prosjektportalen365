@@ -3,11 +3,13 @@ import IExcelExportConfig from '../../../common/interfaces/IExcelExportConfig';
 import * as strings from 'ExperienceLogWebPartStrings';
 import { SPHttpClient } from '@microsoft/sp-http';
 import { IListProps } from '../../../common/components/List/IListProps';
+import { PageContext } from '@microsoft/sp-page-context';
 
 export interface IExperienceLogProps extends IListProps {
   hubSiteId: string;
   spHttpClient: SPHttpClient;
   absoluteUrl: string;
+  pageContext: PageContext;
   serverRelativeUrl: string;
   groupByOptions: IGroupByOption[];
   excelExportEnabled: boolean;
