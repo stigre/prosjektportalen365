@@ -100,10 +100,9 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
         }]
       }),
     ]);
-    console.log(phaseTerms);
     let projects = associatedSites
       .map(site => {
-        let [item] = projectListItems.filter(p => site.Title === p.Title);
+        let [item] = projectListItems.filter(p => site['SiteId'] === p.GtSiteId);
         if (item) {
           let [owner] = users.filter(user => user.Id === item.GtProjectOwnerId);
           let [manager] = users.filter(user => user.Id === item.GtProjectManagerId);

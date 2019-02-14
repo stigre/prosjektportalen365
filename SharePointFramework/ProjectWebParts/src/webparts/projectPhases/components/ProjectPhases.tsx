@@ -99,7 +99,7 @@ export default class ProjectPhases extends React.Component<IProjectPhasesProps, 
     let properties: { [key: string]: string } = {};
     properties[this.state.data.phaseTextField] = phase.toString();
     Logger.log({ message: '(ProjectPhases) updatePhase', data: { properties }, level: LogLevel.Info });
-    await this.props.spEntityPortalService.UpdateEntityItem(this.props.context.pageContext.legacyPageContext.groupId, properties);
+    await this.props.spEntityPortalService.updateEntityItem(this.props.context.pageContext, properties);
   }
 
   /**
@@ -224,7 +224,7 @@ export default class ProjectPhases extends React.Component<IProjectPhasesProps, 
       ]);
       const [phaseTerms, entityItem] = await Promise.all([
         taxonomy.getDefaultSiteCollectionTermStore().getTermSetById(termSetId).terms.get(),
-        spEntityPortalService.GetEntityItem(context.pageContext.legacyPageContext.groupId),
+        spEntityPortalService.getEntityItem(context.pageContext),
       ]);
       const phases = phaseTerms
         .filter(term => term.LocalCustomProperties.ShowOnFrontpage !== 'false')

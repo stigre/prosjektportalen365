@@ -11,5 +11,4 @@ const Tasks: BaseTask[] = [
     new ApplyTemplate(),
     new CopyListData(),
 ];
-
 export { Tasks };

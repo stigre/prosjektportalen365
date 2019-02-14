@@ -88,15 +88,13 @@ export default class ProjectInformation extends React.Component<IProjectInformat
 
   private async fetchData(): Promise<IProjectInformationData> {
     try {
-      const { context } = this.props;
-      const { pageContext } = context;
-      const { hubSiteId, groupId } = pageContext.legacyPageContext;
-      const hubSite = await HubSiteService.GetHubSiteById(pageContext.web.absoluteUrl, hubSiteId);
+      const { pageContext } = this.props.context;
+      const hubSite = await HubSiteService.GetHubSiteById(pageContext.web.absoluteUrl, pageContext.legacyPageContext.hubSiteId);
       const spEntityPortalService = new SpEntityPortalService({ webUrl: hubSite.url, ...this.props.entity });
       const [entityItem, entityFields, editFormUrl] = await Promise.all([
-        spEntityPortalService.GetEntityItemFieldValues(groupId),
-        spEntityPortalService.GetEntityFields(),
-        spEntityPortalService.GetEntityEditFormUrl(groupId, pageContext.web.absoluteUrl),
+        spEntityPortalService.getEntityItemFieldValues(pageContext),
+        spEntityPortalService.getEntityFields(),
+        spEntityPortalService.getEntityEditFormUrl(pageContext, pageContext.web.absoluteUrl),
       ]);
       let properties = Object.keys(entityItem)
         .map(fieldName => ({
