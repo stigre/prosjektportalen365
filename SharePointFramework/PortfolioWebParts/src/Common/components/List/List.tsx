@@ -9,6 +9,7 @@ import { CommandBar, ICommandBarItemProps } from 'office-ui-fabric-react/lib/Com
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { ExcelExportStatus } from '../../ExportToExcel';
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
+import ModalLink from '../ModalLink/ModalLink';
 
 export default class List extends React.Component<IListProps, IListState> {
   public static defaultProps: Partial<IListProps> = {
@@ -27,6 +28,7 @@ export default class List extends React.Component<IListProps, IListState> {
 
   public render() {
     let { items, columns, groups } = this._getFilteredData();
+    console.log(groups);
     return (
       <div>
         {this._renderCommandBar()}
@@ -39,6 +41,7 @@ export default class List extends React.Component<IListProps, IListState> {
           items={items}
           columns={columns}
           groups={groups}
+          // onRenderItemColumn={this._onRenderItemColumn}
         />
       </div>
     );
@@ -98,11 +101,29 @@ export default class List extends React.Component<IListProps, IListState> {
     return null;
   }
 
+  private _onRenderItemColumn(item: any, index: number, column: IColumn) {
+    let colValue = item[column.fieldName];
+    switch (column.key) {
+      case 'Title': {
+        if (item.Path) {
+/*           return (
+            <ModalLink
+              label={colValue}
+              url={item.Path}
+              options={{ HideRibbon: true }}
+            />
+          ); */
+        }
+      }
+    }
+  }
+
   private _getFilteredData(): { items: any[], columns: any[], groups: IGroup[] } {
     let columns = [].concat(this.props.columns);
     let groups: IGroup[] = null;
     if (this.state.groupBy.key !== 'NoGrouping') {
       const groupItems = this.props.items.sort((a, b) => a[this.state.groupBy.key] > b[this.state.groupBy.key] ? -1 : 1);
+      console.log(groupItems);
       const groupNames = groupItems.map(g => g[this.state.groupBy.key]);
       groups = unique([].concat(groupNames)).map((name, idx) => ({
         key: idx,
