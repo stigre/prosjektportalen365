@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IModalLinkProps } from './IModalLinkProps';
 import { IModalLinkState } from './IModalLinkState';
-import { autobind } from '@uifabric/utilities/lib';
+import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 
 export default class ModalLink extends React.Component<IModalLinkProps, IModalLinkState> {
 

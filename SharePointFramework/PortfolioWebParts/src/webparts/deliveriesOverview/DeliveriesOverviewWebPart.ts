@@ -1,23 +1,19 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
-import {
-  BaseClientSideWebPart,
-  IPropertyPaneConfiguration,
-  PropertyPaneTextField
-} from '@microsoft/sp-webpart-base';
+import { BaseClientSideWebPart, IPropertyPaneConfiguration } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'DeliveriesOverviewWebPartStrings';
 import DeliveriesOverview from './components/DeliveriesOverview';
 import { IDeliveriesOverviewProps } from './components/IDeliveriesOverviewProps';
 
-export interface IDeliveriesOverviewWebPartProps {}
+export interface IDeliveriesOverviewWebPartProps { }
 
 export default class DeliveriesOverviewWebPart extends BaseClientSideWebPart<IDeliveriesOverviewWebPartProps> {
 
   public render(): void {
-    const element: React.ReactElement<IDeliveriesOverviewProps > = React.createElement(
-      DeliveriesOverview,      {      }
+    const element: React.ReactElement<IDeliveriesOverviewProps> = React.createElement(
+      DeliveriesOverview, { context: this.context, dataSource: 'DELIVERIESOVERVIEW' }
     );
 
     ReactDom.render(element, this.domElement);
@@ -37,7 +33,7 @@ export default class DeliveriesOverviewWebPart extends BaseClientSideWebPart<IDe
         {
           groups: [
             {
-              groupFields: [              ]
+              groupFields: []
             }
           ]
         }

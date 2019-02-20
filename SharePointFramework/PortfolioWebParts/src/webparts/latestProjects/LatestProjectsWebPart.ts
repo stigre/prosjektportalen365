@@ -1,22 +1,13 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
-import {
-  BaseClientSideWebPart,
-  IPropertyPaneConfiguration,
-  PropertyPaneTextField,
-  WebPartContext
-} from '@microsoft/sp-webpart-base';
-
-import * as strings from 'LatestProjectsWebPartStrings';
+import { BaseClientSideWebPart, IPropertyPaneConfiguration } from '@microsoft/sp-webpart-base';
 import LatestProjects from './components/LatestProjects';
 import { ILatestProjectsProps } from './components/ILatestProjectsProps';
-import { sp, Web } from '@pnp/sp';
+import { sp } from '@pnp/sp';
 
 export interface ILatestProjectsWebPartProps {
-  absoluteUrl: string;
-  serverRelativeUrl: string;
-  context: WebPartContext;
+  title: string;
 }
 
 export default class LatestProjectsWebPart extends BaseClientSideWebPart<ILatestProjectsWebPartProps> {
@@ -26,17 +17,21 @@ export default class LatestProjectsWebPart extends BaseClientSideWebPart<ILatest
       {
         context: this.context,
         absoluteUrl: this.context.pageContext.web.absoluteUrl,
-        serverRelativeUrl: this.context.pageContext.web.serverRelativeUrl
+        serverRelativeUrl: this.context.pageContext.web.serverRelativeUrl,
+        displayMode: this.displayMode,
+        updateProperty: (value: string) => {
+          this.properties.title = value;
+        },
+        ...this.properties,
       }
     );
 
     ReactDom.render(element, this.domElement);
   }
 
-  protected onInit(): Promise<void> {
-    return super.onInit().then(_ => {
-      sp.setup({ spfxContext: this.context });
-    });
+  protected async onInit(): Promise<void> {
+    await super.onInit();
+    sp.setup({ spfxContext: this.context });
   }
 
   protected onDispose(): void {
@@ -48,8 +43,6 @@ export default class LatestProjectsWebPart extends BaseClientSideWebPart<ILatest
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
-    return {
-      pages: []
-    };
+    return { pages: [] };
   }
 }
