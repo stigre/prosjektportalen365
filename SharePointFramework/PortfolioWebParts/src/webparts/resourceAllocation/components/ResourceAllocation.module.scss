@@ -1,0 +1,20 @@
+@import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
+
+.resourceAllocation {
+  .container {
+    margin: 0px auto;
+  }
+
+  .row {
+    @include ms-Grid-row;
+  }
+
+  .column {
+    @include ms-Grid-col;
+    @include ms-sm12;
+  }
+
+  .title {
+    @include ms-font-xl;
+  }
+}

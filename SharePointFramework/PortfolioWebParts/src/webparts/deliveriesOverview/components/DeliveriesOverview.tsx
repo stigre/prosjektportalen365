@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { DetailsList, DetailsListLayoutMode, IColumn } from "office-ui-fabric-react/lib/DetailsList";
+import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import { IDeliveriesOverviewProps, DeliveriesOverviewDefaultProps } from './IDeliveriesOverviewProps';
 import { IDeliveriesOverviewState } from './IDeliveriesOverviewState';
+import List from '../../../common/components/List/List';
 import { sp } from '@pnp/sp';
 
 export default class DeliveriesOverview extends React.Component<IDeliveriesOverviewProps, IDeliveriesOverviewState> {
@@ -29,35 +30,17 @@ export default class DeliveriesOverview extends React.Component<IDeliveriesOverv
 
   public render(): React.ReactElement<IDeliveriesOverviewProps> {
     if (this.state.isLoading) {
-      return (
-        <Spinner type={SpinnerType.large} />
-      );
+      return <Spinner type={SpinnerType.large} />;
     }
 
     return (
-      <DetailsList
+      <List
         items={this.state.items}
         columns={this.props.columns}
-        layoutMode={DetailsListLayoutMode.justified}
-        onRenderItemColumn={this.onRenderItemColumn} />
+        showCommandBar={true}
+        groupByOptions={this.props.groupByOptions}
+        excelExportEnabled={this.props.excelExportEnabled} />
     );
-  }
-
-  @autobind
-  private onRenderItemColumn(item: any, index: number, column: IColumn) {
-    let colValue = item[column.fieldName];
-    switch (column.key) {
-      case 'Title': {
-        if (item.Path) {
-          return <a href={item.Path} target="_blank">{colValue}</a>;
-        }
-        return colValue;
-      }
-      case 'SiteTitle': {
-        return <a href={item.SPWebUrl} target="_blank">{item.SiteTitle}</a>;
-      }
-    }
-    return colValue;
   }
 
   /**
@@ -75,7 +58,6 @@ export default class DeliveriesOverview extends React.Component<IDeliveriesOverv
         TrimDuplicates: false,
         SelectProperties: ["Path", "SPWebUrl", ...this.props.columns.map(col => col.key)],
       });
-      console.log(PrimarySearchResults);
       return PrimarySearchResults;
     } catch (err) {
       throw err;
