@@ -6,4 +6,5 @@ export interface IListState {
   searchTerm?: string;
   groupBy: IGroupByOption;
   excelExportStatus?: ExcelExportStatus;
+  showModalDialog?: boolean;
 }
