@@ -999,43 +999,37 @@
   <data name="SiteFields_GtMilestoneActualDate_DisplayName" xml:space="preserve">
     <value>Faktisk dato</value>
   </data>
-  <data name="SiteFields_GtStSecViewFields_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtSecViewFields_DisplayName" xml:space="preserve">
     <value>Felter</value>
   </data>
-  <data name="SiteFields_GtStSecIcon_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtSecIcon_DisplayName" xml:space="preserve">
     <value>Ikon</value>
   </data>
-  <data name="SiteFields_GtStSecCustomComponent_DisplayName" xml:space="preserve">
-    <value>Komponent</value>
-  </data>
-  <data name="SiteFields_GtStSecShowInNavbar_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtSecShowInNavbar_DisplayName" xml:space="preserve">
     <value>Vis i navigasjonslinjen</value>
   </data>
-  <data name="SiteFields_GtStSecViewQuery_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtSecViewQuery_DisplayName" xml:space="preserve">
     <value>Spørring</value>
   </data>
-  <data name="SiteFields_GtStSecFieldName_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtSecFieldName_DisplayName" xml:space="preserve">
     <value>Feltnavn</value>
   </data>
-  <data name="SiteFields_GtStSecShowInStatusSection_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtSecShowInStatusSection_DisplayName" xml:space="preserve">
     <value>Vis i statusseksjonen</value>
   </data>
-  <data name="SiteFields_GtStSecRowLimit_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtSecRowLimit_DisplayName" xml:space="preserve">
     <value>Antal elementer</value>
   </data>
-  <data name="SiteFields_GtStSecOrder_DisplayName" xml:space="preserve">
-    <value>Rekkefølge	</value>
-  </data>
-  <data name="SiteFields_GtStSecShowAsSection_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtSecShowAsSection_DisplayName" xml:space="preserve">
     <value>Vis som egen seksjon</value>
   </data>
-  <data name="SiteFields_GtStSecSource_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtSecSource_DisplayName" xml:space="preserve">
     <value>Lenke</value>
   </data>
-  <data name="SiteFields_GtStSecShowRiskMatrix_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtSecShowRiskMatrix_DisplayName" xml:space="preserve">
     <value>Vis risikomatrise</value>
   </data>
-  <data name="SiteFields_GtStSecList_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtSecList_DisplayName" xml:space="preserve">
     <value>Listenavn</value>
   </data>
   <data name="SiteFields_GtDpIcon_DisplayName" xml:space="preserve">
@@ -1506,43 +1500,37 @@
   <data name="SiteFields_GtMeasurementComment_Description" xml:space="preserve">
     <value />
   </data>
-  <data name="SiteFields_GtStSecViewFields_Description" xml:space="preserve">
+  <data name="SiteFields_GtSecViewFields_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtStSecIcon_Description" xml:space="preserve">
+  <data name="SiteFields_GtSecIcon_Description" xml:space="preserve">
     <value>Ikon fra https://dev.office.com/fabric#/styles/icons</value>
   </data>
-  <data name="SiteFields_GtStSecShowInNavbar_Description" xml:space="preserve">
+  <data name="SiteFields_GtSecShowInNavbar_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtStSecViewQuery_Description" xml:space="preserve">
+  <data name="SiteFields_GtSecViewQuery_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtStSecFieldName_Description" xml:space="preserve">
+  <data name="SiteFields_GtSecFieldName_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtStSecShowInStatusSection_Description" xml:space="preserve">
+  <data name="SiteFields_GtSecShowInStatusSection_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtStSecRowLimit_Description" xml:space="preserve">
+  <data name="SiteFields_GtSecRowLimit_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtStSecOrder_Description" xml:space="preserve">
+  <data name="SiteFields_GtSecShowAsSection_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtStSecShowAsSection_Description" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="SiteFields_GtStSecSource_Description" xml:space="preserve">
+  <data name="SiteFields_GtSecSource_Description" xml:space="preserve">
     <value>Om seksjonen skal lenke til en annen side eller ett dokument</value>
   </data>
-  <data name="SiteFields_GtStSecShowRiskMatrix_Description" xml:space="preserve">
+  <data name="SiteFields_GtSecShowRiskMatrix_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtStSecList_Description" xml:space="preserve">
-    <value></value>
-  </data>
-  <data name="SiteFields_GtStSecCustomComponent_Description" xml:space="preserve">
+  <data name="SiteFields_GtSecList_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="SiteFields_GtDpIcon_Description" xml:space="preserve">

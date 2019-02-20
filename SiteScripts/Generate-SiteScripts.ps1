@@ -33,7 +33,7 @@ $SiteConnection = Connect-PnPOnline -Url $RootSiteUrl -Credentials $Credentials 
 Write-Host "[INFO] Connecting to $ProjectWebUrl"
 $ProjectWebConnection = Connect-PnPOnline -Url $ProjectWebUrl -Credentials $Credentials -ReturnConnection
 
-$SiteFields = Get-PnPField -Connection $SiteConnection | Where-Object { $_.Group -eq "Prosjektportalenkolonner" -and $_.InternalName -notlike "GtChr*" -and $_.InternalName -notlike "GtLcc**" -and $_.InternalName -notlike "GtDp*" -and $_.InternalName -notlike "GtStSec*" -and $_.InternalName -notlike "GtPc*" -and $_.InternalName -notlike "GtFeedback*" } | Sort-Object -Property Title
+$SiteFields = Get-PnPField -Connection $SiteConnection | Where-Object { $_.Group -eq "Prosjektportalenkolonner" -and $_.InternalName -notlike "GtChr*" -and $_.InternalName -notlike "GtLcc**" -and $_.InternalName -notlike "GtDp*" -and $_.InternalName -notlike "GtSec*" -and $_.InternalName -notlike "GtPc*" -and $_.InternalName -notlike "GtFeedback*" } | Sort-Object -Property Title
 $ContentTypes = Get-PnPContentType -Connection $SiteConnection | Where-Object { $_.Group -eq "Prosjektportalen innholdstyper" } | Sort-Object -Property Id
 $Lists = Get-PnPList -Connection $ProjectWebConnection | Where-Object { ($_.BaseTemplate -eq 100 -or $_.BaseTemplate -eq 101 -or $_.BaseTemplate -eq 106 -or $_.BaseTemplate -eq 171) -and $_.RootFolder.ServerRelativeUrl -notlike "*SiteAssets" }
 $NavigationNodes = Get-PnPNavigationNode -Location QuickLaunch -Connection $ProjectWebConnection 
