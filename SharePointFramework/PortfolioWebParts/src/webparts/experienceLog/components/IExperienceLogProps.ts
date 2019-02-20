@@ -1,19 +1,15 @@
 import IGroupByOption from '../../../common/interfaces/IGroupByOption';
 import IExcelExportConfig from '../../../common/interfaces/IExcelExportConfig';
 import * as strings from 'ExperienceLogWebPartStrings';
-import { SPHttpClient } from '@microsoft/sp-http';
-import { IListProps } from '../../../common/components/List/IListProps';
-import { PageContext } from '@microsoft/sp-page-context';
+import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
+import { WebPartContext } from '@microsoft/sp-webpart-base';
 
-export interface IExperienceLogProps extends IListProps {
-  hubSiteId: string;
-  spHttpClient: SPHttpClient;
-  absoluteUrl: string;
-  pageContext: PageContext;
-  serverRelativeUrl: string;
-  groupByOptions: IGroupByOption[];
-  excelExportEnabled: boolean;
-  excelExportConfig: IExcelExportConfig;
+export interface IExperienceLogProps {
+  context: WebPartContext;
+  groupByOptions?: IGroupByOption[];
+  columns?: IColumn[];
+  excelExportEnabled?: boolean;
+  excelExportConfig?: IExcelExportConfig;
 }
 
 export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
@@ -33,35 +29,35 @@ export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
     },
     {
       key: 'GtProjectLogDescriptionOWSMTXT',
-      fieldName: 'Description',
+      fieldName: 'GtProjectLogDescriptionOWSMTXT',
       name: strings.DescriptionColumnDisplayName,
       minWidth: 100,
       isResizable: true
     },
     {
       key: 'GtProjectLogResponsibleOWSCHCS',
-      fieldName: 'Responsible',
+      fieldName: 'GtProjectLogResponsibleOWSCHCS',
       name: strings.ResponsibleColumnDisplayName,
       minWidth: 100,
       isResizable: true
     },
     {
       key: 'GtProjectLogConsequenceOWSMTXT',
-      fieldName: 'Consequence',
+      fieldName: 'GtProjectLogConsequenceOWSMTXT',
       name: strings.ConsequenceColumnDisplayName,
       minWidth: 100,
       isResizable: true
     },
     {
       key: 'GtProjectLogRecommendationOWSMTXT',
-      fieldName: 'Recommendation',
+      fieldName: 'GtProjectLogRecommendationOWSMTXT',
       name: strings.RecommendationColumnDisplayName,
       minWidth: 100,
       isResizable: true
     },
     {
       key: 'GtProjectLogActorsOWSCHCM',
-      fieldName: 'Actors',
+      fieldName: 'GtProjectLogActorsOWSCHCM',
       name: strings.ActorsColumnDisplayName,
       minWidth: 100,
       isResizable: true
@@ -71,8 +67,8 @@ export const ExperienceLogDefaultProps: Partial<IExperienceLogProps> = {
   excelExportEnabled: true,
   excelExportConfig: {
     fileNamePrefix: strings.ExcelExportFileNamePrefix,
-    sheetName: "Sheet A",
+    sheetName: 'Sheet A',
     buttonLabel: strings.ExcelExportButtonLabel,
-    buttonIcon: "ExcelDocument",
+    buttonIcon: 'ExcelDocument',
   },
 };

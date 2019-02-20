@@ -3,20 +3,15 @@ import { IExperienceLogProps, ExperienceLogDefaultProps } from './IExperienceLog
 import { IExperienceLogState } from './IExperienceLogState';
 import List from '../../../common/components/List/List';
 import * as strings from 'ExperienceLogWebPartStrings';
-import { sp, SearchQuery, QueryPropertyValueType, ISearchQueryBuilder, SearchQueryBuilder } from '@pnp/sp';
-import LogElement from './LogElement';
+import { sp } from '@pnp/sp';
 import { Spinner, SpinnerType } from 'office-ui-fabric-react/lib/Spinner';
 
 export default class ExperienceLog extends React.Component<IExperienceLogProps, IExperienceLogState> {
-
   public static defaultProps = ExperienceLogDefaultProps;
 
-  constructor(props) {
+  constructor(props: IExperienceLogProps) {
     super(props);
-
-    this.state = {
-      isLoading: true
-    };
+    this.state = { isLoading: true };
   }
 
   public async componentDidMount() {
@@ -24,7 +19,6 @@ export default class ExperienceLog extends React.Component<IExperienceLogProps, 
       const items = await this.fetchData();
       this.setState({ items, isLoading: false });
     } catch (err) {
-      console.log(err);
       this.setState({ items: [], isLoading: false });
     }
   }
@@ -36,42 +30,24 @@ export default class ExperienceLog extends React.Component<IExperienceLogProps, 
 
     return (
       <List
-        entity={this.props.entity}
         items={this.state.items}
         columns={this.props.columns}
         showCommandBar={true}
         groupByOptions={this.props.groupByOptions}
-        pageContext={this.props.pageContext}
         excelExportEnabled={this.props.excelExportEnabled}
-        excelExportConfig={this.props.excelExportConfig}
-      />
+        excelExportConfig={this.props.excelExportConfig} />
     );
   }
 
   private async fetchData() {
-
-    let queryText = `DepartmentId:{${this.props.hubSiteId}} ContentType:Prosjektloggelement`;
-
-    const _searchQuerySettings: SearchQuery = {
+    let { PrimarySearchResults } = await sp.search({
+      Querytext: "*",
+      QueryTemplate: `DepartmentId:{${this.props.context.pageContext.legacyPageContext.hubSiteId}} ContentTypeId:0x01004EDD18CB92C14EBA97103D909C897810*`,
       TrimDuplicates: false,
       RowLimit: 500,
-      SelectProperties: ['Title', 'SiteTitle', 'SPWebUrl', 'SiteId', 'GtProjectLogType', 'GtProjectLogResponsible', 'GtProjectLogRecommendation', 'Path', 'GtProjectLogConsequence', 'Actors'],
-      Properties: [{
-        Name: "EnableDynamicGroups",
-        Value: {
-          BoolVal: true,
-          QueryPropertyValueTypeIndex: QueryPropertyValueType.BooleanType
-        }
-      }
-      ]
-    };
-
-    const query: ISearchQueryBuilder = SearchQueryBuilder(queryText, _searchQuerySettings);
-    let result = await sp.search(query);
-    console.log(result);
-    let items = result.PrimarySearchResults.map(r => new LogElement(r));
-
-    return items;
+      SelectProperties: ["Path", "SPWebUrl", ...this.props.columns.map(col => col.key)],
+    });
+    return PrimarySearchResults;
   }
 
 }

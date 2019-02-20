@@ -22,6 +22,7 @@ export interface ISPUser {
 }
 
 export default class ProjectListModel {
+  public Id: string;
   public Title: string;
   public Url: string;
   public Logo: string;

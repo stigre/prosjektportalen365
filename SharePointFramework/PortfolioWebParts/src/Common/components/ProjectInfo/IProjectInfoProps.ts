@@ -2,7 +2,7 @@ import ProjectListModel from "../../models/ProjectListModel";
 import { PageContext } from "@microsoft/sp-page-context";
 
 export interface IProjectInfoProps {
-  showProjectInfo?: ProjectListModel;
+  project?: ProjectListModel;
   onDismiss: any;
   pageContext: PageContext;
   entity: {

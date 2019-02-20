@@ -8,10 +8,8 @@ export interface IListProps {
   columns?: Array<IColumn>;
   showCommandBar?: boolean;
   showSearchBox?: boolean;
-  pageContext: PageContext;
   groupByOptions?: IGroupByOption[];
   defaultGroupBy?: IGroupByOption;
   excelExportEnabled?: boolean;
   excelExportConfig?: IExcelExportConfig;
-  entity?: any;
 }

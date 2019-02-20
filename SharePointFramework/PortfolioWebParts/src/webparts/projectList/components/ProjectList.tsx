@@ -11,6 +11,7 @@ import ProjectCard from './ProjectCard/ProjectCard';
 import { sp, QueryPropertyValueType } from '@pnp/sp';
 import { taxonomy } from '@pnp/sp-taxonomy';
 import ProjectInfo from '../../../common/components/ProjectInfo/ProjectInfo';
+import ProjectListModel from '../../../common/models/ProjectListModel';
 
 export default class ProjectList extends React.Component<IProjectListProps, IProjectListState> {
   constructor(props: IProjectListProps) {
@@ -30,7 +31,7 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
           <ProjectInfo
             entity={this.props.entity}
             pageContext={this.props.pageContext}
-            showProjectInfo={this.state.showProjectInfo}
+            project={this.state.showProjectInfo}
             onDismiss={(_event: any) => this.setState({ showProjectInfo: null })} />}
         <div className={styles.projectListSearchBox}>
           <SearchBox placeholder={strings.SearchBoxPlaceholderText} onChanged={this.onSearch} />
@@ -108,7 +109,8 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
           let [manager] = users.filter(user => user.Id === item.GtProjectManagerId);
           let phase = item.GtProjectPhase ? phaseTerms.filter(p => p.Id.indexOf(item.GtProjectPhase.TermGuid) !== -1)[0].Name : '';
 
-          return {
+          const project: ProjectListModel = {
+            Id: site['SiteId'],
             Logo: site.SiteLogo,
             Manager: manager,
             Owner: owner,
@@ -120,6 +122,7 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
             Views: site.ViewsLifetime,
             RawObject: item,
           };
+          return project;
         }
         return null;
       })
