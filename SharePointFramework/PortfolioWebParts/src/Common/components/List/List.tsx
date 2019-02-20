@@ -10,8 +10,6 @@ import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMen
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { ExcelExportStatus } from '../../ExportToExcel';
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
-import ModalLink from '../ModalLink/ModalLink';
-import Modal from 'office-ui-fabric-react/lib/Modal';
 import ProjectInfo from '../ProjectInfo/ProjectInfo';
 
 export default class List extends React.Component<IListProps, IListState> {
@@ -20,47 +18,44 @@ export default class List extends React.Component<IListProps, IListState> {
     defaultGroupBy: { key: "NoGrouping", name: strings.NoGrouping },
   };
 
-  constructor(props) {
+  /**
+   * Constructor
+   * 
+   * @param {IListProps} props Props
+   */
+  constructor(props: IListProps) {
     super(props);
-
-    this.state = {
-      searchTerm: '',
-      groupBy: this.props.defaultGroupBy,
-      showModalDialog: false
-    };
+    this.state = { searchTerm: '', groupBy: this.props.defaultGroupBy };
   }
 
+  /**
+   * Renders the <List /> component
+   */
   public render() {
-    console.log(this.state.showModalDialog);
-    let { items, columns, groups } = this._getFilteredData();
-    console.log(groups);
+    let { items, columns, groups } = this.getFilteredData();
     return (
       <div>
-        {this._renderCommandBar()}
+        {this.renderCommandBar()}
         <div hidden={!this.props.showSearchBox}>
           <SearchBox
             placeholder={strings.SearchBoxPlaceholder}
-            onChanged={this._onSearch} />
+            onChanged={this.onSearch} />
         </div>
         <DetailsList
           items={items}
           columns={columns}
           groups={groups}
-          onRenderItemColumn={this._onRenderItemColumn}
+          onRenderItemColumn={this.onRenderItemColumn}
         />
-        {this._renderProjectInfoModal()}
-        <Modal
-          isOpen={this.state.showModalDialog}
-          onDismiss={() => this.setState({ showModalDialog: false })}
-        >
-          {/* TODO: BAD! Figure out better view */}
-          <iframe src="https://pzlpart.sharepoint.com/sites/Prosjekt-6/Lists/Prosjektlogg/DispForm.aspx?ID=1" width='600' height='850' />
-        </Modal>
+        {this.renderProjectInfoModal()}
       </div>
     );
   }
 
-  private _renderCommandBar() {
+  /**
+   * Render command bar
+   */
+  private renderCommandBar() {
     const items: Array<ICommandBarItemProps> = [];
     const farItems: Array<ICommandBarItemProps> = [];
 
@@ -97,7 +92,7 @@ export default class List extends React.Component<IListProps, IListState> {
         disabled: this.state.excelExportStatus === ExcelExportStatus.Exporting,
         onClick: evt => {
           evt.preventDefault();
-          this._exportToExcel();
+          this.exportToExcel();
         },
       });
     }
@@ -114,7 +109,10 @@ export default class List extends React.Component<IListProps, IListState> {
     return null;
   }
 
-  private _renderProjectInfoModal() {
+  /**
+   * Render project info modal
+   */
+  private renderProjectInfoModal() {
     const showProjectInfo = this.state.showProjectInfo;
     if (showProjectInfo) {
       return (
@@ -122,7 +120,7 @@ export default class List extends React.Component<IListProps, IListState> {
           entity={null}
           pageContext={this.props.pageContext}
           showProjectInfo={showProjectInfo}
-          onDismiss={() => this.setState({  showProjectInfo: null})}
+          onDismiss={() => this.setState({ showProjectInfo: null })}
 
         />
       );
@@ -130,39 +128,41 @@ export default class List extends React.Component<IListProps, IListState> {
   }
 
   @autobind
-  private _onRenderItemColumn(item: any, index: number, column: IColumn) {
+  private onRenderItemColumn(item: any, index: number, column: IColumn) {
     let colValue = item[column.fieldName];
     switch (column.key) {
       case 'Title': {
         if (item.Path) {
-          return (
-            <ModalLink
-              showModalDialog={() => this.showModalDialog()}
-              label={colValue}
-              url={item.Path}
-            // options={{ HideRibbon: true }}
-            />
-          );
-        } else return colValue;
+          return <a href={item.Path} target="_blank">{colValue}</a>;
+        }
+        return colValue;
       }
       case 'SiteTitle': {
-        return <a href={item.SPWebUrl} onClick={(e) => this._openProject(e, item)}>{item.SiteTitle}</a>;
+        return <a href={item.SPWebUrl} onClick={(e) => this.openProject(e, item)}>{item.SiteTitle}</a>;
       }
     }
   }
 
-  private _openProject(e: React.MouseEvent<HTMLAnchorElement>, project: any) {
-    e.preventDefault();
-    e.stopPropagation();
+  /**
+   * Open project 
+   * 
+   * @param {React.MouseEvent<HTMLAnchorElement>} event Event
+   * @param {any} project Project
+   */
+  private openProject(event: React.MouseEvent<HTMLAnchorElement>, project: any) {
+    event.preventDefault();
+    event.stopPropagation();
     this.setState({ showProjectInfo: project });
   }
 
-  private _getFilteredData(): { items: any[], columns: any[], groups: IGroup[] } {
+  /**
+   * Get filtered data
+   */
+  private getFilteredData(): { items: any[], columns: any[], groups: IGroup[] } {
     let columns = [].concat(this.props.columns);
     let groups: IGroup[] = null;
     if (this.state.groupBy.key !== 'NoGrouping') {
       const groupItems = this.props.items.sort((a, b) => a[this.state.groupBy.key] > b[this.state.groupBy.key] ? -1 : 1);
-      console.log(groupItems);
       const groupNames = groupItems.map(g => g[this.state.groupBy.key]);
       groups = unique([].concat(groupNames)).map((name, idx) => ({
         key: idx,
@@ -180,22 +180,12 @@ export default class List extends React.Component<IListProps, IListState> {
       }).length;
       return matches > 0;
     });
-    return {
-      items: filteredItems,
-      columns: columns,
-      groups: groups
-    };
+    return { items: filteredItems, columns: columns, groups: groups };
   }
 
-  private showModalDialog() {
-    console.log('clicked');
-    this.setState({ showModalDialog: true });
+  private exportToExcel() {
   }
 
-  private _exportToExcel() {
+  private onSearch() {
   }
-
-  private _onSearch() {
-  }
-
 }

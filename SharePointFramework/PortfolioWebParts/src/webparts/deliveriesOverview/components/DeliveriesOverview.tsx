@@ -60,6 +60,7 @@ export default class DeliveriesOverview extends React.Component<IDeliveriesOverv
         TrimDuplicates: false,
         SelectProperties: ["Path", "SPWebUrl", ...this.props.columns.map(col => col.key)],
       });
+      console.log(PrimarySearchResults);
       return PrimarySearchResults;
     } catch (err) {
       throw err;
