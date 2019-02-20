@@ -1,33 +1,19 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
-import {
-  BaseClientSideWebPart,
-  IPropertyPaneConfiguration,
-  PropertyPaneTextField
-} from '@microsoft/sp-webpart-base';
-
-import * as strings from 'ExperienceLogWebPartStrings';
+import { BaseClientSideWebPart, IPropertyPaneConfiguration } from '@microsoft/sp-webpart-base';
 import ExperienceLog from './components/ExperienceLog';
 import { IExperienceLogProps } from './components/IExperienceLogProps';
 import { sp } from '@pnp/sp';
 
-export interface IExperienceLogWebPartProps {
-  absoluteUrl: string;
-  serverRelativeUrl: string;
-}
+export interface IExperienceLogWebPartProps { }
 
 export default class ExperienceLogWebPart extends BaseClientSideWebPart<IExperienceLogWebPartProps> {
 
   public render(): void {
-    const element: React.ReactElement<IExperienceLogProps> = React.createElement(
-      ExperienceLog,
+    const element: React.ReactElement<IExperienceLogProps> = React.createElement(ExperienceLog,
       {
-        hubSiteId: this.context.pageContext.legacyPageContext.hubSiteId,
-        absoluteUrl: this.context.pageContext.web.absoluteUrl,
-        pageContext: this.context.pageContext,
-        spHttpClient: this.context.spHttpClient,
-        serverRelativeUrl: this.context.pageContext.web.serverRelativeUrl,
+        context: this.context,
       }
     );
 
@@ -45,12 +31,10 @@ export default class ExperienceLogWebPart extends BaseClientSideWebPart<IExperie
   }
 
   protected get dataVersion(): Version {
-    return Version.parse('1.0');
+    return Version.parse(this.manifest.version);
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
-    return {
-      pages: [  ]
-    };
+    return { pages: [] };
   }
 }

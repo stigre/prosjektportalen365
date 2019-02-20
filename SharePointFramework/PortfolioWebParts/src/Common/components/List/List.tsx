@@ -4,27 +4,17 @@ import styles from './List.module.scss';
 import * as strings from 'CommonStrings';
 import { IListProps } from './IListProps';
 import { IListState } from './IListState';
-import { DetailsList, IColumn, IGroup, SelectionMode, DetailsListLayoutMode, ConstrainMode } from "office-ui-fabric-react/lib/DetailsList";
+import { DetailsList, IColumn, IGroup, SelectionMode, DetailsListLayoutMode, ConstrainMode } from 'office-ui-fabric-react/lib/DetailsList';
 import { CommandBar, ICommandBarItemProps } from 'office-ui-fabric-react/lib/CommandBar';
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
-import { Modal } from 'office-ui-fabric-react/lib/Modal';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { ExcelExportStatus } from '../../ExportToExcel';
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
-import ProjectInfo from '../ProjectInfo/ProjectInfo';
-import { sp, CamlQuery } from '@pnp/sp';
-import ProjectListModel from '../../models/ProjectListModel';
 
 export default class List extends React.Component<IListProps, IListState> {
   public static defaultProps: Partial<IListProps> = {
     groupByOptions: [],
-    defaultGroupBy: { key: "NoGrouping", name: strings.NoGrouping },
-    entity: {
-      listName: 'PROSJEKTER',
-      contentTypeId: '0x0100805E9E4FEAAB4F0EABAB2600D30DB70C',
-      fieldsGroupName: 'GtGroupName',
-      siteIdFieldName: 'GtSiteId'
-    }
+    defaultGroupBy: { key: 'NoGrouping', name: strings.NoGrouping }
   };
 
   /**
@@ -54,23 +44,7 @@ export default class List extends React.Component<IListProps, IListState> {
           items={items}
           columns={columns}
           groups={groups}
-          onRenderItemColumn={this.onRenderItemColumn}
-        />
-        {/* this._renderProjectInfoModal() */}
-        {(this.state.showProjectInfo) &&
-          <ProjectInfo
-            entity={this.props.entity}
-            pageContext={this.props.pageContext}
-            project={this.state.showProjectInfo}
-            onDismiss={() => this.setState({ showProjectInfo: null })}
-          />
-        }
-        <Modal
-          isOpen={this.state.showModalDialog}
-          onDismiss={() => this.setState({ showModalDialog: false })}
-        >
-          {/* Render log item properties */}
-        </Modal>
+          onRenderItemColumn={this.onRenderItemColumn} />
       </div>
     );
   }
@@ -84,20 +58,20 @@ export default class List extends React.Component<IListProps, IListState> {
 
     if (this.props.groupByOptions.length > 0) {
       const noGrouping = {
-        key: "NoGrouping",
+        key: 'NoGrouping',
         name: strings.NoGrouping,
       };
       const subItems = [noGrouping, ...this.props.groupByOptions].map(item => ({
         ...item,
-        onClick: e => {
-          e.preventDefault();
+        onClick: (event: any) => {
+          event.preventDefault();
           this.setState({ groupBy: item });
         },
       }));
       items.push({
-        key: "Group",
+        key: 'Group',
         name: this.state.groupBy.name,
-        iconProps: { iconName: "GroupedList" },
+        iconProps: { iconName: 'GroupedList' },
         itemType: ContextualMenuItemType.Header,
         onClick: evt => evt.preventDefault(),
         subMenuProps: { items: subItems },
@@ -106,11 +80,11 @@ export default class List extends React.Component<IListProps, IListState> {
 
     if (this.props.excelExportEnabled && this.props.excelExportConfig) {
       items.push({
-        key: "ExcelExport",
+        key: 'ExcelExport',
         name: this.props.excelExportConfig.buttonLabel,
         iconProps: {
           iconName: this.props.excelExportConfig.buttonIcon,
-          styles: { root: { color: "green !important" } },
+          styles: { root: { color: 'green !important' } },
         },
         disabled: this.state.excelExportStatus === ExcelExportStatus.Exporting,
         onClick: evt => {
@@ -132,59 +106,22 @@ export default class List extends React.Component<IListProps, IListState> {
     return null;
   }
 
-  /**
-   * Render project info modal
-   */
-  private renderProjectInfoModal() {
-    const showProjectInfo = this.state.showProjectInfo;
-    if (showProjectInfo) {
-      return (
-        <ProjectInfo
-          entity={null}
-          pageContext={this.props.pageContext}
-          project={showProjectInfo}
-          onDismiss={() => this.setState({ showProjectInfo: null })}
-
-        />
-      );
-    }
-  }
 
   @autobind
-  private onRenderItemColumn(item: any, index: number, column: IColumn) {
+  private onRenderItemColumn(item: any, _index: number, column: IColumn) {
     let colValue = item[column.fieldName];
     switch (column.key) {
       case 'Title': {
         if (item.Path) {
-          return <a href={item.Path} target="_blank">{colValue}</a>;
+          return <a href={item.Path} target='_blank'>{colValue}</a>;
         }
         return colValue;
       }
       case 'SiteTitle': {
-        return <a href={item.SPWebUrl} onClick={(e) => this.openProject(e, item)}>{item.SiteTitle}</a>;
+        return <a href={item.SPWebUrl} target='_blank'>{item.SiteTitle}</a>;
       }
     }
     return colValue;
-  }
-
-  /**
-   * Open project
-   *
-   * @param {React.MouseEvent<HTMLAnchorElement>} event Event
-   * @param {any} logItem LogItem
-   */
-  private async openProject(e: React.MouseEvent<HTMLAnchorElement>, logItem: any) {
-    e.preventDefault();
-    e.stopPropagation();
-
-    const xml = `<View><Query><Where><Eq><FieldRef Name='GtSiteId' /><Value Type='Text'>${logItem.SiteId}</Value></Eq></Where></Query></View>`;
-    const q: CamlQuery = {
-      ViewXml: xml,
-    };
-    let projects = await sp.web.lists.getByTitle('PROSJEKTER').getItemsByCAMLQuery(q);
-    let project: ProjectListModel = projects[0];
-
-    this.setState({ showProjectInfo: project });
   }
 
   /**
@@ -196,7 +133,7 @@ export default class List extends React.Component<IListProps, IListState> {
     if (this.state.groupBy.key !== 'NoGrouping') {
       const groupItems = this.props.items.sort((a, b) => a[this.state.groupBy.key] > b[this.state.groupBy.key] ? -1 : 1);
       const groupNames = groupItems.map(g => g[this.state.groupBy.key]);
-      groups = unique([].concat(groupNames)).map((name, idx) => ({
+      groups = unique([].concat(groupNames)).map((name: any, idx: any) => ({
         key: idx,
         name: `${this.state.groupBy.name}: ${name}`,
         count: [].concat(groupNames).filter(n => n === name).length,
@@ -205,27 +142,23 @@ export default class List extends React.Component<IListProps, IListState> {
         isDropEnabled: false
       }));
     }
-    const filteredItems = this.props.items.filter(itm => {
+    const items = this.props.items.filter(itm => {
       const matches = Object.keys(itm).filter(key => {
         const value = itm[key];
         return value && typeof value === 'string' && value.toLowerCase().indexOf(this.state.searchTerm) !== -1;
       }).length;
       return matches > 0;
     });
-    return {
-      items: filteredItems,
-      columns: columns,
-      groups: groups
-    };
+    return { items, columns, groups };
   }
 
-  private showModalDialog() {
-    this.setState({ showModalDialog: true });
-  }
-
+  @autobind
   private exportToExcel() {
+
   }
 
-  private onSearch() {
+  @autobind
+  private onSearch(searchTerm: string) {
+    this.setState({ searchTerm });
   }
 }
