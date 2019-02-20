@@ -63,9 +63,23 @@
         <pnp:Header Type="None" />
     </pnp:ClientSidePage>
     <pnp:ClientSidePage PageName="Risikooversikt.aspx" PromoteAsNewsArticle="false" Overwrite="true" Layout="SingleWebPartAppPage" EnableComments="false" Title="Risikooversikt">
+        <pnp:Sections>
+            <pnp:Section Order="1" Type="OneColumn">
+                <pnp:Controls>
+                    <pnp:CanvasControl WebPartType="Custom" JsonControlData="{}" ControlId="57530c94-4fb2-4ca2-9279-16c57881fa19" Order="1" Column="1" />
+                </pnp:Controls>
+            </pnp:Section>
+        </pnp:Sections>
         <pnp:Header Type="None" />
     </pnp:ClientSidePage>
     <pnp:ClientSidePage PageName="Ressursallokering.aspx" PromoteAsNewsArticle="false" Overwrite="true" Layout="SingleWebPartAppPage" EnableComments="false" Title="Ressursallokering">
+        <pnp:Sections>
+            <pnp:Section Order="1" Type="OneColumn">
+                <pnp:Controls>
+                    <pnp:CanvasControl WebPartType="Custom" JsonControlData="{}" ControlId="2ef269b2-6370-4841-8b35-2185b7ccb22a" Order="1" Column="1" />
+                </pnp:Controls>
+            </pnp:Section>
+        </pnp:Sections>
         <pnp:Header Type="None" />
     </pnp:ClientSidePage>
 </pnp:ClientSidePages>
