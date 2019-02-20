@@ -1071,8 +1071,11 @@
   <data name="SiteFields_GtDpMinWidth_DisplayName" xml:space="preserve">
     <value>Minimum bredde</value>
   </data>
-  <data name="SiteFields_GtDpProperty_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtManagedProperty_DisplayName" xml:space="preserve">
     <value>Forvaltet egenskap</value>
+  </data>
+  <data name="SiteFields_GtInternalName_DisplayName" xml:space="preserve">
+    <value>Internt feltnavn</value>
   </data>
   <data name="SiteFields_GtDpOrder_DisplayName" xml:space="preserve">
     <value>Rekkefølge</value>
@@ -1119,13 +1122,13 @@
   <data name="SiteFields_GtLccLabel_DisplayName" xml:space="preserve">
     <value>Tekst</value>
   </data>
-  <data name="SiteFields_GtPcProjectStatus_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtShowFieldProjectStatus_DisplayName" xml:space="preserve">
     <value>Vis på prosjektstatus-siden</value>
   </data>
-  <data name="SiteFields_GtPcFrontpage_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtShowFieldFrontpage_DisplayName" xml:space="preserve">
     <value>Vis på forsiden</value>
   </data>
-  <data name="SiteFields_GtPcPortfolioPage_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtShowFieldPortfolio_DisplayName" xml:space="preserve">
     <value>Vis i porteføljeoversikt</value>
   </data>
   <data name="SiteFields_GtKey_DisplayName" xml:space="preserve">
@@ -1200,7 +1203,7 @@
   <data name="SiteFields_GtChrYMax_DisplayName" xml:space="preserve">
     <value>Max (primærakse)</value>
   </data>
-  <data name="SiteFields_GtChrDataType_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtFieldDataType_DisplayName" xml:space="preserve">
     <value>Datatype</value>
   </data>
   <data name="SiteFields_GtChrYTickInterval_DisplayName" xml:space="preserve">
@@ -1253,6 +1256,9 @@
   </data>
   <data name="SiteFields_GtResourceAbsenceComment_DisplayName" xml:space="preserve">
     <value>Kommentar</value>
+  </data>
+  <data name="SiteFields_GtDescription_DisplayName" xml:space="preserve">
+    <value>Beskrivelse</value>
   </data>
   <data name="SiteFields_GtSortOrder_Description" xml:space="preserve">
     <value />
@@ -1572,7 +1578,10 @@
   <data name="SiteFields_GtDpMinWidth_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtDpProperty_Description" xml:space="preserve">
+  <data name="SiteFields_GtManagedProperty_Description" xml:space="preserve">
+    <value></value>
+  </data>
+  <data name="SiteFields_GtInternalName_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="SiteFields_GtDpOrder_Description" xml:space="preserve">
@@ -1620,13 +1629,13 @@
   <data name="SiteFields_GtLccLabel_Description" xml:space="preserve">
     <value>Tekst som vises i Nytt prosjekt-dialogen</value>
   </data>
-  <data name="SiteFields_GtPcProjectStatus_Description" xml:space="preserve">
+  <data name="SiteFields_GtShowFieldProjectStatus_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtPcFrontpage_Description" xml:space="preserve">
+  <data name="SiteFields_GtShowFieldFrontpage_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtPcPortfolioPage_Description" xml:space="preserve">
+  <data name="SiteFields_GtShowFieldPortfolio_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="SiteFields_GtKey_Description" xml:space="preserve">
@@ -1683,7 +1692,7 @@
   <data name="SiteFields_GtChrYMax_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtChrDataType_Description" xml:space="preserve">
+  <data name="SiteFields_GtFieldDataType_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="SiteFields_GtChrYTickInterval_Description" xml:space="preserve">
