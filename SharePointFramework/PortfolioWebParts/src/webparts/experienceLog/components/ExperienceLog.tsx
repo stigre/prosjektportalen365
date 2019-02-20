@@ -40,6 +40,7 @@ export default class ExperienceLog extends React.Component<IExperienceLogProps, 
         columns={this.props.columns}
         showCommandBar={true}
         groupByOptions={this.props.groupByOptions}
+        pageContext={this.props.pageContext}
         excelExportEnabled={this.props.excelExportEnabled}
         excelExportConfig={this.props.excelExportConfig}
       />
@@ -66,6 +67,7 @@ export default class ExperienceLog extends React.Component<IExperienceLogProps, 
 
     const query: ISearchQueryBuilder = SearchQueryBuilder(queryText, _searchQuerySettings);
     let result = await sp.search(query);
+    console.log(result);
     let items = result.PrimarySearchResults.map(r => new LogElement(r));
 
     return items;

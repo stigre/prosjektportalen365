@@ -6,6 +6,7 @@ export interface IModalLinkProps extends React.HTMLAttributes<HTMLElement> {
   reloadOnSubmit?: boolean;
   reloadOnCancel?: boolean;
   id?: string;
+  showModalDialog(): void;
 }
 
 export const ModalLinkDefaultProps: Partial<IModalLinkProps> = {

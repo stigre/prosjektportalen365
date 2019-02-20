@@ -10,6 +10,9 @@ import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMen
 import { ExcelExportStatus } from '../../ExportToExcel';
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import ModalLink from '../ModalLink/ModalLink';
+import { autobind } from '@uifabric/utilities/lib';
+import Modal from 'office-ui-fabric-react/lib/Modal';
+import ProjectInfo from '../ProjectInfo/ProjectInfo';
 
 export default class List extends React.Component<IListProps, IListState> {
   public static defaultProps: Partial<IListProps> = {
@@ -22,11 +25,13 @@ export default class List extends React.Component<IListProps, IListState> {
 
     this.state = {
       searchTerm: '',
-      groupBy: this.props.defaultGroupBy
+      groupBy: this.props.defaultGroupBy,
+      showModalDialog: false
     };
   }
 
   public render() {
+    console.log(this.state.showModalDialog);
     let { items, columns, groups } = this._getFilteredData();
     console.log(groups);
     return (
@@ -41,8 +46,16 @@ export default class List extends React.Component<IListProps, IListState> {
           items={items}
           columns={columns}
           groups={groups}
-          // onRenderItemColumn={this._onRenderItemColumn}
+          onRenderItemColumn={this._onRenderItemColumn}
         />
+        {this._renderProjectInfoModal()}
+        <Modal
+          isOpen={this.state.showModalDialog}
+          onDismiss={() => this.setState({ showModalDialog: false })}
+        >
+          {/* TODO: BAD! Figure out better view */}
+          <iframe src="https://pzlpart.sharepoint.com/sites/Prosjekt-6/Lists/Prosjektlogg/DispForm.aspx?ID=1" width='600' height='850' />
+        </Modal>
       </div>
     );
   }
@@ -101,21 +114,47 @@ export default class List extends React.Component<IListProps, IListState> {
     return null;
   }
 
+  private _renderProjectInfoModal() {
+    const showProjectInfo = this.state.showProjectInfo;
+    if (showProjectInfo) {
+      return (
+        <ProjectInfo
+          entity={null}
+          pageContext={this.props.pageContext}
+          showProjectInfo={showProjectInfo}
+          onDismiss={() => this.setState({  showProjectInfo: null})}
+
+        />
+      );
+    }
+  }
+
+  @autobind
   private _onRenderItemColumn(item: any, index: number, column: IColumn) {
     let colValue = item[column.fieldName];
     switch (column.key) {
       case 'Title': {
         if (item.Path) {
-/*           return (
+          return (
             <ModalLink
+              showModalDialog={() => this.showModalDialog()}
               label={colValue}
               url={item.Path}
-              options={{ HideRibbon: true }}
+            // options={{ HideRibbon: true }}
             />
-          ); */
-        }
+          );
+        } else return colValue;
+      }
+      case 'SiteTitle': {
+        return <a href={item.SPWebUrl} onClick={(e) => this._openProject(e, item)}>{item.SiteTitle}</a>;
       }
     }
+  }
+
+  private _openProject(e: React.MouseEvent<HTMLAnchorElement>, project: any) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.setState({ showProjectInfo: project });
   }
 
   private _getFilteredData(): { items: any[], columns: any[], groups: IGroup[] } {
@@ -146,6 +185,11 @@ export default class List extends React.Component<IListProps, IListState> {
       columns: columns,
       groups: groups
     };
+  }
+
+  private showModalDialog() {
+    console.log('clicked');
+    this.setState({ showModalDialog: true });
   }
 
   private _exportToExcel() {
