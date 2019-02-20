@@ -7,6 +7,7 @@ import { IListState } from './IListState';
 import { DetailsList, IColumn, IGroup, SelectionMode, DetailsListLayoutMode, ConstrainMode } from "office-ui-fabric-react/lib/DetailsList";
 import { CommandBar, ICommandBarItemProps } from 'office-ui-fabric-react/lib/CommandBar';
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
+import { Modal } from 'office-ui-fabric-react/lib/Modal';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { ExcelExportStatus } from '../../ExportToExcel';
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
@@ -40,11 +41,7 @@ export default class List extends React.Component<IListProps, IListState> {
    * Renders the <List /> component
    */
   public render() {
-<<<<<<< HEAD
     let { items, columns, groups } = this.getFilteredData();
-=======
-    let { items, columns, groups } = this._getFilteredData();
->>>>>>> d9ae9027506e1ad74380fb3ce577d01532e60506
     return (
       <div>
         {this.renderCommandBar()}
@@ -59,9 +56,6 @@ export default class List extends React.Component<IListProps, IListState> {
           groups={groups}
           onRenderItemColumn={this.onRenderItemColumn}
         />
-<<<<<<< HEAD
-        {this.renderProjectInfoModal()}
-=======
         {/* this._renderProjectInfoModal() */}
         {(this.state.showProjectInfo) &&
           <ProjectInfo
@@ -78,7 +72,6 @@ export default class List extends React.Component<IListProps, IListState> {
           {/* TODO: BAD! Figure out better view */}
           <iframe src="https://pzlpart.sharepoint.com/sites/Prosjekt-6/Lists/Prosjektlogg/DispForm.aspx?ID=1" width='600' height='850' />
         </Modal>
->>>>>>> d9ae9027506e1ad74380fb3ce577d01532e60506
       </div>
     );
   }
@@ -172,20 +165,10 @@ export default class List extends React.Component<IListProps, IListState> {
         return <a href={item.SPWebUrl} onClick={(e) => this.openProject(e, item)}>{item.SiteTitle}</a>;
       }
     }
+    return colValue;
   }
 
-<<<<<<< HEAD
-  /**
-   * Open project 
-   * 
-   * @param {React.MouseEvent<HTMLAnchorElement>} event Event
-   * @param {any} project Project
-   */
-  private openProject(event: React.MouseEvent<HTMLAnchorElement>, project: any) {
-    event.preventDefault();
-    event.stopPropagation();
-=======
-  private async _openProject(e: React.MouseEvent<HTMLAnchorElement>, logItem: any) {
+  private async openProject(e: React.MouseEvent<HTMLAnchorElement>, logItem: any) {
     e.preventDefault();
     e.stopPropagation();
 
@@ -196,7 +179,6 @@ export default class List extends React.Component<IListProps, IListState> {
     let projects = await sp.web.lists.getByTitle('PROSJEKTER').getItemsByCAMLQuery(q);
     let project: ProjectListModel = projects[0];
 
->>>>>>> d9ae9027506e1ad74380fb3ce577d01532e60506
     this.setState({ showProjectInfo: project });
   }
 
@@ -225,9 +207,6 @@ export default class List extends React.Component<IListProps, IListState> {
       }).length;
       return matches > 0;
     });
-<<<<<<< HEAD
-    return { items: filteredItems, columns: columns, groups: groups };
-=======
     return {
       items: filteredItems,
       columns: columns,
@@ -237,7 +216,6 @@ export default class List extends React.Component<IListProps, IListState> {
 
   private showModalDialog() {
     this.setState({ showModalDialog: true });
->>>>>>> d9ae9027506e1ad74380fb3ce577d01532e60506
   }
 
   private exportToExcel() {
