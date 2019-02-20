@@ -36,10 +36,8 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
         <div className={styles.projectListSearchBox}>
           <SearchBox placeholder={strings.SearchBoxPlaceholderText} onChanged={this.onSearch} />
         </div>
-        <div className={styles.projectList}>
-          <div className={styles.projectsContainer}>
-            {this.renderCards()}
-          </div>
+        <div className={styles.projectsContainer}>
+          {this.renderCards()}
         </div>
       </div>
     );
@@ -47,18 +45,14 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
 
   private renderCards() {
     const { projects } = this.getFilteredData();
-    return (
-      <div className={styles.ppCardContainer}>
-        {projects.length === 0 ? <MessageBar>{strings.NoSearchResults}</MessageBar> :
-          projects.map(project => (
-            <ProjectCard
-              project={project}
-              onClickHref={project.Url}
-              showProjectInfo={() => this.setState({ showProjectInfo: project })}
-              fallbackPreviewImage={`${this.props.webAbsoluteUrl}/SiteAssets/pp/img/ICO-Global-Project-11.png`} />
-          ))}
-      </div>
-    );
+    return projects.length === 0
+      ? <MessageBar>{strings.NoSearchResults}</MessageBar>
+      : projects.map(project => (
+        <ProjectCard
+          project={project}
+          onClickHref={project.Url}
+          showProjectInfo={() => this.setState({ showProjectInfo: project })}/>
+      ));
   }
 
   private getFilteredData(): IProjectListData {

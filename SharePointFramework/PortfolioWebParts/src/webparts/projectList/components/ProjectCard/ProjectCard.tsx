@@ -3,6 +3,7 @@ import styles from '../ProjectList.module.scss';
 import * as strings from 'ProjectListWebPartStrings';
 import IProjectCardProps from './IProjectCardProps';
 import { DocumentCard, DocumentCardTitle, DocumentCardLocation, DocumentCardActivity, DocumentCardActions, DocumentCardType } from "office-ui-fabric-react/lib/DocumentCard";
+import getUserPhoto from '../../../../common/helpers/getUserPhoto';
 
 export default ({ project, onClickHref, showProjectInfo }: IProjectCardProps): JSX.Element => {
   return (
@@ -22,7 +23,3 @@ export default ({ project, onClickHref, showProjectInfo }: IProjectCardProps): J
     </DocumentCard>
   );
 };
-
-function getUserPhoto(email: string, size = "L"): string {
-  return `/_layouts/15/userphoto.aspx?size=${size}&accountname=${email}`;
-}
