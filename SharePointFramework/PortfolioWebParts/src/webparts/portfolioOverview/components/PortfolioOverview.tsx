@@ -28,7 +28,7 @@ export default class PortfolioOverview extends React.Component<IPortfolioOvervie
   }
 
   public render(): React.ReactElement<IPortfolioOverviewProps> {
-    if (this.state.isLoading) return <Spinner label='Laster prosjektportefølje...' size={SpinnerSize.large} />;
+    if (this.state.isLoading) return <Spinner label={strings.LoadingText} size={SpinnerSize.large} />;
     return (
       <div className={styles.portfolioOverview}>
       {this.renderCommandBar()}
