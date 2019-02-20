@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { DetailsList, DetailsListLayoutMode } from "office-ui-fabric-react/lib/DetailsList";
+import { DetailsList, DetailsListLayoutMode, IColumn } from "office-ui-fabric-react/lib/DetailsList";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
+import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import { IDeliveriesOverviewProps, DeliveriesOverviewDefaultProps } from './IDeliveriesOverviewProps';
 import { IDeliveriesOverviewState } from './IDeliveriesOverviewState';
 import { sp } from '@pnp/sp';
-import List from '../../../common/components/List/List';
 
 export default class DeliveriesOverview extends React.Component<IDeliveriesOverviewProps, IDeliveriesOverviewState> {
   public static defaultProps = DeliveriesOverviewDefaultProps;
@@ -38,8 +38,26 @@ export default class DeliveriesOverview extends React.Component<IDeliveriesOverv
       <DetailsList
         items={this.state.items}
         columns={this.props.columns}
-        layoutMode={DetailsListLayoutMode.justified} />
+        layoutMode={DetailsListLayoutMode.justified}
+        onRenderItemColumn={this.onRenderItemColumn} />
     );
+  }
+
+  @autobind
+  private onRenderItemColumn(item: any, index: number, column: IColumn) {
+    let colValue = item[column.fieldName];
+    switch (column.key) {
+      case 'Title': {
+        if (item.Path) {
+          return <a href={item.Path} target="_blank">{colValue}</a>;
+        }
+        return colValue;
+      }
+      case 'SiteTitle': {
+        return <a href={item.SPWebUrl} target="_blank">{item.SiteTitle}</a>;
+      }
+    }
+    return colValue;
   }
 
   /**
