@@ -1,7 +1,6 @@
 declare interface IPortfolioOverviewWebPartStrings {
-  PropertyPaneDescription: string;
-  BasicGroupName: string;
-  DescriptionFieldLabel: string;
+  LoadingText: string;
+  NoGrouping: string;
 }
 
 declare module 'PortfolioOverviewWebPartStrings' {
