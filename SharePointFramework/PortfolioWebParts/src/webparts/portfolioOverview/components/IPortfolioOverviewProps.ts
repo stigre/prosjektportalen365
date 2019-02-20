@@ -1,3 +1,6 @@
+import IGroupByOption from "../../../common/interfaces/IGroupByOption";
+
 export interface IPortfolioOverviewProps {
-  description: string;
+  groupByOptions?: IGroupByOption[];
+  defaultGroupBy?: IGroupByOption;
 }
