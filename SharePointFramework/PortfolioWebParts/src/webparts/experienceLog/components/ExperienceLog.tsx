@@ -54,7 +54,7 @@ export default class ExperienceLog extends React.Component<IExperienceLogProps, 
     const _searchQuerySettings: SearchQuery = {
       TrimDuplicates: false,
       RowLimit: 500,
-      SelectProperties: ['Title', 'SiteTitle', 'SPWebUrl', 'GtProjectLogType', 'GtProjectLogResponsible', 'GtProjectLogRecommendation', 'Path', 'GtProjectLogConsequence', 'Actors'],
+      SelectProperties: ['Title', 'SiteTitle', 'SPWebUrl', 'SiteId', 'GtProjectLogType', 'GtProjectLogResponsible', 'GtProjectLogRecommendation', 'Path', 'GtProjectLogConsequence', 'Actors'],
       Properties: [{
         Name: "EnableDynamicGroups",
         Value: {

@@ -3,6 +3,7 @@ export default class LogElement {
   public Title: string;
   public SiteTitle: string;
   public SPWebUrl: string;
+  public SiteId: string;
   public Description: string;
   public Responsible: string;
   public Consequence: string;
@@ -14,6 +15,7 @@ export default class LogElement {
       this.Title = data.Title;
       this.SiteTitle = data.SiteTitle;
       this.SPWebUrl = data.SPWebUrl;
+      this.SiteId = data.SiteId;
       this.Description = data.GtProjectLogType;
       this.Responsible = data.GtProjectLogResponsible;
       this.Consequence = data.GtProjectLogConsequence;
