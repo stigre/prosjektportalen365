@@ -61,7 +61,7 @@ export default class List extends React.Component<IListProps, IListState> {
           <ProjectInfo
             entity={this.props.entity}
             pageContext={this.props.pageContext}
-            showProjectInfo={this.state.showProjectInfo}
+            project={this.state.showProjectInfo}
             onDismiss={() => this.setState({ showProjectInfo: null })}
           />
         }
@@ -143,7 +143,7 @@ export default class List extends React.Component<IListProps, IListState> {
         <ProjectInfo
           entity={null}
           pageContext={this.props.pageContext}
-          showProjectInfo={showProjectInfo}
+          project={showProjectInfo}
           onDismiss={() => this.setState({ showProjectInfo: null })}
 
         />

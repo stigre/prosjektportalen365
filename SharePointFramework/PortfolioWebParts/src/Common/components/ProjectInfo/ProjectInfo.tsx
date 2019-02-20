@@ -27,22 +27,22 @@ export default class ProjectInfo extends React.Component<IProjectInfoProps, IPro
     return (
       <Modal
         className={styles.modal}
-        isOpen={this.props.showProjectInfo !== undefined}
+        isOpen={this.props.project !== undefined}
         isBlocking={false}
         isDarkOverlay={true}
         onDismiss={this.props.onDismiss}>
         <div className={styles.propertiesModalInner}>
-          <span className={styles.propertiesModalHeader}>{this.props.showProjectInfo.Title}</span>
+          <span className={styles.propertiesModalHeader}>{this.props.project.Title}</span>
           {(this.state.isLoading) ? <Spinner className={styles.spinner} label={strings.Loading} size={SpinnerSize.medium} /> :
             <div className={styles.headerButtons}>
               <Button
                 iconProps={{ iconName: 'Home' }}
                 text={strings.ProjectLinkText}
-                onClick={() => location.replace(this.props.showProjectInfo.Url)} />
+                onClick={() => location.replace(this.props.project.Url)} />
               <Button
                 iconProps={{ iconName: "BarChart4" }}
                 text={strings.ProjectStatusLinkText}
-                onClick={() => location.replace(`${this.props.showProjectInfo.Url}/SitePages/ProjectStatus.aspx`)} />
+                onClick={() => location.replace(`${this.props.project.Url}/SitePages/ProjectStatus.aspx`)} />
               {this.renderProperties(this.state.data.properties.slice())}
             </div>}
         </div>
@@ -71,13 +71,13 @@ export default class ProjectInfo extends React.Component<IProjectInfoProps, IPro
 
   private async fetchData() {
     try {
-      const { pageContext } = this.props;
+      const { pageContext, project } = this.props;
       const hubSite = await HubSiteService.GetHubSiteById(pageContext.web.absoluteUrl, pageContext.legacyPageContext.hubSiteId);
       const spEntityPortalService = new SpEntityPortalService({ webUrl: hubSite.url, ...this.props.entity });
       const [entityItem, entityFields, editFormUrl] = await Promise.all([
-        spEntityPortalService.getEntityItemFieldValues(pageContext),
+        spEntityPortalService.getEntityItemFieldValues(project.Id),
         spEntityPortalService.getEntityFields(),
-        spEntityPortalService.getEntityEditFormUrl(pageContext, pageContext.web.absoluteUrl),
+        spEntityPortalService.getEntityEditFormUrl(project.Id, pageContext.web.absoluteUrl),
       ]);
       let properties = Object.keys(entityItem)
         .map(n => ({
