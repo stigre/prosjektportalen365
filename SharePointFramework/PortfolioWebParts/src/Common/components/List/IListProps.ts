@@ -13,5 +13,5 @@ export interface IListProps {
   defaultGroupBy?: IGroupByOption;
   excelExportEnabled?: boolean;
   excelExportConfig?: IExcelExportConfig;
-  entity: any;
+  entity?: any;
 }

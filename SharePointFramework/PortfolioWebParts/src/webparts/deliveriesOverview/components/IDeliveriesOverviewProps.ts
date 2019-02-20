@@ -13,7 +13,9 @@ export const DeliveriesOverviewDefaultProps: Partial<IDeliveriesOverviewProps> =
         fieldName: 'Title',
         name: 'Tittel',
         minWidth: 220,
+        maxWidth: 300,
         isMultiline: true,
+        isResizable: true,
     },
     {
         key: 'SiteTitle',

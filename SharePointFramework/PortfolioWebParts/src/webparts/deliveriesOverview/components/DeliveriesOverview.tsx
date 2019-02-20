@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { DetailsList, DetailsListLayoutMode } from "office-ui-fabric-react/lib/DetailsList";
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
 import { IDeliveriesOverviewProps, DeliveriesOverviewDefaultProps } from './IDeliveriesOverviewProps';
 import { IDeliveriesOverviewState } from './IDeliveriesOverviewState';
@@ -34,14 +35,10 @@ export default class DeliveriesOverview extends React.Component<IDeliveriesOverv
     }
 
     return (
-      <List
-        pageContext={this.props.context.pageContext}
+      <DetailsList
         items={this.state.items}
         columns={this.props.columns}
-        showCommandBar={false}
-        groupByOptions={[]}
-        excelExportEnabled={false}
-        excelExportConfig={null} />
+        layoutMode={DetailsListLayoutMode.justified} />
     );
   }
 
