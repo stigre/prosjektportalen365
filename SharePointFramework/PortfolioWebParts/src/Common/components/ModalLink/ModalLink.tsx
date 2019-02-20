@@ -26,8 +26,7 @@ export default class ModalLink extends React.Component<IModalLinkProps, IModalLi
     );
   }
 
-  @autobind
-  private showModalDialog(event: React.MouseEvent<HTMLAnchorElement>): void {
+  private showModalDialog = (event: React.MouseEvent<HTMLAnchorElement>): void => {
     event.preventDefault();
     event.stopPropagation();
     this.props.showModalDialog();

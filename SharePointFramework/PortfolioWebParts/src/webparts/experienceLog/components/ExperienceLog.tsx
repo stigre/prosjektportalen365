@@ -36,6 +36,7 @@ export default class ExperienceLog extends React.Component<IExperienceLogProps, 
 
     return (
       <List
+        entity={this.props.entity}
         items={this.state.items}
         columns={this.props.columns}
         showCommandBar={true}

@@ -29,7 +29,7 @@ export default class List extends React.Component<IListProps, IListState> {
 
   /**
    * Constructor
-   * 
+   *
    * @param {IListProps} props Props
    */
   constructor(props: IListProps) {
@@ -69,8 +69,7 @@ export default class List extends React.Component<IListProps, IListState> {
           isOpen={this.state.showModalDialog}
           onDismiss={() => this.setState({ showModalDialog: false })}
         >
-          {/* TODO: BAD! Figure out better view */}
-          <iframe src="https://pzlpart.sharepoint.com/sites/Prosjekt-6/Lists/Prosjektlogg/DispForm.aspx?ID=1" width='600' height='850' />
+          {/* Render log item properties */}
         </Modal>
       </div>
     );
@@ -168,6 +167,12 @@ export default class List extends React.Component<IListProps, IListState> {
     return colValue;
   }
 
+  /**
+   * Open project
+   *
+   * @param {React.MouseEvent<HTMLAnchorElement>} event Event
+   * @param {any} logItem LogItem
+   */
   private async openProject(e: React.MouseEvent<HTMLAnchorElement>, logItem: any) {
     e.preventDefault();
     e.stopPropagation();
