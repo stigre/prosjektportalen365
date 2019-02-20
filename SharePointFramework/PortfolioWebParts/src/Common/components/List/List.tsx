@@ -13,11 +13,19 @@ import ModalLink from '../ModalLink/ModalLink';
 import { autobind } from '@uifabric/utilities/lib';
 import Modal from 'office-ui-fabric-react/lib/Modal';
 import ProjectInfo from '../ProjectInfo/ProjectInfo';
+import { sp, CamlQuery } from '@pnp/sp';
+import ProjectListModel from '../../models/ProjectListModel';
 
 export default class List extends React.Component<IListProps, IListState> {
   public static defaultProps: Partial<IListProps> = {
     groupByOptions: [],
     defaultGroupBy: { key: "NoGrouping", name: strings.NoGrouping },
+    entity: {
+      listName: 'PROSJEKTER',
+      contentTypeId: '0x0100805E9E4FEAAB4F0EABAB2600D30DB70C',
+      fieldsGroupName: 'GtGroupName',
+      siteIdFieldName: 'GtSiteId'
+    }
   };
 
   constructor(props) {
@@ -31,9 +39,7 @@ export default class List extends React.Component<IListProps, IListState> {
   }
 
   public render() {
-    console.log(this.state.showModalDialog);
     let { items, columns, groups } = this._getFilteredData();
-    console.log(groups);
     return (
       <div>
         {this._renderCommandBar()}
@@ -48,7 +54,15 @@ export default class List extends React.Component<IListProps, IListState> {
           groups={groups}
           onRenderItemColumn={this._onRenderItemColumn}
         />
-        {this._renderProjectInfoModal()}
+        {/* this._renderProjectInfoModal() */}
+        {(this.state.showProjectInfo) &&
+          <ProjectInfo
+            entity={this.props.entity}
+            pageContext={this.props.pageContext}
+            showProjectInfo={this.state.showProjectInfo}
+            onDismiss={() => this.setState({ showProjectInfo: null })}
+          />
+        }
         <Modal
           isOpen={this.state.showModalDialog}
           onDismiss={() => this.setState({ showModalDialog: false })}
@@ -122,7 +136,7 @@ export default class List extends React.Component<IListProps, IListState> {
           entity={null}
           pageContext={this.props.pageContext}
           showProjectInfo={showProjectInfo}
-          onDismiss={() => this.setState({  showProjectInfo: null})}
+          onDismiss={() => this.setState({ showProjectInfo: null })}
 
         />
       );
@@ -151,9 +165,17 @@ export default class List extends React.Component<IListProps, IListState> {
     }
   }
 
-  private _openProject(e: React.MouseEvent<HTMLAnchorElement>, project: any) {
+  private async _openProject(e: React.MouseEvent<HTMLAnchorElement>, logItem: any) {
     e.preventDefault();
     e.stopPropagation();
+
+    const xml = `<View><Query><Where><Eq><FieldRef Name='GtSiteId' /><Value Type='Text'>${logItem.SiteId}</Value></Eq></Where></Query></View>`;
+    const q: CamlQuery = {
+      ViewXml: xml,
+    };
+    let projects = await sp.web.lists.getByTitle('PROSJEKTER').getItemsByCAMLQuery(q);
+    let project: ProjectListModel = projects[0];
+
     this.setState({ showProjectInfo: project });
   }
 
@@ -162,7 +184,6 @@ export default class List extends React.Component<IListProps, IListState> {
     let groups: IGroup[] = null;
     if (this.state.groupBy.key !== 'NoGrouping') {
       const groupItems = this.props.items.sort((a, b) => a[this.state.groupBy.key] > b[this.state.groupBy.key] ? -1 : 1);
-      console.log(groupItems);
       const groupNames = groupItems.map(g => g[this.state.groupBy.key]);
       groups = unique([].concat(groupNames)).map((name, idx) => ({
         key: idx,
@@ -188,7 +209,6 @@ export default class List extends React.Component<IListProps, IListState> {
   }
 
   private showModalDialog() {
-    console.log('clicked');
     this.setState({ showModalDialog: true });
   }
 

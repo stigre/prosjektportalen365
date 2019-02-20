@@ -13,4 +13,10 @@ export interface IListProps {
   defaultGroupBy?: IGroupByOption;
   excelExportEnabled?: boolean;
   excelExportConfig?: IExcelExportConfig;
+  entity?: {
+    listName: string;
+    contentTypeId: string;
+    fieldsGroupName: string;
+    siteIdFieldName: string;
+  };
 }
