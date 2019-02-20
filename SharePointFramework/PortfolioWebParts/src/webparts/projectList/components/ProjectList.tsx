@@ -93,7 +93,7 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
         Querytext: `DepartmentId:${this.props.pageContext.legacyPageContext.siteId} contentclass:STS_Site`,
         TrimDuplicates: false,
         RowLimit: 500,
-        SelectProperties: ['Title', 'Path', 'DepartmentId', 'SiteId', 'SiteLogo', 'ViewsLifetime'],
+        SelectProperties: ['Title', 'Path', 'DepartmentId', 'SiteId', 'SiteLogo'],
         Properties: [{
           Name: "EnableDynamicGroups",
           Value: {
@@ -117,12 +117,8 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
             Manager: manager,
             Owner: owner,
             Phase: phase,
-            ServiceArea: null,
             Title: site.Title,
-            Type: null,
             Url: site.Path,
-            Views: site.ViewsLifetime,
-            RawObject: item,
           };
           return project;
         }

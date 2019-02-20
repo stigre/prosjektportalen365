@@ -27,10 +27,6 @@ export default class ProjectListModel {
   public Url: string;
   public Logo: string;
   public Phase: string;
-  public ServiceArea: string;
-  public Type: string;
   public Manager: ISPUser;
   public Owner: ISPUser;
-  public Views: number;
-  public RawObject: any;
 }
