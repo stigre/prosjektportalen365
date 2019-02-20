@@ -1,13 +1,13 @@
 import * as React from 'react';
 import styles from './LatestProjects.module.scss';
 import * as strings from 'LatestProjectsWebPartStrings';
+import { WebPartTitle } from "@pnp/spfx-controls-react/lib/WebPartTitle";
 import { ILatestProjectsProps } from './ILatestProjectsProps';
 import { ILatestProjectsState } from './ILatestProjectsState';
-import { SearchQuery, ISearchQueryBuilder, SearchQueryBuilder, sp, QueryPropertyValueType, SortDirection, SearchResult, Site } from '@pnp/sp';
+import { SearchQuery, ISearchQueryBuilder, SearchQueryBuilder, sp, QueryPropertyValueType, SortDirection, SearchResult } from '@pnp/sp';
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 import { Spinner, SpinnerType } from 'office-ui-fabric-react/lib/Spinner';
 import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
-import { Icon } from 'office-ui-fabric-react/lib/Icon';
 
 export default class LatestProjects extends React.Component<ILatestProjectsProps, ILatestProjectsState> {
 
@@ -27,24 +27,18 @@ export default class LatestProjects extends React.Component<ILatestProjectsProps
 
   public render(): React.ReactElement<ILatestProjectsProps> {
     const sites = this.state.sites.slice();
-    let toggleStyles = this.state.showList ? null : { display: 'none' };
-    const iconName = this.state.showList ? "ChevronUp" : "ChevronDown";
     return (
       <div className={styles.latestProjects}>
-        <div className={styles.title} onClick={() => this.onToggleClicked()}><Icon className={styles.arrowIcon} iconName={iconName} />
-          <span>Siste prosjekter</span>
-        </div>
-        <div className={styles.linksContainer} style={toggleStyles}>
+        <WebPartTitle
+         displayMode={this.props.displayMode}
+          title={this.props.title}
+          updateProperty={this.props.updateProperty} />
+        <div className={styles.linksContainer}>
           {(this.state.isLoading) ? <Spinner label={strings.LoadingProjects} type={SpinnerType.large} />
             : this.renderProjectList(sites)}
         </div>
       </div>
     );
-  }
-
-  private onToggleClicked() {
-    let newState = this.state.showList ? false : true;
-    this.setState({ showList: newState });
   }
 
   private renderProjectList(sites: SearchResult[]) {
@@ -94,7 +88,8 @@ export default class LatestProjects extends React.Component<ILatestProjectsProps
 
     this.setState({
       sites: associatedSites,
-      isLoading: false });
+      isLoading: false
+    });
   }
 
   private getHubId() {

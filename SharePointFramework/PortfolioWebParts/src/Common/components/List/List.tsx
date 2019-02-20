@@ -7,10 +7,10 @@ import { IListState } from './IListState';
 import { DetailsList, IColumn, IGroup, SelectionMode, DetailsListLayoutMode, ConstrainMode } from "office-ui-fabric-react/lib/DetailsList";
 import { CommandBar, ICommandBarItemProps } from 'office-ui-fabric-react/lib/CommandBar';
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
+import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { ExcelExportStatus } from '../../ExportToExcel';
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import ModalLink from '../ModalLink/ModalLink';
-import { autobind } from '@uifabric/utilities/lib';
 import Modal from 'office-ui-fabric-react/lib/Modal';
 import ProjectInfo from '../ProjectInfo/ProjectInfo';
 
