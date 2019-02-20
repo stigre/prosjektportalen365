@@ -144,4 +144,10 @@
             <pnp:FieldRef ID="adf89685-f464-4ef5-8f7b-53b600aac14a" Name="GtSecRowLimit" />
         </pnp:FieldRefs>
     </pnp:ContentType>
+    <pnp:ContentType ID="0x0100A0AB42EFAB986D4A8E8038BC2391BEB2" Name="Datakilde" Group="Prosjektportalen innholdstyper">
+        <pnp:FieldRefs>
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Required="true" />
+            <pnp:FieldRef ID="31e405e0-2890-439d-9c9f-42354154feda" Name="GtSearchQuery" Required="true" />
+        </pnp:FieldRefs>
+    </pnp:ContentType>
 </pnp:ContentTypes> 

@@ -1080,7 +1080,7 @@
   <data name="SiteFields_GtIsDefault_DisplayName" xml:space="preserve">
     <value>Standard</value>
   </data>
-  <data name="SiteFields_GtDpSearchQuery_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtSearchQuery_DisplayName" xml:space="preserve">
     <value>Søkespørring</value>
   </data>
   <data name="SiteFields_GtDpDisplayName_DisplayName" xml:space="preserve">
@@ -1581,7 +1581,7 @@
   <data name="SiteFields_GtIsDefault_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtDpSearchQuery_Description" xml:space="preserve">
+  <data name="SiteFields_GtSearchQuery_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="SiteFields_GtDpDisplayName_Description" xml:space="preserve">
