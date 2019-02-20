@@ -24,7 +24,9 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
   }
 
   public render(): React.ReactElement<IProjectListProps> {
-    if (this.state.isLoading) return <Spinner label={strings.LoadingProjectsLabel} type={SpinnerType.large} />;
+    if (this.state.isLoading) {
+      return <Spinner label={strings.LoadingProjectsLabel} type={SpinnerType.large} />;
+    }
     return (
       <div className={styles.projectListWebPartContainer}>
         {this.state.showProjectInfo &&

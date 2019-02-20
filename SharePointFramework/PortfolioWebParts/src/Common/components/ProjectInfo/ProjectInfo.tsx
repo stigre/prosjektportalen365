@@ -12,10 +12,8 @@ import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBa
 import { Button } from 'office-ui-fabric-react/lib/Button';
 
 export default class ProjectInfo extends React.Component<IProjectInfoProps, IProjectInfoState> {
-
-  constructor(props) {
+  constructor(props: IProjectInfoProps) {
     super(props);
-
     this.state = { isLoading: true, data: null };
   }
 
@@ -27,9 +25,7 @@ export default class ProjectInfo extends React.Component<IProjectInfoProps, IPro
     return (
       <Modal
         className={styles.modal}
-        isOpen={this.props.project !== undefined}
-        isBlocking={false}
-        isDarkOverlay={true}
+        isOpen={true}
         onDismiss={this.props.onDismiss}>
         <div className={styles.propertiesModalInner}>
           <span className={styles.propertiesModalHeader}>{this.props.project.Title}</span>
@@ -42,7 +38,7 @@ export default class ProjectInfo extends React.Component<IProjectInfoProps, IPro
               <Button
                 iconProps={{ iconName: "BarChart4" }}
                 text={strings.ProjectStatusLinkText}
-                onClick={() => location.replace(`${this.props.project.Url}/SitePages/ProjectStatus.aspx`)} />
+                onClick={() => location.replace(`${this.props.project.Url}/SitePages/Prosjektstatus.aspx`)} />
               {this.renderProperties(this.state.data.properties.slice())}
             </div>}
         </div>
