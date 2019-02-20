@@ -1,16 +1,15 @@
 import * as React from 'react';
-import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
-import { BaseClientSideWebPart, IPropertyPaneConfiguration } from '@microsoft/sp-webpart-base';
+import { IPropertyPaneConfiguration } from '@microsoft/sp-webpart-base';
 import LatestProjects from './components/LatestProjects';
 import { ILatestProjectsProps } from './components/ILatestProjectsProps';
-import { sp } from '@pnp/sp';
+import PortfolioBaseWebPart from '../portfolioBaseWebPart';
 
 export interface ILatestProjectsWebPartProps {
   title: string;
 }
 
-export default class LatestProjectsWebPart extends BaseClientSideWebPart<ILatestProjectsWebPartProps> {
+export default class LatestProjectsWebPart extends PortfolioBaseWebPart<ILatestProjectsWebPartProps> {
   public render(): void {
     const element: React.ReactElement<ILatestProjectsProps> = React.createElement(
       LatestProjects,
@@ -25,17 +24,15 @@ export default class LatestProjectsWebPart extends BaseClientSideWebPart<ILatest
         ...this.properties,
       }
     );
-
-    ReactDom.render(element, this.domElement);
+    super._render('latestprojectswebpart', element);
   }
 
   protected async onInit(): Promise<void> {
     await super.onInit();
-    sp.setup({ spfxContext: this.context });
   }
 
   protected onDispose(): void {
-    ReactDom.unmountComponentAtNode(this.domElement);
+    super.onDispose();
   }
 
   protected get dataVersion(): Version {

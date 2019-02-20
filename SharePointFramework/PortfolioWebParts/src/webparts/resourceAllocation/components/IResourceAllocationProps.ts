@@ -1,3 +1,1 @@
-export interface IResourceAllocationProps {
-  description: string;
-}
+export interface IResourceAllocationProps {}

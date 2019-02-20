@@ -1,60 +1,31 @@
 import * as React from 'react';
-import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
-import {
-  BaseClientSideWebPart,
-  IPropertyPaneConfiguration,
-  PropertyPaneTextField
-} from '@microsoft/sp-webpart-base';
-
-import * as strings from 'BenefitsOverviewWebPartStrings';
+import { IPropertyPaneConfiguration } from '@microsoft/sp-webpart-base';
 import BenefitsOverview from './components/BenefitsOverview';
 import { IBenefitsOverviewProps } from './components/IBenefitsOverviewProps';
+import PortfolioBaseWebPart from '../portfolioBaseWebPart';
 
-export interface IBenefitsOverviewWebPartProps {
-  description: string;
-}
+export interface IBenefitsOverviewWebPartProps { }
 
-export default class BenefitsOverviewWebPart extends BaseClientSideWebPart<IBenefitsOverviewWebPartProps> {
-
+export default class BenefitsOverviewWebPart extends PortfolioBaseWebPart<IBenefitsOverviewWebPartProps> {
   public render(): void {
-    const element: React.ReactElement<IBenefitsOverviewProps > = React.createElement(
-      BenefitsOverview,
-      {
-        description: this.properties.description
-      }
-    );
+    const element: React.ReactElement<IBenefitsOverviewProps> = React.createElement(BenefitsOverview, {});
+    super._render('benefitsoverviewwebpart', element);
+  }
 
-    ReactDom.render(element, this.domElement);
+  protected async onInit(): Promise<void> {
+    await super.onInit();
   }
 
   protected onDispose(): void {
-    ReactDom.unmountComponentAtNode(this.domElement);
+    super.onDispose();
   }
 
   protected get dataVersion(): Version {
-    return Version.parse('1.0');
+    return Version.parse(this.manifest.version);
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
-    return {
-      pages: [
-        {
-          header: {
-            description: strings.PropertyPaneDescription
-          },
-          groups: [
-            {
-              groupName: strings.BasicGroupName,
-              groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
-                })
-              ]
-            }
-          ]
-        }
-      ]
-    };
+    return { pages: [] };
   }
 }

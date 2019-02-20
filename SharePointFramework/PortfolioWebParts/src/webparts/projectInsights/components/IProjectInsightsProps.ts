@@ -1,3 +1,1 @@
-export interface IProjectInsightsProps {
-  description: string;
-}
+export interface IProjectInsightsProps {}

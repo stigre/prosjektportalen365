@@ -1,34 +1,32 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
-import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
-
-import * as strings from 'PortfolioOverviewWebPartStrings';
+import { BaseClientSideWebPart, IPropertyPaneConfiguration } from '@microsoft/sp-webpart-base';
 import PortfolioOverview from './components/PortfolioOverview';
 import { IPortfolioOverviewProps } from './components/IPortfolioOverviewProps';
+import PortfolioBaseWebPart from '../portfolioBaseWebPart';
 
-export interface IPortfolioOverviewWebPartProps {
-  description: string;
-}
+export interface IPortfolioOverviewWebPartProps { }
 
-export default class PortfolioOverviewWebPart extends BaseClientSideWebPart<IPortfolioOverviewWebPartProps> {
-
+export default class PortfolioOverviewWebPart extends PortfolioBaseWebPart<IPortfolioOverviewWebPartProps> {
   public render(): void {
-    const element: React.ReactElement<IPortfolioOverviewProps > = React.createElement(
-      PortfolioOverview,
-      {
-        description: this.properties.description
-      }
-    );
+    const element: React.ReactElement<IPortfolioOverviewProps> = React.createElement(PortfolioOverview, {});
+    super._render('deliveriesoverviewwebpart', element);
+  }
 
-    ReactDom.render(element, this.domElement);
+  protected async onInit(): Promise<void> {
+    await super.onInit();
   }
 
   protected onDispose(): void {
-    ReactDom.unmountComponentAtNode(this.domElement);
+    super.onDispose();
   }
 
   protected get dataVersion(): Version {
-    return Version.parse('1.0');
+    return Version.parse(this.manifest.version);
+  }
+
+  protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
+    return { pages: [] };
   }
 }

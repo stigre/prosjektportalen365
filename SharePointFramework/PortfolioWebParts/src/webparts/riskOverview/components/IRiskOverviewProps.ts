@@ -1,3 +1,1 @@
-export interface IRiskOverviewProps {
-  description: string;
-}
+export interface IRiskOverviewProps {}

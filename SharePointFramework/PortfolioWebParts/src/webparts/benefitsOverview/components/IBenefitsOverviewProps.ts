@@ -1,3 +1,1 @@
-export interface IBenefitsOverviewProps {
-  description: string;
-}
+export interface IBenefitsOverviewProps {}

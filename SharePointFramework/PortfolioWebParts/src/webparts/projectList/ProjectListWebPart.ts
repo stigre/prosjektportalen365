@@ -1,10 +1,10 @@
 import * as React from 'react';
-import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
-import { BaseClientSideWebPart, IPropertyPaneConfiguration, } from '@microsoft/sp-webpart-base';
+import { IPropertyPaneConfiguration, } from '@microsoft/sp-webpart-base';
 import ProjectList from './components/ProjectList';
 import { IProjectListProps } from './components/IProjectListProps';
-import { sp, Web } from '@pnp/sp';
+import { Web } from '@pnp/sp';
+import PortfolioBaseWebPart from '../portfolioBaseWebPart';
 
 
 export interface IProjectListWebPartProps {
@@ -17,8 +17,7 @@ export interface IProjectListWebPartProps {
   };
 }
 
-export default class ProjectListWebPart extends BaseClientSideWebPart<IProjectListWebPartProps> {
-
+export default class ProjectListWebPart extends PortfolioBaseWebPart<IProjectListWebPartProps> {
   private web: Web;
 
   public render(): void {
@@ -33,19 +32,16 @@ export default class ProjectListWebPart extends BaseClientSideWebPart<IProjectLi
         webAbsoluteUrl: this.context.pageContext.web.absoluteUrl
       }
     );
-
-    ReactDom.render(element, this.domElement);
+    super._render('projectlistwebpart', element);
   }
 
-  protected onInit(): Promise<void> {
-    return super.onInit().then(_ => {
-      sp.setup({ spfxContext: this.context });
-      this.web = new Web(this.context.pageContext.web.absoluteUrl);
-    });
+  protected async onInit(): Promise<void> {
+    await super.onInit();
+    this.web = new Web(this.context.pageContext.web.absoluteUrl);
   }
 
   protected onDispose(): void {
-    ReactDom.unmountComponentAtNode(this.domElement);
+    super.onDispose();
   }
 
   protected get dataVersion(): Version {
@@ -53,16 +49,6 @@ export default class ProjectListWebPart extends BaseClientSideWebPart<IProjectLi
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
-    return {
-      pages: [
-        {
-          groups: [
-            {
-              groupFields: []
-            }
-          ]
-        }
-      ]
-    };
+    return { pages: [] };
   }
 }

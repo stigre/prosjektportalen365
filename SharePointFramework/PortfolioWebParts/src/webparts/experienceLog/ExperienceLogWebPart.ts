@@ -1,33 +1,24 @@
 import * as React from 'react';
-import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
-import { BaseClientSideWebPart, IPropertyPaneConfiguration } from '@microsoft/sp-webpart-base';
+import { IPropertyPaneConfiguration } from '@microsoft/sp-webpart-base';
 import ExperienceLog from './components/ExperienceLog';
 import { IExperienceLogProps } from './components/IExperienceLogProps';
-import { sp } from '@pnp/sp';
+import PortfolioBaseWebPart from '../portfolioBaseWebPart';
 
 export interface IExperienceLogWebPartProps { }
 
-export default class ExperienceLogWebPart extends BaseClientSideWebPart<IExperienceLogWebPartProps> {
-
+export default class ExperienceLogWebPart extends PortfolioBaseWebPart<IExperienceLogWebPartProps> {
   public render(): void {
-    const element: React.ReactElement<IExperienceLogProps> = React.createElement(ExperienceLog,
-      {
-        context: this.context,
-      }
-    );
-
-    ReactDom.render(element, this.domElement);
+    const element: React.ReactElement<IExperienceLogProps> = React.createElement(ExperienceLog, { context: this.context });
+    super._render('experiencelogwebpart', element);
   }
 
-  protected onInit(): Promise<void> {
-    return super.onInit().then(_ => {
-      sp.setup({ spfxContext: this.context });
-    });
+  protected async onInit(): Promise<void> {
+    await super.onInit();
   }
 
   protected onDispose(): void {
-    ReactDom.unmountComponentAtNode(this.domElement);
+    super.onDispose();
   }
 
   protected get dataVersion(): Version {

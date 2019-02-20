@@ -10,51 +10,30 @@ import {
 import * as strings from 'ProjectInsightsWebPartStrings';
 import ProjectInsights from './components/ProjectInsights';
 import { IProjectInsightsProps } from './components/IProjectInsightsProps';
+import PortfolioBaseWebPart from '../portfolioBaseWebPart';
 
-export interface IProjectInsightsWebPartProps {
-  description: string;
-}
+export interface IProjectInsightsWebPartProps { }
 
-export default class ProjectInsightsWebPart extends BaseClientSideWebPart<IProjectInsightsWebPartProps> {
+export default class ProjectInsightsWebPart extends PortfolioBaseWebPart<IProjectInsightsWebPartProps> {
 
   public render(): void {
-    const element: React.ReactElement<IProjectInsightsProps > = React.createElement(
-      ProjectInsights,
-      {
-        description: this.properties.description
-      }
-    );
+    const element: React.ReactElement<IProjectInsightsProps> = React.createElement(ProjectInsights, {});
+    super._render('projectinsightswebpart', element);
+  }
 
-    ReactDom.render(element, this.domElement);
+  protected async onInit(): Promise<void> {
+    await super.onInit();
   }
 
   protected onDispose(): void {
-    ReactDom.unmountComponentAtNode(this.domElement);
+    super.onDispose();
   }
 
   protected get dataVersion(): Version {
-    return Version.parse('1.0');
+    return Version.parse(this.manifest.version);
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
-    return {
-      pages: [
-        {
-          header: {
-            description: strings.PropertyPaneDescription
-          },
-          groups: [
-            {
-              groupName: strings.BasicGroupName,
-              groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
-                })
-              ]
-            }
-          ]
-        }
-      ]
-    };
+    return { pages: [] };
   }
 }
