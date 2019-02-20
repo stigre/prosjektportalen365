@@ -1,6 +1,6 @@
 define([], function() {
   return {
-    "LoadingText": "",
+    "LoadingText": "Laster prosjektportefølje...",
     "NoGrouping": "Ingen gruppering",
 
   }
