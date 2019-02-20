@@ -19,7 +19,7 @@ export default ({ project, onClickHref, showProjectInfo }: IProjectCardProps): J
       <DocumentCardActivity
         activity={strings.ProjectManager}
         people={project.Manager ? [{ name: project.Manager.Title, profileImageSrc: getUserPhoto(project.Manager.Email) }] : []} />
-      <DocumentCardActions actions={[{ iconProps: { iconName: "OpenInNewWindow" }, onClick: showProjectInfo }]} />
+      <DocumentCardActions actions={[{ iconProps: { iconName: "OpenInNewWindow" }, onClick: event => showProjectInfo(event, project) }]} />
     </DocumentCard>
   );
 };

@@ -45,14 +45,22 @@ export default class ProjectList extends React.Component<IProjectListProps, IPro
 
   private renderCards() {
     const { projects } = this.getFilteredData();
-    return projects.length === 0
-      ? <MessageBar>{strings.NoSearchResults}</MessageBar>
-      : projects.map(project => (
-        <ProjectCard
-          project={project}
-          onClickHref={project.Url}
-          showProjectInfo={() => this.setState({ showProjectInfo: project })}/>
-      ));
+    if (projects.length === 0) {
+      return <MessageBar>{strings.NoSearchResults}</MessageBar>;
+    }
+    return projects.map(project => (
+      <ProjectCard
+        project={project}
+        onClickHref={project.Url}
+        showProjectInfo={this.onShowProjectInfo} />
+    ));
+  }
+
+  @autobind
+  private onShowProjectInfo(event: React.MouseEvent<any>, project: ProjectListModel) {
+    event.stopPropagation();
+    event.preventDefault();
+    this.setState({ showProjectInfo: project });
   }
 
   private getFilteredData(): IProjectListData {

@@ -10,15 +10,9 @@ import { Spinner, SpinnerType } from 'office-ui-fabric-react/lib/Spinner';
 import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
 
 export default class LatestProjects extends React.Component<ILatestProjectsProps, ILatestProjectsState> {
-
   constructor(props) {
     super(props);
-
-    this.state = {
-      isLoading: true,
-      sites: [],
-      showList: true
-    };
+    this.state = { isLoading: true, sites: [], showList: true };
   }
 
   public async componentDidMount() {
@@ -30,7 +24,7 @@ export default class LatestProjects extends React.Component<ILatestProjectsProps
     return (
       <div className={styles.latestProjects}>
         <WebPartTitle
-         displayMode={this.props.displayMode}
+          displayMode={this.props.displayMode}
           title={this.props.title}
           updateProperty={this.props.updateProperty} />
         <div className={styles.linksContainer}>
