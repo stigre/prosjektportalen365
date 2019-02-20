@@ -5,7 +5,7 @@ import { IPropertyPaneConfiguration, PropertyPaneTextField } from '@microsoft/sp
 import * as strings from 'RiskOverviewWebPartStrings';
 import RiskOverview from './components/RiskOverview';
 import { IRiskOverviewProps } from './components/IRiskOverviewProps';
-import PortfolioBaseWebPart from '../portfolioBaseWebPart';
+import PortfolioBaseWebPart from '../@portfolioBaseWebPart';
 
 export interface IRiskOverviewWebPartProps { }
 

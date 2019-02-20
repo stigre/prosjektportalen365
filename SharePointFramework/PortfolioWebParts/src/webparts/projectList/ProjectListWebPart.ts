@@ -4,7 +4,7 @@ import { IPropertyPaneConfiguration, } from '@microsoft/sp-webpart-base';
 import ProjectList from './components/ProjectList';
 import { IProjectListProps } from './components/IProjectListProps';
 import { Web } from '@pnp/sp';
-import PortfolioBaseWebPart from '../portfolioBaseWebPart';
+import PortfolioBaseWebPart from '../@portfolioBaseWebPart';
 
 
 export interface IProjectListWebPartProps {

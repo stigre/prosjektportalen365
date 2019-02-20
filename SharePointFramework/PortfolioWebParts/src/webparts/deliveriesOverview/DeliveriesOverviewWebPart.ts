@@ -3,7 +3,7 @@ import { Version } from '@microsoft/sp-core-library';
 import { IPropertyPaneConfiguration } from '@microsoft/sp-webpart-base';
 import DeliveriesOverview from './components/DeliveriesOverview';
 import { IDeliveriesOverviewProps } from './components/IDeliveriesOverviewProps';
-import PortfolioBaseWebPart from '../portfolioBaseWebPart';
+import PortfolioBaseWebPart from '../@portfolioBaseWebPart';
 
 export interface IDeliveriesOverviewWebPartProps { }
 

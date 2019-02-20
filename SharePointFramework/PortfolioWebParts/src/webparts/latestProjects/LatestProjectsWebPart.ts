@@ -3,7 +3,7 @@ import { Version } from '@microsoft/sp-core-library';
 import { IPropertyPaneConfiguration } from '@microsoft/sp-webpart-base';
 import LatestProjects from './components/LatestProjects';
 import { ILatestProjectsProps } from './components/ILatestProjectsProps';
-import PortfolioBaseWebPart from '../portfolioBaseWebPart';
+import PortfolioBaseWebPart from '../@portfolioBaseWebPart';
 
 export interface ILatestProjectsWebPartProps {
   title: string;

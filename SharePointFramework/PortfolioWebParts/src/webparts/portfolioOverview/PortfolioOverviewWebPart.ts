@@ -4,7 +4,7 @@ import { Version } from '@microsoft/sp-core-library';
 import { BaseClientSideWebPart, IPropertyPaneConfiguration } from '@microsoft/sp-webpart-base';
 import PortfolioOverview from './components/PortfolioOverview';
 import { IPortfolioOverviewProps } from './components/IPortfolioOverviewProps';
-import PortfolioBaseWebPart from '../portfolioBaseWebPart';
+import PortfolioBaseWebPart from '../@portfolioBaseWebPart';
 
 export interface IPortfolioOverviewWebPartProps { }
 

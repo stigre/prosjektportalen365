@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
+import { sp } from '@pnp/sp';
 
 export default class PortfolioBaseWebPart<T> extends BaseClientSideWebPart<T> {
     private placeholder: HTMLElement;
@@ -14,6 +15,11 @@ export default class PortfolioBaseWebPart<T> extends BaseClientSideWebPart<T> {
             this.domElement.appendChild(this.placeholder);
         }
         ReactDom.render(element, this.placeholder);
+    }
+
+    protected async onInit(): Promise<void> {
+        await super.onInit();
+        sp.setup({ spfxContext: this.context });
     }
 
     protected onDispose(): void {

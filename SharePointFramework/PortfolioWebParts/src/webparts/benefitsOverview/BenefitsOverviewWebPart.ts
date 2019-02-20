@@ -3,7 +3,7 @@ import { Version } from '@microsoft/sp-core-library';
 import { IPropertyPaneConfiguration } from '@microsoft/sp-webpart-base';
 import BenefitsOverview from './components/BenefitsOverview';
 import { IBenefitsOverviewProps } from './components/IBenefitsOverviewProps';
-import PortfolioBaseWebPart from '../portfolioBaseWebPart';
+import PortfolioBaseWebPart from '../@portfolioBaseWebPart';
 
 export interface IBenefitsOverviewWebPartProps { }
 

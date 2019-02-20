@@ -10,7 +10,7 @@ import {
 import * as strings from 'ProjectInsightsWebPartStrings';
 import ProjectInsights from './components/ProjectInsights';
 import { IProjectInsightsProps } from './components/IProjectInsightsProps';
-import PortfolioBaseWebPart from '../portfolioBaseWebPart';
+import PortfolioBaseWebPart from '../@portfolioBaseWebPart';
 
 export interface IProjectInsightsWebPartProps { }
 
