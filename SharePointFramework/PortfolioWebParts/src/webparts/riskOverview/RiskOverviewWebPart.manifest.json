@@ -6,14 +6,31 @@
   "version": "*",
   "manifestVersion": 2,
   "requiresCustomScript": false,
-  "preconfiguredEntries": [{
-    "groupId": "5c03119e-3074-46fd-976b-c60198311f70", 
-    "group": { "default": "Other" },
-    "title": { "default": "RiskOverview" },
-    "description": { "default": "RiskOverview description" },
-    "officeFabricIconFontName": "Page",
-    "properties": {
-      "description": "RiskOverview"
+  "hiddenFromToolbox": false,
+  "preconfiguredEntries": [
+    {
+      "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+      "group": {
+        "default": "Other"
+      },
+      "title": {
+        "default": "Risikooversikt"
+      },
+      "description": {
+        "default": " "
+      },
+      "officeFabricIconFontName": "AsteriskSolid",
+      "properties": {
+        "dataSource": "Alle risikoelementer",
+        "showCommandBar": true,
+        "groupByOptions": [
+          {
+            "name": "Prosjekt",
+            "key": "SiteTitle"
+          }
+        ],
+        "excelExportEnabled": false
+      }
     }
-  }]
+  ]
 }

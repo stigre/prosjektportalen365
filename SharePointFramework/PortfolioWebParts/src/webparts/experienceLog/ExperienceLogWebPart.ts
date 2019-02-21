@@ -10,7 +10,7 @@ export interface IExperienceLogWebPartProps { }
 export default class ExperienceLogWebPart extends PortfolioBaseWebPart<IExperienceLogWebPartProps> {
   public render(): void {
     const element: React.ReactElement<IExperienceLogProps> = React.createElement(ExperienceLog, { context: this.context });
-    super._render('experiencelogwebpart', element);
+    super._render(this.manifest.alias, element);
   }
 
   protected async onInit(): Promise<void> {

@@ -11,7 +11,7 @@ export interface IPortfolioOverviewWebPartProps { }
 export default class PortfolioOverviewWebPart extends PortfolioBaseWebPart<IPortfolioOverviewWebPartProps> {
   public render(): void {
     const element: React.ReactElement<IPortfolioOverviewProps> = React.createElement(PortfolioOverview, {});
-    super._render('deliveriesoverviewwebpart', element);
+    super._render(this.manifest.alias, element);
   }
 
   protected async onInit(): Promise<void> {

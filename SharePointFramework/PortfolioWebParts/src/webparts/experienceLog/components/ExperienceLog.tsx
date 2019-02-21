@@ -6,7 +6,6 @@ import { IExperienceLogState } from './IExperienceLogState';
 import List from '../../../common/components/List/List';
 import { sp } from '@pnp/sp';
 import { Spinner, SpinnerType } from 'office-ui-fabric-react/lib/Spinner';
-import { stringIsNullOrEmpty } from '@pnp/common';
 
 export default class ExperienceLog extends React.Component<IExperienceLogProps, IExperienceLogState> {
   public static defaultProps = ExperienceLogDefaultProps;

@@ -18,7 +18,7 @@ export default class ProjectInsightsWebPart extends PortfolioBaseWebPart<IProjec
 
   public render(): void {
     const element: React.ReactElement<IProjectInsightsProps> = React.createElement(ProjectInsights, {});
-    super._render('projectinsightswebpart', element);
+    super._render(this.manifest.alias, element);
   }
 
   protected async onInit(): Promise<void> {
