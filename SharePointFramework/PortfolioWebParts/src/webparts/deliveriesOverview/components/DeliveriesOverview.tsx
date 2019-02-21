@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styles from './DeliveriesOverview.module.scss';
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
+import { DetailsListLayoutMode } from "office-ui-fabric-react/lib/DetailsList";
 import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
 import { IDeliveriesOverviewProps, DeliveriesOverviewDefaultProps } from './IDeliveriesOverviewProps';
 import { IDeliveriesOverviewState } from './IDeliveriesOverviewState';
@@ -56,6 +57,7 @@ export default class DeliveriesOverview extends React.Component<IDeliveriesOverv
           <List
             items={this.state.items}
             columns={this.props.columns}
+            layoutMode={DetailsListLayoutMode.fixedColumns}
             showCommandBar={true}
             groupByOptions={this.props.groupByOptions}
             excelExportEnabled={this.props.excelExportEnabled} />

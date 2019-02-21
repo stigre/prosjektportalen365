@@ -100,7 +100,7 @@ export default class List extends React.Component<IListProps, IListState> {
 
 
   @autobind
-  private onRenderItemColumn(item: any, _index: number, column: IColumn) {
+  private onRenderItemColumn(item: any, index: number, column: IColumn) {
     let colValue = item[column.fieldName];
     switch (column.key) {
       case 'Title': {
@@ -113,7 +113,7 @@ export default class List extends React.Component<IListProps, IListState> {
         return <a href={item.SPWebUrl} target='_blank'>{item.SiteTitle}</a>;
       }
     }
-    return colValue;
+    return column.onRender ? column.onRender(item, index, column) : colValue;
   }
 
   /**
