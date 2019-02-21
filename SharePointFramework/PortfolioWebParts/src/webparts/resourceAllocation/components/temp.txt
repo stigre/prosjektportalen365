@@ -1,0 +1,95 @@
+Rank	16.4980812072754
+DocId	17618960685101
+Author	Ole Martin Pettersen
+AuthorOWSUSER	olemp@puzzlepart.com | Ole Martin Pettersen | 693A30232E667C6D656D626572736869707C6F6C656D704070757A7A6C65706172742E636F6D i:0#.f|membership|olemp@puzzlepart.com
+ContentDatabaseId	{544850a9-1c04-4ae0-975b-3300724fceb3}
+ContentSource	SharePoint Content
+ContentType	Ressursallokering
+ContentTypeId	0x010004EAFF7AFCC94C2680042E6881264120003042E15D78C89D42B04678AB46376B24
+CrawlTime	2019-02-21T13:28:24.0000000Z
+Created	2019-02-21T13:28:10.0000000Z
+CreatedBy	Ole Martin Pettersen
+CreatedById	6
+CreatedOWSDATE	2019-02-21T13:28:10Z
+DefaultEncodingURL	https://pzlcloud.sharepoint.com/sites/Markedsanalyse2020/Lists/Ressursallokering/1_.000
+DepartmentId	{f4367f0f-18ac-45d0-bcb0-884b24ce47b9}
+DetectedLanguage	en
+DetectedLanguageRanking	9
+DiscoveredTime	2019-02-21T13:28:56.9557231Z
+DisplayAuthor	Ole Martin Pettersen
+DocumentLink	https://pzlcloud.sharepoint.com/sites/Markedsanalyse2020/Lists/Ressursallokering/1_.000
+EditorOWSUSER	olemp@puzzlepart.com | Ole Martin Pettersen | 693A30232E667C6D656D626572736869707C6F6C656D704070757A7A6C65706172742E636F6D i:0#.f|membership|olemp@puzzlepart.com
+FallbackLanguage	1044
+FileExtension	aspx
+Filename	DispForm.aspx
+GeoLocation	EUR
+GroupId	1c8bd464-e3da-4bea-bf9e-f295311e8117
+HostingPartition	e03b5249-1555-4b59-ba09-cfc385668865
+IndexDocId	17618960685101
+InternalFileType	6
+IsContainer	false
+IsDocument	false
+IsExternalContent	false
+IsListItem	true
+IsProtected	false
+LastModifiedTime	2019-02-21T13:28:10.0000000Z
+LastModifiedTimeForRetention	2019-02-21T13:28:10.0000000Z
+ListID	d4112c07-f1b6-4f63-bf66-83da8268269c
+ListItemID	1
+MetadataAuthor	Ole Martin Pettersen
+ModifiedBy	Ole Martin Pettersen
+ModifiedById	olemp@puzzlepart.com | Ole Martin Pettersen | 693A30232E667C6D656D626572736869707C6F6C656D704070757A7A6C65706172742E636F6D i:0#.f|membership|olemp@puzzlepart.com
+ModifiedOWSDATE	2019-02-21T13:28:10Z
+NonDocument	true
+OriginalPath	https://pzlcloud.sharepoint.com/sites/Markedsanalyse2020/Lists/Ressursallokering/DispForm.aspx?ID=1
+ParentLink	https://pzlcloud.sharepoint.com/sites/Markedsanalyse2020/Lists/Ressursallokering/AllItems.aspx
+PartitionKey	2e980895-5c9e-4e69-ad31-6b11e4c9294e
+Path	https://pzlcloud.sharepoint.com/sites/Markedsanalyse2020/Lists/Ressursallokering/DispForm.aspx?ID=1
+People	steffen.norby@puzzlepart.com | Steffen R. Norby | 693A30232E667C6D656D626572736869707C7374656666656E2E6E6F7262794070757A7A6C65706172742E636F6D i:0#.f|membership|steffen.norby@puzzlepart.com;olemp@puzzlepart.com | Ole Martin Pettersen | 693A30232E667C6D656D626572736869707C6F6C656D704070757A7A6C65706172742E636F6D i:0#.f|membership|olemp@puzzlepart.com;Ole Martin Pettersen
+PrivacyIndicator	4
+RefinableDate05	2/20/2019 11:00:00 PM
+RefinableDate06	8/24/2019 10:00:00 PM
+RefinableString71	Steffen R. Norby
+RefinableString72	Ass. Prosjektleder
+ReplyCount	0
+SPSiteURL	https://pzlcloud.sharepoint.com/sites/markedsanalyse2020
+SPWebUrl	https://pzlcloud.sharepoint.com/sites/Markedsanalyse2020
+SecurityId	{fba3e310-1934-4168-b5ec-20d88e004ff9}
+SiteID	2e980895-5c9e-4e69-ad31-6b11e4c9294e
+SitePath	https://pzlcloud.sharepoint.com/sites/markedsanalyse2020/lists/ressursallokering/dispform.aspx?id=1/;com.sharepoint.pzlcloud./sites/markedsanalyse2020/lists/ressursallokering/dispform.aspx?id=1/
+SiteTemplate	GROUP
+SiteTemplateId	64
+SiteTitle	Markedsanalyse 2020
+Size	0
+Tags	L0|#0a588c673-eed6-4063-b0d0-852dde2b6cb9|Ass. Prosjektleder
+Title	DispForm.aspx
+UIVersionStringOWSTEXT	1.0
+UniqueID	{50B3E8E1-6BF7-4F7D-A697-DBD77FD2D3DC}
+UrlDepth	5
+ViewableByAnonymousUsers	false
+ViewableByExternalUsers	false
+WebApplicationId	{5291432a-ec34-4377-9612-3255bbd55ee2}
+WebId	c26d3e95-74e3-4a44-b8b3-df08738bce3d
+contentclass	STS_ListItem_GenericList
+language	en
+languages	en
+ows_MetadataFacetInfo	GtResourceRole|Rolle|w2WMoNCYj0egc9mN2AiXrA==|R5/aVE7GJkqA8008P6G3sg==|#a588c673-eed6-4063-b0d0-852dde2b6cb9|Ass. Prosjektleder;#
+owsmetadatafacetinfo	GtResourceRole|Rolle|w2WMoNCYj0egc9mN2AiXrA==|R5/aVE7GJkqA8008P6G3sg==|#a588c673-eed6-4063-b0d0-852dde2b6cb9|Ass. Prosjektleder;#
+owstaxidmetadataalltagsinfo	L0|#0a588c673-eed6-4063-b0d0-852dde2b6cb9|Ass. Prosjektleder
+ContentExcludeFromSummaries	
+ContentModifiedTime	
+Contents	
+CrawledProperties	
+GtEndDateOWSDATE	2019-08-24T22:00:00Z
+GtResourceLoadOWSNMBR	1.00000000000000
+GtResourceUserOWSUSER	steffen.norby@puzzlepart.com | Steffen R. Norby | 693A30232E667C6D656D626572736869707C7374656666656E2E6E6F7262794070757A7A6C65706172742E636F6D i:0#.f|membership|steffen.norby@puzzlepart.com
+GtStartDateOWSDATE	2019-02-20T23:00:00Z
+SPContentType	
+docacl	
+owstaxIdGtResourceRole	GP0|#a588c673-eed6-4063-b0d0-852dde2b6cb9;L0|#0a588c673-eed6-4063-b0d0-852dde2b6cb9|Ass. Prosjektleder;GTSet|#54da9f47-c64e-4a26-80f3-4d3c3fa1b7b2
+policyacl	
+PartitionId	e03b5249-1555-4b59-ba09-cfc385668865
+UrlZone	0
+Culture	nb-NO
+ResultTypeId	0
+RenderTemplateId	~sitecollection/_catalogs/masterpage/Display Templates/Search/Item_Default.js

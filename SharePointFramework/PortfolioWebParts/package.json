@@ -7,6 +7,7 @@
   },
   "scripts": {
     "serve": "gulp serve --locale=nb-no",
+    "serve-nobrowser": "gulp serve --locale=nb-no --nobrowser",
     "package": "gulp clean && gulp default --ship && gulp package-solution --ship",
     "deploy": "gulp uploadAppPkg && gulp deploySppkg",
     "package-deploy": " npm run package &&  npm run deploy",
@@ -38,9 +39,13 @@
     "@types/react-dom": "16.0.5",
     "@types/webpack-env": "1.13.1",
     "array-unique": "^0.3.2",
+    "interactjs": "^1.3.4",
+    "moment": "^2.24.0",
     "jsom-ctx": "^1.2.0",
     "office-ui-fabric-react": "5.134.0",
+    "prop-types": "^15.7.2",
     "react": "16.3.2",
+    "react-calendar-timeline": "^0.23.0",
     "react-dom": "16.3.2",
     "sp-entityportal-service": "^0.5.2",
     "sp-hubsite-service": "^0.1.0"

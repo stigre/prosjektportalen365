@@ -8,7 +8,7 @@ import { IResourceAllocationWebPartProps } from './IResourceAllocationWebPartPro
 
 export default class ResourceAllocationWebPart extends PortfolioBaseWebPart<IResourceAllocationWebPartProps> {
   public render(): void {
-    const element: React.ReactElement<IResourceAllocationProps> = React.createElement(ResourceAllocation, {});
+    const element: React.ReactElement<IResourceAllocationProps> = React.createElement(ResourceAllocation, { ...this.properties });
     super._render(this.manifest.alias, element);
   }
 

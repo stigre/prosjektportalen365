@@ -16,6 +16,7 @@ export default class ProgressModal extends React.Component<IProgressModalProps, 
                 isDarkOverlay={this.props.isDarkOverlay}>
                 <div className={styles.progressModal}>
                     <div className={styles.progressModalBody}>
+                        <div className={styles.modalTitle}>Setter opp prosjektområdet</div>
                         <div className={styles.progressIcon}>
                             <Icon iconName={this.props.iconName} style={{ fontSize: 42, display: 'block', textAlign: 'center' }} />
                         </div>

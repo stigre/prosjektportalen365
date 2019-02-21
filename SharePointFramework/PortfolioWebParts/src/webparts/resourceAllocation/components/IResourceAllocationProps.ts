@@ -1,3 +1,3 @@
-import { IResourceAllocationWebPartProps } from "../IResourceAllocationWebPartProps";
+import { IResourceAllocationWebPartProps } from '../IResourceAllocationWebPartProps';
 
 export interface IResourceAllocationProps extends IResourceAllocationWebPartProps { }
