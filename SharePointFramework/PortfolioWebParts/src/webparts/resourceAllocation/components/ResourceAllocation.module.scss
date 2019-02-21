@@ -3,18 +3,9 @@
 .resourceAllocation {
   .container {
     margin: 0px auto;
-  }
 
-  .row {
-    @include ms-Grid-row;
-  }
-
-  .column {
-    @include ms-Grid-col;
-    @include ms-sm12;
-  }
-
-  .title {
-    @include ms-font-xl;
+    .timeline {
+      margin: 0px auto;
+    }
   }
 }

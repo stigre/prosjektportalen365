@@ -3,7 +3,7 @@
   "id": "2ef269b2-6370-4841-8b35-2185b7ccb22a",
   "alias": "ResourceAllocationWebPart",
   "componentType": "WebPart",
-  "version": "*",
+  "version": "0.1.0",
   "manifestVersion": 2,
   "requiresCustomScript": false,
   "preconfiguredEntries": [
@@ -13,14 +13,14 @@
         "default": "Other"
       },
       "title": {
-        "default": "resourceAllocation"
+        "default": "Ressursallokering"
       },
       "description": {
-        "default": "resourceAllocation description"
+        "default": " "
       },
-      "officeFabricIconFontName": "Page",
+      "officeFabricIconFontName": "TimelineDelivery",
       "properties": {
-        "description": "resourceAllocation"
+        "dataSource": "Alle ressursallokeringer"
       }
     }
   ]

@@ -1,2 +1,3 @@
-
-export interface IResourceAllocationWebPartProps { }
+export interface IResourceAllocationWebPartProps {
+    dataSource: string;
+}
