@@ -12,7 +12,8 @@ import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 export default class List extends React.Component<IListProps, IListState> {
   public static defaultProps: Partial<IListProps> = {
     groupByOptions: [],
-    defaultGroupBy: { key: 'NoGrouping', name: strings.NoGrouping }
+    defaultGroupBy: { key: 'NoGrouping', name: strings.NoGrouping },
+    layoutMode: DetailsListLayoutMode.justified,
   };
 
   /**
@@ -44,7 +45,7 @@ export default class List extends React.Component<IListProps, IListState> {
           groups={groups}
           onRenderItemColumn={this.onRenderItemColumn}
           selectionMode={SelectionMode.none}
-          layoutMode={DetailsListLayoutMode.justified} />
+          layoutMode={this.props.layoutMode} />
       </div>
     );
   }
