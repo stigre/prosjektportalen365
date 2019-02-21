@@ -13,11 +13,13 @@ dependencies:
   '@pnp/sp-taxonomy': 1.2.8
   '@pnp/spfx-controls-react': 1.11.0
   '@types/es6-promise': 0.0.33
+  '@types/microsoft-ajax': 0.0.33
   '@types/react': 16.4.2
   '@types/react-dom': 16.0.5
   '@types/webpack-env': 1.13.1
   array-unique: 0.3.2
   interactjs: 1.3.4
+  jsom-ctx: 1.2.0
   moment: 2.24.0
   office-ui-fabric-react: 5.134.0
   prop-types: 15.7.2
@@ -219,7 +221,6 @@ packages:
     resolution:
       integrity: sha512-ppBmdD8YODFEhz1oerGViX03rmUunT7rBiVQVGIxwcMqaE44B7uomonqB3BiefdSWcCn+39lIBqoKvKDbDstRA==
   /@microsoft/load-themed-styles/1.8.60:
-    dev: false
     resolution:
       integrity: sha512-ANHSycOYKAndbp1H0IwqDCG1g1JIRxaG0eL6YyOHYSndY4YLHaf0Ek8Qyhx9p66pVXUrqKK1ntyh6YZNUfgn6Q==
   /@microsoft/loader-cased-file/1.7.1/webpack@3.6.0:
@@ -277,7 +278,7 @@ packages:
     dependencies:
       '@types/react': 16.4.2
       '@types/webpack-env': 1.13.1
-      '@uifabric/icons': /@uifabric/icons/5.8.0/react-dom@16.3.2+react@16.3.2
+      '@uifabric/icons': 5.8.0
       office-ui-fabric-react: /office-ui-fabric-react/5.131.0/react-dom@16.3.2+react@16.3.2
       react: 16.3.2
       react-dom: /react-dom/16.3.2/react@16.3.2
@@ -1054,7 +1055,6 @@ packages:
     resolution:
       integrity: sha1-y1UumCbKPAjZ5lSd6ezY8VQX8G0=
   /@types/microsoft-ajax/0.0.33:
-    dev: true
     resolution:
       integrity: sha512-R31YIw2FUZsx62yzH1LX9+SV0xCxRn+r6FpYhaEKHAms+3zozMYZZvsJO+I3za+wlE/z03PrePGgCO1rxv7dUg==
   /@types/mime/2.0.0:
@@ -1274,14 +1274,6 @@ packages:
     dependencies:
       '@uifabric/styling': 5.37.0
       tslib: 1.9.3
-    dev: false
-    resolution:
-      integrity: sha512-EUhKxYlIPJshg4fQvCNTYSk0p7RhzEWeEAJBV4sao1SKmN0/pZBnkLbDqWjU5VUfdwZZYiIdaLRpM+pyzhniZw==
-  /@uifabric/icons/5.8.0/react-dom@16.3.2+react@16.3.2:
-    dependencies:
-      '@uifabric/styling': /@uifabric/styling/5.37.0/react-dom@16.3.2+react@16.3.2
-      tslib: 1.9.3
-    id: registry.npmjs.org/@uifabric/icons/5.8.0
     resolution:
       integrity: sha512-EUhKxYlIPJshg4fQvCNTYSk0p7RhzEWeEAJBV4sao1SKmN0/pZBnkLbDqWjU5VUfdwZZYiIdaLRpM+pyzhniZw==
   /@uifabric/merge-styles/5.17.1:
@@ -1295,7 +1287,6 @@ packages:
       '@uifabric/merge-styles': 5.17.1
       '@uifabric/utilities': 5.34.2
       tslib: 1.9.3
-    dev: false
     resolution:
       integrity: sha512-3hC0itW/hWSD5J4uANzUKk8XVGWUNkU+VLjEjWsQ6i5lvwFGaanR6Qy0bTkZdFGqFWMXe91CkBHV7HnvEx7tCA==
   /@uifabric/styling/5.37.0/react-dom@16.3.2+react@16.3.2:
@@ -1312,7 +1303,6 @@ packages:
       '@uifabric/merge-styles': 5.17.1
       prop-types: 15.7.2
       tslib: 1.9.3
-    dev: false
     peerDependencies:
       react: ^0.14.9 || ^15.0.1-0 || ^16.0.0-0
       react-dom: ^0.14.9 || ^15.0.1-0 || ^16.0.0-0
@@ -1321,7 +1311,7 @@ packages:
   /@uifabric/utilities/5.34.2/react-dom@16.3.2+react@16.3.2:
     dependencies:
       '@uifabric/merge-styles': 5.17.1
-      prop-types: 15.6.2
+      prop-types: 15.7.2
       react: 16.3.2
       react-dom: /react-dom/16.3.2/react@16.3.2
       tslib: 1.9.3
@@ -6403,6 +6393,10 @@ packages:
     hasBin: true
     resolution:
       integrity: sha1-RsP+yMGJKxKwgz25vHYiF226s0s=
+  /jsom-ctx/1.2.0:
+    dev: false
+    resolution:
+      integrity: sha512-yIc56IbC6r2Gl6xuBx12E475+QK06qrKm/npGlaSf3GIPzNlX28hG41yMGIGXqXwu45ttlK1xN9H1/xYsWJukw==
   /json-edm-parser/0.1.2:
     dependencies:
       jsonparse: 1.2.0
@@ -8068,12 +8062,12 @@ packages:
       integrity: sha512-gcBs5HHr7tjkvk/+Ls10ttb3jEllRn7SvJitX/kx/gQq8BiFMSMKr1w+oNqXlh4EgkBHWUlJVPrYUu1KW/jVaQ==
   /office-ui-fabric-react/5.131.0:
     dependencies:
-      '@microsoft/load-themed-styles': 1.8.60
+      '@microsoft/load-themed-styles': 1.8.55
       '@uifabric/icons': 5.8.0
       '@uifabric/merge-styles': 5.17.1
       '@uifabric/styling': 5.37.0
       '@uifabric/utilities': 5.34.2
-      prop-types: 15.7.2
+      prop-types: 15.6.2
       tslib: 1.9.3
     dev: false
     peerDependencies:
@@ -8084,7 +8078,7 @@ packages:
   /office-ui-fabric-react/5.131.0/react-dom@16.3.2+react@16.3.2:
     dependencies:
       '@microsoft/load-themed-styles': 1.8.55
-      '@uifabric/icons': /@uifabric/icons/5.8.0/react-dom@16.3.2+react@16.3.2
+      '@uifabric/icons': 5.8.0
       '@uifabric/merge-styles': 5.17.1
       '@uifabric/styling': /@uifabric/styling/5.37.0/react-dom@16.3.2+react@16.3.2
       '@uifabric/utilities': /@uifabric/utilities/5.34.2/react-dom@16.3.2+react@16.3.2
@@ -8968,7 +8962,6 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.8.2
-    dev: false
     resolution:
       integrity: sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
   /proxy-addr/2.0.4:
@@ -9165,7 +9158,6 @@ packages:
     resolution:
       integrity: sha512-MMPko3zYncNrz/7gG17wJWUREZDvskZHXOwbttzl0F0L3wDmToyuETuo/r8Y5yvDejwYcRyWI1lvVBjLJWFwKA==
   /react-is/16.8.2:
-    dev: false
     resolution:
       integrity: sha512-D+NxhSR2HUCjYky1q1DwpNUD44cDpUXzSmmFyC3ug1bClcU/iDNy0YNn1iwme28fn+NFhpA13IndOd42CrFb+Q==
   /react/16.3.2:
@@ -12038,6 +12030,7 @@ specifiers:
   '@pnp/spfx-controls-react': ^1.11.0
   '@types/chai': 3.4.34
   '@types/es6-promise': 0.0.33
+  '@types/microsoft-ajax': 0.0.33
   '@types/mocha': 2.2.38
   '@types/react': 16.4.2
   '@types/react-dom': 16.0.5
@@ -12047,6 +12040,7 @@ specifiers:
   bluebird: ^3.5.3
   gulp: ~3.9.1
   interactjs: ^1.3.4
+  jsom-ctx: ^1.2.0
   moment: ^2.24.0
   node-fetch: ^2.3.0
   office-ui-fabric-react: 5.134.0
