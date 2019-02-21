@@ -38,7 +38,7 @@
     "office-ui-fabric-react": "5.134.0",
     "react": "16.3.2",
     "react-dom": "16.3.2",
-    "sp-entityportal-service": "^0.5.0",
+    "sp-entityportal-service": "^0.5.6",
     "sp-hubsite-service": "^0.1.0",
     "spfx-jsom": "^0.6.0",
     "string-format": "^2.0.0"

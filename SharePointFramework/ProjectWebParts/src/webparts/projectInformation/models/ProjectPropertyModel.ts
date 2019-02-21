@@ -8,6 +8,12 @@ export default class ProjectPropertyModel {
     public required?: any;
     public showInDisplayForm?: any;
 
+    /**
+     * Creates an instance of ProjectPropertyModel
+     * 
+     * @param {any} field Field
+     * @param {string} value Value
+    */
     constructor(field: any, value: string) {
         this.internalName = field.InternalName;
         this.displayName = field.Title;

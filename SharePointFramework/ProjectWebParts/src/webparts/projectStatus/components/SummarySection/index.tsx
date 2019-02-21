@@ -23,6 +23,7 @@ export default class SummarySection extends StatusSectionBase<ISummarySectionPro
                                 title='Prosjektinformasjon'
                                 context={this.props.context}
                                 entity={this.props.entity}
+                                filterField='GtShowFieldProjectStatus'
                                 hideEditPropertiesButton={true} />
                         </div>
                         <div className={styles.column6}>

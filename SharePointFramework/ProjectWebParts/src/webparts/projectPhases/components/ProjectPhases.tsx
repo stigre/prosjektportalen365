@@ -224,7 +224,7 @@ export default class ProjectPhases extends React.Component<IProjectPhasesProps, 
       ]);
       const [phaseTerms, entityItem] = await Promise.all([
         taxonomy.getDefaultSiteCollectionTermStore().getTermSetById(termSetId).terms.get(),
-        spEntityPortalService.getEntityItem(context.pageContext),
+        spEntityPortalService.getEntityItem(context.pageContext.site.id.toString()),
       ]);
       const phases = phaseTerms
         .filter(term => term.LocalCustomProperties.ShowOnFrontpage !== 'false')
