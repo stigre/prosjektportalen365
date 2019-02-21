@@ -7,7 +7,6 @@ import { DetailsList, IColumn, IGroup, SelectionMode, DetailsListLayoutMode } fr
 import { CommandBar, ICommandBarItemProps, ICommandBarProps } from 'office-ui-fabric-react/lib/CommandBar';
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
-import { ExcelExportStatus } from '../../ExportToExcel';
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 
 export default class List extends React.Component<IListProps, IListState> {
@@ -80,19 +79,19 @@ export default class List extends React.Component<IListProps, IListState> {
     }
 
     if (this.props.excelExportEnabled && this.props.excelExportConfig) {
-      items.push({
-        key: 'ExcelExport',
-        name: this.props.excelExportConfig.buttonLabel,
-        iconProps: {
-          iconName: this.props.excelExportConfig.buttonIcon,
-          styles: { root: { color: 'green !important' } },
-        },
-        disabled: this.state.excelExportStatus === ExcelExportStatus.Exporting,
-        onClick: evt => {
-          evt.preventDefault();
-          this.exportToExcel();
-        },
-      });
+      // items.push({
+      //   key: 'ExcelExport',
+      //   name: this.props.excelExportConfig.buttonLabel,
+      //   iconProps: {
+      //     iconName: this.props.excelExportConfig.buttonIcon,
+      //     styles: { root: { color: 'green !important' } },
+      //   },
+      //   disabled: this.state.excelExportStatus === ExcelExportStatus.Exporting,
+      //   onClick: evt => {
+      //     evt.preventDefault();
+      //     this.exportToExcel();
+      //   },
+      // });
     }
 
     return { hidden: !this.props.showCommandBar, items, farItems };
