@@ -1,4 +1,5 @@
 declare interface IPortfolioOverviewWebPartStrings {
+  ProjectLabel: string;
   LoadingText: string;
   NoGrouping: string;
 }
