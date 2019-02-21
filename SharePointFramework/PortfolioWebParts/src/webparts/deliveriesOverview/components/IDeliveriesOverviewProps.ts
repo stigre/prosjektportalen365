@@ -1,13 +1,11 @@
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import { WebPartContext } from '@microsoft/sp-webpart-base';
 import IGroupByOption from '../../../common/interfaces/IGroupByOption';
+import { IDeliveriesOverviewWebPartProps } from '../DeliveriesOverviewWebPart';
 
-export interface IDeliveriesOverviewProps {
-    dataSource: string;
+export interface IDeliveriesOverviewProps extends IDeliveriesOverviewWebPartProps {
     context: WebPartContext;
-    groupByOptions?: IGroupByOption[];
     columns?: IColumn[];
-    excelExportEnabled?: boolean;
 }
 
 export const DeliveriesOverviewDefaultProps: Partial<IDeliveriesOverviewProps> = {
@@ -68,6 +66,4 @@ export const DeliveriesOverviewDefaultProps: Partial<IDeliveriesOverviewProps> =
         isMultiline: true,
         isResizable: true,
     }],
-    groupByOptions: [{ name: 'Prosjekt', key: 'SiteTitle' }],
-    excelExportEnabled: false,
 };

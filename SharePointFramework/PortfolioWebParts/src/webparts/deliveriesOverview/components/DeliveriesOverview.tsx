@@ -1,13 +1,16 @@
 import * as React from 'react';
 import styles from './DeliveriesOverview.module.scss';
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
+import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
 import { IDeliveriesOverviewProps, DeliveriesOverviewDefaultProps } from './IDeliveriesOverviewProps';
 import { IDeliveriesOverviewState } from './IDeliveriesOverviewState';
 import List from '../../../common/components/List/List';
 import { sp } from '@pnp/sp';
+import DataSourceService from '../../../common/services/DataSourceService';
 
 export default class DeliveriesOverview extends React.Component<IDeliveriesOverviewProps, IDeliveriesOverviewState> {
   public static defaultProps = DeliveriesOverviewDefaultProps;
+
   /**
    * Constructor
    *
@@ -22,14 +25,29 @@ export default class DeliveriesOverview extends React.Component<IDeliveriesOverv
     try {
       const items = await this.fetchItems();
       this.setState({ items, isLoading: false });
-    } catch (err) {
-      this.setState({ items: [], isLoading: false });
+    } catch (error) {
+      this.setState({ error, isLoading: false });
     }
   }
 
   public render(): React.ReactElement<IDeliveriesOverviewProps> {
     if (this.state.isLoading) {
-      return <Spinner label='Laster prosjektleveranser...' type={SpinnerType.large} />;
+      return (
+        <div className={styles.deliveriesOverview}>
+          <div className={styles.container}>
+            <Spinner label='Laster prosjektleveranser...' type={SpinnerType.large} />
+          </div>
+        </div>
+      );
+    }
+    if (this.state.error) {
+      return (
+        <div className={styles.deliveriesOverview}>
+          <div className={styles.container}>
+            <MessageBar messageBarType={MessageBarType.error}>{this.state.error}</MessageBar>
+          </div>
+        </div>
+      );
     }
 
     return (
@@ -50,23 +68,22 @@ export default class DeliveriesOverview extends React.Component<IDeliveriesOverv
    * Fetch items
    */
   private async fetchItems() {
-    // const dataSourcesList = sp.web.lists.getByTitle('Datakilder');
-    // const [dataSource] = await dataSourcesList.items.filter(`Title eq '${this.props.dataSource}'`).get();
-    // if (dataSource) {
-    try {
-      const { PrimarySearchResults } = await sp.search({
-        Querytext: "*",
-        QueryTemplate: 'ContentTypeId:0x0100D7B74DE815F946D3B0F99D19F9B36B68*',
-        RowLimit: 500,
-        TrimDuplicates: false,
-        SelectProperties: ["Path", "SPWebUrl", ...this.props.columns.map(col => col.key)],
-      });
-      return PrimarySearchResults;
-    } catch (err) {
-      throw err;
+    const dataSource = await DataSourceService.getByName(this.props.dataSource);
+    if (dataSource) {
+      try {
+        const { PrimarySearchResults } = await sp.search({
+          ...dataSource,
+          Querytext: "*",
+          RowLimit: 500,
+          TrimDuplicates: false,
+          SelectProperties: ["Path", "SPWebUrl", ...this.props.columns.map(col => col.key)],
+        });
+        return PrimarySearchResults;
+      } catch (err) {
+        throw err;
+      }
+    } else {
+      throw `Finner ingen datakilde med navn '${this.props.dataSource}.'`;
     }
-    // } else {
-    //   return [];
-    // }
   }
 }

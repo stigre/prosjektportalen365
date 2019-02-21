@@ -1,7 +1,7 @@
 <pnp:ContentTypes xmlns:pnp="http://schemas.dev.office.com/PnP/2018/05/ProvisioningSchema">
     <pnp:ContentType ID="0x0100805E9E4FEAAB4F0EABAB2600D30DB70C" Name="Prosjekt" Description="" Group="Prosjektportalen innholdstyper">
         <pnp:FieldRefs>
-            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" />
+            <pnp:FieldRef ID="fa564e0f-0c70-4ab9-b863-0177e6ddd247" Name="Title" Hidden="true" />
             <pnp:FieldRef ID="983d5ab3-0a6c-4f6a-a7b5-d34d52d73676" Name="GtProjectFinanceName" />
             <pnp:FieldRef ID="64d45745-0dd0-4c21-979b-67fb13748bb1" Name="GtProjectNumber" />
             <pnp:FieldRef ID="a59fe220-36c3-464a-8cfc-40d6d04debd2" Name="GtArchiveReference" />

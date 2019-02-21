@@ -4,13 +4,18 @@ import { IPropertyPaneConfiguration } from '@microsoft/sp-webpart-base';
 import DeliveriesOverview from './components/DeliveriesOverview';
 import { IDeliveriesOverviewProps } from './components/IDeliveriesOverviewProps';
 import PortfolioBaseWebPart from '../@portfolioBaseWebPart';
+import IGroupByOption from '../../common/interfaces/IGroupByOption';
 
-export interface IDeliveriesOverviewWebPartProps { }
+export interface IDeliveriesOverviewWebPartProps { 
+  dataSource: string;
+  groupByOptions: IGroupByOption[];
+  excelExportEnabled: boolean;
+}
 
 export default class DeliveriesOverviewWebPart extends PortfolioBaseWebPart<IDeliveriesOverviewWebPartProps> {
   public render(): void {
     const element: React.ReactElement<IDeliveriesOverviewProps> = React.createElement(
-      DeliveriesOverview, { context: this.context, dataSource: 'DELIVERIESOVERVIEW' }
+      DeliveriesOverview, { context: this.context, ...this.properties }
     );
     super._render('deliveriesoverviewwebpart', element);
   }
