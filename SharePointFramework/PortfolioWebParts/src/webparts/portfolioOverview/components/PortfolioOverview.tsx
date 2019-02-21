@@ -7,8 +7,10 @@ import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
 import { CommandBar, ICommandBarItemProps, ICommandBarProps } from 'office-ui-fabric-react/lib/CommandBar';
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
-import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
+import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBar';
+import * as PortfolioOverviewConfig from '../config/PortfolioOverviewConfig';
 import { CreateJsomContext, ExecuteJsomQuery } from 'jsom-ctx';
+import { queryProjects } from './PortfolioOverViewSearch';
 
 export default class PortfolioOverview extends React.Component<IPortfolioOverviewProps, IPortfolioOverviewState> {
   public static defaultProps: Partial<IPortfolioOverviewProps> = {
@@ -52,8 +54,42 @@ export default class PortfolioOverview extends React.Component<IPortfolioOvervie
     permissions.set(31);
     const canUserManageWeb = jsomCtx.web.doesUserHavePermissions(permissions);
     await ExecuteJsomQuery(jsomCtx);
+    const config = await PortfolioOverviewConfig.getConfig();
 
+    let currentView;
 
+    if (this.props.defaultView) {
+      currentView = this.props.defaultView;
+    } else {
+      let viewIdUrlParam = GetUrlKeyValue('viewId');
+      if (viewIdUrlParam !== '') {
+        [currentView] = config.views.filter(qc => qc.id === parseInt(viewIdUrlParam, 10));
+        if (!currentView) {
+          throw {
+            message: strings.ViewNotFoundMessage,
+            type: MessageBarType.error
+          };
+        }
+      } else if (hashState.viewId) {
+        [currentView] = config.views.filter(qc => qc.id === parseInt(hashState.viewId, 10));
+        if (!currentView) {
+          throw {
+            message: strings.ViewNotFoundMessage,
+            type: MessageBarType.error
+          };
+        }
+      } else {
+        [currentView] = config.views.filter(qc => qc.default);
+        if (!currentView) {
+          throw {
+            message: strings.NoDefaultViewMessage,
+            type: MessageBarType.error
+          };
+        }
+      }
+    }
+    const fieldNames = config.columns.map(f => f.fieldName);
+    const response = await queryProjects(currentView, config);
 
 
     return null;
@@ -62,11 +98,11 @@ export default class PortfolioOverview extends React.Component<IPortfolioOvervie
   private getUrlHash(hash = document.location.hash.substring(1)): { [key: string]: string } {
     let hashObject: { [key: string]: string } = {};
     hash.split("&").map(str => {
-        const [key, value] = str.split("=");
-        hashObject[key] = value;
+      const [key, value] = str.split("=");
+      hashObject[key] = value;
     });
     return hashObject;
-}
+  }
 
   /**
    *  Render SearchBox

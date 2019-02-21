@@ -8,6 +8,8 @@ declare interface IPortfolioOverviewWebPartStrings {
   PortfolioFieldsListTitle: string;
   PortfolioRefinersListTitle: string;
   PortfolioViewsListTitle: string;
+  ViewNotFoundMessage: string;
+  NoDefaultViewMessage: string;
 }
 
 declare module 'PortfolioOverviewWebPartStrings' {
