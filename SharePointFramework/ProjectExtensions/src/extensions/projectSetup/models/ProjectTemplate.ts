@@ -1,5 +1,5 @@
 import { Web } from '@pnp/sp';
-import { Schema } from 'pnp-js-provisioning';
+import { Schema } from 'sp-js-provisioning';
 
 
 export default class ProjectTemplate {

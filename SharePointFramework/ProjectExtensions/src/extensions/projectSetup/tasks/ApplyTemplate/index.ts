@@ -1,6 +1,6 @@
 import { override } from '@microsoft/decorators';
 import { BaseTask, OnProgressCallbackFunction } from '../BaseTask';
-import { WebProvisioner, Web } from 'pnp-js-provisioning';
+import { WebProvisioner, Web } from 'sp-js-provisioning';
 import ApplyTemplateStatusMap from './ApplyTemplateStatusMap';
 import * as strings from 'ProjectSetupApplicationCustomizerStrings';
 import * as stringFormat from 'string-format';

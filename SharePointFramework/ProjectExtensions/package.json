@@ -35,11 +35,11 @@
     "@types/react-dom": "16.0.5",
     "@types/webpack-env": "1.13.1",
     "office-ui-fabric-react": "5.134.0",
-    "pnp-js-provisioning": "^0.9.26",
     "react": "16.3.2",
     "react-dom": "16.3.2",
     "sp-entityportal-service": "^0.5.0",
     "sp-hubsite-service": "^0.1.0",
+    "sp-js-provisioning": "github:Puzzlepart/sp-js-provisioning#master",
     "string-format": "^2.0.0"
   },
   "resolutions": {
