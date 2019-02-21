@@ -18,7 +18,16 @@
         "default": " "
       },
       "officeFabricIconFontName": "BusinessCenterLogo",
-      "properties": {}
+      "properties": {
+        "dataSource": "Alle prosjektleveranser",
+        "groupByOptions": [
+          {
+            "name": "Prosjekt",
+            "key": "SiteTitle"
+          }
+        ],
+        "excelExportEnabled": false
+      }
     }
   ]
 }

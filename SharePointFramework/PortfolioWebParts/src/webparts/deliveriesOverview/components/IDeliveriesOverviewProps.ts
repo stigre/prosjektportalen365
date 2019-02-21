@@ -1,7 +1,7 @@
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import { WebPartContext } from '@microsoft/sp-webpart-base';
-import IGroupByOption from '../../../common/interfaces/IGroupByOption';
-import { IDeliveriesOverviewWebPartProps } from '../DeliveriesOverviewWebPart';
+import { IDeliveriesOverviewWebPartProps } from '../IDeliveriesOverviewWebPartProps';
+import formatDate from '../../../common/helpers/formatDate';
 
 export interface IDeliveriesOverviewProps extends IDeliveriesOverviewWebPartProps {
     context: WebPartContext;
@@ -41,6 +41,7 @@ export const DeliveriesOverviewDefaultProps: Partial<IDeliveriesOverviewProps> =
         minWidth: 100,
         isMultiline: false,
         isResizable: true,
+        onRender: (item, _index, column) => formatDate(item[column.fieldName]),
     },
     {
         key: 'GtDeliveryEndTimeOWSDATE',
@@ -49,6 +50,7 @@ export const DeliveriesOverviewDefaultProps: Partial<IDeliveriesOverviewProps> =
         minWidth: 100,
         isMultiline: false,
         isResizable: true,
+        onRender: (item, _index, column) => formatDate(item[column.fieldName]),
     },
     {
         key: 'GtDeliveryStatusOWSCHCS',

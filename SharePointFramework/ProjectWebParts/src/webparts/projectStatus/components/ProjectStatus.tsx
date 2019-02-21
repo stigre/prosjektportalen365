@@ -162,7 +162,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
     const { hubSite, spEntityPortalService, reportListName } = this.props;
     this.reportList = hubSite.web.lists.getByTitle(reportListName);
     const [entityItem, entityFields] = await Promise.all([
-      spEntityPortalService.getEntityItemFieldValues(this.props.context.pageContext),
+      spEntityPortalService.getEntityItemFieldValues(this.props.context.pageContext.site.id.toString()),
       spEntityPortalService.getEntityFields(),
     ]);
     let { DefaultEditFormUrl: reportEditFormUrl } = await this.reportList

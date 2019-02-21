@@ -1,7 +1,5 @@
 declare interface IRiskOverviewWebPartStrings {
-  PropertyPaneDescription: string;
-  BasicGroupName: string;
-  DescriptionFieldLabel: string;
+  LoadingText: string;
 }
 
 declare module 'RiskOverviewWebPartStrings' {

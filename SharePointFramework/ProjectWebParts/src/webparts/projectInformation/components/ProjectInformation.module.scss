@@ -3,18 +3,9 @@
 .projectInformation {
   .container {
     margin: 0;
-  }
 
-  .row {
-    @include ms-Grid-row;
-  }
-
-  .column {
-    @include ms-Grid-col;
-    @include ms-sm12;
-  }
-
-  .editPropertiesButton {
-    margin-top: 25px;
+    .editPropertiesButton {
+      margin-top: 25px;
+    }
   }
 }

@@ -27,7 +27,13 @@ export default class ExperienceLog extends React.Component<IExperienceLogProps, 
 
   public render(): React.ReactElement<IExperienceLogProps> {
     if (this.state.isLoading) {
-      return <Spinner label={strings.LoadingLabel} type={SpinnerType.large} />;
+      return (
+        <div className={styles.experienceLog}>
+          <div className={styles.container}>
+            <Spinner label={strings.LoadingText} type={SpinnerType.large} />
+          </div>
+        </div>
+      );
     }
 
     return (

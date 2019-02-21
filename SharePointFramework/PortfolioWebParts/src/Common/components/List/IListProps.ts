@@ -1,11 +1,11 @@
 import IGroupByOption from "../../interfaces/IGroupByOption";
 import IExcelExportConfig from "../../interfaces/IExcelExportConfig";
-import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
-import { PageContext } from "@microsoft/sp-page-context";
+import { IColumn, DetailsListLayoutMode } from "office-ui-fabric-react/lib/DetailsList";
 
 export interface IListProps {
   items?: Array<any>;
   columns?: Array<IColumn>;
+  layoutMode?: DetailsListLayoutMode;
   showCommandBar?: boolean;
   showSearchBox?: boolean;
   groupByOptions?: IGroupByOption[];

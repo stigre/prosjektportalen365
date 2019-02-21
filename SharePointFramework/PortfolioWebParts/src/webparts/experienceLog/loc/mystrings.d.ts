@@ -1,5 +1,5 @@
 declare interface IExperienceLogWebPartStrings {
-  LoadingLabel: string;
+  LoadingText: string;
   ExcelExportFileNamePrefix: string;
   ExcelExportButtonLabel: string;
   TitleColumnDisplayName: string;
