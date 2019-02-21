@@ -158,5 +158,19 @@
                 <JSLink>clienttemplates.js</JSLink>
             </View>
         </pnp:Views>
+        <pnp:DataRows KeyColumn="Title" UpdateBehavior="Overwrite">
+            <pnp:DataRow>
+                <pnp:DataValue FieldName="Title">Alle prosjektleveranser</pnp:DataValue>
+                <pnp:DataValue FieldName="GtSearchQuery">ContentTypeId:0x0100D7B74DE815F946D3B0F99D19F9B36B68*</pnp:DataValue>
+            </pnp:DataRow>
+            <pnp:DataRow>
+                <pnp:DataValue FieldName="Title">Alle risikoelementer</pnp:DataValue>
+                <pnp:DataValue FieldName="GtSearchQuery">ContentTypeId:0x0100A87AE71CBF2643A6BC9D0948BD2EE89701*</pnp:DataValue>
+            </pnp:DataRow>
+            <pnp:DataRow>
+                <pnp:DataValue FieldName="Title">Alle ressursallokeringer</pnp:DataValue>
+                <pnp:DataValue FieldName="GtSearchQuery">ContentTypeId:0x010004EAFF7AFCC94C2680042E6881264120*</pnp:DataValue>
+            </pnp:DataRow>
+        </pnp:DataRows>
     </pnp:ListInstance>
 </pnp:Lists>
