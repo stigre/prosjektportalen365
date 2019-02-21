@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Util } from 'sp-pnp-js';
+import { isArray } from '@pnp/common';
 import IPortfolioOverviewFilter from './IPortfolioOverviewFilter';
 import PortfolioOverviewFilterItem from '../PortfolioOverviewFilterItem/PortfolioOverviewFilterItem';
 import IPortfolioOverviewFilterItem from '../PortfolioOverviewFilterItem/IPortfolioOverviewFilterItem';
@@ -59,7 +59,7 @@ export default class PortfolioOverviewFilter extends React.PureComponent<IPortfo
         const { filter } = this.state;
         if (filter) {
             return filter.items.map((item, idx) => {
-                item.selected = item.defaultSelected || (Util.isArray(this.state.filter.selected) && Array.contains(this.state.filter.selected, item.value));
+                item.selected = item.defaultSelected || (isArray(this.state.filter.selected) && Array.contains(this.state.filter.selected, item.value));
                 return (
                     <PortfolioOverviewFilterItem
                         key={`PortfolioOverviewFilterItem_${idx}`}

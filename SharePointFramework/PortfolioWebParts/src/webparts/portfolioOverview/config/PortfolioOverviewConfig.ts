@@ -1,5 +1,5 @@
 import * as strings from 'PortfolioOverviewWebPartStrings';
-import { Web } from 'sp-pnp-js';
+import { Web } from '@pnp/sp';
 import IPortfolioOverviewConfig, {
   IPortfolioOverviewColumnConfig,
   IPortfolioOverviewRefinerConfig,
