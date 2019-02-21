@@ -35,6 +35,7 @@ export default class TemplateSelectModal extends React.Component<ITemplateSelect
                 <div className={styles.templateSelectModal}>
                     <div className={styles.templateSelectModalInner}>
                         <div className={styles.templateSelectModalBody}>
+                            <div className={styles.modalTitle}>Oppsett av prosjektområde</div>
                             <div className={styles.templateSelect}>
                                 <div className={styles.templateSelectTitle}>{strings.TemplateSelectTitle}</div>
                                 <div className={styles.templateSelectDropdown}>
