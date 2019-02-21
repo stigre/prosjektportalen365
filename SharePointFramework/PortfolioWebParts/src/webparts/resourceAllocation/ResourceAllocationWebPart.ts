@@ -11,7 +11,7 @@ export interface IResourceAllocationWebPartProps { }
 export default class ResourceAllocationWebPart extends PortfolioBaseWebPart<IResourceAllocationWebPartProps> {
   public render(): void {
     const element: React.ReactElement<IResourceAllocationProps> = React.createElement(ResourceAllocation, {});
-    super._render('resourceallocationwebpart', element);
+    super._render(this.manifest.alias, element);
   }
 
   protected onInit(): Promise<void> {
