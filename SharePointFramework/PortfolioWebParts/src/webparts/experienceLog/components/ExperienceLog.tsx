@@ -2,7 +2,6 @@ import * as React from 'react';
 import { IExperienceLogProps, ExperienceLogDefaultProps } from './IExperienceLogProps';
 import { IExperienceLogState } from './IExperienceLogState';
 import List from '../../../common/components/List/List';
-import * as strings from 'ExperienceLogWebPartStrings';
 import { sp } from '@pnp/sp';
 import { Spinner, SpinnerType } from 'office-ui-fabric-react/lib/Spinner';
 
@@ -25,17 +24,21 @@ export default class ExperienceLog extends React.Component<IExperienceLogProps, 
 
   public render(): React.ReactElement<IExperienceLogProps> {
     if (this.state.isLoading) {
-      return <Spinner type={SpinnerType.large} label={strings.LoadingLabel} />;
+      return <Spinner label='Laster erfaringslogg...' type={SpinnerType.large} />;
     }
 
     return (
-      <List
-        items={this.state.items}
-        columns={this.props.columns}
-        showCommandBar={true}
-        groupByOptions={this.props.groupByOptions}
-        excelExportEnabled={this.props.excelExportEnabled}
-        excelExportConfig={this.props.excelExportConfig} />
+      <div className={styles.experienceLog}>
+        <div className={styles.container}>
+          <List
+            items={this.state.items}
+            columns={this.props.columns}
+            showCommandBar={true}
+            groupByOptions={this.props.groupByOptions}
+            excelExportEnabled={this.props.excelExportEnabled}
+            excelExportConfig={this.props.excelExportConfig} />
+        </div>
+      </div>
     );
   }
 

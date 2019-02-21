@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { IColumn } from "office-ui-fabric-react/lib/DetailsList";
+import styles from './DeliveriesOverview.module.scss';
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
-import { autobind } from "office-ui-fabric-react/lib/Utilities";
 import { IDeliveriesOverviewProps, DeliveriesOverviewDefaultProps } from './IDeliveriesOverviewProps';
 import { IDeliveriesOverviewState } from './IDeliveriesOverviewState';
 import List from '../../../common/components/List/List';
@@ -30,16 +29,20 @@ export default class DeliveriesOverview extends React.Component<IDeliveriesOverv
 
   public render(): React.ReactElement<IDeliveriesOverviewProps> {
     if (this.state.isLoading) {
-      return <Spinner type={SpinnerType.large} />;
+      return <Spinner label='Laster prosjektleveranser...' type={SpinnerType.large} />;
     }
 
     return (
-      <List
-        items={this.state.items}
-        columns={this.props.columns}
-        showCommandBar={true}
-        groupByOptions={this.props.groupByOptions}
-        excelExportEnabled={this.props.excelExportEnabled} />
+      <div className={styles.deliveriesOverview}>
+        <div className={styles.container}>
+          <List
+            items={this.state.items}
+            columns={this.props.columns}
+            showCommandBar={true}
+            groupByOptions={this.props.groupByOptions}
+            excelExportEnabled={this.props.excelExportEnabled} />
+        </div>
+      </div>
     );
   }
 

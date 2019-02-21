@@ -100,24 +100,6 @@
             </ArrayOfProperty>
         </Customization>
     </Field>
-    <Field Description="" DisplayName="Område-ID" Group="Prosjektportalenkolonner" ID="{fba7ced6-9970-4b14-ab9c-7c809310d86d}" Name="GtSiteId" ShowInDisplayForm="FALSE" ShowInEditForm="FALSE" ShowInNewForm="FALSE" StaticName="GtSiteId" Type="Text" />
-    <Field Description="" DisplayName="Områdeadresse" Group="Prosjektportalenkolonner" ID="{871c1234-9ac5-4841-8b56-50839c34a7a1}" Name="GtSiteUrl" ShowInDisplayForm="FALSE" ShowInEditForm="FALSE" ShowInNewForm="FALSE" StaticName="GtSiteUrl" Type="Text" />
-    <Field Description="" DisplayName="Måned" Format="RadioButtons" Group="Prosjektportalenkolonner" ID="{86673e07-181e-4521-843c-b687d86a6f85}" Name="GtMonthChoice" ShowInEditForm="FALSE" StaticName="GtMonthChoice" Type="Choice">
-        <CHOICES>
-            <CHOICE>April</CHOICE>
-            <CHOICE>August</CHOICE>
-            <CHOICE>Desember</CHOICE>
-            <CHOICE>Februar</CHOICE>
-            <CHOICE>Januar</CHOICE>
-            <CHOICE>Juli</CHOICE>
-            <CHOICE>Juni</CHOICE>
-            <CHOICE>Mai</CHOICE>
-            <CHOICE>Mars</CHOICE>
-            <CHOICE>November</CHOICE>
-            <CHOICE>Oktober</CHOICE>
-            <CHOICE>September</CHOICE>
-        </CHOICES>
-    </Field>
     <Field Description="{resource:SiteFields_GtProjectOwner_Description}" DisplayName="{resource:SiteFields_GtProjectOwner_DisplayName}" Group="Prosjektportalenkolonner" ID="{3121ac55-d68e-4fcb-8fc8-3d8ed8a601b2}" Name="GtProjectOwner" StaticName="GtProjectOwner" Type="User" />
     <Field Description="{resource:SiteFields_GtProjectManager_Description}" DisplayName="{resource:SiteFields_GtProjectManager_DisplayName}" Group="Prosjektportalenkolonner" ID="{d46bed8f-0fb6-4684-8221-632fdb12598f}" Name="GtProjectManager" StaticName="GtProjectManager" Type="User" />
     <Field Description="{resource:SiteFields_GtProjectFinanceName_Description}" DisplayName="{resource:SiteFields_GtProjectFinanceName_DisplayName}" Group="Prosjektportalenkolonner" ID="{983d5ab3-0a6c-4f6a-a7b5-d34d52d73676}" Name="GtProjectFinanceName" StaticName="GtProjectFinanceName" Type="Text" />
@@ -373,7 +355,7 @@
             <CHOICE>Currency</CHOICE>
             <CHOICE>Note</CHOICE>
         </CHOICES>
-    </Field>    
+    </Field>
     <Field Type="Text" DisplayName="{resource:SiteFields_GtSecViewFields_DisplayName}" Description="{resource:SiteFields_GtSecViewFields_Description}" Group="Prosjektportalenkolonner" ID="{2d165a4d-a3e9-4756-acd2-abb537041fd4}" StaticName="GtSecViewFields" Name="GtSecViewFields"></Field>
     <Field Type="Text" DisplayName="{resource:SiteFields_GtSecIcon_DisplayName}" Description="{resource:SiteFields_GtSecIcon_Description}" Group="Prosjektportalenkolonner" ID="{b2af224f-5e07-4f9f-9a3a-9f5345bb3153}" StaticName="GtSecIcon" Name="GtSecIcon"></Field>
     <Field Type="Text" DisplayName="{resource:SiteFields_GtSecFieldName_DisplayName}" Description="{resource:SiteFields_GtSecFieldName_Description}" Group="Prosjektportalenkolonner" ID="{fe762779-f5d6-475d-ad1d-68e7d9ae0034}" StaticName="GtSecFieldName" Name="GtSecFieldName"></Field>
@@ -394,4 +376,22 @@
     <Field Type="Text" DisplayName="{resource:SiteFields_GtSecList_DisplayName}" Description="{resource:SiteFields_GtSecList_Description}" Group="Prosjektportalenkolonner" ID="{4b5ca6f2-a470-4c11-a738-edd9d55fb096}" StaticName="GtSecList" Name="GtSecList"></Field>
     <Field Type="Text" DisplayName="{resource:SiteFields_GtSecSource_DisplayName}" Description="{resource:SiteFields_GtSecSource_Description}" Group="Prosjektportalenkolonner" ID="{2d6790ad-9da9-408c-a87f-8d56d7b377f6}" StaticName="GtSecSource" Name="GtSecSource"></Field>
     <Field Type="Note" DisplayName="{resource:SiteFields_GtSearchQuery_DisplayName}" Description="{resource:SiteFields_GtSearchQuery_Description}" ID="{31e405e0-2890-439d-9c9f-42354154feda}" StaticName="GtSearchQuery" Name="GtSearchQuery" Group="Prosjektportalenkolonner" />
+    <Field Description="" DisplayName="Område-ID" Group="Prosjektportalenkolonner" ID="{fba7ced6-9970-4b14-ab9c-7c809310d86d}" Name="GtSiteId" ShowInDisplayForm="FALSE" ShowInEditForm="FALSE" ShowInNewForm="FALSE" StaticName="GtSiteId" Type="Text" />
+    <Field Description="" DisplayName="Områdeadresse" Group="Prosjektportalenkolonner" ID="{871c1234-9ac5-4841-8b56-50839c34a7a1}" Name="GtSiteUrl" ShowInDisplayForm="FALSE" ShowInEditForm="FALSE" ShowInNewForm="FALSE" StaticName="GtSiteUrl" Type="Text" />
+    <Field Description="" DisplayName="Måned" Format="RadioButtons" Group="Prosjektportalenkolonner" ID="{86673e07-181e-4521-843c-b687d86a6f85}" Name="GtMonthChoice" ShowInEditForm="FALSE" StaticName="GtMonthChoice" Type="Choice">
+        <CHOICES>
+            <CHOICE>Januar</CHOICE>
+            <CHOICE>Februar</CHOICE>
+            <CHOICE>Mars</CHOICE>
+            <CHOICE>April</CHOICE>
+            <CHOICE>Mai</CHOICE>
+            <CHOICE>Juni</CHOICE>
+            <CHOICE>Juli</CHOICE>
+            <CHOICE>August</CHOICE>
+            <CHOICE>September</CHOICE>
+            <CHOICE>Oktober</CHOICE>
+            <CHOICE>November</CHOICE>
+            <CHOICE>Desember</CHOICE>
+        </CHOICES>
+    </Field>
 </pnp:SiteFields>

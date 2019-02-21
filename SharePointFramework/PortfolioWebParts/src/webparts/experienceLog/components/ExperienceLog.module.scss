@@ -1,5 +1,7 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
 .experienceLog {
-  background-color: white;
+  .container {
+    margin: 0px auto;
+  }
 }
