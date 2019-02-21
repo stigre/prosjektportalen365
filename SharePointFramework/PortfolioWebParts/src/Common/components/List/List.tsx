@@ -1,11 +1,10 @@
 import * as React from 'react';
 import * as unique from 'array-unique';
-import styles from './List.module.scss';
 import * as strings from 'CommonStrings';
 import { IListProps } from './IListProps';
 import { IListState } from './IListState';
-import { DetailsList, IColumn, IGroup, SelectionMode, DetailsListLayoutMode, ConstrainMode } from 'office-ui-fabric-react/lib/DetailsList';
-import { CommandBar, ICommandBarItemProps } from 'office-ui-fabric-react/lib/CommandBar';
+import { DetailsList, IColumn, IGroup, SelectionMode, DetailsListLayoutMode } from 'office-ui-fabric-react/lib/DetailsList';
+import { CommandBar, ICommandBarItemProps, ICommandBarProps } from 'office-ui-fabric-react/lib/CommandBar';
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { ExcelExportStatus } from '../../ExportToExcel';
@@ -34,7 +33,7 @@ export default class List extends React.Component<IListProps, IListState> {
     let { items, columns, groups } = this.getFilteredData();
     return (
       <div>
-        {this.renderCommandBar()}
+        <CommandBar {...this.getCommandBarProps()} />
         <div hidden={!this.props.showSearchBox}>
           <SearchBox
             placeholder={strings.SearchBoxPlaceholder}
@@ -44,15 +43,17 @@ export default class List extends React.Component<IListProps, IListState> {
           items={items}
           columns={columns}
           groups={groups}
-          onRenderItemColumn={this.onRenderItemColumn} />
+          onRenderItemColumn={this.onRenderItemColumn}
+          selectionMode={SelectionMode.none}
+          layoutMode={DetailsListLayoutMode.justified} />
       </div>
     );
   }
 
   /**
-   * Render command bar
+   * Get command bar props
    */
-  private renderCommandBar() {
+  private getCommandBarProps(): ICommandBarProps {
     const items: Array<ICommandBarItemProps> = [];
     const farItems: Array<ICommandBarItemProps> = [];
 
@@ -94,16 +95,7 @@ export default class List extends React.Component<IListProps, IListState> {
       });
     }
 
-    if (items.length > 0 || farItems.length > 0) {
-      return (
-        <CommandBar
-          hidden={!this.props.showCommandBar}
-          items={items}
-          farItems={farItems}
-        />
-      );
-    }
-    return null;
+    return { hidden: !this.props.showCommandBar, items, farItems };
   }
 
 
