@@ -8,6 +8,7 @@ import { SearchQuery, ISearchQueryBuilder, SearchQueryBuilder, sp, QueryProperty
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 import { Spinner, SpinnerType } from 'office-ui-fabric-react/lib/Spinner';
 import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
+import formatDate from '../../../common/helpers/formatDate';
 
 export default class LatestProjects extends React.Component<ILatestProjectsProps, ILatestProjectsState> {
   constructor(props) {
@@ -38,8 +39,7 @@ export default class LatestProjects extends React.Component<ILatestProjectsProps
   private renderProjectList(sites: SearchResult[]) {
     if (sites.length > 0) {
       return sites.map(site => {
-        let options = { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-        let created = new Date(site['Created']).toLocaleString("nb-NO", options);
+        let created = formatDate(site['Created']);
         return (
           <div className={styles.linkItem}>
             <a className={styles.projectLink} href={site.Path}>{site.Title}</a>
