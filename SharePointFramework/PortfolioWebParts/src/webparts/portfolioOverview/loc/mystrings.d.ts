@@ -3,6 +3,16 @@ declare interface IPortfolioOverviewWebPartStrings {
   LoadingText: string;
   SearchBoxPlaceHolder: string;
   NoGrouping: string;
+  ShowCount: string;
+  ShowCountWithFilters: string;
+  PortfolioFieldsListTitle: string;
+  PortfolioRefinersListTitle: string;
+  PortfolioViewsListTitle: string;
+  ViewNotFoundMessage: string;
+  NoDefaultViewMessage: string;
+  FiltersString: string;
+  FieldSelectorName: string;
+  FieldSelectorEmptyMessage: string;
 }
 
 declare module 'PortfolioOverviewWebPartStrings' {
