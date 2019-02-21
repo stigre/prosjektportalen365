@@ -10,7 +10,7 @@ export interface IBenefitsOverviewWebPartProps { }
 export default class BenefitsOverviewWebPart extends PortfolioBaseWebPart<IBenefitsOverviewWebPartProps> {
   public render(): void {
     const element: React.ReactElement<IBenefitsOverviewProps> = React.createElement(BenefitsOverview, {});
-    super._render('benefitsoverviewwebpart', element);
+    super._render(this.manifest.alias, element);
   }
 
   protected async onInit(): Promise<void> {

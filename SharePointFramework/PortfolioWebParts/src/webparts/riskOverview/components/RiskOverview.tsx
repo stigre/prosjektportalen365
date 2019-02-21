@@ -4,6 +4,8 @@ import * as strings from 'RiskOverviewWebPartStrings';
 import { IRiskOverviewProps, RiskOverviewDefaultProps } from './IRiskOverviewProps';
 import { IRiskOverviewState } from './IRiskOverviewState';
 import { Spinner, SpinnerType } from "office-ui-fabric-react/lib/Spinner";
+import { DetailsListLayoutMode } from "office-ui-fabric-react/lib/DetailsList";
+import { MessageBar, MessageBarType } from "office-ui-fabric-react/lib/MessageBar";
 import List from '../../../common/components/List/List';
 import { sp } from '@pnp/sp';
 import DataSourceService from '../../../common/services/DataSourceService';
@@ -24,14 +26,29 @@ export default class RiskOverview extends React.Component<IRiskOverviewProps, IR
     try {
       const items = await this.fetchItems();
       this.setState({ items, isLoading: false });
-    } catch (err) {
-      this.setState({ items: [], isLoading: false });
+    } catch (error) {
+      this.setState({ error, isLoading: false });
     }
   }
 
   public render(): React.ReactElement<IRiskOverviewProps> {
     if (this.state.isLoading) {
-      return <Spinner label={strings.LoadingText} type={SpinnerType.large} />;
+      return (
+        <div className={styles.riskOverview}>
+          <div className={styles.container}>
+            <Spinner label={strings.LoadingText} type={SpinnerType.large} />
+          </div>
+        </div>
+      );
+    }
+    if (this.state.error) {
+      return (
+        <div className={styles.riskOverview}>
+          <div className={styles.container}>
+            <MessageBar messageBarType={MessageBarType.error}>{this.state.error}</MessageBar>
+          </div>
+        </div>
+      );
     }
 
     return (
@@ -40,7 +57,8 @@ export default class RiskOverview extends React.Component<IRiskOverviewProps, IR
           <List
             items={this.state.items}
             columns={this.props.columns}
-            showCommandBar={true}
+            layoutMode={DetailsListLayoutMode.fixedColumns}
+            showCommandBar={this.props.showCommandBar}
             groupByOptions={this.props.groupByOptions}
             excelExportEnabled={this.props.excelExportEnabled} />
         </div>

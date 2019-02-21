@@ -11,7 +11,7 @@ export default class DeliveriesOverviewWebPart extends PortfolioBaseWebPart<IDel
     const element: React.ReactElement<IDeliveriesOverviewProps> = React.createElement(
       DeliveriesOverview, { context: this.context, ...this.properties }
     );
-    super._render('deliveriesoverviewwebpart', element);
+    super._render(this.manifest.alias, element);
   }
 
   protected async onInit(): Promise<void> {

@@ -9,7 +9,7 @@ import { IRiskOverviewWebPartProps } from './IRiskOverviewWebPartProps';
 export default class RiskOverviewWebPart extends PortfolioBaseWebPart<IRiskOverviewWebPartProps> {
   public render(): void {
     const element: React.ReactElement<IRiskOverviewProps> = React.createElement(RiskOverview, { ...this.properties });
-    super._render('riskoverviewwebpart', element);
+    super._render(this.manifest.alias, element);
   }
 
   protected onDispose(): void {

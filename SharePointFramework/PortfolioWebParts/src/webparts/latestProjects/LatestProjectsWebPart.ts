@@ -24,7 +24,7 @@ export default class LatestProjectsWebPart extends PortfolioBaseWebPart<ILatestP
         ...this.properties,
       }
     );
-    super._render('latestprojectswebpart', element);
+    super._render(this.manifest.alias, element);
   }
 
   protected async onInit(): Promise<void> {

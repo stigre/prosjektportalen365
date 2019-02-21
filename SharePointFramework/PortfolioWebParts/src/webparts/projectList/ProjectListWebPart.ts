@@ -32,7 +32,7 @@ export default class ProjectListWebPart extends PortfolioBaseWebPart<IProjectLis
         webAbsoluteUrl: this.context.pageContext.web.absoluteUrl
       }
     );
-    super._render('projectlistwebpart', element);
+    super._render(this.manifest.alias, element);
   }
 
   protected async onInit(): Promise<void> {
