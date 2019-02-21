@@ -6,6 +6,7 @@ import { IPortfolioOverviewState } from './IPortfolioOverviewState';
 import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
 import { CommandBar, ICommandBarItemProps, ICommandBarProps } from 'office-ui-fabric-react/lib/CommandBar';
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
+import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 
 export default class PortfolioOverview extends React.Component<IPortfolioOverviewProps, IPortfolioOverviewState> {
   public static defaultProps: Partial<IPortfolioOverviewProps> = {
@@ -31,14 +32,24 @@ export default class PortfolioOverview extends React.Component<IPortfolioOvervie
     if (this.state.isLoading) return <Spinner label={strings.LoadingText} size={SpinnerSize.large} />;
     return (
       <div className={styles.portfolioOverview}>
-      <CommandBar {...this.getCommandBarProps()} />
+        <CommandBar {...this.getCommandBarProps()} />
+        <div className={styles.container}>
+          <div className={styles.searchBox}>
+            <SearchBox
+              onChange={newValue => {
+                let searchTerm = newValue.toLowerCase();
+                this.setState({ searchTerm });
+              }}
+              placeholder={strings.SearchBoxPlaceHolder} />
+          </div>
+        </div>
       </div>
     );
   }
 
-    /**
-   * Get command bar props
-   */
+  /**
+ * Get command bar props
+ */
   private getCommandBarProps(): ICommandBarProps {
     const items: Array<ICommandBarItemProps> = [];
     const farItems: Array<ICommandBarItemProps> = [];
