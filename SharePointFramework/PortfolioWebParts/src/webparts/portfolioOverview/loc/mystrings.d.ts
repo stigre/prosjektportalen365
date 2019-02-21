@@ -5,6 +5,9 @@ declare interface IPortfolioOverviewWebPartStrings {
   NoGrouping: string;
   ShowCount: string;
   ShowCountWithFilters: string;
+  PortfolioFieldsListTitle: string;
+  PortfolioRefinersListTitle: string;
+  PortfolioViewsListTitle: string;
 }
 
 declare module 'PortfolioOverviewWebPartStrings' {

@@ -8,6 +8,7 @@ import { CommandBar, ICommandBarItemProps, ICommandBarProps } from 'office-ui-fa
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
+import { CreateJsomContext, ExecuteJsomQuery } from 'jsom-ctx';
 
 export default class PortfolioOverview extends React.Component<IPortfolioOverviewProps, IPortfolioOverviewState> {
   public static defaultProps: Partial<IPortfolioOverviewProps> = {
@@ -43,6 +44,29 @@ export default class PortfolioOverview extends React.Component<IPortfolioOvervie
       </div>
     );
   }
+
+  private async fetchInitialData(): Promise<Partial<IPortfolioOverviewState>> {
+    let hashState = this.getUrlHash();
+    const jsomCtx = await CreateJsomContext(this.props.pageContext.web.absoluteUrl);
+    const permissions = new SP.BasePermissions();
+    permissions.set(31);
+    const canUserManageWeb = jsomCtx.web.doesUserHavePermissions(permissions);
+    await ExecuteJsomQuery(jsomCtx);
+
+
+
+
+    return null;
+  }
+
+  private getUrlHash(hash = document.location.hash.substring(1)): { [key: string]: string } {
+    let hashObject: { [key: string]: string } = {};
+    hash.split("&").map(str => {
+        const [key, value] = str.split("=");
+        hashObject[key] = value;
+    });
+    return hashObject;
+}
 
   /**
    *  Render SearchBox
