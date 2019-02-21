@@ -1,10 +1,12 @@
 import * as React from 'react';
 import styles from './ExperienceLog.module.scss';
+import * as strings from 'ExperienceLogWebPartStrings';
 import { IExperienceLogProps, ExperienceLogDefaultProps } from './IExperienceLogProps';
 import { IExperienceLogState } from './IExperienceLogState';
 import List from '../../../common/components/List/List';
 import { sp } from '@pnp/sp';
 import { Spinner, SpinnerType } from 'office-ui-fabric-react/lib/Spinner';
+import { stringIsNullOrEmpty } from '@pnp/common';
 
 export default class ExperienceLog extends React.Component<IExperienceLogProps, IExperienceLogState> {
   public static defaultProps = ExperienceLogDefaultProps;
@@ -25,7 +27,7 @@ export default class ExperienceLog extends React.Component<IExperienceLogProps, 
 
   public render(): React.ReactElement<IExperienceLogProps> {
     if (this.state.isLoading) {
-      return <Spinner label='Laster erfaringslogg...' type={SpinnerType.large} />;
+      return <Spinner label={strings.LoadingLabel} type={SpinnerType.large} />;
     }
 
     return (

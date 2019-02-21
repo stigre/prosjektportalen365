@@ -4,12 +4,13 @@ import * as strings from 'PortfolioOverviewWebPartStrings';
 import { IPortfolioOverviewProps } from './IPortfolioOverviewProps';
 import { IPortfolioOverviewState } from './IPortfolioOverviewState';
 import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
-import { CommandBar, ICommandBarItemProps } from 'office-ui-fabric-react/lib/CommandBar';
+import { CommandBar, ICommandBarItemProps, ICommandBarProps } from 'office-ui-fabric-react/lib/CommandBar';
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
+import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 
 export default class PortfolioOverview extends React.Component<IPortfolioOverviewProps, IPortfolioOverviewState> {
   public static defaultProps: Partial<IPortfolioOverviewProps> = {
-    groupByOptions: [],
+    groupByOptions: [{ name: strings.ProjectLabel, key: 'SiteTitle' }],
     defaultGroupBy: { key: "NoGrouping", name: strings.NoGrouping },
   };
 
@@ -31,42 +32,51 @@ export default class PortfolioOverview extends React.Component<IPortfolioOvervie
     if (this.state.isLoading) return <Spinner label={strings.LoadingText} size={SpinnerSize.large} />;
     return (
       <div className={styles.portfolioOverview}>
-      {this.renderCommandBar()}
+        <CommandBar {...this.getCommandBarProps()} />
+        <div className={styles.container}>
+          <div className={styles.searchBox}>
+            <SearchBox
+              onChange={newValue => {
+                let searchTerm = newValue.toLowerCase();
+                this.setState({ searchTerm });
+              }}
+              placeholder={strings.SearchBoxPlaceHolder} />
+          </div>
+        </div>
       </div>
     );
   }
 
-  private renderCommandBar() {
-  const items: Array<ICommandBarItemProps> = [];
+  /**
+ * Get command bar props
+ */
+  private getCommandBarProps(): ICommandBarProps {
+    const items: Array<ICommandBarItemProps> = [];
+    const farItems: Array<ICommandBarItemProps> = [];
 
-  if (this.props.groupByOptions.length > 0) {
-    const noGrouping = {
-      key: "NoGrouping",
-      name: strings.NoGrouping,
-    };
-    const subItems = [noGrouping, ...this.props.groupByOptions].map(item => ({
-      ...item,
-      onClick: e => {
-        e.preventDefault();
-        this.setState({ groupBy: item });
-      },
-    }));
-    items.push({
-      key: "Group",
-      name: this.state.groupBy.name,
-      iconProps: { iconName: "GroupedList" },
-      itemType: ContextualMenuItemType.Header,
-      onClick: evt => evt.preventDefault(),
-      subMenuProps: { items: subItems },
-    });
-  }
+    if (this.props.groupByOptions.length > 0) {
+      const noGrouping = {
+        key: 'NoGrouping',
+        name: strings.NoGrouping,
+      };
+      const subItems = [noGrouping, ...this.props.groupByOptions].map(item => ({
+        ...item,
+        onClick: (event: any) => {
+          event.preventDefault();
+          this.setState({ groupBy: item });
+        },
+      }));
+      items.push({
+        key: 'Group',
+        name: this.state.groupBy.name,
+        iconProps: { iconName: 'GroupedList' },
+        itemType: ContextualMenuItemType.Header,
+        onClick: evt => evt.preventDefault(),
+        subMenuProps: { items: subItems },
+      });
+    }
 
-    return (
-      <CommandBar
-        items={items}
-        farItems={[]}
-      />
-    );
+    return { items, farItems };
   }
 
 }
