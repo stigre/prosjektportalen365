@@ -4,9 +4,7 @@ import { IPropertyPaneConfiguration, } from '@microsoft/sp-webpart-base';
 import ResourceAllocation from './components/ResourceAllocation';
 import { IResourceAllocationProps } from './components/IResourceAllocationProps';
 import PortfolioBaseWebPart from '../@portfolioBaseWebPart';
-import { sp } from '@pnp/sp';
-
-export interface IResourceAllocationWebPartProps { }
+import { IResourceAllocationWebPartProps } from './IResourceAllocationWebPartProps';
 
 export default class ResourceAllocationWebPart extends PortfolioBaseWebPart<IResourceAllocationWebPartProps> {
   public render(): void {
@@ -14,10 +12,8 @@ export default class ResourceAllocationWebPart extends PortfolioBaseWebPart<IRes
     super._render(this.manifest.alias, element);
   }
 
-  protected onInit(): Promise<void> {
-    return super.onInit().then(_ => {
-      sp.setup({ spfxContext: this.context });
-    });
+  protected async onInit(): Promise<void> {
+    await super.onInit();
   }
 
   protected onDispose(): void {
