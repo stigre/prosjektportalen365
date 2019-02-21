@@ -3,6 +3,8 @@ declare interface IPortfolioOverviewWebPartStrings {
   LoadingText: string;
   SearchBoxPlaceHolder: string;
   NoGrouping: string;
+  ShowCount: string;
+  ShowCountWithFilters: string;
 }
 
 declare module 'PortfolioOverviewWebPartStrings' {

@@ -4,6 +4,7 @@ define([], function() {
     "LoadingText": "Laster prosjektportefølje...",
     "SearchBoxPlaceHolder": "Søk i alle prosjekter...",
     "NoGrouping": "Ingen gruppering",
-
+    "ShowCount": "Viser {0} av totalt {1} prosjekter.",
+    "ShowCountWithFilters": "Viser {0} av totalt {1} prosjekter, filtrert på {2}."
   }
 });

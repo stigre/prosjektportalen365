@@ -7,6 +7,7 @@ import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
 import { CommandBar, ICommandBarItemProps, ICommandBarProps } from 'office-ui-fabric-react/lib/CommandBar';
 import { ContextualMenuItemType } from 'office-ui-fabric-react/lib/ContextualMenu';
 import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
+import { MessageBar } from 'office-ui-fabric-react/lib/MessageBar';
 
 export default class PortfolioOverview extends React.Component<IPortfolioOverviewProps, IPortfolioOverviewState> {
   public static defaultProps: Partial<IPortfolioOverviewProps> = {
@@ -19,7 +20,9 @@ export default class PortfolioOverview extends React.Component<IPortfolioOvervie
 
     this.state = {
       isLoading: true,
-      groupBy: this.props.defaultGroupBy
+      groupBy: this.props.defaultGroupBy,
+      currentFilters: {},
+      items: ['test']
     };
   }
 
@@ -34,17 +37,52 @@ export default class PortfolioOverview extends React.Component<IPortfolioOvervie
       <div className={styles.portfolioOverview}>
         <CommandBar {...this.getCommandBarProps()} />
         <div className={styles.container}>
-          <div className={styles.searchBox}>
-            <SearchBox
-              onChange={newValue => {
-                let searchTerm = newValue.toLowerCase();
-                this.setState({ searchTerm });
-              }}
-              placeholder={strings.SearchBoxPlaceHolder} />
-          </div>
+          {this.renderSearchBox()}
+          {this.renderStatusBar()}
         </div>
       </div>
     );
+  }
+
+  /**
+   *  Render SearchBox
+   */
+  private renderSearchBox() {
+    return (
+      <div className={styles.searchBox}>
+        <SearchBox
+          onChange={newValue => {
+            let searchTerm = newValue.toLowerCase();
+            this.setState({ searchTerm });
+          }}
+          placeholder={strings.SearchBoxPlaceHolder} />
+      </div>
+    );
+  }
+
+  /**
+  *  Render status bar
+  */
+  private renderStatusBar() {
+    const data = this.getFilteredData();
+    if (data.items.length === 0) {
+      return null;
+    }
+    const { currentFilters } = this.state;
+    const currentFiltersStr = [].concat.apply([], Object.keys(currentFilters).map(key => currentFilters[key])).join(", ");
+    let statusText = this.formatString(strings.ShowCount, data.items.length.toString(), this.state.items.length.toString());
+    if (currentFiltersStr) {
+      statusText = this.formatString(strings.ShowCountWithFilters, data.items.length.toString(), this.state.items.length.toString(), currentFiltersStr);
+    }
+    return <MessageBar>{statusText}</MessageBar>;
+  }
+
+  private formatString(str: string, ...replacements: string[]): string {
+    return str.replace(/{(\d+)}/g, (match, number) => {
+      return typeof replacements[number] != 'undefined'
+        ? replacements[number]
+        : match;
+    });
   }
 
   /**
@@ -77,6 +115,14 @@ export default class PortfolioOverview extends React.Component<IPortfolioOvervie
     }
 
     return { items, farItems };
+  }
+
+  private getFilteredData() {
+    return {
+      items: ['test'],
+      columns: [],
+      groups: []
+    };
   }
 
 }

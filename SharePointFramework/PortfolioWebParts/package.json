@@ -33,6 +33,7 @@
     "@pnp/sp-taxonomy": "^1.2.7",
     "@pnp/spfx-controls-react": "^1.11.0",
     "@types/es6-promise": "0.0.33",
+    "@types/microsoft-ajax": "0.0.33",
     "@types/react": "16.4.2",
     "@types/react-dom": "16.0.5",
     "@types/webpack-env": "1.13.1",
