@@ -11,6 +11,7 @@ import { MessageBar, MessageBarType } from 'office-ui-fabric-react/lib/MessageBa
 import * as PortfolioOverviewConfig from '../config/PortfolioOverviewConfig';
 import { CreateJsomContext, ExecuteJsomQuery } from 'jsom-ctx';
 import { queryProjects } from './PortfolioOverViewSearch';
+import PortfolioOverviewFilterPanel from './PortfolioOverviewFilterPanel/PortfolioOverviewFilterPanel';
 
 export default class PortfolioOverview extends React.Component<IPortfolioOverviewProps, IPortfolioOverviewState> {
   public static defaultProps: Partial<IPortfolioOverviewProps> = {
@@ -44,6 +45,18 @@ export default class PortfolioOverview extends React.Component<IPortfolioOvervie
           {this.renderStatusBar()}
         </div>
       </div>
+    );
+  }
+
+  private renderFilterPanel() {
+    return (
+      <PortfolioOverviewFilterPanel
+      isOpen={false}
+      onDismiss={null}
+      filters={[]}
+      showIcons={false}
+      onFilterChange={null}
+      />
     );
   }
 

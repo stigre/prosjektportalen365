@@ -10,6 +10,9 @@ define([], function() {
     "PortfolioRefinersListTitle": "Filterkonfigurasjon for portefølje",
     "PortfolioViewsListTitle": "Visninger for portefølje",
     "ViewNotFoundMessage": "Cannot find selected view",
-    "NoDefaultViewMessage": "Default view is not configured"
+    "NoDefaultViewMessage": "Default view is not configured",
+    "FiltersString": "Filters",
+    "FieldSelectorName": "Fields",
+    "FieldSelectorEmptyMessage": "No fields are configured. Please contact an administrator."
   }
 });
