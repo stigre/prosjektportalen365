@@ -39,7 +39,7 @@ export default class RiskOverview extends React.Component<IRiskOverviewProps, IR
             columns={this.props.columns}
             showCommandBar={true}
             groupByOptions={this.props.groupByOptions}
-            excelExportEnabled={false} />
+            excelExportEnabled={this.props.excelExportEnabled} />
         </div>
       </div>
     );

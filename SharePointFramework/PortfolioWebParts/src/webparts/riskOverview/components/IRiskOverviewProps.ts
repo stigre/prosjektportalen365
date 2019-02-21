@@ -3,6 +3,7 @@ import IGroupByOption from '../../../common/interfaces/IGroupByOption';
 
 export interface IRiskOverviewProps {
     columns?: IColumn[];
+    showCommandBar?: boolean;
     groupByOptions?: IGroupByOption[];
     excelExportEnabled?: boolean;
 }
@@ -17,5 +18,7 @@ export const RiskOverviewDefaultProps: Partial<IRiskOverviewProps> = {
         isMultiline: true,
         isResizable: true,
     }],
-    excelExportEnabled: true,
+    showCommandBar: true,
+    groupByOptions: [{ name: 'Prosjekt', key: 'SiteTitle' }],
+    excelExportEnabled: false,
 };

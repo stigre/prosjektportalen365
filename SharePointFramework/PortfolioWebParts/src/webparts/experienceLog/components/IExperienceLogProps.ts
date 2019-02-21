@@ -6,8 +6,8 @@ import { WebPartContext } from '@microsoft/sp-webpart-base';
 
 export interface IExperienceLogProps {
   context: WebPartContext;
-  groupByOptions?: IGroupByOption[];
   columns?: IColumn[];
+  groupByOptions?: IGroupByOption[];
   excelExportEnabled?: boolean;
   excelExportConfig?: IExcelExportConfig;
 }
