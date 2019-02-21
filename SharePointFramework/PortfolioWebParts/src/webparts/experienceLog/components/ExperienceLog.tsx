@@ -1,4 +1,5 @@
 import * as React from 'react';
+import styles from './ExperienceLog.module.scss';
 import { IExperienceLogProps, ExperienceLogDefaultProps } from './IExperienceLogProps';
 import { IExperienceLogState } from './IExperienceLogState';
 import List from '../../../common/components/List/List';

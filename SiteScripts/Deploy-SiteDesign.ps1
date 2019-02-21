@@ -13,14 +13,14 @@ Param(
     [int]$First = 300
 )
 
-Try {
-    $env_settings = Get-Content .\config\env.json -Raw -ErrorAction Stop | ConvertFrom-Json -ErrorAction Stop
-    $RootSiteUrl = $env_settings.RootSiteUrl
-    $Credentials = $env_settings.Credentials
-}
-Catch {
-    exit 0
-}
+# Try {
+#     $env_settings = Get-Content .\config\env.json -Raw -ErrorAction Stop | ConvertFrom-Json -ErrorAction Stop
+#     $RootSiteUrl = $env_settings.RootSiteUrl
+#     $Credentials = $env_settings.Credentials
+# }
+# Catch {
+#     exit 0
+# }
 
 
 Write-Host "[INFO] Connecting to $RootSiteUrl"
