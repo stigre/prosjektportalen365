@@ -12,11 +12,14 @@ import * as PortfolioOverviewConfig from '../config/PortfolioOverviewConfig';
 import { CreateJsomContext, ExecuteJsomQuery } from 'jsom-ctx';
 import { queryProjects } from './PortfolioOverViewSearch';
 import PortfolioOverviewFilterPanel from './PortfolioOverviewFilterPanel/PortfolioOverviewFilterPanel';
+import PortfolioOverviewFieldSelector from './PortfolioOverviewFieldSelector';
 
 export default class PortfolioOverview extends React.Component<IPortfolioOverviewProps, IPortfolioOverviewState> {
   public static defaultProps: Partial<IPortfolioOverviewProps> = {
     groupByOptions: [{ name: strings.ProjectLabel, key: 'SiteTitle' }],
     defaultGroupBy: { key: "NoGrouping", name: strings.NoGrouping },
+    defaultSortFunction: (a, b) => a.Title > b.Title ? 1 : -1,
+    viewSelectorEnabled: true
   };
 
   constructor(props) {
@@ -30,12 +33,20 @@ export default class PortfolioOverview extends React.Component<IPortfolioOvervie
     };
   }
 
-  public componentDidMount() {
-    // fetch data
-    this.setState({ isLoading: false });
+  public async componentDidMount() {
+    try {
+      const data = await this.fetchInitialData();
+      await this.updateState({ ...data, isLoading: false });
+      if (this.props.viewSelectorEnabled) {
+        this.setUrlHash({ viewId: this.state.currentView.id.toString() });
+      }
+    } catch (errorMessage) {
+      this.setState({ errorMessage, isLoading: false });
+    }
   }
 
   public render(): React.ReactElement<IPortfolioOverviewProps> {
+    console.log(this.state.errorMessage);
     if (this.state.isLoading) return <Spinner label={strings.LoadingText} size={SpinnerSize.large} />;
     return (
       <div className={styles.portfolioOverview}>
@@ -51,11 +62,11 @@ export default class PortfolioOverview extends React.Component<IPortfolioOvervie
   private renderFilterPanel() {
     return (
       <PortfolioOverviewFilterPanel
-      isOpen={false}
-      onDismiss={null}
-      filters={[]}
-      showIcons={false}
-      onFilterChange={null}
+        isOpen={false}
+        onDismiss={null}
+        filters={[]}
+        showIcons={false}
+        onFilterChange={null}
       />
     );
   }
@@ -104,8 +115,43 @@ export default class PortfolioOverview extends React.Component<IPortfolioOvervie
     const fieldNames = config.columns.map(f => f.fieldName);
     const response = await queryProjects(currentView, config);
 
+    // Populates PortfolioOverviewFieldSelector with items from this.congig.columns
+    PortfolioOverviewFieldSelector.items = config.columns.map(col => ({
+      name: col.name,
+      value: col.fieldName,
+      defaultSelected: Array.contains(currentView.fields, col.name),
+      readOnly: col.readOnly,
+    }));
 
-    return null;
+    // Sort the columns as they are added to the view
+    let selectedColumns = currentView.fields.map(f => config.columns.filter(fc => fc.name === f)[0]);
+
+    // Get selected filters
+    let filters = this.getSelectedFiltersWithItems(response.refiners, config, currentView).concat([PortfolioOverviewFieldSelector]);
+
+    // Sorts items from response.primarySearchResults
+    let items = response.primarySearchResults.sort(this.props.defaultSortFunction);
+
+    let updatedState: Partial<IPortfolioOverviewState> = {
+      selectedColumns,
+      fieldNames,
+      items,
+      filters,
+      currentView,
+      config,
+      canUserManageWeb: canUserManageWeb.get_value(),
+      filteredItems: items,
+    };
+
+    // Check if current view has group by set
+    if (currentView.groupBy) {
+      let [groupByColumn] = config.columns.filter(fc => fc.name === currentView.groupBy);
+      if (groupByColumn) {
+        updatedState.groupBy = groupByColumn;
+      }
+    }
+
+    return updatedState;
   }
 
   private getUrlHash(hash = document.location.hash.substring(1)): { [key: string]: string } {
@@ -115,6 +161,39 @@ export default class PortfolioOverview extends React.Component<IPortfolioOvervie
       hashObject[key] = value;
     });
     return hashObject;
+  }
+
+  private setUrlHash(hashObject: { [key: string]: string }): void {
+    let hash = "#";
+    let hashParts = Object.keys(hashObject).map(key => `${key}=${hashObject[key]}`);
+    hash += hashParts.join("&");
+    document.location.hash = hash;
+}
+
+  /**
+ * Get selected filters with items. Based on refiner configuration retrieved from the config list,
+ * the filters are checked against refiners retrieved by search.
+ *
+ * @param {any[]} refiners Refiners retrieved by search
+ * @param {PortfolioOverviewConfig.IPortfolioOverviewConfig} configuration PortfolioOverviewConfig
+ * @param {PortfolioOverviewConfig.IPortfolioOverviewConfigViewConfig} viewConfig View configuration
+ */
+  private getSelectedFiltersWithItems(refiners: any[], configuration: PortfolioOverviewConfig.IPortfolioOverviewConfig, viewConfig: PortfolioOverviewConfig.IPortfolioOverviewViewConfig): any {
+    return configuration.refiners
+      .filter(ref => (refiners.filter(r => r.Name === ref.key).length > 0) && (Array.contains(viewConfig.refiners, ref.name)))
+      .map(ref => {
+        let entries = refiners.filter(r => r.Name === ref.key)[0].Entries;
+        let items = entries.results
+          .map(entry => ({
+            name: entry.RefinementName,
+            value: entry.RefinementValue,
+          }))
+          .sort((a, b) => a.value > b.value ? 1 : -1);
+        return {
+          ...ref,
+          items,
+        };
+      });
   }
 
   /**
@@ -196,6 +275,12 @@ export default class PortfolioOverview extends React.Component<IPortfolioOvervie
       columns: [],
       groups: []
     };
+  }
+
+  private async updateState(updatedState: IPortfolioOverviewState): Promise<void> {
+    this.setState(updatedState, () => {
+      return;
+    });
   }
 
 }
