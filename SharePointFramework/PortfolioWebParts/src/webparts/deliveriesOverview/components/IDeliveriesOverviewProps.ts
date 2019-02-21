@@ -1,7 +1,6 @@
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import { WebPartContext } from '@microsoft/sp-webpart-base';
-import IGroupByOption from '../../../common/interfaces/IGroupByOption';
-import { IDeliveriesOverviewWebPartProps } from '../DeliveriesOverviewWebPart';
+import { IDeliveriesOverviewWebPartProps } from '../IDeliveriesOverviewWebPartProps';
 
 export interface IDeliveriesOverviewProps extends IDeliveriesOverviewWebPartProps {
     context: WebPartContext;

@@ -1,11 +1,8 @@
 import { IColumn } from 'office-ui-fabric-react/lib/DetailsList';
-import IGroupByOption from '../../../common/interfaces/IGroupByOption';
+import { IRiskOverviewWebPartProps } from '../IRiskOverviewWebPartProps';
 
-export interface IRiskOverviewProps {
+export interface IRiskOverviewProps extends IRiskOverviewWebPartProps {
     columns?: IColumn[];
-    showCommandBar?: boolean;
-    groupByOptions?: IGroupByOption[];
-    excelExportEnabled?: boolean;
 }
 
 export const RiskOverviewDefaultProps: Partial<IRiskOverviewProps> = {
@@ -18,7 +15,4 @@ export const RiskOverviewDefaultProps: Partial<IRiskOverviewProps> = {
         isMultiline: true,
         isResizable: true,
     }],
-    showCommandBar: true,
-    groupByOptions: [{ name: 'Prosjekt', key: 'SiteTitle' }],
-    excelExportEnabled: false,
 };

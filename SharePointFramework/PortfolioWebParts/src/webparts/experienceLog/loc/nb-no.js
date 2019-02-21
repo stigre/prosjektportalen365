@@ -1,6 +1,6 @@
 define([], function() {
   return {
-    "LoadingLabel": "Laster loggelementer...",
+    "LoadingText": "Laster loggelementer...",
     "ExcelExportFileNamePrefix": "Erfaringslogg",
     "ExcelExportButtonLabel": "Eksporter til Excel",
     "TitleColumnDisplayName": "Tittel",
