@@ -394,7 +394,7 @@
             <CHOICE>Desember</CHOICE>
         </CHOICES>
     </Field>
-    <Field DisplayName="{resource:SiteFields_GtResourceRole_DisplayName}" Description="{resource:SiteFields_GtResourceRole_Description}" ID="{3a0ae560-bd55-45d4-907f-5119bf0a83bb}" Type="TaxonomyFieldType" WebId="{siteid}" Group="{resource:SiteFields_Group}" StaticName="GtResourceRole" Name="GtResourceRole">
+    <Field DisplayName="{resource:SiteFields_GtResourceRole_DisplayName}" Description="{resource:SiteFields_GtResourceRole_Description}" ID="{3a0ae560-bd55-45d4-907f-5119bf0a83bb}" Type="TaxonomyFieldType" WebId="{siteid}" Group="Prosjektportalenkolonner" StaticName="GtResourceRole" Name="GtResourceRole">
         <Customization>
             <ArrayOfProperty>
                 <Property>
@@ -412,8 +412,8 @@
             </ArrayOfProperty>
         </Customization>
     </Field>
-    <Field DisplayName="{resource:SiteFields_GtResourceUser_DisplayName}" Description="{resource:SiteFields_GtResourceUser_Description}" ID="{88d9b92c-efed-45d0-a586-86d9196b77d0}" Type="User" Group="{resource:SiteFields_Group}" StaticName="GtResourceUser" Name="GtResourceUser" ShowField="ImnName" UserSelectionMode="PeopleOnly" UserSelectionScope="0" />
-    <Field DisplayName="{resource:SiteFields_GtResourceLoad_DisplayName}" Description="{resource:SiteFields_GtResourceLoad_Description}" ID="{08ac9d56-f8eb-4a2c-868f-d39fc012fcd6}" Name="GtResourceLoad" Type="Number" Group="{resource:SiteFields_Group}" Percentage="TRUE" StaticName="GtResourceLoad" />
+    <Field DisplayName="{resource:SiteFields_GtResourceUser_DisplayName}" Description="{resource:SiteFields_GtResourceUser_Description}" ID="{88d9b92c-efed-45d0-a586-86d9196b77d0}" Type="User" Group="Prosjektportalenkolonner" StaticName="GtResourceUser" Name="GtResourceUser" ShowField="ImnName" UserSelectionMode="PeopleOnly" UserSelectionScope="0" />
+    <Field DisplayName="{resource:SiteFields_GtResourceLoad_DisplayName}" Description="{resource:SiteFields_GtResourceLoad_Description}" ID="{08ac9d56-f8eb-4a2c-868f-d39fc012fcd6}" Name="GtResourceLoad" Type="Number" Group="Prosjektportalenkolonner" Percentage="TRUE" StaticName="GtResourceLoad" />
     <Field DisplayName="{resource:SiteFields_GtResourceAbsence_DisplayName}" Description="{resource:SiteFields_GtResourceAbsence_Description}" FillInChoice="FALSE" Type="Choice" ID="{028e49b1-b141-4d35-8998-a17d729960d4}" Name="GtResourceAbsence" StaticName="GtResourceAbsence">
         <CHOICES>
             <CHOICE>{resource:Choice_GtResourceAbsence_Linetasks}</CHOICE>
@@ -423,5 +423,15 @@
             <CHOICE>{resource:Choice_GtResourceAbsence_Other}</CHOICE>
         </CHOICES>
     </Field>
-    <Field DisplayName="{resource:SiteFields_GtResourceAbsenceComment_DisplayName}" Description="{resource:SiteFields_GtResourceAbsenceComment_Description}" Title="{resource:SiteFields_GtResourceAbsenceComment_DisplayName}" Type="Text" Group="{resource:SiteFields_Group}" ID="{1dd2e8f2-bf4f-4a66-b0dc-ad992d10eb64}" StaticName="GtResourceAbsenceComment" Name="GtResourceAbsenceComment" />
+    <Field DisplayName="{resource:SiteFields_GtResourceAbsenceComment_DisplayName}" Description="{resource:SiteFields_GtResourceAbsenceComment_Description}" Title="{resource:SiteFields_GtResourceAbsenceComment_DisplayName}" Type="Text" Group="Prosjektportalenkolonner" ID="{1dd2e8f2-bf4f-4a66-b0dc-ad992d10eb64}" StaticName="GtResourceAbsenceComment" Name="GtResourceAbsenceComment" />
+    <Field Type="Text" DisplayName="{resource:SiteFields_GtPortfolioFabricIcon_DisplayName}" Description="{resource:SiteFields_GtPortfolioFabricIcon_Description}" ID="{b5fc712a-9908-4ba1-a8ac-7e51eca7a251}" StaticName="GtPortfolioFabricIcon" Name="GtPortfolioFabricIcon" Group="Prosjektportalenkolonner" />
+    <Field Type="Boolean" DisplayName="{resource:SiteFields_GtPortfolioIsPersonalView_DisplayName}" Description="{resource:SiteFields_GtPortfolioIsPersonalView_Description}" ID="{9f4ee969-ea00-4cc1-a466-a05c7db4156d}" StaticName="GtPortfolioIsPersonalView" Name="GtPortfolioIsPersonalView" Group="Prosjektportalenkolonner">
+        <Default>0</Default>
+    </Field>
+    <Field Type="Boolean" DisplayName="{resource:SiteFields_GtPortfolioIsDefaultView_DisplayName}" Description="{resource:SiteFields_GtPortfolioIsDefaultView_Description}" ID="{3ccd363c-36ba-49aa-bf1e-52a2eb27a876}" StaticName="GtPortfolioIsDefaultView" Name="GtPortfolioIsDefaultView" Group="{resource:SiteFields_Group}">
+        <Default>0</Default>
+    </Field>
+    <Field Type="LookupMulti" DisplayName="{resource:SiteFields_GtPortfolioColumns_DisplayName}" Description="{resource:SiteFields_GtPortfolioColumns_Description}" List="{{listid:Prosjektkolonner}}" ShowField="Title" Mult="TRUE" UnlimitedLengthInDocumentLibrary="TRUE" Group="Prosjektportalenkolonner" ID="{43c79736-a2b6-452c-9995-6b72bba0ec16}" StaticName="GtPortfolioColumns" Name="GtPortfolioColumns" />
+    <Field Type="LookupMulti" DisplayName="{resource:SiteFields_GtPortfolioRefiners_DisplayName}" Description="{resource:SiteFields_GtPortfolioRefiners_Description}" List="{{listid:Prosjektkolonner}}" ShowField="Title" Mult="TRUE" UnlimitedLengthInDocumentLibrary="TRUE" Group="Prosjektportalenkolonner" ID="{503e35fd-ccee-4d66-af88-e016eab2f80b}" StaticName="GtPortfolioRefiners" Name="GtPortfolioRefiners" />
+    <Field Type="Lookup" DisplayName="{resource:SiteFields_GtPortfolioGroupBy_DisplayName}" Description="{resource:SiteFields_GtPortfolioGroupBy_Description}" List="{{listid:Prosjektkolonner}}" ShowField="Title" UnlimitedLengthInDocumentLibrary="TRUE" Group="Prosjektportalenkolonner" ID="{0d7a146d-b41e-4357-82c3-76fb49eac011}" StaticName="GtPortfolioGroupBy" Name="GtPortfolioGroupBy" />
 </pnp:SiteFields>

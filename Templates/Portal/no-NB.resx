@@ -1032,19 +1032,19 @@
   <data name="SiteFields_GtSecList_DisplayName" xml:space="preserve">
     <value>Listenavn</value>
   </data>
-  <data name="SiteFields_GtDpIcon_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtPortfolioFabricIcon_DisplayName" xml:space="preserve">
     <value>Ikon</value>
   </data>
   <data name="SiteFields_GtDpRender_DisplayName" xml:space="preserve">
     <value>Visning</value>
   </data>
-  <data name="SiteFields_GtDpFieldsLookup_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtPortfolioColumns_DisplayName" xml:space="preserve">
     <value>Felter</value>
   </data>
-  <data name="SiteFields_GtDpDefault_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtPortfolioIsDefaultView_DisplayName" xml:space="preserve">
     <value>Valgt som standard</value>
   </data>
-  <data name="SiteFields_GtDpDefaultHidden_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtPortfolioIsDefaultViewHidden_DisplayName" xml:space="preserve">
     <value>Gjemt som standard</value>
   </data>
   <data name="SiteFields_GtDpReadOnly_DisplayName" xml:space="preserve">
@@ -1056,7 +1056,7 @@
   <data name="SiteFields_GtDpMaxWidth_DisplayName" xml:space="preserve">
     <value>Maksimum bredde</value>
   </data>
-  <data name="SiteFields_GtDpPersonalView_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtPortfolioIsPersonalView_DisplayName" xml:space="preserve">
     <value>Personlig visning</value>
   </data>
   <data name="SiteFields_GtDpIsResizable_DisplayName" xml:space="preserve">
@@ -1089,10 +1089,10 @@
   <data name="SiteFields_GtDpGroupBy_DisplayName" xml:space="preserve">
     <value>Grupperbar</value>
   </data>
-  <data name="SiteFields_GtDpRefinersLookup_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtPortfolioRefiners_DisplayName" xml:space="preserve">
     <value>Filter</value>
   </data>
-  <data name="SiteFields_GtDpGroupByLookup_DisplayName" xml:space="preserve">
+  <data name="SiteFields_GtPortfolioGroupBy_DisplayName" xml:space="preserve">
     <value>Grupper etter</value>
   </data>
   <data name="SiteFields_GtLccDefault_DisplayName" xml:space="preserve">
@@ -1533,19 +1533,19 @@
   <data name="SiteFields_GtSecList_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtDpIcon_Description" xml:space="preserve">
+  <data name="SiteFields_GtPortfolioFabricIcon_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="SiteFields_GtDpRender_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtDpFieldsLookup_Description" xml:space="preserve">
+  <data name="SiteFields_GtPortfolioColumns_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtDpDefault_Description" xml:space="preserve">
+  <data name="SiteFields_GtPortfolioIsDefaultView_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtDpDefaultHidden_Description" xml:space="preserve">
+  <data name="SiteFields_GtPortfolioIsDefaultViewHidden_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="SiteFields_GtDpReadOnly_Description" xml:space="preserve">
@@ -1557,7 +1557,7 @@
   <data name="SiteFields_GtDpMaxWidth_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtDpPersonalView_Description" xml:space="preserve">
+  <data name="SiteFields_GtPortfolioIsPersonalView_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="SiteFields_GtDpIsResizable_Description" xml:space="preserve">
@@ -1590,10 +1590,10 @@
   <data name="SiteFields_GtDpGroupBy_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtDpRefinersLookup_Description" xml:space="preserve">
+  <data name="SiteFields_GtPortfolioRefiners_Description" xml:space="preserve">
     <value></value>
   </data>
-  <data name="SiteFields_GtDpGroupByLookup_Description" xml:space="preserve">
+  <data name="SiteFields_GtPortfolioGroupBy_Description" xml:space="preserve">
     <value></value>
   </data>
   <data name="SiteFields_GtLccDefault_Description" xml:space="preserve">
