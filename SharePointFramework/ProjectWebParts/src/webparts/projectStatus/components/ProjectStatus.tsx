@@ -14,10 +14,12 @@ import SummarySection from './SummarySection';
 import StatusPropertySection from './StatusPropertySection';
 import ProjectStatusReport from '../models/ProjectStatusReport';
 import * as strings from 'ProjectStatusWebPartStrings';
+import SectionModel from './SectionModel';
 
 
 export default class ProjectStatus extends React.Component<IProjectStatusProps, IProjectStatusState> {
   private reportList;
+  private sectionsList;
 
   constructor(props: IProjectStatusProps) {
     super(props);
@@ -29,7 +31,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
     this.setState({ data, selectedReport: data.reports[0], isLoading: false });
   }
 
-  public render(): React.ReactElement<IProjectStatusProps> {
+  public render() {
     const { isLoading, data, selectedReport, showNewStatusReportModal } = this.state;
 
     if (isLoading) {
@@ -159,8 +161,9 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
 
   private async fetchData(): Promise<IProjectStatusData> {
     Logger.log({ message: '(ProjectStatus) fetchData: Fetching fields and reports', data: {}, level: LogLevel.Info });
-    const { hubSite, spEntityPortalService, reportListName } = this.props;
+    const { hubSite, spEntityPortalService, reportListName, sectionsListName } = this.props;
     this.reportList = hubSite.web.lists.getByTitle(reportListName);
+    this.sectionsList = hubSite.web.lists.getByTitle(sectionsListName);
     const [entityItem, entityFields] = await Promise.all([
       spEntityPortalService.getEntityItemFieldValues(this.props.context.pageContext.site.id.toString()),
       spEntityPortalService.getEntityFields(),
@@ -183,6 +186,9 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
     }));
     let reports = await this.reportList.items.filter(`GtSiteId eq '${this.props.context.pageContext.legacyPageContext.groupId}'`).get();
     reports = reports.map((r: any) => new ProjectStatusReport(r));
+    let sections = await this.sectionsList.items.get();
+    sections = sections.map((r: any) => new SectionModel(r, entityItem));
+    console.log(sections);
     return { entityFields, entityItem, reportFields, reportEditFormUrl, reports };
   }
 }

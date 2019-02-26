@@ -3,10 +3,13 @@
 .statusPropertySection {
     .container {
         @include ms-Grid;
+        background-color: #EFF6FA;
+        border-top: 5px solid #035484;
+        margin-top: 30px;
 
-        .row {            
-            @include ms-Grid-row;      
-            
+        .row {
+            @include ms-Grid-row;
+
             .statusPropertySectionHeader {
                 width: auto;
             }
