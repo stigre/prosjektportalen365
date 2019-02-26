@@ -11,7 +11,7 @@ const Navigation = ({ entityItem, sections }) => {
     key={key}
     className={styles.navLink}
     activeClass='active'
-    to={`seciton-${key}`}
+    to={`section-${key}`}
     offset={-100}
     spy={true}
     duration={300}

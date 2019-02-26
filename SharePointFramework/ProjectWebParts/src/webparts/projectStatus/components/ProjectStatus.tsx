@@ -98,61 +98,66 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
 
   private _renderSections(sections: SectionModel[], baseProps: any) {
     const report = baseProps.report.item;
-    console.log(report);
-    let sortedSections = sections.sort((a, b) => a.sortOrder < b.sortOrder ? -1 :1 );
-    let index = 0;
+    let sortedSections = sections.sort((a, b) => a.sortOrder < b.sortOrder ? -1 : 1);
+    let index = -1;
     return sortedSections.map((s => {
       index++;
-      console.log(s.fieldName);
-      return (
-      <Element
-        id={s.getHtmlElementId()}
-        name={`section-${index}`}
-        className={styles.row}
-      >
-      <StatusPropertySection
-      headerProps={{ label: s.name, value: report[s.fieldName], comment: '', iconName: s.iconName, iconSize: 50 }}
-      {...baseProps}
-      />
-      </Element>
-    );
+      if (s.name === 'Overordnet status') {
+        return (
+          <SummarySection
+            entity={this.props.entity}
+            sections={sections}
+            {...baseProps} />
+        );
+      } else return (
+        <Element
+          id={s.getHtmlElementId()}
+          name={`section-${index}`}
+          className={styles.row}
+        >
+          <StatusPropertySection
+            headerProps={{ label: s.name, value: report[s.fieldName], comment: '', iconName: s.iconName, iconSize: 50 }}
+            {...baseProps}
+          />
+        </Element>
+      );
     }));
 
   }
 
-  private renderSections() {
-    let sections = [];
-    if (this.state.selectedReport) {
-      const baseProps = {
-        context: this.props.context,
-        report: this.state.selectedReport,
-        entityFields: this.state.data.entityFields,
-        entityItem: this.state.data.entityItem,
-      };
-      const data = this.state.selectedReport.item;
-      sections.push(
-        <SummarySection
-          entity={this.props.entity} {...baseProps} />,
-        <StatusPropertySection
-          headerProps={{ label: 'Fremdrift', value: data.GtStatusTime, comment: data.GtStatusTimeComment, iconName: 'AwayStatus', iconSize: 50 }}
-          {...baseProps} />,
-        <StatusPropertySection
-          headerProps={{ label: 'Økonomi', value: data.GtStatusBudget, comment: data.GtStatusBudgetComment, iconName: 'Money', iconSize: 50 }}
-          fieldNames={['GtProjectFinanceName', 'GtBudgetTotal', 'GtCostsTotal', 'GtProjectForecast']}
-          {...baseProps} />,
-        <StatusPropertySection
-          headerProps={{ label: 'Kvalitet', value: data.GtStatusQuality, comment: data.GtStatusQualityComment, iconName: 'Equalizer', iconSize: 50 }}
-          {...baseProps} />,
-        <StatusPropertySection
-          headerProps={{ label: 'Risiko', value: data.GtStatusRisk, comment: data.GtStatusRiskComment, iconName: 'Warning', iconSize: 50 }}
-          {...baseProps} />,
-        <StatusPropertySection
-          headerProps={{ label: 'Gevinstoppnåelse', value: data.GtStatusGainAchievement, comment: data.GtStatusGainAchievementComment, iconName: 'Wines', iconSize: 50 }}
-          {...baseProps} />,
-      );
-    }
-    return sections;
-  }
+  /*   private renderSections() {
+      let sections = [];
+      if (this.state.selectedReport) {
+        const baseProps = {
+          context: this.props.context,
+          report: this.state.selectedReport,
+          entityFields: this.state.data.entityFields,
+          entityItem: this.state.data.entityItem,
+        };
+        const data = this.state.selectedReport.item;
+        sections.push(
+          <SummarySection
+            entity={this.props.entity} {...baseProps} />,
+          <StatusPropertySection
+            headerProps={{ label: 'Fremdrift', value: data.GtStatusTime, comment: data.GtStatusTimeComment, iconName: 'AwayStatus', iconSize: 50 }}
+            {...baseProps} />,
+          <StatusPropertySection
+            headerProps={{ label: 'Økonomi', value: data.GtStatusBudget, comment: data.GtStatusBudgetComment, iconName: 'Money', iconSize: 50 }}
+            fieldNames={['GtProjectFinanceName', 'GtBudgetTotal', 'GtCostsTotal', 'GtProjectForecast']}
+            {...baseProps} />,
+          <StatusPropertySection
+            headerProps={{ label: 'Kvalitet', value: data.GtStatusQuality, comment: data.GtStatusQualityComment, iconName: 'Equalizer', iconSize: 50 }}
+            {...baseProps} />,
+          <StatusPropertySection
+            headerProps={{ label: 'Risiko', value: data.GtStatusRisk, comment: data.GtStatusRiskComment, iconName: 'Warning', iconSize: 50 }}
+            {...baseProps} />,
+          <StatusPropertySection
+            headerProps={{ label: 'Gevinstoppnåelse', value: data.GtStatusGainAchievement, comment: data.GtStatusGainAchievementComment, iconName: 'Wines', iconSize: 50 }}
+            {...baseProps} />,
+        );
+      }
+      return sections;
+    } */
 
   private getSelectedReportEditFormUrl(): string {
     const { selectedReport, data } = this.state;
@@ -221,11 +226,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
     let reports = await this.reportList.items.filter(`GtSiteId eq '${this.props.context.pageContext.legacyPageContext.groupId}'`).get();
     reports = reports.map((r: any) => new ProjectStatusReport(r));
     let sections = await this.sectionsList.items.get();
-    console.log(sections);
     sections = sections.map((r: any) => new SectionModel(r, entityItem));
-    console.log(sections);
-    console.log(entityFields);
-    console.log(entityItem);
     return { entityFields, entityItem, reportFields, reportEditFormUrl, reports, sections };
   }
 }

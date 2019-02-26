@@ -28,7 +28,7 @@ export default class SummarySection extends StatusSectionBase<ISummarySectionPro
                         </div>
                         <div className={styles.column6}>
                             <div className={styles.container}>
-                                <div className={styles.row}>
+                                <div className={styles.row}>{/*
                                     <div className={styles.column6}>
                                         <StatusElement label='Overordnet status' value='' comment={data.GtOverallStatus} iconName='StatusCircleRing' height={150} />
                                     </div>
@@ -46,7 +46,8 @@ export default class SummarySection extends StatusSectionBase<ISummarySectionPro
                                     </div>
                                     <div className={styles.column6}>
                                         <StatusElement label='Gevinstoppnåelse' value={data.GtStatusGainAchievement} comment={data.GtStatusGainAchievementComment} iconName='Wines' height={150} />
-                                    </div>
+                                    </div> */}
+                                    {this.renderSections(data)}
                                 </div>
                             </div>
                         </div>
@@ -55,4 +56,15 @@ export default class SummarySection extends StatusSectionBase<ISummarySectionPro
             </div>
         );
     }
+
+    private renderSections(data: any) {
+      return this.props.sections.map(s => {
+        return (
+          <div className={styles.column6}>
+          <StatusElement label={s.name} value={data[s.fieldName]} comment='' iconName={s.iconName} height={150} />
+          </div>
+        );
+      });
+    }
+
 }

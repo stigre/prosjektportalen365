@@ -10,7 +10,7 @@
     .projectStatusTopSection {
         width: auto;
         .title {
-            margin: 0 0 20px 0;
+            margin: 0;
             background-color: #939393;
             div>span {
                 color: #fff;
@@ -19,15 +19,18 @@
         .navigation {
             z-index: 99;
             width: 100%;
+            margin: 10px 0;
             .navLink {
-              padding: 9px 10px;
-              text-decoration: none;
-              cursor: pointer;
-              text-align: center;
-              display: inline-block;
+                padding: 9px 10px;
+                text-decoration: none;
+                cursor: pointer;
+                text-align: center;
+                display: inline-block;
+                >i {
+                    margin-right: 5px;
+                }
             }
         }
-
         .projectStatusActions {
             >button {
                 margin-right: 8px;
