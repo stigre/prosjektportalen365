@@ -15,6 +15,8 @@ import StatusPropertySection from './StatusPropertySection';
 import ProjectStatusReport from '../models/ProjectStatusReport';
 import * as strings from 'ProjectStatusWebPartStrings';
 import SectionModel from './SectionModel';
+import { Element } from 'react-scroll';
+import Navigation from './Navigation/Navigation';
 
 
 export default class ProjectStatus extends React.Component<IProjectStatusProps, IProjectStatusState> {
@@ -43,6 +45,13 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
       webPartTitleText = `${this.props.title} (${selectedReport.toString()})`;
     }
 
+    const baseProps = {
+      context: this.props.context,
+      report: this.state.selectedReport,
+      entityFields: this.state.data.entityFields,
+      entityItem: this.state.data.entityItem,
+    };
+
     return (
       <div className={styles.projectStatus}>
         <div className={styles.container}>
@@ -53,6 +62,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
                 title={webPartTitleText}
                 updateProperty={_title => { }} />
             </div>
+            <Navigation entityItem={baseProps.entityItem} sections={this.state.data.sections} />
             <div className={`${styles.projectStatusActions} ${styles.column8}`}>
               <DefaultButton
                 text={strings.NewStatusReportModalHeaderText}
@@ -72,7 +82,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
                 disabled={reportOptions.length === 0} />
             </div>
             <div className={`${styles.sections} ${styles.column12}`}>
-              {this.renderSections()}
+              {this._renderSections(this.state.data.sections, baseProps)}
             </div>
           </div>
         </div>
@@ -84,6 +94,30 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
         )}
       </div>
     );
+  }
+
+  private _renderSections(sections: SectionModel[], baseProps: any) {
+    const report = baseProps.report.item;
+    console.log(report);
+    let sortedSections = sections.sort((a, b) => a.sortOrder < b.sortOrder ? -1 :1 );
+    let index = 0;
+    return sortedSections.map((s => {
+      index++;
+      console.log(s.fieldName);
+      return (
+      <Element
+        id={s.getHtmlElementId()}
+        name={`section-${index}`}
+        className={styles.row}
+      >
+      <StatusPropertySection
+      headerProps={{ label: s.name, value: report[s.fieldName], comment: '', iconName: s.iconName, iconSize: 50 }}
+      {...baseProps}
+      />
+      </Element>
+    );
+    }));
+
   }
 
   private renderSections() {
@@ -187,8 +221,11 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
     let reports = await this.reportList.items.filter(`GtSiteId eq '${this.props.context.pageContext.legacyPageContext.groupId}'`).get();
     reports = reports.map((r: any) => new ProjectStatusReport(r));
     let sections = await this.sectionsList.items.get();
+    console.log(sections);
     sections = sections.map((r: any) => new SectionModel(r, entityItem));
     console.log(sections);
-    return { entityFields, entityItem, reportFields, reportEditFormUrl, reports };
+    console.log(entityFields);
+    console.log(entityItem);
+    return { entityFields, entityItem, reportFields, reportEditFormUrl, reports, sections };
   }
 }

@@ -50,4 +50,24 @@ export default class SectionModel {
 
   }
 
+  public getHtmlElementId(element?: string): string {
+    if (element) {
+      return `section-${this.cleanString(this.name)}-${element}`;
+    } else {
+      return `section-${this.cleanString(this.name)}`;
+    }
+  }
+
+  private cleanString(str: string, length?: number): string {
+    str = str
+        .trim()
+        .toLowerCase()
+        .replace(/ /g, "-")
+        .replace(/å/g, "a")
+        .replace(/æ/g, "ae")
+        .replace(/ø/g, "o")
+        .replace(/[^a-z0-9-]/gi, "");
+    return str.substring(0, length ? length : Math.min(80, str.length));
+}
+
 }

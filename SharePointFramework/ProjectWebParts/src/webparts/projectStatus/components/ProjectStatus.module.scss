@@ -16,29 +16,41 @@
                 color: #fff;
             }
         }
-    }
-    .projectStatusActions {
-        >button {
-            margin-right: 8px;
+        .navigation {
+            z-index: 99;
+            width: 100%;
+            .navLink {
+              padding: 9px 10px;
+              text-decoration: none;
+              cursor: pointer;
+              text-align: center;
+              display: inline-block;
+            }
         }
-    }
-    .sections {
-        margin-top: 25px;
-    }
-    .column12 {
-        @include ms-Grid-col;
-        @include ms-sm12;
-    }
-    .column8 {
-        @include ms-Grid-col;
-        @include ms-sm8;
-    }
-    .column6 {
-        @include ms-Grid-col;
-        @include ms-sm6;
-    }
-    .column4 {
-        @include ms-Grid-col;
-        @include ms-sm4;
+
+        .projectStatusActions {
+            >button {
+                margin-right: 8px;
+            }
+        }
+        .sections {
+            margin-top: 25px;
+        }
+        .column12 {
+            @include ms-Grid-col;
+            @include ms-sm12;
+        }
+        .column8 {
+            @include ms-Grid-col;
+            @include ms-sm8;
+        }
+        .column6 {
+            @include ms-Grid-col;
+            @include ms-sm6;
+        }
+        .column4 {
+            @include ms-Grid-col;
+            @include ms-sm4;
+        }
     }
 }
