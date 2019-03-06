@@ -8,5 +8,6 @@ export interface IStatusElementProps {
     height?: string | number;
     iconSize?: number;
     iconColumnWidth?: StatusElementColumnWidth;
-    bodyColumnWidth?: StatusElementColumnWidth;    
+    bodyColumnWidth?: StatusElementColumnWidth;
+    source?: string;
 }

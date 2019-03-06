@@ -1,1 +1,1 @@
-export interface IStatusSectionBaseState {}
+export interface IStatusSectionBaseState { listItems?: any[]; }
