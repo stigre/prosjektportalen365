@@ -82,7 +82,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
                 disabled={reportOptions.length === 0} />
             </div>
             <div className={`${styles.sections} ${styles.column12}`}>
-              {this._renderSections(this.state.data.sections, baseProps)}
+              {(this.state.selectedReport) && this._renderSections(this.state.data.sections, baseProps)}
             </div>
           </div>
         </div>
