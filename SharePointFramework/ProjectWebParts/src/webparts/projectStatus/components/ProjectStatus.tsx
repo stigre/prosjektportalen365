@@ -116,7 +116,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
           className={styles.row}
         >
           <StatusPropertySection
-            headerProps={{ label: s.name, value: report[s.fieldName], comment: '', iconName: s.iconName, iconSize: 50 }}
+            headerProps={{ label: s.name, value: report[s.fieldName], comment: report[s.commentFieldName], iconName: s.iconName, iconSize: 50 }}
             {...baseProps}
           />
         </Element>
