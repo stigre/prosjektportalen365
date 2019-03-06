@@ -15,12 +15,10 @@ export default class StatusSectionBase<P extends IStatusSectionBaseProps, S exte
 
     @autobind
     public renderFields() {
-      console.log(this.props);
         if (this.props.fieldNames) {
             const { entityFields, entityItem } = this.props;
             return this.props.fieldNames.map(fieldName => {
                 const [fld] = entityFields.filter(ef => ef.InternalName === fieldName);
-                console.log(fld);
                 if (fld) {
                     return <StatusSectionField label={fld.Title} value={entityItem[fieldName]} />;
                 }

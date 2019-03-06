@@ -35,6 +35,10 @@
         .column2 {
             @include ms-Grid-col;
             @include ms-sm2;
+            i {
+                font-size: 38px;
+                margin: -15px;
+            }
         }
         .column1 {
             @include ms-Grid-col;

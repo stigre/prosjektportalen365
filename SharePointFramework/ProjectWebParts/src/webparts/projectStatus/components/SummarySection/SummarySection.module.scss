@@ -4,6 +4,7 @@
     .container {
         @include ms-Grid;
         background-color: #EFF6FA;
+        padding: 10px 18px;
 
         .row {
             @include ms-Grid-row;

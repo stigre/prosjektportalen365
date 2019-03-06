@@ -115,10 +115,18 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
           name={`section-${index}`}
           className={styles.row}
         >
-          <StatusPropertySection
-            headerProps={{ label: s.name, value: report[s.fieldName], comment: report[s.commentFieldName], iconName: s.iconName, iconSize: 50 }}
-            {...baseProps}
-          />
+          {(s.fieldName === 'GtStatusBudget') ?
+            <StatusPropertySection
+              headerProps={{ label: s.name, value: report[s.fieldName], comment: report[s.commentFieldName], iconName: s.iconName, iconSize: 50 }}
+              {...baseProps}
+              fieldNames={['GtProjectFinanceName', 'GtBudgetTotal', 'GtCostsTotal', 'GtProjectForecast']}
+            />
+            :
+            <StatusPropertySection
+              headerProps={{ label: s.name, value: report[s.fieldName], comment: report[s.commentFieldName], iconName: s.iconName, iconSize: 50 }}
+              {...baseProps}
+            />
+          }
         </Element>
       );
     }));
