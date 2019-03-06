@@ -102,7 +102,7 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
     let index = -1;
     return sortedSections.map((s => {
       index++;
-      if (s.name === 'Overordnet status') {
+      if (s.fieldName === strings.OverallStatusFieldName) {
         return (
           <SummarySection
             entity={this.props.entity}
