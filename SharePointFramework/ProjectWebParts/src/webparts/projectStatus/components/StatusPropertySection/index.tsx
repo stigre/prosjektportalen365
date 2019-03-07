@@ -8,6 +8,7 @@ import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { sp, SPBatch, CamlQuery } from '@pnp/sp';
 import { DetailsList, IColumn } from 'office-ui-fabric-react/lib/DetailsList';
 import { IStatusSectionBaseProps, StatusSectionDefaultProps } from '../StatusSectionBase/IStatusSectionBaseProps';
+import SectionModel from '../SectionModel';
 
 export enum ListItemType {
   ProjectDelivery
@@ -23,15 +24,16 @@ export default class StatusPropertySection extends StatusSectionBase<IStatusProp
   }
 
   public async componentDidMount() {
-    if (this.props.headerProps.listTitle) {
-      await this.fetchListData(this.props.headerProps.listTitle);
+    console.log(this.props);
+    if (this.props.section.listTitle) {
+      await this.fetchListData(this.props.section);
     }
   }
 
   public render(): React.ReactElement<IStatusPropertySectionProps> {
     let navUrl = null;
-    if (this.props.headerProps.source) {
-      navUrl = `${this.props.context.pageContext.web.serverRelativeUrl}/${this.props.headerProps.source}`;
+    if (this.props.section.source) {
+      navUrl = `${this.props.context.pageContext.web.serverRelativeUrl}/${this.props.section.source}`;
     }
 
     return (
@@ -57,8 +59,19 @@ export default class StatusPropertySection extends StatusSectionBase<IStatusProp
     );
   }
 
-  private async fetchListData(listTitle: string) {
-    let listItems = await sp.web.lists.getByTitle(listTitle).items.get();
+  private async fetchListData(section: SectionModel) {
+    let list = await sp.web.lists.getByTitle(section.listTitle);
+    let viewXml = ['<View>'];
+    if (section.viewQuery) {
+      viewXml.push(`<Query>${section.viewQuery}</Query>`);
+    }
+    if (section.rowLimit) {
+      viewXml.push(`<RowLimit>${section.rowLimit}</RowLimit>`);
+    }
+    viewXml.push('</View>');
+    const camlQuery: CamlQuery = { ViewXml: viewXml.join('') };
+    let listItems = await list.getItemsByCAMLQuery(camlQuery);
+
     this.setState({ listItems });
   }
 
