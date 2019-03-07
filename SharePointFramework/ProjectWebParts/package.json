@@ -26,7 +26,7 @@
     "@pnp/common": "^1.2.7",
     "@pnp/logging": "^1.2.7",
     "@pnp/odata": "^1.2.7",
-    "@pnp/polyfill-ie11": "^1.0.0",
+    "@pnp/polyfill-ie11": "^1.0.1",
     "@pnp/sp": "^1.2.7",
     "@pnp/sp-clientsvc": "^1.2.7",
     "@pnp/sp-taxonomy": "^1.2.7",
