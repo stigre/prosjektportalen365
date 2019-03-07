@@ -10,4 +10,5 @@ export interface IStatusElementProps {
     iconColumnWidth?: StatusElementColumnWidth;
     bodyColumnWidth?: StatusElementColumnWidth;
     source?: string;
+    listTitle?: string;
 }

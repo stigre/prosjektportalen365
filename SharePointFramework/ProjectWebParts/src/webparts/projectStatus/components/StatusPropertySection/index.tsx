@@ -5,25 +5,30 @@ import { IStatusPropertySectionState } from './IStatusPropertySectionState';
 import StatusSectionBase from '../StatusSectionBase';
 import StatusElement from '../StatusElement';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
+import { sp, SPBatch, CamlQuery } from '@pnp/sp';
 import { DetailsList, IColumn } from 'office-ui-fabric-react/lib/DetailsList';
-import { sp } from '@pnp/sp';
+import { IStatusSectionBaseProps, StatusSectionDefaultProps } from '../StatusSectionBase/IStatusSectionBaseProps';
+
+export enum ListItemType {
+  ProjectDelivery
+}
 
 export default class StatusPropertySection extends StatusSectionBase<IStatusPropertySectionProps, IStatusPropertySectionState> {
+  public static defaultProps = StatusSectionDefaultProps;
+
   constructor(props: IStatusPropertySectionProps) {
     super(props);
+
+    this.state = {};
   }
 
   public async componentDidMount() {
-
-    if (this.props.headerProps.source && this.props.headerProps.source.match('Lists')) {
-      await this.fetchListData(this.props.headerProps.source);
+    if (this.props.headerProps.listTitle) {
+      await this.fetchListData(this.props.headerProps.listTitle);
     }
-
   }
 
   public render(): React.ReactElement<IStatusPropertySectionProps> {
-    const data = this.props.report.item;
-
     let navUrl = null;
     if (this.props.headerProps.source) {
       navUrl = `${this.props.context.pageContext.web.serverRelativeUrl}/${this.props.headerProps.source}`;
@@ -43,6 +48,8 @@ export default class StatusPropertySection extends StatusSectionBase<IStatusProp
             </div>}
             <div className={`${styles.statusPropertySectionFields} ${styles.column12}`}>
               {super.renderFields()}
+              {(this.state.listItems && this.state.listItems.length > 0) &&
+                this.renderList(this.state.listItems)}
             </div>
           </div>
         </div>
@@ -50,13 +57,55 @@ export default class StatusPropertySection extends StatusSectionBase<IStatusProp
     );
   }
 
-  private async fetchListData(source: string) {
-    let listTitle = source.replace('Lists/', '');
-    listTitle = listTitle.replace(/\/(.*)/, '');
-
+  private async fetchListData(listTitle: string) {
     let listItems = await sp.web.lists.getByTitle(listTitle).items.get();
     this.setState({ listItems });
-
   }
 
+  private renderList(listItems: any[]) {
+    let type: ListItemType = this.typeOf(listItems[0].ContentTypeId);
+    let columns: IColumn[] = this.getListColumns(type);
+
+    return (
+      <DetailsList
+        items={listItems}
+        columns={columns}
+        onRenderItemColumn={this._onRenderItemColumn}
+      />
+    );
+  }
+
+  /**
+   * Returns the type of the supplied list items contenttype ID
+   * @param contentTypeId ListItem ContentTypeId
+   */
+  private typeOf(contentTypeId: string): ListItemType {
+    if (contentTypeId.match('0x0100D7B74DE815F946D3B0F99D19F9B36B68')) return ListItemType.ProjectDelivery;
+    return null;
+  }
+
+  private getListColumns(type: ListItemType): IColumn[] {
+    switch (type) {
+      case ListItemType.ProjectDelivery:
+        return this.props.projectDeliveryColumns;
+
+      default:
+        return [];
+    }
+  }
+
+  private _onRenderItemColumn(item?: any, index?: number, column?: IColumn) {
+    switch (column.key) {
+      case 'title':
+        return item.Title;
+      case 'acceptanceDate':
+        return item.GtDeliveryAcceptanceDate;
+      case 'deliveryStatus':
+        return item.GtDeliveryStatus;
+      case 'deliveryStatusComment':
+        return item.GtDeliveryStatusComment;
+      case 'qualityExpectations':
+        return item.GtDeliveryQualityExpectations;
+    }
+  }
 }

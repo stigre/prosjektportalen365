@@ -23,6 +23,9 @@
             .column12 {
                 @include ms-Grid-col;
                 @include ms-sm12;
+                > div {
+                  margin: 20px -7px;
+                }
             }
             .column8 {
                 @include ms-Grid-col;
