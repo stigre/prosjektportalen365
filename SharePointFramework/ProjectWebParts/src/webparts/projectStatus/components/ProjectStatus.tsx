@@ -60,17 +60,18 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
         <ScrollablePane className={styles.scrollablePane}>
           <div className={styles.container}>
             <div className={`${styles.projectStatusTopSection} ${styles.row}`}>
-              <Sticky stickyPosition={StickyPositionType.Header}>
               <div className={styles.sticky}>
-                <div className={`${styles.title} ${styles.column12}`}>
-                  <WebPartTitle
-                    displayMode={DisplayMode.Read}
-                    title={webPartTitleText}
-                    updateProperty={_title => { }} />
-                </div>
-                <Navigation entityItem={baseProps.entityItem} sections={this.state.data.sections} />
-                </div>
-              </Sticky>
+                <Sticky stickyPosition={StickyPositionType.Header}>
+
+                  <div className={`${styles.title} ${styles.column12}`}>
+                    <WebPartTitle
+                      displayMode={DisplayMode.Read}
+                      title={webPartTitleText}
+                      updateProperty={_title => { }} />
+                  </div>
+                  <Navigation entityItem={baseProps.entityItem} sections={this.state.data.sections} />
+                </Sticky>
+              </div>
               <div className={`${styles.projectStatusActions} ${styles.column8}`}>
                 <DefaultButton
                   text={strings.NewStatusReportModalHeaderText}

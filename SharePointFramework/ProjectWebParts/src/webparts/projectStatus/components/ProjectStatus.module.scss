@@ -61,5 +61,29 @@
                 @include ms-sm4;
             }
         }
+        // Sticky header styles
+        .title {
+          margin: 0;
+          padding: 2px;
+          background-color: #939393;
+          div>span {
+              color: #fff;
+          }
+      }
+      .navigation {
+          z-index: 99;
+          width: 100%;
+          margin: 10px 0;
+          .navLink {
+              padding: 9px 10px;
+              text-decoration: none;
+              cursor: pointer;
+              text-align: center;
+              display: inline-block;
+              >i {
+                  margin-right: 5px;
+              }
+          }
+      }
     }
 }
