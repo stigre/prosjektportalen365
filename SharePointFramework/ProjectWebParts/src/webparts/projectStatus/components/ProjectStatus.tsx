@@ -16,7 +16,7 @@ import StatusPropertySection from './StatusPropertySection';
 import ProjectStatusReport from '../models/ProjectStatusReport';
 import * as strings from 'ProjectStatusWebPartStrings';
 import SectionModel from './SectionModel';
-import { Element } from 'react-scroll';
+import { Element, Link } from 'react-scroll';
 import Navigation from './Navigation/Navigation';
 import { ScrollablePane } from 'office-ui-fabric-react/lib/ScrollablePane';
 import { Sticky, StickyPositionType } from 'office-ui-fabric-react/lib/Sticky';
@@ -62,7 +62,6 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
             <div className={`${styles.projectStatusTopSection} ${styles.row}`}>
               <div className={styles.sticky}>
                 <Sticky stickyPosition={StickyPositionType.Header}>
-
                   <div className={`${styles.title} ${styles.column12}`}>
                     <WebPartTitle
                       displayMode={DisplayMode.Read}
@@ -90,7 +89,6 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
                   options={reportOptions}
                   disabled={reportOptions.length === 0} />
               </div>
-
               <div className={`${styles.sections} ${styles.column12}`}>
                 {(this.state.selectedReport) && this._renderSections(this.state.data.sections, baseProps)}
               </div>
@@ -121,26 +119,33 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
             {...baseProps} />
         );
       } else return (
-        <Element
-          id={s.getHtmlElementId()}
-          name={`section-${index}`}
-          className={styles.row}
-        >
-          {(s.fieldName === 'GtStatusBudget') ?
+
+        (s.fieldName === 'GtStatusBudget') ?
+          <Element
+            id={s.getHtmlElementId()}
+            name={`section-${index}`}
+            className={styles.row}
+          >
+            {console.log(`section-${index}`)}
             <StatusPropertySection
               section={s}
               headerProps={{ label: s.name, value: report[s.fieldName], comment: report[s.commentFieldName], iconName: s.iconName, iconSize: 50 }}
               {...baseProps}
               fieldNames={['GtProjectFinanceName', 'GtBudgetTotal', 'GtCostsTotal', 'GtProjectForecast']}
             />
-            :
+          </Element>
+          :
+          <Element
+            id={s.getHtmlElementId()}
+            name={`section-${index}`}
+            className={styles.row}
+          >
             <StatusPropertySection
               section={s}
               headerProps={{ label: s.name, value: report[s.fieldName], comment: report[s.commentFieldName], iconName: s.iconName, iconSize: 50 }}
               {...baseProps}
             />
-          }
-        </Element>
+          </Element>
       );
     }));
 
