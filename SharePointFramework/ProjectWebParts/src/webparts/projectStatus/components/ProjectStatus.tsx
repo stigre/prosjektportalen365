@@ -126,7 +126,6 @@ export default class ProjectStatus extends React.Component<IProjectStatusProps, 
             name={`section-${index}`}
             className={styles.row}
           >
-            {console.log(`section-${index}`)}
             <StatusPropertySection
               section={s}
               headerProps={{ label: s.name, value: report[s.fieldName], comment: report[s.commentFieldName], iconName: s.iconName, iconSize: 50 }}
